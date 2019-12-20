@@ -1,0 +1,10 @@
+.dashboard-container > .row {
+  height: 33.33%;
+}
+/* .dashboard-label {
+  width: 100%;
+} */
+
+.dashboard-recipes {
+  height: 100%;
+}

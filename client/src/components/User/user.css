@@ -1,0 +1,76 @@
+.peak-users-image {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover;
+    border-radius: 5px;
+    opacity: .25;
+    filter: grayscale(100%);
+}
+
+.peak-users-image:hover {
+    opacity: .95;
+    filter: grayscale(0%);
+}
+
+.listHorizontal {
+    /* display: flex; */
+    list-style: none;
+    float: left;
+    /* overflow-x: auto; */
+    white-space: nowrap;
+}
+
+.user-image-container {
+    width: 100%;
+    height: 100%;
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+}
+
+.user-body-container {
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.user-body-container>.card-title {
+    font-size: .79em;
+    font-weight: bold;
+    color: white
+}
+
+.user-body-container>.card-text {
+    font-size: .56em;
+    color: white;
+    overflow: auto;
+    height: 75px;
+}
+
+.user-table-subject {
+    width: 90px;
+}
+
+.users-card {
+    width: 230px !important;
+    height: 135px !important;
+    display: inline-block;
+    background-color: #0d4160;
+    position: relative;
+    box-shadow:0px 0px 10px 1px rgba(0, 0, 0, 0.6) !important;
+    margin:10px
+}
+
+.card-text::-webkit-scrollbar {
+    width: 2px !important;
+}
+
+.card-text::-webkit-scrollbar-thumb {
+    border-radius: 20px;
+    background-color: #FDA401;
+}
