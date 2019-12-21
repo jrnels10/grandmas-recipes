@@ -6,13 +6,13 @@ const FacebookTokenStrategy = require('passport-facebook-token');
 const { ExtractJwt } = require('passport-jwt');
 const User = require('./models/user');
 
-const { JWT_secret, google, facebook } = process.env.NODE_ENV === "production" ? require('./prodKeys'):require('./config/keys');
+// const { JWT_secret, google, facebook } = process.env.NODE_ENV === "production" ? require('./prodKeys'):require('./config/keys');
 // const { JWT_secret, google, facebook } = require('./prodKeys');
 
 // JSON WEB TOKENS STRATEGY
 passport.use(new JwtStrategy({
     jwtFromRequest: ExtractJwt.fromHeader('authorization'),
-    secretOrKey: JWT_secret
+    secretOrKey: process.env.JWT_secret
 }, async (payload, done) => {
     try {
         // find user specified in token
@@ -33,8 +33,8 @@ passport.use(new JwtStrategy({
 
 // GOOGLE OAUTH STRATEGY
 passport.use('googleToken', new GooglePlusTokenStrategy({
-    clientID: google.clientID,
-    clientSecret: google.clientSecret
+    clientID: process.env.googleclientID,
+    clientSecret: process.env.googleclientSecret
 }, async (accessToken, refreshToken, profile, done) => {
     try {
         const existingUser = await User.findOne({ 'google.id': profile.id })
@@ -65,8 +65,8 @@ passport.use('googleToken', new GooglePlusTokenStrategy({
 }));
 
 passport.use('facebookToken', new FacebookTokenStrategy({
-    clientID: facebook.AppID,
-    clientSecret: facebook.AppSecret
+    clientID: process.env.facebookAppID,
+    clientSecret: process.env.facebookAppSecret
 }, async (accessToken, refreshToken, profile, done) => {
     try {
         const existingUser = await User.findOne({ 'facebook.id': profile.id })

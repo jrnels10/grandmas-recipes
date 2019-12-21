@@ -9,6 +9,25 @@ env: flex
 manual_scaling:
   instances: 1
 
+env_variables:
+  googleclientID: "267196671122-h7odor5ai5ll5rk7hd00u67285160gov.apps.googleusercontent.com"
+  googleclientSecret: "P3d90yzwxrosGli356Qn0Wrz"
+  facebookAppID: 2368972536494612
+  facebookAppSecret: a90ecf64aea3b4c43b08c9db6aa92ebe
+  mongoDBdbURI: mongodb://jrnels10:jrnels10@ds353358.mlab.com:53358/grandmas-recipes #,//'mongodb://jrnels10:jrnels10@ds345587.mlab.com:45587/14er'
+  sessioncookieKey: testingthecookie
+  JWT_secret: testingstravaauthentication
+  googleCloudtype: service_account
+  googleCloudproject_id: grandmasrecipes
+  googleCloudprivate_key_id: 49091d2bc82f1e050bbb50eafc0830d69db44cb6
+  googleCloudprivate_key: -----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDFYePoiPFrn465\n8wMsqZrfC4Cg/ZnHkggh32iWEOq5SJRlhLCfX2vVCEUTKdEtyqwCMJOvgVYCbL3H\nbSOPrANUFBVZM+08unFcX9NTBeBKLGEAAgOkXqKEDzMxQpTuMQAVbq6QAQRqgbCL\n2Bzg8r/Icze81EcYIeFcS/jDn7f21GlrkIxqFZ+zx17DoL+u86lGhkrX0fh4FtPK\nmQDZ0x5CrN1s4UeqGdwEiYiawyguxoahfXYbcFH8gEgqZcMR6+Tx68ov9pg9UKcY\n7zoU6z6UU+gkJGtTSReo4TQrh9iK8CilXZ5I3eVi3wNjtGaVjEz4RR1uGqBliqbv\nM3LPihgxAgMBAAECggEAETQG+S12XTr65ZoYnLvrk6UdAOsZjBteOhWOuAWhb6Sz\nymVWP43BiD/ARXtPj/4qH8a8GH/dTzjLEaahgtQrNhjKA4xTEQfu+W4grQvGELDt\ng2Kpjpnw8DGi9JgpAtmieDu9Wy+7gszq5kVfvvtpW78vDHYz/BZ33eOBOwugrRKP\nI3RU1TQrW0YiDENrkDac+ehcyVw70AGiDizae7BqhwQpgaK5RHEp8ottRLXY2lko\n7NWunpe7XkH5KVevkZ+k5eFJxbIYEe6BO+mJFggDbIA+t0KqFL/DjDa97HR00tMb\nrU4G/umLMFqpboob2hIgrzQaxNxGypIkLnyQ2UzcQQKBgQDrjsF8zi+g8kXn0xpB\nB90uohrRn5d9drdNr5Al1844QKhXoz2H8RDE2SwbyktXdJYgv8Vd4MHjMHU3beTt\ns2FQ2NLPeJhw0LHjAxT9n6Wk4follOxzRC5VhRlumw2gTLPAFTgEA9hQryrI8Akr\nT7JzQgPnP1APH1F8QFBv3lhB4wKBgQDWgwR4l+jWn7xiwPPbtgyQ2T62z9i5j3iH\njGIach0ANP1UDH9n6sOa8nlmWrnlg5mpvH4231OiKKqkqonBlzn49a7duEUn9gGV\nAgIrRHXwQwmpIAIgmcc0Vjt8RzpXd/brDetTaklAW/ULbcYD3q5X3AuzRWwbXXyg\n+W4n98BJ2wKBgD0dBXAG4m6ETMSvjVEv5B+UKRcXq6r+YOJD2UcoLTWE+Of7zxv0\n3B/mJD51hoSDF+wZNPB9PnBeAxtFZK6S6n2aM19mb05dprk59Hk0sToM8uRLNelV\n2BuR854xliBvpfcAyk6oXLfaKmSFeiuFesvSZcbaM0ApJO/yk6viaM13AoGBAJOo\nbBN2vde+7LYti67ZiZzLbdf5Cn3wvE7R21XI5x2VXCvWznyBpVOrRNWn7f6Gr+ee\n0GKFJ9SfmZbvrRONPWKZ+1yz0ybGuCAR2dxeq7BO9P9uAQjf0be9BAVwIkDDWzxB\nwJMSvomGww6y6XMQfYIM/iDQ0LGlkHxeNe1dJQexAoGBAMV+uJPZMRDuh0aTEwBU\nzgm4KWsz4UPwSlVpv77aNo3E2MwU6pxZ//DQz1vCTNhNmIvY3WmvUM7IHIU3Ubi2\n7i45RMllizEpgg+QHPSBypFOjLD2Zazn6sQrtHqdMzvKTFQZSAKaANUxEpUwNv1W\nhUiENc7J43ccuf94ARPaZlTg\n-----END PRIVATE KEY-----\n
+  googleCloudclient_email: grandmas-recipes@grandmasrecipes.iam.gserviceaccount.com
+  googleCloudclient_id: 109188296574053878174
+  googleCloudauth_uri: https://accounts.google.com/o/oauth2/auth
+  googleCloudtoken_uri: https://oauth2.googleapis.com/token
+  googleCloudauth_provider_x509_cert_url: https://www.googleapis.com/oauth2/v1/certs
+  googleCloudclient_x509_cert_url: https://www.googleapis.com/robot/v1/metadata/x509/grandmas-recipes%40grandmasrecipes.iam.gserviceaccount.com
+
 resources:
   cpu: .5
   memory_gb: 0.5
