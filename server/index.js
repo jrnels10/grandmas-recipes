@@ -2,12 +2,14 @@ const express = require('express');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 var history = require('connect-history-api-fallback');
+const keys = process.env.NODE_ENV === "production" ? require('./prodKeys') : require('./config/keys');
+// const keys = require('./prodKeys');
 const bodyParser = require('body-parser');
 const path = require('path');
 const cors = require('cors');
 const Promise = require('bluebird');
 
-mongoose.connect(process.env.mongoDBdbURI, { useNewUrlParser: true, useFindAndModify: false, useUnifiedTopology: true }, () => {
+mongoose.connect(keys.mongoDB.dbURI, { useNewUrlParser: true, useFindAndModify: false, useUnifiedTopology: true }, () => {
     console.log("connected to mongodb");
 });
 
