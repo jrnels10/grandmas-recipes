@@ -2,8 +2,6 @@ const express = require('express');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 var history = require('connect-history-api-fallback');
-// const keys = process.env.NODE_ENV === "production" ? require('./prodKeys') : require('./config/keys');
-// const keys = require('./prodKeys');
 const bodyParser = require('body-parser');
 const path = require('path');
 const cors = require('cors');
