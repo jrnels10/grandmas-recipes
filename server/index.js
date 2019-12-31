@@ -26,7 +26,7 @@ app.use(bodyParser.json());
 
 //routes  http://localhost:3000/users
 app.use('/users', require('./routes/users'));
-// app.use('/peaks', require('./routes/peaks'));
+app.use('/test', require('./routes/test'));
 
 
 if (process.env.NODE_ENV === "production") {
