@@ -9,7 +9,7 @@ const projectId = 'grandmasrecipes';
 module.exports = {
     uploadToGoogleCloud: async (req, res, next) => {
         try {
-            // return keyFilename;
+            return keyFilename;
             const storage = new Storage({ projectId, keyFilename });
             var myBucket = storage.bucket('grandmas-recipes');
             const imageUploaded = await myBucket.upload(req.path, { public: true });
