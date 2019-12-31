@@ -1,8 +1,8 @@
 const JWT = require('jsonwebtoken');
-const User = require('./../models/user');
-const { uploadToGoogleCloud, deleteImageFromGoogleCloud } = require('./../cloud/googleCloud');
+const User = require('../models/user');
+const { uploadToGoogleCloud, deleteImageFromGoogleCloud } = require('../cloud/googleCloud');
 // import { uploadToGoogleCloud } from './../cloud/googleCloud';
-const { JWT_secret } = process.env.NODE_ENV === "production" ? require('./../prodKeys') : require('./../config/keys');
+const { JWT_secret } = process.env.NODE_ENV === "production" ? require('../prodKeys') : require('../config/keys');
 // const { JWT_secret } = require('./../prodKeys');
 
 const uuidv1 = require('uuid/v1');
