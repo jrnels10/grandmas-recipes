@@ -17,10 +17,8 @@ module.exports = {
 
             //     });
             // })
-            return (myBucket)
             const imageUploaded = await myBucket.upload(req.path, { public: true });
-            console.log(imageUploaded)
-            return imageUploaded;
+            return (imageUploaded)
         } catch (err) {
             console.error('ERROR:', err);
         };
