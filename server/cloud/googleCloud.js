@@ -8,8 +8,8 @@ const projectId = 'grandmasrecipes';
 module.exports = {
     uploadToGoogleCloud: async (req, res, next) => {
         try {
-            return ("made it")
             const storage = new Storage({ projectId, keyFilename });
+            return (storage)
             var myBucket = storage.bucket('grandmas-recipes');
             // storage.getBuckets().then(buckets => {
             //     console.log('Buckets:');
