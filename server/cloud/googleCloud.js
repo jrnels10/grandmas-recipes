@@ -2,7 +2,6 @@
 const { Storage } = require('@google-cloud/storage');
 // const keyFilename = './server/config/grandmasRecipes-49091d2bc82f.json';
 const keyFilename = process.env.GOOGLE_APPLICATION_CREDENTIALS;
-const { auth, Compute } = require('google-auth-library');
 const projectId = 'grandmasrecipes';
 // https://cloud.google.com/storage/docs/reference/libraries#client-libraries-install-nodejs
 // api requests (GET,POST,DELETE,PUT) =>   https://cloud.google.com/storage/docs/json_api/v1/?apix=true
@@ -11,13 +10,7 @@ module.exports = {
         try {
             let path = req.path;
             const storage = new Storage({ projectId, keyFilename });
-            const myBucket = await storage.bucket('grandmas-recipes').upload(path, { public: true });
-            // return storage.getBuckets().then(buckets => {
-            //     console.log('Buckets:');
-            //     return buckets
-            // })
-            return { keyFilename, storage, myBucket, path };
-            // const imageUploaded = await myBucket
+            const imageUploaded = await storage.bucket('grandmas-recipes').upload(path, { public: true });
             return (imageUploaded)
         } catch (err) {
             console.error('ERROR:', err);
