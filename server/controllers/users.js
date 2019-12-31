@@ -130,6 +130,7 @@ module.exports = {
             const imageUploaded = await uploadToGoogleCloud(req.file);
             picture = `https://storage.cloud.google.com/${imageUploaded[0].metadata.bucket}/${imageUploaded[0].metadata.name}`;
             console.log(picture)
+            res.send(picture)
         }
 
         let myRecipes = foundMyRecipeList.myRecipes;
