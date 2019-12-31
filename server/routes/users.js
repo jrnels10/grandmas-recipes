@@ -70,7 +70,7 @@ router.route('/test')
     .post(UserController.connection);
 
 router.route('/uploadGoogleCloud')
-    .post(upload.array('picture', 2), UserController.uploadToGoogleCloud)
+    .post(upload.array('picture', 1), UserController.uploadToGoogleCloud)
 
 router.route('/deleteImageFromGoogleCloud/:fileName')
     .delete(UserController.deleteFromGoogleCloud)
