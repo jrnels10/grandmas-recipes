@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export async function secret() {
-  return await axios.get(`http://localhost:5000/users/secret`);
+  return await axios.get(`https://grandmasrecipes.herokuapp.com/users/secret`);
 }
 
 // export async function getUsersById(arr) {
