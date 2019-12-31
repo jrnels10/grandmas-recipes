@@ -48,9 +48,9 @@ class AddRecipe extends Component {
         bodyFormData.append('accountType', this.props.data.user.method);
         bodyFormData.append('myRecipes', json);
         bodyFormData.append('private', true);
-        debugger
+        // debugger
         const res = await addNewRecipe(bodyFormData, this.props.data.user.email);
-
+        console.log(res)
 
         if (res.status === 200) {
             const { dispatch } = this.props.data;
