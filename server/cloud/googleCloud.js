@@ -11,13 +11,13 @@ module.exports = {
         try {
             let path = req.path;
             const storage = new Storage({ projectId, keyFilename });
-            var myBucket = storage.bucket('grandmas-recipes');
+            const myBucket = await storage.bucket('grandmas-recipes').upload(path, { public: true });
             // return storage.getBuckets().then(buckets => {
             //     console.log('Buckets:');
             //     return buckets
             // })
             return { keyFilename, storage, myBucket, path };
-            const imageUploaded = await myBucket.upload(path, { public: true });
+            // const imageUploaded = await myBucket
             return (imageUploaded)
         } catch (err) {
             console.error('ERROR:', err);

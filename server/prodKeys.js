@@ -14,5 +14,6 @@ module.exports = {
     session: {
         cookieKey: process.env.COOKIE_URI
     },
-    JWT_secret: process.env.JWT_URI
+    JWT_secret: process.env.JWT_URI,
+
 }
