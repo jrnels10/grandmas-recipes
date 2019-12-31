@@ -188,6 +188,9 @@ module.exports = {
         });
         await res.send(foundRecipe);
     },
+    connection: async (req, res, next) => {
+        res.status(200).json({ connection: 'connection to backend successful!' })
+    },
     updateUser: async (req, res, next) => {
         var obj = JSON.parse(req.body.user);
         console.log(obj)

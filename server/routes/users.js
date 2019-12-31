@@ -66,6 +66,8 @@ router.route('/updatemyrecipe/:id')
 
 router.route('/getmyrecipe/:id')
     .post(UserController.getMyRecipe);
+router.route('/test')
+    .post(UserController.connection);
 
 router.route('/uploadGoogleCloud')
     .post(upload.array('picture', 2), UserController.uploadToGoogleCloud)
