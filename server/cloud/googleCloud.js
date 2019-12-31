@@ -11,7 +11,7 @@ module.exports = {
         try {
             const storage = new Storage({ projectId, keyFilename });
             var myBucket = storage.bucket('grandmas-recipes');
-            // return { keyFilename, storage, myBucket };
+            return { keyFilename, storage, myBucket };
             const imageUploaded = await myBucket.upload(req.path, { public: true });
             return (imageUploaded)
         } catch (err) {
