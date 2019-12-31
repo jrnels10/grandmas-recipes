@@ -11,7 +11,13 @@ module.exports = {
         try {
             const storage = new Storage({ projectId, keyFilename });
             var myBucket = storage.bucket('grandmas-recipes');
-            return { keyFilename, storage, myBucket };
+            return storage.getBuckets().then(buckets => {
+                console.log('Buckets:');
+                buckets.forEach(bucket => {
+                    return bucket;
+                });
+            })
+            // return { keyFilename, storage, myBucket };
             const imageUploaded = await myBucket.upload(req.path, { public: true });
             return (imageUploaded)
         } catch (err) {
