@@ -126,11 +126,11 @@ module.exports = {
         const accountType = req.body.accountType === "google" ? 'google.email' :
             req.body.accountType === "facebook" ? 'facebook.email' : 'local.email';
         const foundMyRecipeList = await User.findOne({ [accountType]: req.params.email })
+        console.log(req)
         if (req.file !== undefined) {
             const imageUploaded = await uploadToGoogleCloud(req.file);
+            console.log(imageUploaded)
             picture = `https://storage.cloud.google.com/${imageUploaded[0].metadata.bucket}/${imageUploaded[0].metadata.name}`;
-            console.log(picture)
-            res.send(picture)
         }
 
         let myRecipes = foundMyRecipeList.myRecipes;
