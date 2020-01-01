@@ -1,7 +1,12 @@
 'use strict';
 const { Storage } = require('@google-cloud/storage');
+<<<<<<< HEAD
 // const keyFilename = ;
 const keyFilename = process.env.NODE_ENV === 'production' ? process.env.GOOGLE_APPLICATION_CREDENTIALS : './server/config/grandmasRecipes-49091d2bc82f.json';
+=======
+// const keyFilename = './server/config/grandmasRecipes-49091d2bc82f.json';
+const keyFilename = process.env.GOOGLE_APPLICATION_CREDENTIALS;
+>>>>>>> 1fb989e7436d69e012a378793c5a9a61d27337f3
 const projectId = 'grandmasrecipes';
 // https://cloud.google.com/storage/docs/reference/libraries#client-libraries-install-nodejs
 // api requests (GET,POST,DELETE,PUT) =>   https://cloud.google.com/storage/docs/json_api/v1/?apix=true
