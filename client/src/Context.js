@@ -94,7 +94,7 @@ export class Provider extends Component {
         isAuthenticated: false,
         token: '',
         facebookappId: "2368972536494612",
-        googleClientId: "193762703842-63qqf0oip1i372ib0a27opsn8opuhpkm.apps.googleusercontent.com",
+        googleClientId: "267196671122-t1r725c4lmflnnmola4mb0s1mv7gb2cg.apps.googleusercontent.com",
         axiosServerUrl: 'http://localhost:5000',
         dispatch: action => this.setState(state => reducer(state, action))
     }
@@ -115,8 +115,8 @@ export class Provider extends Component {
     environment = () => {
         return process.env.NODE_ENV === "development" ? null : this.setState({
             facebookappId: "2368972536494612",
-            googleClientId: '193762703842-srn8he4847mntqhqu0fmen7l29s5b6nj.apps.googleusercontent.com',
-            axiosServerUrl: 'https://localhost:3000/'
+            googleClientId: "267196671122-t1r725c4lmflnnmola4mb0s1mv7gb2cg.apps.googleusercontent.com",
+            axiosServerUrl: 'https://grandmasrecipes.herokuapp.com'
         })
     }
     render() {

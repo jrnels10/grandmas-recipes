@@ -128,8 +128,8 @@ module.exports = {
         const foundMyRecipeList = await User.findOne({ [accountType]: req.params.email })
         if (req.file !== undefined) {
             const imageUploaded = await uploadToGoogleCloud(req.file);
+            console.log(imageUploaded)
             picture = `https://storage.cloud.google.com/${imageUploaded[0].metadata.bucket}/${imageUploaded[0].metadata.name}`;
-            console.log(picture)
         }
 
         let myRecipes = foundMyRecipeList.myRecipes;
@@ -187,6 +187,9 @@ module.exports = {
             return item._id == req.params.id
         });
         await res.send(foundRecipe);
+    },
+    connection: async (req, res, next) => {
+        res.status(200).json({ connection: 'connection to backend successful!' })
     },
     updateUser: async (req, res, next) => {
         var obj = JSON.parse(req.body.user);

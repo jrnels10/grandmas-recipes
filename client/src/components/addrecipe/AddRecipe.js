@@ -44,13 +44,13 @@ class AddRecipe extends Component {
     upload = async (e) => {
         const json = JSON.stringify(this.state);
         var bodyFormData = new FormData();
-        bodyFormData.append('picture', this.state.img);
+        bodyFormData.append('picture', this.state.chefImage);
         bodyFormData.append('accountType', this.props.data.user.method);
         bodyFormData.append('myRecipes', json);
         bodyFormData.append('private', true);
-        debugger
+        // debugger
         const res = await addNewRecipe(bodyFormData, this.props.data.user.email);
-
+        console.log(res)
 
         if (res.status === 200) {
             const { dispatch } = this.props.data;
@@ -135,12 +135,12 @@ class AddRecipe extends Component {
                     </div>
                     <input type="text" className="form-control" aria-label="Sizing example input" ref="theDiv" tabIndex={0} name='cookingInstructions' aria-describedby="inputGroup-sizing-sm" onChange={this.onSelectedText.bind(this)} />
                 </div>
-                <div className="input-group input-group-sm mb-3">
+                {/* <div className="input-group input-group-sm mb-3">
                     <div className="input-group-prepend">
                         <span className="input-group-text" id="inputGroup-sizing-sm">Recipe Image</span>
                     </div>
                     <input className="text-white mt-1 edit-input-file" type="file" name='img' onChange={this.onSelected.bind(this)} />
-                </div>
+                </div>*/}
                 <button className="btn btn-primary" onClick={this.upload}>Save</button>
             </div>
         </PageWrapper>

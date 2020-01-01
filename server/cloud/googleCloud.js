@@ -1,22 +1,18 @@
+'use strict';
 const { Storage } = require('@google-cloud/storage');
-const keyFilename = './server/config/grandmasRecipes-49091d2bc82f.json';
+// const keyFilename = ;
+const keyFilename = process.env.NODE_ENV === 'production' ? process.env.GOOGLE_APPLICATION_CREDENTIALS : './server/config/grandmasRecipes-49091d2bc82f.json';
 const projectId = 'grandmasrecipes';
-const storage = new Storage({ projectId, keyFilename });
-var myBucket = storage.bucket('grandmas-recipes');
 // https://cloud.google.com/storage/docs/reference/libraries#client-libraries-install-nodejs
 // api requests (GET,POST,DELETE,PUT) =>   https://cloud.google.com/storage/docs/json_api/v1/?apix=true
+// https://medium.com/@nwkeeley/a-better-solution-would-be-to-4fde38db8401
 module.exports = {
     uploadToGoogleCloud: async (req, res, next) => {
         try {
-            // storage.getBuckets().then(buckets => {
-            //     console.log('Buckets:');
-            //     buckets.forEach(bucket => {
-            //         console.log(bucket[0].name);
-
-            //     });
-            // })
-            const imageUploaded = await myBucket.upload(req.path, { public: true });
-            return imageUploaded;
+            let path = req.path;
+            const storage = new Storage({ projectId, keyFilename });
+            const imageUploaded = await storage.bucket('grandmas-recipes').upload(path, { public: true });
+            return (imageUploaded)
         } catch (err) {
             console.error('ERROR:', err);
         };

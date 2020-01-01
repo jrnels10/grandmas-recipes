@@ -25,6 +25,8 @@ yarn-error.log*
 #file
 .keys.js
 .grandmasRecipes-49091d2bc82f.json
+*.yaml
+*.yml
 
 /config
 config/

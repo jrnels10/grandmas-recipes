@@ -12,7 +12,7 @@ class Recipe extends Component {
 
     render() {
         // debugger
-        console.log(this.props.recipeData)
+        // console.log(this.props.recipeData)
         const { recipeName, _id, img, chefName, chefBio } = this.props.recipeData;
         return <div className="card recipe-card">
             <Link to={`/dashboard/${_id}`}>

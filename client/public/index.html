@@ -2,13 +2,13 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="shortcut icon" href="%PUBLIC_URL%/fourteenerCommunity.ico" />
+
     <meta
       name="viewport"
       content="width=device-width, height=device-height, initial-scale=1, minimum-scale=1, maximum-scale=1, shrink-to-fit=no"
     />
     <meta name="theme-color" content="#000000" />
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <!-- <link rel="manifest" href="%PUBLIC_URL%/manifest.json" /> -->
     <link rel="apple-touch-icon" href="apple-touch-icon.png" />
     <link
       rel="stylesheet"
@@ -46,17 +46,17 @@
     />
     <script>
       // When ready...
-      window.addEventListener('load', function() {
+      window.addEventListener("load", function() {
         // Set a timeout...
         setTimeout(function() {
           // Hide the address bar!
           document
-            .getElementById('body')
+            .getElementById("body")
             .setAttribute(
-              'style',
+              "style",
               `height: ${window.innerHeight}px !important`
             );
-          document.cookie = 'SameSite=None; Secure';
+          document.cookie = "SameSite=None; Secure";
           window.scrollTo(0, 1);
         }, 0);
       });

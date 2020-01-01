@@ -20,7 +20,7 @@ export default class SignIn extends Component {
 
     onSubmit = async (value, e) => {
         const { dispatch, axiosServerUrl } = value;
-        // console.log(this.state)
+        console.log(value)
         e.preventDefault();
         // Step 1) User the data and to make HTTP request to our BE and send it along
         // Step 2) Take the BE's response (jwtToken)
@@ -57,6 +57,7 @@ export default class SignIn extends Component {
 
     async responseGoogle(value, res) {
         const { dispatch, axiosServerUrl } = value;
+        console.log(dispatch, res)
         try {
             const data = await axios.post(`${axiosServerUrl}/users/oauth/google`, { access_token: res.accessToken });
             // console.log(data);
@@ -177,7 +178,7 @@ export default class SignIn extends Component {
                                 </div> */}
                                 <div className="w-50 text-center">
                                     <GoogleLogin
-                                        clientId={`${value.googleClientId}`}
+                                        clientId={`267196671122-t1r725c4lmflnnmola4mb0s1mv7gb2cg.apps.googleusercontent.com`}
                                         buttonText="Google"
                                         onSuccess={this.responseGoogle.bind(this, value)}
                                         onFailure={this.responseGoogle}
