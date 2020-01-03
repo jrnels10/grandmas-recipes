@@ -21,6 +21,7 @@ class DashBoard extends Component {
     render() {
         return <Consumer>
             {value => {
+                console.log(value)
                 return <PageWrapper>
                     <h2>DashBoard</h2>
                 </PageWrapper>
