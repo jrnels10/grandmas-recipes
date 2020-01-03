@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { Consumer } from '../../Context';
-
+import OwlCarousel from 'react-owl-carousel';
+import 'owl.carousel/dist/assets/owl.carousel.css';
+import 'owl.carousel/dist/assets/owl.theme.default.css';
 import secretResponse from './../HOC/Secret';
-
+import GrandmaCard from './../grandma/GrandmaCard';
 import './dashBoard.css'
 import PageWrapper from '../tools/PageWrapper';
 
@@ -23,7 +25,16 @@ class DashBoard extends Component {
             {value => {
                 console.log(value)
                 return <PageWrapper>
-                    <h2>DashBoard</h2>
+                    <OwlCarousel
+                        className="owl-theme"
+                        items={1}
+                        margin={10}
+                        nav
+                    >
+                        {value.user.myRecipes.map((chef, idx) => {
+                            return <GrandmaCard key={idx} chef={chef} value={value} />
+                        })}
+                    </OwlCarousel>
                 </PageWrapper>
             }}
         </Consumer >

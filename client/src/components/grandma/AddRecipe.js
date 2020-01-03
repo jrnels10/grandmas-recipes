@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PageWrapper from '../tools/PageWrapper';
-import { addNewRecipe } from './../../API/RecipeAPI';
+import { addNewRecipe } from '../../API/RecipeAPI';
 
 const Units = ['tsp', 'tbsp', 'fl oz', 'cup', 'pt', 'qt', 'gal', 'mL', 'L', 'dL', 'lb', 'oz', 'mg', 'g', 'kg', 'mm', 'cm', 'm', 'inch']
 
