@@ -9,7 +9,10 @@ const User = require('./../models/user');
 const { validateBody, schema } = require('../helpers/routeHelpers');
 const UserController = require('../controllers/users');
 const passportSignIn = passport.authenticate('local', { session: false });
-const passportGoogle = passport.authenticate('googleToken', { session: false });
+const passportGoogle = passport.authenticate('googleToken', {
+    session: false, scope:
+        ['openid', 'profile', 'email']
+});
 const passportFacebook = passport.authenticate('facebookToken', { session: false });
 const passportJWT = passport.authenticate('jwt', { session: false });
 const multer = require('multer');
@@ -61,6 +64,8 @@ router.route('/update/:email')
 router.route('/addmyrecipe/:email')
     .put(upload.single('picture'), UserController.addMyRecipe);
 
+router.route('/addmygrandma/:email')
+    .put(upload.single('picture'), UserController.addMyGrandma);
 router.route('/updatemyrecipe/:id')
     .put(upload.single('picture'), UserController.updateMyRecipe);
 

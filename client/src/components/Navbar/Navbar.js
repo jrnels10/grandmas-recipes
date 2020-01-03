@@ -2,9 +2,6 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Consumer } from '../../Context';
 import axios from 'axios';
-import Loader from './../loader/Loader';
-// import { MobileFooterContainer } from './Mobile/MobileFooter';
-// import Logo from './../../Images/14erLogo.png'
 
 import './navbar.css';
 
@@ -59,7 +56,7 @@ export default class Navbar extends Component {
         return (
             <Consumer>
                 {value => {
-                    const { dispatch, loader } = value;
+                    const { dispatch } = value;
                     const home = value.isAuthenticated ? "blueish" : "no-color";
                     const show = this.state.show ? 'open' : 'close';
                     return <React.Fragment>
@@ -105,7 +102,6 @@ export default class Navbar extends Component {
                                 </ul>
                             </div>
                         </nav>
-                        {/* {value.isAuthenticated ? <MobileFooterContainer value={value} signOut={this.signOut}/>:null} */}
                     </React.Fragment>
                 }}
             </Consumer>

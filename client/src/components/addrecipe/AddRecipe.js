@@ -135,12 +135,6 @@ class AddRecipe extends Component {
                     </div>
                     <input type="text" className="form-control" aria-label="Sizing example input" ref="theDiv" tabIndex={0} name='cookingInstructions' aria-describedby="inputGroup-sizing-sm" onChange={this.onSelectedText.bind(this)} />
                 </div>
-                {/* <div className="input-group input-group-sm mb-3">
-                    <div className="input-group-prepend">
-                        <span className="input-group-text" id="inputGroup-sizing-sm">Recipe Image</span>
-                    </div>
-                    <input className="text-white mt-1 edit-input-file" type="file" name='img' onChange={this.onSelected.bind(this)} />
-                </div>*/}
                 <button className="btn btn-primary" onClick={this.upload}>Save</button>
             </div>
         </PageWrapper>

@@ -1,7 +1,7 @@
 import axios from 'axios';
-const baseUrl = 'https://grandmasrecipes.herokuapp.com';
+// const baseUrl = 'https://grandmasrecipes.herokuapp.com';
 
-// const baseUrl = 'http://localhost:5000'
+const baseUrl = process.env.NODE_ENV === 'development' ? 'http://localhost:5000' : 'https://grandmasrecipes.herokuapp.com';
 export function addNewRecipe(bodyFormData, email) {
     try {
         return axios.put(`${baseUrl}/users/addmyrecipe/${email}`,

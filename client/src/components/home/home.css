@@ -13,14 +13,14 @@
   text-align: center;
 }
 
-.login-buttons {
-  margin: 30px;
-  border-color: #8884ff;
-  font-family: 'Roboto', sans-serif;
+.signin-button {
+  background-color: #877785;
+  outline: none;
+  border-color: #ffffff;
+  height: 45px;
+  width: 100px;
 }
-.btn-signup {
-  background-color: #d7bce8;
-}
+
 .fade-out {
   opacity: 1;
 }

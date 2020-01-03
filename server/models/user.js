@@ -84,13 +84,6 @@ const userSchema = new Schema({
         }
     },
     myRecipes: [{
-        recipeName: {
-            type: String
-        },
-        groups: [],
-        img: {
-            type: String
-        },
         chefImage: {
             type: String
         },
@@ -100,21 +93,33 @@ const userSchema = new Schema({
         chefBio: {
             type: String
         },
-        ingredients: [{
-            ingredient: {
-                type: String
-            },
-            amount: {
-                type: Number
-            },
-            units: {
-                type: String
-            }
-        }],
-        cookingInstructions: {
+        author: {
             type: String
         },
-        private: Boolean
+        chefRecipes: [{
+            recipeName: {
+                type: String
+            },
+            groups: [],
+            img: {
+                type: String
+            },
+            ingredients: [{
+                ingredient: {
+                    type: String
+                },
+                amount: {
+                    type: Number
+                },
+                units: {
+                    type: String
+                }
+            }],
+            cookingInstructions: {
+                type: String
+            },
+            private: Boolean
+        }]
     }]
     // index: { unique: true }
 });

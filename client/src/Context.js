@@ -95,7 +95,7 @@ export class Provider extends Component {
         token: '',
         facebookappId: "2368972536494612",
         googleClientId: "267196671122-kijg7hhm848n7klsgsiqav74vebejt45.apps.googleusercontent.com",
-        axiosServerUrl: 'https://grandmasrecipes.herokuapp.com',
+        axiosServerUrl: 'http://localhost:5000',
         dispatch: action => this.setState(state => reducer(state, action))
     }
     async componentDidMount() {
@@ -116,14 +116,14 @@ export class Provider extends Component {
         return process.env.NODE_ENV === "development" ? null : this.setState({
             facebookappId: "2368972536494612",
             googleClientId: "267196671122-kijg7hhm848n7klsgsiqav74vebejt45.apps.googleusercontent.com",
-            axiosServerUrl: 'https://grandmasrecipes.herokuapp.com'
+            axiosServerUrl: 'http://localhost:5000'
         })
     }
     render() {
         return (
-            <Context.Provider value={this.state}>
+            < Context.Provider value={this.state} >
                 {this.props.children}
-            </Context.Provider>
+            </Context.Provider >
         )
     }
 }

@@ -1,89 +1,73 @@
-.sign-container {
-  background: none;
-  height: 500px;
-  width: 500px;
-  position: absolute;
-  top: 10%;
-  right: 5%;
-}
-
 .signin-menu {
-  margin-top: 56px;
-  background-color: #dae7dd;
+  position: absolute;
+  object-fit: cover;
+  background-color: rgba(0, 0, 0, 0.35);
   height: 100%;
+  width: 100%;
 }
 
-#exampleInputPassword1::placeholder,
-#exampleInputEmail1::placeholder,
-#exampleInputFirstName1::placeholder,
-#exampleInputLastName1::placeholder {
-  color: #d5d0cf;
-  opacity: 0.8;
-  font-style: italic;
+.fa-arrow-circle-right {
+  color: #877785;
 }
 
-@media screen and (max-width: 801px) {
-  .signin-close {
-    width: 100vw;
-    -webkit-transition: width 0.3s ease-in-out;
-    -moz-transition: width 0.3s ease-in-out;
-    -ms-transition: width 0.3s ease-in-out;
-    -o-transition: width 0.3s ease-in-out;
-  }
-  .signin-open {
-    width: 0px;
-    height: 100%;
-    -webkit-transition: width 0.3s ease-in-out;
-    -moz-transition: width 0.3s ease-in-out;
-    -ms-transition: width 0.3s ease-in-out;
-    -o-transition: width 0.3s ease-in-out;
-  }
+.sign-container {
+  position: absolute;
+  bottom: 0px;
+  height: 75vh;
+  padding: 0px 50px 0px 50px;
+}
+.signup-container {
+  position: absolute;
+  bottom: 0px;
+  height: 90vh;
+  width: 100%;
+  padding: 0px 50px 0px 50px;
+}
 
-  .fade-open {
-    opacity: 0;
-  }
-  .fade-close {
-    opacity: 1;
-  }
+.sign-input {
+  background: none;
+  border: none;
+}
+.sign-input::placeholder {
+  color: #f0d1bf;
+}
 
-  .signup-open {
-    margin-top: 4%;
-    margin-right: 25%;
-    margin-left: 50%;
-    width: 30%;
-    height: 60%;
-  }
+.sign-input-label {
+  width: 100vw;
+  color: #c59894;
+  margin: 0px;
+}
 
-  .facebook-login {
-    background-color: #395898 !important;
-    outline: none;
-    color: #ffffff;
-    font-size: 1rem;
-    height: 40px;
-    width: 90%;
-  }
+.signin-button {
+  background-color: #877785;
+  outline: none;
+  border-color: #ffffff;
+  height: 45px;
+  width: 100px;
+  color: #ffffff;
+}
 
-  .google-login {
-    width: 100%;
-    float: right;
-    height: 40px !important;
-    text-align: center;
-    padding-left: 15px !important;
-    position: relative;
-    font-size: 1rem !important;
-  }
+.sign-underline {
+  margin-top: 2px;
+  background: #877785;
+}
 
-  .google-login div {
-    padding: 5px !important;
-    margin-bottom: 4px !important;
-    margin-left: 3px;
-    float: right;
-    font-size: 1rem !important;
-  }
-  .google-login > div > span {
-    padding: 7px 10px 10px 0px !important;
-  }
-  .signup-labels {
-    margin-bottom: 0px !important;
-  }
+.facebook-login,
+.google-login {
+  height: 45px;
+  width: 110px;
+  border-radius: 5px !important;
+  background-color: #877785 !important;
+  border-color: #ffffff !important;
+  color: #ffffff !important;
+}
+
+.google-login div {
+  height: 42px;
+  border-radius: 5px !important;
+  background-color: #877785 !important;
+}
+
+.fa-facebook {
+  color: #29487d;
 }

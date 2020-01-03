@@ -4,6 +4,7 @@ import './SignUpAndSignIn.css';
 import axios from 'axios';
 import GoogleLogin from 'react-google-login';
 import FacebookLogin from 'react-facebook-login';
+import PageWrapper from './../tools/PageWrapper';
 
 
 export default class SignUp extends Component {
@@ -62,11 +63,12 @@ export default class SignUp extends Component {
     }
 
     async responseGoogle(value, res) {
+        console.log(res)
         const { dispatch, axiosServerUrl } = value;
         try {
             const data = await axios.post(`${axiosServerUrl}/users/oauth/google`, { access_token: res.accessToken });
             // const data = await axios.post('https://fourteener-community.herokuapp.com/users/oauth/google', { access_token: res.accessToken });
-            // console.log(data);
+            console.log(data);
             dispatch({
                 type: "SIGN_UP",
                 payload: {
@@ -124,93 +126,96 @@ export default class SignUp extends Component {
                 {value => {
                     // const { dispatch } = value;
                     const open = !this.state.open ? "close" : "open";
-                    return <div className={`col-7 float-right signup-${open} `}>
-                        <div className={`w-100`}>
-                            <span className="m-2" onClick={this.close}><i className="fas fa-arrow-circle-right fa-lg"></i></span>
-                            <form className={`mt-2`} onSubmit={this.onSubmit.bind(this, value)}>
-                                <div className="form-group-sm">
-                                    <label className="text-white w-100 font-weight-bold ml-2 mb-1 signup-labels" htmlFor="exampleInputEmail1">Email address</label>
-                                    <input
-                                        className="form-control-sm sigin-input"
-                                        id="exampleInputEmail1"
-                                        type="email"
-                                        name="email"
-                                        onChange={this.onChange}
-                                        aria-describedby="emailHelp"
-                                        placeholder="John@smith.com"
-                                    />
-                                    <hr></hr>
-                                </div>
-                                <div className="form-group">
-                                    <label className="text-white w-100 font-weight-bold ml-2 mb-1 signup-labels" htmlFor="exampleInputPassword1 text-white">Password</label>
-                                    <input
-                                        className="form-control-sm sigin-input"
-                                        id="exampleInputPassword1"
-                                        type="password"
-                                        name='password'
-                                        onChange={this.onChange}
-                                        placeholder="14ersRcool" />
-                                    <hr></hr>
-                                </div>
-                                <div className="form-group">
-                                    <label className="text-white w-100 font-weight-bold ml-2 mb-1 signup-labels" htmlFor="exampleInputFirstName1">First Name</label>
-                                    <input
-                                        className="form-control sigin-input"
-                                        id="exampleInputFirstName1"
-                                        type="text"
-                                        name="firstName"
-                                        onChange={this.onChange}
-                                        placeholder="Enter your first name"
-                                    />
-                                    <hr></hr>
+                    return <PageWrapper>
+                        <div className={` signin-menu signup-${open} `}>
+                            <div className={`w-100 signup-container`}>
+                                <span className="m-2" onClick={this.close}><i className="fas fa-arrow-circle-right fa-lg"></i></span>
+                                <form className={`mt-2`} onSubmit={this.onSubmit.bind(this, value)}>
+                                    <div className="form-group-sm">
+                                        <label className="sign-input-label" htmlFor="exampleInputEmail1">Email address</label>
+                                        <input
+                                            className="form-control-sm sign-input"
+                                            id="exampleInputEmail1"
+                                            type="email"
+                                            name="email"
+                                            onChange={this.onChange}
+                                            aria-describedby="emailHelp"
+                                            placeholder="John@smith.com"
+                                        />
+                                        <hr className='sign-underline' />
+                                    </div>
+                                    <div className="form-group">
+                                        <label className="sign-input-label" htmlFor="exampleInputPassword1 text-white">Password</label>
+                                        <input
+                                            className="form-control-sm sign-input"
+                                            id="exampleInputPassword1"
+                                            type="password"
+                                            name='password'
+                                            onChange={this.onChange}
+                                            placeholder="14ersRcool" />
+                                        <hr className='sign-underline' />
+                                    </div>
+                                    <div className="form-group">
+                                        <label className="sign-input-label" htmlFor="exampleInputFirstName1">First Name</label>
+                                        <input
+                                            className="form-control sign-input"
+                                            id="exampleInputFirstName1"
+                                            type="text"
+                                            name="firstName"
+                                            onChange={this.onChange}
+                                            placeholder="Enter your first name"
+                                        />
+                                        <hr className='sign-underline' />
+                                    </div>
+                                    <div className="form-group">
+                                        <label className="sign-input-label" htmlFor="exampleInputLastName1">Last Name</label>
+                                        <input
+                                            className="form-control sign-input"
+                                            id="exampleInputLastName1"
+                                            type="text"
+                                            name='lastName'
+                                            onChange={this.onChange}
+                                            placeholder="Enter your last name" />
+                                        <hr className='sign-underline' />
+                                    </div>
 
-                                </div>
-                                <div className="form-group">
-                                    <label className="text-white w-100 font-weight-bold ml-2 mb-1 signup-labels" htmlFor="exampleInputLastName1">Last Name</label>
-                                    <input
-                                        className="form-control sigin-input"
-                                        id="exampleInputLastName1"
-                                        type="text"
-                                        name='lastName'
-                                        onChange={this.onChange}
-                                        placeholder="Enter your last name" />
-                                    <hr></hr>
-
-                                </div>
-
-                                <button type="submit" className="btn btn-primary signin-button ml-2">Sign Up</button>
-                            </form>
-                            {this.state.errorMessage ? <div className='alert alert-danger'>{value.errorMessage}</div> : null}
-                            <div className='text-white pl-2 mt-2'><small>
-                                Or sign up using Google or Facebook
+                                    <div className='row w-100 m-0 pl-2 p-0 mt-3'>
+                                        <div className="w-50 text-center float-left">
+                                            <button type="submit" className="btn signin-button">Sign Up</button>
+                                        </div>
+                                    </div>
+                                </form>
+                                {this.state.errorMessage ? <div className='alert alert-danger'>{value.errorMessage}</div> : null}
+                                <div className='text-white pl-2 mt-2'><small>
+                                    Or sign up using Google or Facebook
                             </small>
-                            </div>
-                            <div className='row w-100 m-0 pl-2 p-0 mt-3'>
-                                {/* <div className="w-50 m-auto text-center">
-
-                                    <FacebookLogin
-                                        appId={`${value.facebookappId}`}
-                                        autoLoad={false}
-                                        textButton=" Facebook"
-                                        fields="name,email,picture"
-                                        callback={this.responseFacebook.bind(this, value)}
-                                        cssClass="btn facebook-login"
-                                   
-                                    />
-                                </div> */}
-                                <div className="w-50 m-auto text-center">
-                                    <GoogleLogin
-                                        clientId={`${value.googleClientId}`}
-                                        buttonText="Google"
-                                        onSuccess={this.responseGoogle.bind(this, value)}
-                                        onFailure={this.responseGoogle}
-                                        className='btn google-login ml-5'
-                                    />
+                                </div>
+                                <div className='row w-100 m-0 pl-2 p-0 mt-3'>
+                                    <div className="w-50 m-auto text-center">
+                                        <FacebookLogin
+                                            appId='1431908256951062'
+                                            autoLoad={false}
+                                            isMobile={false}
+                                            textButton=" Facebook"
+                                            fields="name,email,picture"
+                                            callback={this.responseFacebook.bind(this, value)}
+                                            cssClass="btn facebook-login"
+                                            icon="fa-facebook fa-lg"
+                                        />
+                                    </div>
+                                    <div className="w-50 m-auto text-center">
+                                        <GoogleLogin
+                                            clientId={`193762703842-63qqf0oip1i372ib0a27opsn8opuhpkm.apps.googleusercontent.com`}
+                                            buttonText="Google"
+                                            onSuccess={this.responseGoogle.bind(this, value)}
+                                            onFailure={this.responseGoogle}
+                                            className='btn google-login'
+                                        />
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-
+                    </PageWrapper>
                 }}
             </Consumer>
         );

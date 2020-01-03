@@ -2,6 +2,7 @@ const passport = require('passport');
 const JwtStrategy = require('passport-jwt').Strategy;
 const LocalStrategy = require('passport-local').Strategy;
 const GooglePlusTokenStrategy = require('passport-google-plus-token');
+const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const FacebookTokenStrategy = require('passport-facebook-token');
 const { ExtractJwt } = require('passport-jwt');
 const User = require('./models/user');
@@ -35,34 +36,35 @@ passport.use(new JwtStrategy({
 passport.use('googleToken', new GooglePlusTokenStrategy({
     clientID: google.clientID,
     clientSecret: google.clientSecret
-}, async (accessToken, refreshToken, profile, done) => {
-    try {
-        const existingUser = await User.findOne({ 'google.id': profile.id })
-        console.log('existingUser', existingUser)
-        if (existingUser) {
-            return done(null, existingUser);
+},
+    async (accessToken, refreshToken, profile, done) => {
+        try {
+            const existingUser = await User.findOne({ 'google.id': profile.id })
+            console.log('existingUser', existingUser)
+            if (existingUser) {
+                return done(null, existingUser);
+            }
+
+            // If new account
+
+            const newUser = new User({
+                method: 'google',
+                google: {
+                    id: profile.id,
+                    email: profile.emails[0].value,
+                    firstName: profile.name.givenName,
+                    lastName: profile.name.familyName,
+                    profilePicture: profile.photos[0].value
+                }
+            });
+            await newUser.save();
+            done(null, newUser);
+        }
+        catch (error) {
+            done(error, false, error.message);
         }
 
-        // If new account
-
-        const newUser = new User({
-            method: 'google',
-            google: {
-                id: profile.id,
-                email: profile.emails[0].value,
-                firstName: profile.name.givenName,
-                lastName: profile.name.familyName,
-                profilePicture: profile.photos[0].value
-            }
-        });
-        await newUser.save();
-        done(null, newUser);
-    }
-    catch (error) {
-        done(error, false, error.message);
-    }
-
-}));
+    }));
 
 passport.use('facebookToken', new FacebookTokenStrategy({
     clientID: facebook.AppID,
@@ -97,6 +99,7 @@ passport.use(new LocalStrategy({
 }, async (email, password, done) => {
     try {
         // Find the user with the email
+        console.log('test')
         const user = await User.findOne({ 'local.email': email });
         // If not, handle it
         if (!user) {

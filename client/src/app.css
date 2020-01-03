@@ -6,12 +6,20 @@ body {
   background-color: gray;
 }
 
+/* #877785
+#F7C9B
+#F0D1BF
+#C59894
+#E85A4F */
+
 #app-div {
-  /* background: url(./Images/Betty-White.jpg); */
+  background: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)),
+    url(./Images/Nelson2.png);
   background-repeat: no-repeat;
   background-position: center bottom;
   background-size: cover;
   overflow: hidden;
+  background-color: rgba(0, 0, 0, 0.35);
 }
 
 /* #body-container{

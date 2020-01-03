@@ -1,5 +1,6 @@
 .dashboard-container > .row {
   height: 33.33%;
+  padding: 0px;
 }
 /* .dashboard-label {
   width: 100%;

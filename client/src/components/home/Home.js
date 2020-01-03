@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import SignIn from '../sign/SignIn';
 import { Consumer } from '../../Context';
 import { Link } from 'react-router-dom';
-import homePic from './../../Images/Nelson2.png'
 
 
 
@@ -41,18 +39,24 @@ export default class Home extends Component {
                     return <div className="w-100 h-100 row m-0" >
                         {!value.isAuthenticated ?
                             <React.Fragment>
-                                <img id='image-home' src={homePic} />
-                                <div className="login-container">
-                                    <button
-                                        className={`btn w-25 btn-signup login-buttons ${open}`}
-                                        onClick={this.sign}>
-                                        <Link className="nav-link p-0 text-white" to="/signin" onClick={this.delayRedirect}>Sign In</Link>
-                                    </button>
-                                    <button
-                                        className={`btn w-25 btn-outline-warning login-buttons ${open}`}
-                                        onClick={this.sign}>
-                                        <Link className="nav-link p-0 text-white" to="/signup" onClick={this.delayRedirect}>Sign Up</Link>
-                                    </button>
+
+                                <div className="login-container row w-100 m-0 pl-2 p-0 mt-3">
+                                    <div className="w-50 text-center float-left">
+                                        <button
+                                            className={`btn btn-signup signin-button  ${open}`}
+                                            onClick={this.sign}>
+                                            <Link className="nav-link p-0 text-white" to="/signin" onClick={this.delayRedirect}>Sign In</Link>
+                                        </button>
+                                    </div>
+
+                                    <div className="w-50 text-center float-left">
+
+                                        <button
+                                            className={`btn signin-button  ${open}`}
+                                            onClick={this.sign}>
+                                            <Link className="nav-link p-0 text-white" to="/signup" onClick={this.delayRedirect}>Sign Up</Link>
+                                        </button>
+                                    </div>
                                 </div>
                             </React.Fragment> : null}
                         <div className="row"></div>
