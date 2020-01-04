@@ -76,23 +76,18 @@ class AddRecipe extends Component {
         }
         const json = JSON.stringify(test);
         var bodyFormData = new FormData();
-        console.log('bodyForm: ', bodyFormData)
-
         bodyFormData.append('picture', this.state.img);
-        console.log('bodyForm: ', bodyFormData)
-
         bodyFormData.append('accountType', this.props.data.user.method);
-        console.log('bodyForm: ', bodyFormData)
-
         bodyFormData.append('myRecipes', json);
-        console.log('bodyForm: ', bodyFormData)
-
         bodyFormData.append('private', true);
         console.log('json string: ', json)
         console.log('recipe image: ', this.state.img)
         console.log('bodyForm: ', bodyFormData)
         console.log('user info: ', this.props.data.user)
         // debugger
+        for (var key of bodyFormData.entries()) {
+            console.log(key[0] + ', ' + key[1]);
+        }
         const res = await addNewRecipe(bodyFormData, this.props.data.user.email);
         console.log(res)
 
