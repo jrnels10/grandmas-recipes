@@ -24,7 +24,7 @@ class DashBoard extends Component {
         return <Consumer>
             {value => {
                 console.log(value)
-                return <PageWrapper>
+                return value.user.myRecipes.length > 0 ? <PageWrapper>
                     <OwlCarousel
                         className="owl-theme"
                         items={1}
@@ -35,7 +35,7 @@ class DashBoard extends Component {
                             return <GrandmaCard key={idx} chef={chef} value={value} />
                         })}
                     </OwlCarousel>
-                </PageWrapper>
+                </PageWrapper> : null;
             }}
         </Consumer >
     }

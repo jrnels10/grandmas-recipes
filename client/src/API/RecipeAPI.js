@@ -4,6 +4,8 @@ import axios from 'axios';
 const baseUrl = process.env.NODE_ENV === 'development' ? 'http://localhost:5000' : 'https://grandmasrecipes.herokuapp.com';
 export function addNewRecipe(bodyFormData, email) {
     try {
+        console.log(bodyFormData, email)
+        debugger
         return axios.put(`${baseUrl}/users/addmyrecipe/${email}`,
             bodyFormData,
             { headers: { 'Content-Type': 'multipart/form-data' } })

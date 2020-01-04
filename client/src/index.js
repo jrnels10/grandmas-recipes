@@ -9,6 +9,7 @@ import SignIn from './components/sign/SignIn';
 import { Provider } from './Context';
 import authGuard from './components/HOC/authGuard';
 import DashBoard from './components/dashboard/Dashboard';
+import AddRecipe from './components/Recipe/AddRecipe';
 
 
 ReactDOM.render(
@@ -19,6 +20,7 @@ ReactDOM.render(
                     <Route exact path="/" component={Home} />
                     <Route exact path="/signup" component={SignUp} />
                     <Route exact path="/dashboard" component={authGuard(DashBoard)} />
+                    <Route path="/addrecipe/:id" component={authGuard(AddRecipe)} />
                     <Route exact path="/signin" component={SignIn} />
                 </Switch>
             </App>

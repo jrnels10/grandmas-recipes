@@ -61,7 +61,7 @@ export default class Navbar extends Component {
                     const show = this.state.show ? 'open' : 'close';
                     return <React.Fragment>
                         <nav className={`navbar navbar-${show}`} style={{ zIndex: '5000' }}>
-                            <label className="navbar-brand">Grandmas Recipes</label>
+                            <label className="navbar-brand">Family Recipes</label>
                             <Link className="navbar-brand" onClick={this.redirect.bind(this)} to="/"></Link>
                             <button className={`navbar-toggler`} type="button" onClick={() => { this.setState({ show: !this.state.show }) }} aria-expanded="false" aria-label="Toggle navigation">
                                 <svg xmlns="http://www.w3.org/2000/svg" className="bi bi-list" width="1.5em" height="1.5em" viewBox="0 0 20 20" fill="#f7c9b6">

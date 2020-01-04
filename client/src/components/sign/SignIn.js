@@ -5,6 +5,7 @@ import axios from 'axios';
 import GoogleLogin from 'react-google-login';
 import FacebookLogin from 'react-facebook-login';
 import PageWrapper from './../tools/PageWrapper';
+import PageShade from './../tools/PageShade';
 
 
 export default class SignIn extends Component {
@@ -128,72 +129,74 @@ export default class SignIn extends Component {
                 {value => {
                     const open = !this.state.open ? "open" : "close";
                     console.log(value)
-                    return <PageWrapper>
-                        <div className={`signin-${open} signin-menu`}>
-                            <div className={`w-100 fade-${open} sign-container`}>
-                                <span className="m-2" onClick={this.close}><i className="fas fa-arrow-circle-right fa-lg"></i></span>
-                                <form className={`mt-2`} onSubmit={this.onSubmit.bind(this, value)}>
-                                    <div className="form-group-sm">
-                                        <label className="sign-input-label" htmlFor="exampleInputEmail1">Email address</label>
-                                        <input
-                                            className="form-control-sm sign-input"
-                                            id="exampleInputEmail1"
-                                            type="email"
-                                            name="email"
-                                            onChange={this.onChange}
-                                            aria-describedby="emailHelp"
-                                            placeholder="John@smith.com"
-                                        />
-                                        <hr className='sign-underline' />
-                                    </div>
-                                    <div className="form-group">
-                                        <label className="sign-input-label" htmlFor="exampleInputPassword1 text-white">Password</label>
-                                        <input
-                                            className="form-control-sm sign-input"
-                                            id="exampleInputPassword1"
-                                            type="password"
-                                            name='password'
-                                            onChange={this.onChange}
-                                            placeholder="14ersRcool" />
-                                        <hr className='sign-underline' />
+                    return <PageShade>
+                        <PageWrapper>
+                            <div className={`signin-${open} signin-menu`}>
+                                <div className={`w-100 fade-${open} sign-container`}>
+                                    <span className="m-2" onClick={this.close}><i className="fas fa-arrow-circle-right fa-lg"></i></span>
+                                    <form className={`mt-2`} onSubmit={this.onSubmit.bind(this, value)}>
+                                        <div className="form-group-sm">
+                                            <label className="sign-input-label" htmlFor="exampleInputEmail1">Email address</label>
+                                            <input
+                                                className="form-control-sm sign-input"
+                                                id="exampleInputEmail1"
+                                                type="email"
+                                                name="email"
+                                                onChange={this.onChange}
+                                                aria-describedby="emailHelp"
+                                                placeholder="John@smith.com"
+                                            />
+                                            <hr className='sign-underline' />
+                                        </div>
+                                        <div className="form-group">
+                                            <label className="sign-input-label" htmlFor="exampleInputPassword1 text-white">Password</label>
+                                            <input
+                                                className="form-control-sm sign-input"
+                                                id="exampleInputPassword1"
+                                                type="password"
+                                                name='password'
+                                                onChange={this.onChange}
+                                                placeholder="mysecretpassword" />
+                                            <hr className='sign-underline' />
+                                        </div>
+                                        <div className='row w-100 m-0 pl-2 p-0 mt-3'>
+                                            <div className="w-50 text-center float-left">
+                                                <button type="submit" className="btn btn-primary signin-button">Sign In</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    {this.state.errorMessage ? <div className='alert alert-danger'>{value.errorMessage}</div> : null}
+                                    <div className='text-white pl-2 mt-2'><small>
+                                        Or sign in using Facebook or Google
+                            </small>
                                     </div>
                                     <div className='row w-100 m-0 pl-2 p-0 mt-3'>
-                                        <div className="w-50 text-center float-left">
-                                            <button type="submit" className="btn btn-primary signin-button">Sign In</button>
+                                        <div className="w-50 m-auto text-center">
+                                            <FacebookLogin
+                                                appId='1431908256951062'
+                                                autoLoad={false}
+                                                isMobile={false}
+                                                textButton=" Facebook"
+                                                fields="name,email,picture"
+                                                callback={this.responseFacebook.bind(this, value)}
+                                                cssClass="btn facebook-login"
+                                                icon="fa-facebook fa-lg"
+                                            />
                                         </div>
-                                    </div>
-                                </form>
-                                {this.state.errorMessage ? <div className='alert alert-danger'>{value.errorMessage}</div> : null}
-                                <div className='text-white pl-2 mt-2'><small>
-                                    Or sign in using Facebook or Google
-                            </small>
-                                </div>
-                                <div className='row w-100 m-0 pl-2 p-0 mt-3'>
-                                    <div className="w-50 m-auto text-center">
-                                        <FacebookLogin
-                                            appId='1431908256951062'
-                                            autoLoad={false}
-                                            isMobile={false}
-                                            textButton=" Facebook"
-                                            fields="name,email,picture"
-                                            callback={this.responseFacebook.bind(this, value)}
-                                            cssClass="btn facebook-login"
-                                            icon="fa-facebook fa-lg"
-                                        />
-                                    </div>
-                                    <div className="w-50 m-auto text-center">
-                                        <GoogleLogin
-                                            clientId={`193762703842-63qqf0oip1i372ib0a27opsn8opuhpkm.apps.googleusercontent.com`}
-                                            buttonText="Google"
-                                            onSuccess={this.responseGoogle.bind(this, value)}
-                                            onFailure={this.responseGoogle}
-                                            className='btn google-login'
-                                        />
+                                        <div className="w-50 m-auto text-center">
+                                            <GoogleLogin
+                                                clientId={`193762703842-63qqf0oip1i372ib0a27opsn8opuhpkm.apps.googleusercontent.com`}
+                                                buttonText="Google"
+                                                onSuccess={this.responseGoogle.bind(this, value)}
+                                                onFailure={this.responseGoogle}
+                                                className='btn google-login'
+                                            />
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </PageWrapper>
+                        </PageWrapper>
+                    </PageShade>
                 }}
             </Consumer>
         );
