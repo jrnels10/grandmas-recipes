@@ -9,7 +9,7 @@ export default (OriginalComponent) => {
                 {value => {
                     const { isAuthenticated } = value;
                     // console.log(isAuthenticated)
-                    return isAuthenticated ? <OriginalComponent data={value}/> : null
+                    return isAuthenticated ? <OriginalComponent data={value} /> : null
                 }}
             </Consumer>
         }
