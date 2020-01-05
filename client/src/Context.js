@@ -136,7 +136,7 @@ export class Provider extends Component {
     environment = () => {
         return process.env.NODE_ENV === "development" ? null : this.setState({
             facebookappId: "2368972536494612",
-            googleClientId: "267196671122-kijg7hhm848n7klsgsiqav74vebejt45.apps.googleusercontent.com",
+            googleClientId: "267196671122-12ovuas1pjla6r5dbhd7p5avighbhbdq.apps.googleusercontent.com",
             axiosServerUrl: process.env.NODE_ENV === 'development' ? 'http://localhost:5000' : 'https://grandmasrecipes.herokuapp.com'
         })
     }
