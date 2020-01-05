@@ -185,7 +185,7 @@ export default class SignIn extends Component {
                                         </div>
                                         <div className="w-50 m-auto text-center">
                                             <GoogleLogin
-                                                clientId={`193762703842-63qqf0oip1i372ib0a27opsn8opuhpkm.apps.googleusercontent.com`}
+                                                clientId={`267196671122-12ovuas1pjla6r5dbhd7p5avighbhbdq.apps.googleusercontent.com`}
                                                 buttonText="Google"
                                                 onSuccess={this.responseGoogle.bind(this, value)}
                                                 onFailure={this.responseGoogle}
