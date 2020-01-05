@@ -10,6 +10,8 @@ import { Provider } from './Context';
 import authGuard from './components/HOC/authGuard';
 import DashBoard from './components/dashboard/Dashboard';
 import AddRecipe from './components/Recipe/AddRecipe';
+import RecipeCard from './components/cards/RecipeCard';
+import CardContainer from './components/cards/CardContainer';
 
 
 ReactDOM.render(
@@ -19,8 +21,10 @@ ReactDOM.render(
                 <Switch>
                     <Route exact path="/" component={Home} />
                     <Route exact path="/signup" component={SignUp} />
-                    <Route exact path="/dashboard" component={authGuard(DashBoard)} />
+                    <Route path="/dashboard" component={authGuard(DashBoard)} />
+                    <Route path="/familychefs" component={authGuard(CardContainer)} />
                     <Route path="/addrecipe/:id" component={authGuard(AddRecipe)} />
+                    <Route path={`/recipe/selectedrecipe/:recipeId`} component={authGuard(RecipeCard)} />
                     <Route exact path="/signin" component={SignIn} />
                 </Switch>
             </App>

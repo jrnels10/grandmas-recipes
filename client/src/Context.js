@@ -34,8 +34,12 @@ const reducer = (state, action) => {
                 ...state
             }
         case 'ADDED_MY_RECIPE':
-            let recipes = state;
-            recipes.user.myRecipes = action.payload.myRecipes;
+            state.user.myRecipes = action.payload.myRecipes;
+            return {
+                ...state
+            }
+        case 'VIEW_MY_RECIPE':
+            state.recipe.selected = action.payload.selected;
             return {
                 ...state
             }
@@ -89,6 +93,22 @@ export class Provider extends Component {
 
             ],
             myGroups: []
+        },
+        recipe: {
+            selected: {
+                groups: ["Nelson"],
+                ingredients: [{
+                    _id: "5e10cbdee149f9307cf6508f",
+                    ingredient: "test",
+                    amount: 2,
+                    units: "tsp"
+                }],
+                _id: "5e10cbdee149f9307cf6508e",
+                recipeName: "test recipe 3",
+                cookingInstructions: "cook it",
+                img: "https://storage.cloud.google.com/grandmas-recipes/coke.jpg",
+                private: true
+            }
         },
         loader: true,
         isAuthenticated: false,

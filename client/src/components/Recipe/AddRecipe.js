@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PageWrapper from '../tools/PageWrapper';
 import { addNewRecipe } from '../../API/RecipeAPI';
 import PageShade from '../tools/PageShade';
+import ModalRecipes from './../tools/Modal';
 import { withRouter } from 'react-router-dom';
 
 import './addrecipe.css';
@@ -145,56 +146,40 @@ class AddRecipe extends Component {
                         <div className='col-10 w-100 pl-0'>
                             <button className="btn w-100 signin-button" id="addrecipe-add-ingredients" onClick={this.toggleIngredientModal}>Add ingredients</button>
                         </div>
-
-                        <div className={`modal ingredient-modal-${this.state.ingredientModal}`} id="exampleModalCenter" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                            <div className="modal-dialog modal-dialog-centered" role="document">
-                                <div className="modal-content">
-                                    <div className="modal-header">
-                                        <h6 className="modal-title" id="exampleModalLongTitle">{this.state.recipeName} ingredients</h6>
-                                        <button type="button" className="close" onClick={this.toggleIngredientModal}>
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div className="modal-body row w-100 m-0">
-                                        <div className='col-6 w-100 pl-0'>
-                                            <div className="input-group input-group-sm mb-3">
-                                                <label className="sign-input-label" htmlFor="exampleInputEmail1">Ingredient</label>
-                                                <input type="text" className="sign-input" placeholder="Brocolli" aria-label="Sizing example input" ref="ingredientDiv" tabIndex={0} name='ingredient' aria-describedby="inputGroup-sizing-sm" onChange={this.onSelectedText.bind(this)} />
-                                                <hr className='sign-underline' />
-                                            </div>
-                                        </div>
-                                        <div className='col-6 w-100 pr-0 mb-2'>
-                                            <label className="sign-input-label" htmlFor="exampleInputEmail1">Amount</label>
-                                            <input type="text" className="sign-input w-50" placeholder="0" aria-label="Sizing example input" ref="amountDiv" tabIndex={0} name='amount' aria-describedby="inputGroup-sizing-sm" onChange={this.onSelectedText.bind(this)} />
-                                            <select className="w-50 addrecipe-units"
-                                                name="units"
-                                                ref="unitsDiv"
-                                                value={this.state.selectSectionValue}
-                                                onChange={this.onSelectedText.bind(this)}>
-                                                {Units.map((item) => {
-                                                    return <option key={item}>{item}</option>
-                                                })}
-                                            </select>
-                                            <hr className='sign-underline' />
-                                        </div>
-                                        <div className='col-6 w-100 pl-0'>
-                                            <button className="btn signin-button" id="addrecipe-addingredient" onClick={this.addIngredient}>Add</button>
-                                        </div>
-                                        <div className='col-6 w-100 pl-0'>
-                                            <div className="addrecipe-ingredient-container">
-                                                {this.state.ingredients.length > 0 ? this.state.ingredients.map((item, idx) => {
-                                                    return <p key={idx} className="recipe-item">{item.amount} {item.units} of {item.ingredient}</p>
-                                                }) : null}
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="modal-footer">
-                                        <button type="button" className="btn btn-secondary" onClick={this.toggleIngredientModal}>Save</button>
-                                    </div>
+                        <ModalRecipes display={this.state.ingredientModal} name={this.state.recipeName} closeAction={this.toggleIngredientModal}>
+                            <div className='col-6 w-100 pl-0'>
+                                <div className="input-group input-group-sm mb-3">
+                                    <label className="sign-input-label" htmlFor="exampleInputEmail1">Ingredient</label>
+                                    <input type="text" className="sign-input" placeholder="Brocolli" aria-label="Sizing example input" ref="ingredientDiv" tabIndex={0} name='ingredient' aria-describedby="inputGroup-sizing-sm" onChange={this.onSelectedText.bind(this)} />
+                                    <hr className='sign-underline' />
                                 </div>
                             </div>
-                        </div>
+                            <div className='col-6 w-100 pr-0 mb-2'>
+                                <label className="sign-input-label" htmlFor="exampleInputEmail1">Amount</label>
+                                <input type="text" className="sign-input w-50" placeholder="0" aria-label="Sizing example input" ref="amountDiv" tabIndex={0} name='amount' aria-describedby="inputGroup-sizing-sm" onChange={this.onSelectedText.bind(this)} />
+                                <select className="w-50 addrecipe-units"
+                                    name="units"
+                                    ref="unitsDiv"
+                                    value={this.state.selectSectionValue}
+                                    onChange={this.onSelectedText.bind(this)}>
+                                    {Units.map((item) => {
+                                        return <option key={item}>{item}</option>
+                                    })}
+                                </select>
+                                <hr className='sign-underline' />
+                            </div>
+                            <div className='col-6 w-100 pl-0'>
+                                <button className="btn signin-button" id="addrecipe-addingredient" onClick={this.addIngredient}>Add</button>
+                            </div>
+                            <div className='col-6 w-100 pl-0'>
+                                <div className="addrecipe-ingredient-container">
+                                    {this.state.ingredients.length > 0 ? this.state.ingredients.map((item, idx) => {
+                                        return <p key={idx} className="recipe-item">{item.amount} {item.units} of {item.ingredient}</p>
+                                    }) : null}
+                                </div>
+                            </div>
 
+                        </ModalRecipes>
 
                     </div>
                     <div className="input-group input-group-sm mb-3">

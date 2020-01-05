@@ -5,11 +5,11 @@ import 'owl.carousel/dist/assets/owl.carousel.css';
 import 'owl.carousel/dist/assets/owl.theme.default.css';
 import secretResponse from './../HOC/Secret';
 import GrandmaCard from '../cards/GrandmaCard';
-import './dashBoard.css'
+// import './../dashboard/dashboard.css';
 import PageWrapper from '../tools/PageWrapper';
 import { Link } from 'react-router-dom';
 
-class DashBoard extends Component {
+class CardContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {}
@@ -22,27 +22,25 @@ class DashBoard extends Component {
     }
 
     render() {
+        console.log("mounted")
         return <Consumer>
             {value => {
                 console.log(value)
-                return <PageWrapper>
-                    <Link className="nav-link p-0 text-white" to={`/familychefs`} >View Chefs</Link>
-                </PageWrapper>
-                // value.user.myRecipes.length > 0 ? <PageWrapper>
-                //     <OwlCarousel
-                //         className="owl-theme"
-                //         items={1}
-                //         margin={10}
-                //         nav
-                //     >
-                //         {value.user.myRecipes.map((chef, idx) => {
-                //             return <GrandmaCard key={idx} chef={chef} value={value} />
-                //         })}
-                //     </OwlCarousel>
-                // </PageWrapper> : null;
+                return value.user.myRecipes.length > 0 ? <PageWrapper>
+                    <OwlCarousel
+                        className="owl-theme"
+                        items={1}
+                        margin={10}
+                        nav
+                    >
+                        {value.user.myRecipes.map((chef, idx) => {
+                            return <GrandmaCard key={idx} chef={chef} value={value} />
+                        })}
+                    </OwlCarousel>
+                </PageWrapper> : null;
             }}
         </Consumer >
     }
 }
 
-export default DashBoard;
+export default CardContainer;
