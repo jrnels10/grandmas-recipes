@@ -57,11 +57,11 @@ export default class SignIn extends Component {
     }
 
     async responseGoogle(value, res) {
-        console.log(value)
+        console.log(res)
 
         const { dispatch, axiosServerUrl } = value;
         try {
-            const data = await axios.post(`${axiosServerUrl}/users/oauth/google`, { access_token: res.accessToken });
+            const data = await axios.post(`${axiosServerUrl}/users/oauth/google`, { access_token: res.tokenId });
             // console.log(data);
             // debugger
             dispatch({
@@ -185,11 +185,12 @@ export default class SignIn extends Component {
                                         </div>
                                         <div className="w-50 m-auto text-center">
                                             <GoogleLogin
-                                                clientId={`267196671122-12ovuas1pjla6r5dbhd7p5avighbhbdq.apps.googleusercontent.com`}
+                                                clientId={`267196671122-298u06lbfo5ho1ollta67bm337ovluj9.apps.googleusercontent.com`}
                                                 buttonText="Google"
                                                 onSuccess={this.responseGoogle.bind(this, value)}
-                                                onFailure={this.responseGoogle}
+                                                onFailure={this.responseGoogle.bind(this, value)}
                                                 className='btn google-login'
+                                                cookiePolicy={'single_host_origin'}
                                             />
                                         </div>
                                     </div>

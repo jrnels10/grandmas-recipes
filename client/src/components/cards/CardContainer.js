@@ -26,18 +26,20 @@ class CardContainer extends Component {
         return <Consumer>
             {value => {
                 console.log(value)
-                return value.user.myRecipes.length > 0 ? <PageWrapper>
-                    <OwlCarousel
-                        className="owl-theme"
-                        items={1}
-                        margin={10}
-                        nav
-                    >
-                        {value.user.myRecipes.map((chef, idx) => {
-                            return <GrandmaCard key={idx} chef={chef} value={value} />
-                        })}
-                    </OwlCarousel>
-                </PageWrapper> : null;
+                return <PageWrapper>
+                    {value.user.myRecipes.length > 0 ?
+                        <OwlCarousel
+                            className="owl-theme"
+                            items={1}
+                            margin={10}
+                            nav
+                        >
+                            {value.user.myRecipes.map((chef, idx) => {
+                                return <GrandmaCard key={idx} chef={chef} value={value} />
+                            })}
+                        </OwlCarousel>
+                        : <h3>no recipes</h3>}
+                </PageWrapper>
             }}
         </Consumer >
     }

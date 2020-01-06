@@ -9,10 +9,7 @@ const User = require('./../models/user');
 const { validateBody, schema } = require('../helpers/routeHelpers');
 const UserController = require('../controllers/users');
 const passportSignIn = passport.authenticate('local', { session: false });
-const passportGoogle = passport.authenticate('googleToken', {
-    session: false, scope:
-        ['openid', 'profile', 'email']
-});
+// const passportGoogle = passport.authenticate('google-token', { session: false });
 const passportFacebook = passport.authenticate('facebookToken', { session: false });
 const passportJWT = passport.authenticate('jwt', { session: false });
 const multer = require('multer');
@@ -47,7 +44,7 @@ router.route('/signin')
     .post(validateBody(schema.authSchema), passportSignIn, UserController.signIn);
 
 router.route('/oauth/google')
-    .post(passportGoogle, UserController.googleOAuth);
+    .post(passport.authenticate('google-token', { session: false }), UserController.googleOAuth);
 
 router.route('/oauth/facebook')
     .post(passportFacebook, UserController.facebookOAuth);
