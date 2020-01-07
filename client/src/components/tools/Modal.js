@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+// display, name, closeAction, children
 class ModalRecipes extends Component {
     constructor(props) {
         super(props);

@@ -111,24 +111,6 @@ class AddRecipe extends Component {
                         <input type="text" className="sign-input" placeholder="My secret recipe" aria-label="Sizing example input" ref="theDiv" tabIndex={0} name='recipeName' aria-describedby="inputGroup-sizing-sm" onChange={this.onSelectedText.bind(this)} />
                         <hr className='sign-underline' />
                     </div>
-                    {/* <div className="input-group input-group-sm mb-3">
-                    <div className="input-group-prepend">
-                        <span className="input-group-text" id="inputGroup-sizing-sm">Chef Name</span>
-                    </div>
-                    <input type="text" className="form-control" aria-label="Sizing example input" ref="theDiv" tabIndex={0} name='chefName' aria-describedby="inputGroup-sizing-sm" onChange={this.onSelectedText.bind(this)} />
-                </div>
-                <div className="input-group input-group-sm mb-3">
-                    <div className="input-group-prepend">
-                        <span className="input-group-text" id="inputGroup-sizing-sm">Portrait</span>
-                    </div>
-                    <input className="text-white mt-1 edit-input-file" type="file" name='chefImage' onChange={this.onSelected.bind(this)} />
-                </div>
-                <div className="input-group input-group-sm mb-3">
-                    <div className="input-group-prepend">
-                        <span className="input-group-text" id="inputGroup-sizing-sm">Chef Bio</span>
-                    </div>
-                    <textarea rows="4" cols="50" className=" w-100 form-control-sm" name='chefBio' value={this.props.data.chefBio} onChange={this.onSelectedText.bind(this)}></textarea>
-                    {/* <input type="text" className="form-control" aria-label="Sizing example input" ref="theDiv" tabIndex={0} name='chefBio' aria-describedby="inputGroup-sizing-sm" onChange={this.onSelectedText.bind(this)} /> */}
                     <div className="input-group input-group-sm mb-3">
                         <label className="sign-input-label" htmlFor="exampleInputEmail1">Familes</label>
                         {families.length > 0 ? <select className="col-4 custom-select custom-select-sm"

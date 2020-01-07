@@ -14,6 +14,18 @@ export function addNewRecipe(bodyFormData, email) {
     }
 }
 
+export function addNewChef(bodyFormData, email) {
+    try {
+        console.log(bodyFormData, email)
+        debugger
+        return axios.put(`${baseUrl}/users/addmygrandma/${email}`,
+            bodyFormData,
+            { headers: { 'Content-Type': 'multipart/form-data' } })
+    } catch (error) {
+        return 'recipe was not saved!'
+    }
+}
+
 export function getmyrecipe(recipeId) {
     try {
         return axios.post(`${baseUrl}/users/getmyrecipe/${recipeId}`)

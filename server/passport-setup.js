@@ -47,48 +47,32 @@ passport.use('google-token', new GoogleStrategy({
         console.log('profile', profile);
         console.log('accessToken', accessToken);
         console.log('refreshToken', refreshToken);
-
-        if (req.user) {
-            // We're already logged in, time for linking account!
-            // Add Google's data to an existing account
-            req.user.methods.push('google')
-            req.user.google = {
-                id: profile.id,
-                email: profile.emails[0].value
-            }
-            await req.user.save()
-            return done(null, req.user);
-        } else {
-            // We're in the account creation process
-            let existingUser = await User.findOne({ "google.id": profile.id });
+        try {
+            const existingUser = await User.findOne({ 'google.id': profile.id })
+            console.log('existingUser', existingUser)
             if (existingUser) {
                 return done(null, existingUser);
             }
 
-            // Check if we have someone with the same email
-            existingUser = await User.findOne({ "local.email": profile.emails[0].value })
-            if (existingUser) {
-                // We want to merge google's data with local auth
-                existingUser.methods.push('google')
-                existingUser.google = {
-                    id: profile.id,
-                    email: profile.emails[0].value
-                }
-                await existingUser.save()
-                return done(null, existingUser);
-            }
+            // If new account
 
             const newUser = new User({
-                methods: ['google'],
+                method: 'google',
                 google: {
                     id: profile.id,
-                    email: profile.emails[0].value
+                    email: profile.emails[0].value,
+                    firstName: profile.name.givenName,
+                    lastName: profile.name.familyName,
+                    profilePicture: profile._json.picture
                 }
             });
-
             await newUser.save();
             done(null, newUser);
         }
+        catch (error) {
+            done(error, false, error.message);
+        }
+
     } catch (error) {
         done(error, false, error.message);
     }

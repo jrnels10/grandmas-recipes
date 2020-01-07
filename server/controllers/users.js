@@ -105,8 +105,7 @@ module.exports = {
                     lastName: user[user.method].lastName,
                     profilePicture: user[user.method].profilePicture,
                     homeTown: user[user.method].homeTown,
-                    homeState: user[user.method].homeState,
-                    peaks: user.peaksCompleted
+                    homeState: user[user.method].homeState
                 });
 
             });

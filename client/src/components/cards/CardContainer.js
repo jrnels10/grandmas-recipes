@@ -8,6 +8,7 @@ import GrandmaCard from '../cards/GrandmaCard';
 // import './../dashboard/dashboard.css';
 import PageWrapper from '../tools/PageWrapper';
 import { Link } from 'react-router-dom';
+import { NavigateButton } from './../tools/Buttons';
 
 class CardContainer extends Component {
     constructor(props) {
@@ -19,6 +20,9 @@ class CardContainer extends Component {
     }
     reload = () => {
         secretResponse(this.props.data.dispatch, this);
+    }
+    addedChef = () => {
+
     }
 
     render() {
@@ -38,7 +42,8 @@ class CardContainer extends Component {
                                 return <GrandmaCard key={idx} chef={chef} value={value} />
                             })}
                         </OwlCarousel>
-                        : <h3>no recipes</h3>}
+                        : null}
+                    <NavigateButton pathTo={'/addnewchef'}>Add new Chef</NavigateButton>
                 </PageWrapper>
             }}
         </Consumer >

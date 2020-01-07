@@ -12,7 +12,7 @@ import DashBoard from './components/dashboard/Dashboard';
 import AddRecipe from './components/Recipe/AddRecipe';
 import RecipeCard from './components/cards/RecipeCard';
 import CardContainer from './components/cards/CardContainer';
-
+import AddChef from './components/cards/AddChef';
 
 ReactDOM.render(
     <Provider>
@@ -23,6 +23,7 @@ ReactDOM.render(
                     <Route exact path="/signup" component={SignUp} />
                     <Route path="/dashboard" component={authGuard(DashBoard)} />
                     <Route path="/familychefs" component={authGuard(CardContainer)} />
+                    <Route path="/addnewchef" component={authGuard(AddChef)} />
                     <Route path="/addrecipe/:id" component={authGuard(AddRecipe)} />
                     <Route path={`/recipe/selectedrecipe/:recipeId`} component={authGuard(RecipeCard)} />
                     <Route exact path="/signin" component={SignIn} />
