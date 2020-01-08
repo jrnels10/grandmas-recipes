@@ -1,12 +1,12 @@
 .page-wrapper-container {
   padding-top: 56px;
-  height: 100vh;
+  /* height: 100%; */
   width: 100vw;
-  /* background-image: url("./../../Images/cloth-alike.png"); */
+  /* background-color: rgba(0, 0, 0, 0.35); */
 }
 
 .page-shade {
-  height: 100vh;
+  height: 100%;
   width: 100vw;
   background-color: rgba(0, 0, 0, 0.35);
 }

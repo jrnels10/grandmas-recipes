@@ -7,6 +7,7 @@ import secretResponse from './../HOC/Secret';
 import GrandmaCard from '../cards/GrandmaCard';
 import './dashBoard.css'
 import PageWrapper from '../tools/PageWrapper';
+import { NavigateButton } from './../tools/Buttons';
 import { Link } from 'react-router-dom';
 
 class DashBoard extends Component {
@@ -27,6 +28,7 @@ class DashBoard extends Component {
                 console.log(value)
                 return <PageWrapper>
                     <Link className="nav-link p-0 text-white" to={`/familychefs`} >View Chefs</Link>
+                    <NavigateButton pathTo={'/addnewchef'}>Add new Chef</NavigateButton>
                 </PageWrapper>
                 // value.user.myRecipes.length > 0 ? <PageWrapper>
                 //     <OwlCarousel

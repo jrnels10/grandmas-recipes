@@ -124,7 +124,7 @@ class AddRecipe extends Component {
                         <input type="text" className="sign-input" placeholder="Family Name" aria-label="Sizing example input" ref="theDiv" tabIndex={0} name='groups' aria-describedby="inputGroup-sizing-sm" onChange={this.onSelectedText.bind(this)} />
                         <hr className='sign-underline' />
                     </div>
-                    <div className='row w-100 m-0 mb-5'>
+                    <div className='row w-100 m-0 mb-3'>
                         <div className='col-10 w-100 pl-0'>
                             <button className="btn w-100 signin-button" id="addrecipe-add-ingredients" onClick={this.toggleIngredientModal}>Add ingredients</button>
                         </div>

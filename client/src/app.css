@@ -1,9 +1,10 @@
-#root {
+#root,
+#app-div {
   height: 100%;
 }
 
 body {
-  background-color: gray;
+  background-color: rgb(18, 21, 23);
 }
 
 /* #877785
@@ -18,8 +19,10 @@ body {
   background-repeat: no-repeat;
   background-position: center bottom;
   background-size: cover;
-  overflow: hidden;
-  background-color: rgba(0, 0, 0, 0.35);
+  overflow-y: auto;
+  overflow-x: hidden;
+  background-color: rgb(18, 21, 23);
+  position: static;
 }
 
 /* #body-container{

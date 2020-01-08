@@ -37,14 +37,13 @@ class GrandmaCard extends Component {
                 <div className="col-12 card-graphics-container-light"></div>
                 <div className="col-12 card-graphics-container-dark">
                     <div className="card-body grandma-card-body">
-                        <p className="card-text ">{chefBio}</p>
                         <p className="card-author"> -{author}</p>
                         <div className="row w-100 mb-3">
                             <div className="col-8">
                                 <Link className="nav-link p-0 text-white" to={`/addrecipe/${_id}`} >Add New Recipe</Link>
                             </div>
                         </div>
-                        <div className="row w-100 m-0 mb-3">
+                        <div className="row w-100 m-0 mb-3 mini-card-container">
                             {numberOfRecipes > 0 ?
                                 <div className='w-100'>
                                     <OwlCarousel
@@ -57,6 +56,7 @@ class GrandmaCard extends Component {
                                 </div>
                                 : <span>No recipes.</span>}
                         </div>
+                        <p className="card-text ">{chefBio}</p>
 
                     </div>
                 </div>

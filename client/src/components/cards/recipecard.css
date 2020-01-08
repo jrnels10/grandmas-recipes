@@ -27,7 +27,7 @@
 
 .card-graphics-container {
   position: absolute;
-  height: 100vh;
+  height: 100%;
   width: 100%;
   margin: 0px;
 }
@@ -35,7 +35,7 @@
   height: 40%;
 }
 .card-graphics-container-dark {
-  height: 60%;
+  border-radius: 10px;
   background-image: linear-gradient(
     #ff000000,
     #00000099,
