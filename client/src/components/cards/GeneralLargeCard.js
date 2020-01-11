@@ -5,8 +5,8 @@ class GeneralLargeCard extends Component {
         super(props);
         this.state = {}
     }
+
     render() {
-        console.log(this.props)
         return <div className={`card general-card m-auto ${this.props.classNombre}`} style={{ width: '22rem' }}>
             {this.props.children}
         </div>

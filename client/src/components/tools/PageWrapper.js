@@ -4,13 +4,14 @@ import { withRouter } from 'react-router-dom';
 class PageWrapper extends Component {
     constructor(props) {
         super(props);
-        this.state = {}
+        this.state = { isTop: 0 }
     }
+
     backPage = () => {
         this.props.history.goBack()
     }
     render() {
-        console.log(this.props.history)
+        // console.log(this.props.history)
         return <div className="page-wrapper-container">
             {/* <svg className="bi bi-arrow-left" onClick={this.backPage} width="50px" height="40px" viewBox="0 0 20 20" fill="#877785" xmlns="http://www.w3.org/2000/svg">
                 <path fillRule="evenodd" d="M7.854 6.646a.5.5 0 010 .708L5.207 10l2.647 2.646a.5.5 0 01-.708.708l-3-3a.5.5 0 010-.708l3-3a.5.5 0 01.708 0z" clipRule="evenodd" />

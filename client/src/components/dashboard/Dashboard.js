@@ -27,8 +27,11 @@ class DashBoard extends Component {
             {value => {
                 console.log(value)
                 return <PageWrapper>
-                    <Link className="nav-link p-0 text-white" to={`/familychefs`} >View Chefs</Link>
-                    <NavigateButton pathTo={'/addnewchef'}>Add new Chef</NavigateButton>
+                    <div className="dashboard-container">
+
+                        <Link className="nav-link p-0 text-white" to={`/familychefs`} >View Chefs</Link>
+                        <NavigateButton pathTo={'/addnewchef'}>Add new Chef</NavigateButton>
+                    </div>
                 </PageWrapper>
                 // value.user.myRecipes.length > 0 ? <PageWrapper>
                 //     <OwlCarousel

@@ -1,5 +1,5 @@
 .navbar {
-  position: absolute;
+  position: fixed;
   width: 100%;
   height: 56px;
   z-index: 1000;
@@ -25,6 +25,14 @@
   line-height: 1.2;
   margin-left: 15px;
   transition: all 0.3s;
+}
+.nav-scroll-false {
+  background-color: #f7c9b6;
+}
+
+.nav-scroll-false label,
+.nav-scroll-false-hamburger {
+  color: #877785 !important;
 }
 .navbar-brand-open {
   font-family: "Dancing Script", cursive;

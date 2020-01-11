@@ -1,10 +1,19 @@
-#root,
-#app-div {
-  height: 100%;
+/* #root, */
+#app-div,
+body {
+  height: 100vh;
+  overflow: auto;
 }
 
 body {
-  background-color: rgb(18, 21, 23);
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url(./Images/jordane-mathieu-CkirKRvqXUs-unsplash.jpg);
+  background-repeat: no-repeat;
+  background-position: center bottom;
+  background-size: cover;
+  background-attachment: fixed;
+  /* background-color: rgba(0, 0, 0, 0.35); */
+  /* background-color: rgb(18, 21, 23); */
 }
 
 /* #877785
@@ -14,14 +23,9 @@ body {
 #E85A4F */
 
 #app-div {
-  background: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)),
-    url(./Images/jordane-mathieu-CkirKRvqXUs-unsplash.jpg);
-  background-repeat: no-repeat;
-  background-position: center bottom;
-  background-size: cover;
-  overflow-y: auto;
+  /* overflow-y: auto; */
   overflow-x: hidden;
-  background-color: rgb(18, 21, 23);
+  /* background-color: rgb(18, 21, 23); */
   position: static;
 }
 

@@ -2,6 +2,9 @@
   height: 33.33%;
   padding: 0px;
 }
+.dashboard-container {
+  height: calc(100vh - 116px);
+}
 /* .dashboard-label {
   width: 100%;
 } */

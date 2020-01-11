@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Consumer } from '../../Context';
-import OwlCarousel from 'react-owl-carousel';
+// import OwlCarousel from 'react-owl-carousel';
+import OwlCarousel from 'react-owl-carousel2';
 import 'owl.carousel/dist/assets/owl.carousel.css';
 import 'owl.carousel/dist/assets/owl.theme.default.css';
 import secretResponse from './../HOC/Secret';
@@ -18,6 +19,12 @@ class CardContainer extends Component {
     }
     componentDidMount() {
         secretResponse(this.props.data.dispatch, this)
+        const cardSwtich = document.getElementsByClassName('owl-dot');
+        console.log(cardSwtich)
+        return cardSwtich[0] ? cardSwtich[0].addEventListener('click', () => {
+            window.scrollTo(0, 0)
+        }) : null
+
     }
     reload = () => {
         secretResponse(this.props.data.dispatch, this);
@@ -27,28 +34,37 @@ class CardContainer extends Component {
     }
 
     render() {
-        console.log("mounted")
+        const options = {
+            items: 1,
+            nav: true,
+            rewind: true,
+            autoplay: false
+        };
+        const events = {
+            onDragged: function (event) { console.log(event) },
+            onChanged: function (event) {
+                window.scrollTo(0, 0)
+            }
+
+        };
         return <Consumer>
             {value => {
                 console.log(value)
-                return <PageWrapper>
-                    {/* <PageShade> */}
+                return <PageWrapper value={value}>
+
                     {value.user.myRecipes.length > 0 ?
                         <OwlCarousel
-                            className="owl-theme"
-                            items={1}
-                            margin={10}
-                            nav
+                            options={options}
+                            events={events}
                         >
                             {value.user.myRecipes.map((chef, idx) => {
                                 return <GrandmaCard key={idx} chef={chef} value={value} />
                             })}
                         </OwlCarousel>
                         : <NavigateButton pathTo={'/addnewchef'}>Add new Chef</NavigateButton>}
-
-                    {/* </PageShade> */}
                 </PageWrapper>
-            }}
+            }
+            }
         </Consumer >
     }
 }
