@@ -6,7 +6,7 @@
   top: 0;
   padding-left: 0px;
   padding-right: 0px;
-  background-color: rgb(18, 21, 23);
+  /* background-color: rgb(18, 21, 23); */
 }
 
 #navbarSupportedContent {
@@ -44,7 +44,7 @@
 }
 
 .navbar-custom-open {
-  height: 120px;
+  height: auto;
   border-top: solid 1px #877785;
   color: #877785;
   opacity: 1;
