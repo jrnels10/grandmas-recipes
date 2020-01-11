@@ -2,46 +2,13 @@ import React, { Component } from 'react';
 import {
     EmailShareButton,
     FacebookShareButton,
-    InstapaperShareButton,
-    LineShareButton,
-    LinkedinShareButton,
-    LivejournalShareButton,
-    MailruShareButton,
-    OKShareButton,
-    PinterestShareButton,
-    PocketShareButton,
-    RedditShareButton,
-    TelegramShareButton,
-    TumblrShareButton,
-    TwitterShareButton,
-    ViberShareButton,
-    VKShareButton,
     WhatsappShareButton,
-    WorkplaceShareButton,
     EmailIcon,
     FacebookIcon,
-    InstapaperIcon,
-    LineIcon,
-    LinkedinIcon,
-    LivejournalIcon,
-    MailruIcon,
-    OKIcon,
-    PinterestIcon,
-    PocketIcon,
-    RedditIcon,
-    TelegramIcon,
-    TumblrIcon,
-    TwitterIcon,
-    ViberIcon,
-    VKIcon,
-    WeiboIcon,
-    WhatsappIcon,
-    WorkplaceIcon,
+    WhatsappIcon
 } from "react-share";
 import { Link, Route } from 'react-router-dom';
 import './minirecipecard.css';
-import { description } from 'joi';
-import ModalRecipes from '../tools/Modal';
 
 class RecipeCard extends Component {
     constructor(props) {

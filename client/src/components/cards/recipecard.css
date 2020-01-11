@@ -5,6 +5,7 @@
   position: relative;
   width: 22rem;
   border-radius: 10px;
+  overflow: hidden;
 }
 
 .recipe-card {
@@ -58,10 +59,6 @@
   );
 }
 
-.recipe-card-container {
-  overflow-x: hidden;
-}
-
 .ingredients-check-container {
   width: 100%;
   background-color: #f7c9b6;
@@ -70,6 +67,7 @@
   padding-left: 30px;
   padding-right: 10px;
   position: relative;
+  margin-bottom: 10px;
 }
 
 .ingredients-check-item {
@@ -100,6 +98,7 @@
   margin-bottom: 3px;
   font-size: 1.2em;
   font-weight: 500;
+  color: #877785;
 }
 
 .bi-person-fill,
