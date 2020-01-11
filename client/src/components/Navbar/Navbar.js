@@ -43,7 +43,7 @@ export default class Navbar extends Component {
         window.addEventListener('scroll', () => {
             // console.log(this.props.value)
             // debugger
-            const isTop = window.scrollY < 10;
+            const isTop = window.scrollY < 30;
             console.log(isTop)
             if (isTop !== this.state.isTop) {
                 if (this.state.initialScroll) {

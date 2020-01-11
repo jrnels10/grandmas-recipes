@@ -100,6 +100,15 @@ const userSchema = new Schema({
             recipeName: {
                 type: String
             },
+            dateSubmitted: {
+                type: Date
+            },
+            recipeDescription: {
+                type: String
+            },
+            submittedBy: {
+                type: String
+            },
             groups: [],
             img: {
                 type: String

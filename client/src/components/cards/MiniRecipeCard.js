@@ -8,6 +8,7 @@ import {
     WhatsappIcon
 } from "react-share";
 import { Link, Route } from 'react-router-dom';
+import { moment } from 'moment';
 import './minirecipecard.css';
 
 class RecipeCard extends Component {
@@ -16,10 +17,7 @@ class RecipeCard extends Component {
         this.state = { description: false, heart: false, modal: false }
     }
     componentDidMount() {
-        this.props.value.value.dispatch({
-            type: 'VIEW_MY_RECIPE',
-            payload: { selected: this.props.recipe }
-        })
+
     }
     toggle = (title) => {
         console.log(title)
@@ -28,20 +26,31 @@ class RecipeCard extends Component {
     toggleHeart = (e) => {
         this.setState({ heart: !this.state.heart })
     }
+
+    selected = () => {
+        this.props.value.value.dispatch({
+            type: 'VIEW_MY_RECIPE',
+            payload: { selected: this.props.recipe }
+        })
+    }
     render() {
+        console.log(this.props.recipe)
         const { heart, description, modal } = this.state;
-        const { recipeName, img, _id } = this.props.recipe;
+        const { recipeName, img, _id, recipeDescription, dateSubmitted } = this.props.recipe;
         const recipePrivate = this.props.recipe.private;
         return <div className="card mini-recipe-card" >
-            <label className="card-title mini-recipe-card-title">{recipeName}</label>
+            <div className='w-75 mini-recipe-care-title-container'>
+                <label className="card-title mini-recipe-card-title w-100">{recipeName}</label>
+                <span className="card-title mini-recipe-card-date">Submitted {new Date(dateSubmitted).toDateString()}</span>
+            </div>
             <svg className="bi bi-three-dots-vertical mini-three-dot-icon" width="1em" height="1em" viewBox="0 0 20 20" fill="#f7c9b6" xmlns="http://www.w3.org/2000/svg">
                 <path fillRule="evenodd" d="M11.5 15a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zm0-5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zm0-5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z" clipRule="evenodd" />
             </svg>
-            <Link className="nav-link p-0 text-white" to={`/recipe/selectedrecipe/${_id}`} >
+            <Link className="nav-link p-0 text-white" onClick={this.selected.bind(this)} to={`/recipe/selectedrecipe/${_id}`} >
                 <img className="mini-card-recipe-img" src={img} alt="recipe" />
             </Link>
             <div className={`mini-recipe-card-description-${description ? 'full' : 'short'}`}>
-                <p className="mini-recipe-card-description">Description of meal Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                <p className="mini-recipe-card-description">{recipeDescription}</p>
             </div>
             <div className="mini-recipe-card-actions row">
                 <div className="mini-recipe-card-heart-container col-2">

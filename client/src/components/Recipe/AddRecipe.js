@@ -70,6 +70,9 @@ class AddRecipe extends Component {
         //     cookingInstructions: 'cook it'
         // }
         const recipeObject = {
+            dateSubmitted: new Date(),
+            recipeDescription: this.state.recipeDescription,
+            submittedBy: `${this.props.data.user.firstName} ${this.props.data.user.lastName}`,
             grandma_Id: this.state.grandma_Id,
             recipeName: this.state.recipeName,
             groups: this.state.groups,
@@ -110,6 +113,11 @@ class AddRecipe extends Component {
                         <label className="sign-input-label" htmlFor="exampleInputEmail1">Recipe Name</label>
                         <input type="text" className="sign-input" placeholder="My secret recipe" aria-label="Sizing example input" ref="theDiv" tabIndex={0} name='recipeName' aria-describedby="inputGroup-sizing-sm" onChange={this.onSelectedText.bind(this)} />
                         <hr className='sign-underline' />
+                    </div>
+                    <div className="input-group input-group-sm mb-3">
+                        <label className="sign-input-label" htmlFor="exampleInputEmail1">Description</label>
+                        <textarea rows="4" cols="50" type="text" className="sign-input" id="addrecipe-instructions" placeholder="A description about the recipe" aria-label="Sizing example input" ref="theDiv" tabIndex={0} name='recipeDescription' aria-describedby="inputGroup-sizing-sm" onChange={this.onSelectedText.bind(this)} />
+                        {/* <hr className='sign-underline' /> */}
                     </div>
                     <div className="input-group input-group-sm mb-3">
                         <label className="sign-input-label" htmlFor="exampleInputEmail1">Familes</label>
