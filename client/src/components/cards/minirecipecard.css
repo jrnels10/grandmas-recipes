@@ -16,6 +16,7 @@
 .mini-card-container {
   display: table;
   height: auto;
+  padding: 0px;
 }
 
 .mini-card-container > span {

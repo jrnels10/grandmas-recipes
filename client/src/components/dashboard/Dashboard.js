@@ -1,14 +1,9 @@
 import React, { Component } from 'react';
 import { Consumer } from '../../Context';
-import OwlCarousel from 'react-owl-carousel';
-import 'owl.carousel/dist/assets/owl.carousel.css';
-import 'owl.carousel/dist/assets/owl.theme.default.css';
 import secretResponse from './../HOC/Secret';
-import GrandmaCard from '../cards/GrandmaCard';
 import './dashBoard.css'
 import PageWrapper from '../tools/PageWrapper';
 import { NavigateButton } from './../tools/Buttons';
-import { Link } from 'react-router-dom';
 
 class DashBoard extends Component {
     constructor(props) {
@@ -25,26 +20,14 @@ class DashBoard extends Component {
     render() {
         return <Consumer>
             {value => {
-                console.log(value)
                 return <PageWrapper>
                     <div className="dashboard-container">
-
-                        <Link className="nav-link p-0 text-white" to={`/familychefs`} >View Chefs</Link>
-                        <NavigateButton pathTo={'/addnewchef'}>Add new Chef</NavigateButton>
+                        <div className="dashboard-buttons-container">
+                            <NavigateButton customClassName='dashboard-button' pathTo={'/familychefs'}>View Chefs</NavigateButton>
+                            <NavigateButton customClassName='dashboard-button' pathTo={'/addnewchef'}>Add new Chef</NavigateButton>
+                        </div>
                     </div>
                 </PageWrapper>
-                // value.user.myRecipes.length > 0 ? <PageWrapper>
-                //     <OwlCarousel
-                //         className="owl-theme"
-                //         items={1}
-                //         margin={10}
-                //         nav
-                //     >
-                //         {value.user.myRecipes.map((chef, idx) => {
-                //             return <GrandmaCard key={idx} chef={chef} value={value} />
-                //         })}
-                //     </OwlCarousel>
-                // </PageWrapper> : null;
             }}
         </Consumer >
     }

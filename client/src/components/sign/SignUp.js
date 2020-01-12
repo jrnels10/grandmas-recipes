@@ -3,7 +3,7 @@ import { Consumer } from './../../Context';
 import './SignUpAndSignIn.css';
 import axios from 'axios';
 import GoogleLogin from 'react-google-login';
-import FacebookLogin from 'react-facebook-login';
+// import FacebookLogin from 'react-facebook-login';
 import PageWrapper from './../tools/PageWrapper';
 
 
@@ -21,6 +21,7 @@ export default class SignUp extends Component {
 
     onSubmit = async (value, e) => {
         const { dispatch, axiosServerUrl } = value;
+        console.log(axiosServerUrl)
         e.preventDefault();
         // Step 1) User the data and to make HTTP request to our BE and send it along
         // Step 2) Take the BE's response (jwtToken)
@@ -28,14 +29,15 @@ export default class SignUp extends Component {
         // Step 4) Save the jwtToken into our localStorage
         try {
             const res = await axios.post(`${axiosServerUrl}/users/signup`, {
+
                 // const res = await axios.post('https://fourteener-community.herokuapp.com/users/signup', {
                 profilePicture: '',
                 email: this.state.email,
                 password: this.state.password,
                 firstName: this.state.firstName,
                 lastName: this.state.lastName
-            })
-
+            });
+            console.log(res)
             dispatch({
                 type: "SIGN_UP",
                 payload: {
@@ -187,11 +189,11 @@ export default class SignUp extends Component {
                                 </form>
                                 {this.state.errorMessage ? <div className='alert alert-danger'>{value.errorMessage}</div> : null}
                                 <div className='text-white pl-2 mt-2'><small>
-                                    Or sign up using Google or Facebook
+                                    Or sign up using Google
                             </small>
                                 </div>
                                 <div className='row w-100 m-0 pl-2 p-0 mt-3'>
-                                    <div className="w-50 m-auto text-center">
+                                    {/* <div className="w-50 m-auto text-center">
                                         <FacebookLogin
                                             appId='1431908256951062'
                                             autoLoad={false}
@@ -202,10 +204,10 @@ export default class SignUp extends Component {
                                             cssClass="btn facebook-login"
                                             icon="fa-facebook fa-lg"
                                         />
-                                    </div>
+                                    </div> */}
                                     <div className="w-50 m-auto text-center">
                                         <GoogleLogin
-                                            clientId={`193762703842-63qqf0oip1i372ib0a27opsn8opuhpkm.apps.googleusercontent.com`}
+                                            clientId={`267196671122-298u06lbfo5ho1ollta67bm337ovluj9.apps.googleusercontent.com`}
                                             buttonText="Google"
                                             onSuccess={this.responseGoogle.bind(this, value)}
                                             onFailure={this.responseGoogle}

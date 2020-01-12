@@ -59,6 +59,7 @@ p {
   font-family: "Dancing Script", cursive;
   color: #f0d1bf;
   font-size: 2em;
+  z-index: 100;
 }
 
 .card-author {

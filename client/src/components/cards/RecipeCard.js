@@ -22,13 +22,13 @@ class RecipeCard extends Component {
         this.setState({ info: !this.state.info })
     }
     render() {
-        console.log(this.state)
+        // console.log(this.state)
         // const { img, groups, ingredients, recipeName } = this.props.recipe;
         // const privateStatus = this.props.private
         return <Consumer>
             {value => {
-                console.log(value.recipe.selected)
-                const { groups, ingredients, recipeName, img, cookingInstructions } = value.recipe.selected;
+                // console.log(value.recipe.selected)
+                const { ingredients, recipeName, img, cookingInstructions } = value.recipe.selected;
                 const privateStatus = value.recipe.selected;
                 return <PageWrapper>
                     <GeneralLargeCard>

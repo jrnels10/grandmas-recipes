@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import { Consumer } from './../../Context';
-import './SignUpAndSignIn.css';
 import axios from 'axios';
 import GoogleLogin from 'react-google-login';
-import FacebookLogin from 'react-facebook-login';
+// import FacebookLogin from 'react-facebook-login';
 import PageWrapper from './../tools/PageWrapper';
-import PageShade from './../tools/PageShade';
 
+import './SignUpAndSignIn.css';
 
 export default class SignIn extends Component {
     constructor(props, ...rest) {
@@ -57,7 +56,7 @@ export default class SignIn extends Component {
     }
 
     async responseGoogle(value, res) {
-        console.log(res)
+        // console.log(res)
 
         const { dispatch, axiosServerUrl } = value;
         try {
@@ -81,7 +80,7 @@ export default class SignIn extends Component {
     }
 
     async responseFacebook(value, res) {
-        console.log(res)
+        // console.log(res)
         const { dispatch, axiosServerUrl } = value;
         try {
             const data = await axios.post(`${axiosServerUrl}/users/oauth/facebook`, { access_token: res.accessToken });
@@ -128,12 +127,12 @@ export default class SignIn extends Component {
             <Consumer>
                 {value => {
                     const open = !this.state.open ? "open" : "close";
-                    console.log(value)
+                    // console.log(value)
                     return <PageWrapper>
                         <div className={`signin-${open} signin-menu`}>
                             <div className={`w-100 fade-${open} sign-container`}>
-                                <span className="m-2" onClick={this.close}><i className="fas fa-arrow-circle-right fa-lg"></i></span>
-                                <form className={`mt-2`} onSubmit={this.onSubmit.bind(this, value)}>
+                                <span className="m-2 pb-4" onClick={this.close}><i className="fas fa-arrow-circle-right fa-lg"></i></span>
+                                <form className={`mt-3`} onSubmit={this.onSubmit.bind(this, value)}>
                                     <div className="form-group-sm">
                                         <label className="sign-input-label" htmlFor="exampleInputEmail1">Email address</label>
                                         <input
@@ -166,11 +165,11 @@ export default class SignIn extends Component {
                                 </form>
                                 {this.state.errorMessage ? <div className='alert alert-danger'>{value.errorMessage}</div> : null}
                                 <div className='text-white pl-2 mt-5'><small>
-                                    Or sign in using Facebook or Google
+                                    Or sign in using with Google
                             </small>
                                 </div>
-                                <div className='row w-100 m-0 pl-2 p-0 mt-3'>
-                                    <div className="w-50 m-auto text-center">
+                                <div className='row w-50 m-0 pl-2 p-0 mt-3'>
+                                    {/* <div className="w-50 m-auto text-center">
                                         <FacebookLogin
                                             appId='1431908256951062'
                                             autoLoad={false}
@@ -181,8 +180,8 @@ export default class SignIn extends Component {
                                             cssClass="btn facebook-login"
                                             icon="fa-facebook fa-lg"
                                         />
-                                    </div>
-                                    <div className="w-50 m-auto text-center">
+                                    </div> */}
+                                    <div className="w-100 m-auto text-center">
                                         <GoogleLogin
                                             clientId={`267196671122-298u06lbfo5ho1ollta67bm337ovluj9.apps.googleusercontent.com`}
                                             buttonText="Google"

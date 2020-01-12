@@ -24,7 +24,7 @@ module.exports = {
     signUp: async (req, res, next) => {
         // console.log(req.file)
         const { email, password, firstName, lastName, profilePicture } = req.value.body;
-        // console.log(req.value.body)
+        console.log(req.value.body)
         // Check if user has the same email
         const foundUser = await User.findOne({ 'local.email': email });
         // console.log('foundUser', foundUser)
@@ -40,7 +40,7 @@ module.exports = {
                 password: password,
                 firstName: firstName,
                 lastName: lastName,
-                profilePicture: profilePicture
+                profilePicture: "default"
             }
         });
         await newUser.save();

@@ -5,9 +5,14 @@
 .dashboard-container {
   height: calc(100vh - 116px);
 }
-/* .dashboard-label {
+.dashboard-buttons-container {
+  padding: 10%;
+}
+
+.dashboard-button {
   width: 100%;
-} */
+  margin-bottom: 10px;
+}
 
 .dashboard-recipes {
   height: 100%;

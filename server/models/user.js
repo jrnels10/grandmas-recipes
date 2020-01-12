@@ -32,7 +32,8 @@ const userSchema = new Schema({
             type: String,
         },
         profilePicture: {
-            type: String
+            type: String,
+            required: false
         }
     },
     google: {
@@ -90,10 +91,13 @@ const userSchema = new Schema({
         chefName: {
             type: String
         },
+        dateSubmitted: {
+            type: Date
+        },
         chefBio: {
             type: String
         },
-        author: {
+        submittedBy: {
             type: String
         },
         chefRecipes: [{

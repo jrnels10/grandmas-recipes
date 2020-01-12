@@ -7,8 +7,7 @@ import {
     FacebookIcon,
     WhatsappIcon
 } from "react-share";
-import { Link, Route } from 'react-router-dom';
-import { moment } from 'moment';
+import { Link } from 'react-router-dom';
 import './minirecipecard.css';
 
 class RecipeCard extends Component {
@@ -34,10 +33,10 @@ class RecipeCard extends Component {
         })
     }
     render() {
-        console.log(this.props.recipe)
-        const { heart, description, modal } = this.state;
+        // console.log(this.props.recipe)
+        const { heart, description } = this.state;
         const { recipeName, img, _id, recipeDescription, dateSubmitted } = this.props.recipe;
-        const recipePrivate = this.props.recipe.private;
+        // const recipePrivate = this.props.recipe.private;
         return <div className="card mini-recipe-card" >
             <div className='w-75 mini-recipe-care-title-container'>
                 <label className="card-title mini-recipe-card-title w-100">{recipeName}</label>
