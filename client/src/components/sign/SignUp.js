@@ -31,7 +31,7 @@ export default class SignUp extends Component {
             const res = await axios.post(`${axiosServerUrl}/users/signup`, {
 
                 // const res = await axios.post('https://fourteener-community.herokuapp.com/users/signup', {
-                profilePicture: '',
+                profilePicture: 'default',
                 email: this.state.email,
                 password: this.state.password,
                 firstName: this.state.firstName,
@@ -48,7 +48,7 @@ export default class SignUp extends Component {
                 }
             });
             localStorage.setItem('JWT_TOKEN', res.data.token);
-            this.props.history.push('/profile');
+            this.props.history.push('/dashboard');
             axios.defaults.headers.common['Authorization'] = res.data.token;
 
         } catch (err) {

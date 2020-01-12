@@ -7,7 +7,7 @@ module.exports = {
             const result = joi.validate(req.body, schema);
             console.log("result", result)
             if (result.error) {
-                return res.status(400).json(result.error);
+                return res.status(400).send({ error: result.error });
             }
             if (!req.value) { req.value = {}; }
             req.value['body'] = result.value;
@@ -21,7 +21,8 @@ module.exports = {
             firstName: joi.string(),
             lastName: joi.string(),
             homeTown: joi.string(),
-            homeState: joi.string()
+            homeState: joi.string(),
+            profilePicture: joi.string()
         })
     }
 }
