@@ -7,7 +7,7 @@ class GeneralLargeCard extends Component {
     }
 
     render() {
-        return <div className={`card general-card m-auto ${this.props.classNombre}`} style={{ width: '22rem' }}>
+        return <div className={`card general-card ${this.props.classNombre ? this.props.classNombre : ''}`} style={{ width: '22rem', marginTop: "10px" }}>
             {this.props.children}
         </div>
     }

@@ -41,7 +41,7 @@ export default class SignIn extends Component {
             localStorage.setItem('JWT_TOKEN', res.data.token);
             axios.defaults.headers.common['Authorization'] = res.data.token;
 
-            this.props.history.push('/dashboard');
+            await this.props.history.push('/dashboard');
         } catch (err) {
             console.log(err)
             this.setState({ errorMessage: 'Email or password incorrect' })
@@ -73,7 +73,7 @@ export default class SignIn extends Component {
             });
             localStorage.setItem('JWT_TOKEN', data.data.token);
             axios.defaults.headers.common['Authorization'] = data.data.token;
-            this.props.history.push('/dashboard');
+            await this.props.history.push('/dashboard');
         } catch (err) {
             console.log(err)
         }
