@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { secret } from './API/UsersAPI';
+import SimpleLoader from './components/loader/SimpleLoader';
 
 const Context = React.createContext();
 const reducer = (state, action) => {
@@ -58,7 +59,7 @@ const reducer = (state, action) => {
         case 'LOADER':
             return {
                 ...state,
-                loader: action.payload.loader,
+                display: action.payload.loader,
             }
         default:
             return state;
@@ -110,7 +111,7 @@ export class Provider extends Component {
                 private: true
             }
         },
-        loader: true,
+        display: false,
         isAuthenticated: false,
         token: '',
         facebookappId: "2368972536494612",
@@ -143,6 +144,7 @@ export class Provider extends Component {
     render() {
         return (
             < Context.Provider value={this.state} >
+                {this.state.display ? <SimpleLoader /> : null}
                 {this.props.children}
             </Context.Provider >
         )

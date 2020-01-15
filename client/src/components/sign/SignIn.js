@@ -27,6 +27,7 @@ export default class SignIn extends Component {
         // Step 3) Dispatch 'user just signed up'
         // Step 4) Save the jwtToken into our localStorage
         try {
+            dispatch({ type: "LOADER", payload: { display: true } });
             const res = await axios.post(`${axiosServerUrl}/users/signin`, { email: this.state.email, password: this.state.password })
             dispatch({
                 type: "SIGN_IN",
@@ -38,9 +39,9 @@ export default class SignIn extends Component {
                     home: false
                 }
             });
+            dispatch({ type: "LOADER", payload: { display: false } });
             localStorage.setItem('JWT_TOKEN', res.data.token);
             axios.defaults.headers.common['Authorization'] = res.data.token;
-
             await this.props.history.push('/dashboard');
         } catch (err) {
             console.log(err)
@@ -56,13 +57,10 @@ export default class SignIn extends Component {
     }
 
     async responseGoogle(value, res) {
-        // console.log(res)
-
         const { dispatch, axiosServerUrl } = value;
         try {
+            dispatch({ type: "LOADER", payload: { display: true } });
             const data = await axios.post(`${axiosServerUrl}/users/oauth/google`, { access_token: res.tokenId });
-            // console.log(data);
-            // debugger
             dispatch({
                 type: "SIGN_IN",
                 payload: {
@@ -71,6 +69,7 @@ export default class SignIn extends Component {
                     errorMessage: ''
                 }
             });
+            dispatch({ type: "LOADER", payload: { display: false } });
             localStorage.setItem('JWT_TOKEN', data.data.token);
             axios.defaults.headers.common['Authorization'] = data.data.token;
             await this.props.history.push('/dashboard');
@@ -80,7 +79,6 @@ export default class SignIn extends Component {
     }
 
     async responseFacebook(value, res) {
-        // console.log(res)
         const { dispatch, axiosServerUrl } = value;
         try {
             const data = await axios.post(`${axiosServerUrl}/users/oauth/facebook`, { access_token: res.accessToken });
