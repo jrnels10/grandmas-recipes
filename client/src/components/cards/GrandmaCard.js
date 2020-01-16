@@ -2,6 +2,14 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import MiniRecipeCard from './MiniRecipeCard';
 import GeneralLargeCard from './GeneralLargeCard';
+import {
+    EmailShareButton,
+    FacebookShareButton,
+    WhatsappShareButton,
+    EmailIcon,
+    FacebookIcon,
+    WhatsappIcon
+} from "react-share";
 
 import './grandma.css';
 import './recipecard.css';
@@ -19,17 +27,10 @@ class GrandmaCard extends Component {
         setTimeout(() => push(to), 300);
     }
     render() {
-        // const options = {
-        //     items: 2,
-        //     margin: 20,
-        //     nav: false,
-        //     rewind: true,
-        //     autoplay: false,
-        //     loop: true
-        // };
-        // const { selected } = this.props.value.recipe;
         const { chefImage, chefName, chefBio, submittedBy, _id, chefRecipes } = this.props.chef;
         const numberOfRecipes = chefRecipes.length;
+        const inviteFamilyLink = `${window.location.origin}/familychef/${_id}`
+        console.log(window.location)
         return <GeneralLargeCard>
             <h5 className="card-title grandma-card-title">{chefName}</h5>
             <div className="row card-graphics-container">
@@ -49,12 +50,21 @@ class GrandmaCard extends Component {
                             <path fillRule="evenodd" d="M9.5 10a.5.5 0 01.5-.5h4a.5.5 0 010 1h-3.5V14a.5.5 0 01-1 0v-4z" clipRule="evenodd" />
                         </svg></Link>
                     </div>
+                    <div className="col-12">
+                        <FacebookShareButton url={inviteFamilyLink}>
+                            Invite family members
+                        </FacebookShareButton>
+                        {/* <Link className="nav-link p-0 text-white" to={`/familychefs/addtofamily/${_id}`} >Invite family members<svg className="bi bi-plus" width="1em" height="1em" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fillRule="evenodd" d="M10 5.5a.5.5 0 01.5.5v4a.5.5 0 01-.5.5H6a.5.5 0 010-1h3.5V6a.5.5 0 01.5-.5z" clipRule="evenodd" />
+                            <path fillRule="evenodd" d="M9.5 10a.5.5 0 01.5-.5h4a.5.5 0 010 1h-3.5V14a.5.5 0 01-1 0v-4z" clipRule="evenodd" />
+                        </svg></Link> */}
+                    </div>
                 </div>
                 <div className="row w-100 m-0 mb-3 mini-card-container p-0">
                     {numberOfRecipes > 0 ?
                         <div className='w-100'>
                             {chefRecipes.map((recipe, idx) => {
-                                return <MiniRecipeCard key={idx} recipe={recipe} value={this.props} />
+                                return <MiniRecipeCard key={idx} recipe={recipe} value={this.props.value} />
                             })}
                         </div>
                         : <span>No recipes.</span>}

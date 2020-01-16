@@ -59,7 +59,12 @@ const reducer = (state, action) => {
         case 'LOADER':
             return {
                 ...state,
-                display: action.payload.loader,
+                display: action.payload.display,
+            }
+        case 'REDIRECT-FROM':
+            return {
+                redirectedFrom: action.payload.redirectedFrom,
+                redirectTo: action.payload.redirectTo
             }
         default:
             return state;
@@ -93,7 +98,7 @@ export class Provider extends Component {
                 // { id: '3', recipeName: "Recipe Three", groups: [], img: "img-link", private: true },
 
             ],
-            myGroups: []
+            myFamilies: []
         },
         recipe: {
             selected: {
@@ -111,6 +116,8 @@ export class Provider extends Component {
                 private: true
             }
         },
+        redirectedFrom: '',
+        redirectTo: "",
         display: false,
         isAuthenticated: false,
         token: '',
@@ -142,6 +149,7 @@ export class Provider extends Component {
         })
     }
     render() {
+
         return (
             < Context.Provider value={this.state} >
                 {this.state.display ? <SimpleLoader /> : null}

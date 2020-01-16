@@ -28,6 +28,7 @@ class CardContainer extends Component {
         };
         return <Consumer>
             {value => {
+                console.log(value)
                 return <PageWrapper value={value}>
                     {value.user.myRecipes.length > 0 ?
                         <Slider {...settings}>

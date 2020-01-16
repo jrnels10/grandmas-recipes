@@ -9,7 +9,8 @@ class AddChef extends Component {
     constructor(props) {
         super(props);
         this.state = {
-
+            dateSubmitted: new Date(),
+            submittedBy: `${this.props.data.user.firstName} ${this.props.data.user.lastName}`
         }
     }
 
@@ -31,6 +32,8 @@ class AddChef extends Component {
     }
 
     upload = async (e) => {
+        const { dispatch } = this.props.data;
+        dispatch({ type: "LOADER", payload: { display: true } });
         // const testChef = {
         //     chefName: "Anna Nelson",
         //     chefBio: "She was a loving mother that can cook very well",
@@ -42,6 +45,7 @@ class AddChef extends Component {
         //   chefBio: "She was a loving mother that can cook very well",
         //  author: "Jacob Nelson"
         // }
+        debugger
         const json = JSON.stringify(this.state);
         var bodyFormData = new FormData();
         bodyFormData.append('picture', this.state.chefImage);
@@ -51,7 +55,7 @@ class AddChef extends Component {
         const res = await addNewChef(bodyFormData, this.props.data.user.email);
 
         if (res.status === 200) {
-            const { dispatch } = this.props.data;
+            dispatch({ type: "LOADER", payload: { display: false } });
             dispatch({ type: 'ADDED_MY_RECIPE', payload: { myRecipes: res.data.myRecipes } })
             this.setState({ updated: true });
             this.props.history.push('/dashboard');
@@ -74,14 +78,14 @@ class AddChef extends Component {
                 <div className="input-group input-group-sm mb-3">
                     <label className="sign-input-label" htmlFor="exampleInputEmail1">Families</label>
                     {families.length > 0 ? <select className="col-4 custom-select custom-select-sm"
-                        name="groups"
+                        name="familyName"
                         value={this.state.selectSectionValue}
                         onChange={this.onSelectedText.bind(this)}>
                         {families.map((item) => {
                             return <option key={item}>{item}</option>
                         })}
                     </select> : null}
-                    <input type="text" className="sign-input" placeholder="Family Name" aria-label="Sizing example input" ref="theDiv" tabIndex={0} name='groups' aria-describedby="inputGroup-sizing-sm" onChange={this.onSelectedText.bind(this)} />
+                    <input type="text" className="sign-input" placeholder="Family Name" aria-label="Sizing example input" ref="theDiv" tabIndex={0} name='familyName' aria-describedby="inputGroup-sizing-sm" onChange={this.onSelectedText.bind(this)} />
                     <hr className='sign-underline' />
                 </div>
                 <div className="input-group input-group-sm mb-3">

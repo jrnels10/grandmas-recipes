@@ -1,8 +1,9 @@
 .signin-menu {
   position: absolute;
   object-fit: cover;
-  height: 100%;
+  height: calc(100% - 56px);
   width: 100%;
+  overflow: hidden;
 }
 
 .fa-arrow-circle-right {

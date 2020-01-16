@@ -11,6 +11,12 @@ export default class Home extends Component {
     state = {
         open: true,
     }
+    componentDidMount() {
+        if (document.referrer.indexOf('facebook') > -1 && this.props.value !== undefined) {
+            console.log(this.props)
+            this.props.value.dispatch({ type: 'REDIRECT-FROM', payload: { redirectedFrom: this.props.redirectedFrom, redirectTo: this.props.redirectTo.pathname } })
+        }
+    }
 
     sign = () => {
         console.log("Sign Up clicked")
@@ -23,12 +29,7 @@ export default class Home extends Component {
             open: true
         })
     }
-    delayRedirect = event => {
-        let to = event.target.pathname;
-        const { history: { push } } = this.props;
-        event.preventDefault();
-        setTimeout(() => push(to), 300);
-    }
+
 
 
     render() {
@@ -45,7 +46,7 @@ export default class Home extends Component {
                                         <button
                                             className={`btn btn-signup signin-button  ${open}`}
                                             onClick={this.sign}>
-                                            <Link className="nav-link p-0 text-white" to="/signin" onClick={this.delayRedirect}>Sign In</Link>
+                                            <Link className="nav-link p-0 text-white" to="/signin" >Sign In</Link>
                                         </button>
                                     </div>
 
@@ -54,7 +55,7 @@ export default class Home extends Component {
                                         <button
                                             className={`btn signin-button  ${open}`}
                                             onClick={this.sign}>
-                                            <Link className="nav-link p-0 text-white" to="/signup" onClick={this.delayRedirect}>Sign Up</Link>
+                                            <Link className="nav-link p-0 text-white" to="/signup" >Sign Up</Link>
                                         </button>
                                     </div>
                                 </div>

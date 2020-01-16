@@ -128,6 +128,13 @@ module.exports = {
         // await res.send(imageUploaded);
         // await res.send(`https://storage.cloud.google.com/${imageUploaded[0].metadata.bucket}/${imageUploaded[0].metadata.name}`);
     },
+    findMyChef: async (req, res, next) => {
+        const foundGrandmaList = await User.findOne({ 'myRecipes._id': req.params.id })
+        const foundChef = foundGrandmaList.myRecipes.filter(item => {
+            return item._id == req.params.id
+        })
+        res.send(foundChef)
+    },
     addMyGrandma: async (req, res, next) => {
         console.log(req.body)
         let mine = req.body.myRecipes;
@@ -191,12 +198,11 @@ module.exports = {
             const imageUploaded = await uploadToGoogleCloud(req.file);
             picture = `https://storage.cloud.google.com/${imageUploaded[0].metadata.bucket}/${imageUploaded[0].metadata.name}`;
             console.log(picture)
-
         }
         const buildUpdateObject = {};
         for (var key in changeRequest) {
             key == 'recipeName' ? Object.assign(buildUpdateObject, { 'myRecipes.$.recipeName': changeRequest[key] }) :
-                key == 'groups' ? Object.assign(buildUpdateObject, { 'myRecipes.$.groups': changeRequest[key] }) :
+                key == 'families' ? Object.assign(buildUpdateObject, { 'myRecipes.$.families': changeRequest[key] }) :
                     key == 'chefName' ? Object.assign(buildUpdateObject, { 'myRecipes.$.chefName': changeRequest[key] }) :
                         key == 'chefBio' ? Object.assign(buildUpdateObject, { 'myRecipes.$.chefBio': changeRequest[key] }) :
                             key == 'cookingInstructions' ? Object.assign(buildUpdateObject, { 'myRecipes.$.cookingInstructions': changeRequest[key] }) :

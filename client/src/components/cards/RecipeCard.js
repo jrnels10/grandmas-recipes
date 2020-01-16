@@ -3,6 +3,7 @@ import GeneralLargeCard from './GeneralLargeCard';
 import { Consumer } from '../../Context';
 import PageWrapper from '../tools/PageWrapper';
 import ModalRecipes from '../tools/Modal';
+import ViewImage from '../tools/ViewImage';
 
 class RecipeCard extends Component {
     constructor(props) {
@@ -21,6 +22,10 @@ class RecipeCard extends Component {
     toggleinformation = () => {
         this.setState({ info: !this.state.info })
     }
+
+    hide = () => {
+        this.setState({ viewImage: !this.state.viewImage })
+    }
     render() {
         // console.log(this.state)
         // const { img, groups, ingredients, recipeName } = this.props.recipe;
@@ -31,10 +36,11 @@ class RecipeCard extends Component {
                 const { ingredients, recipeName, img, cookingInstructions } = value.recipe.selected;
                 const privateStatus = value.recipe.selected;
                 return <PageWrapper>
+                    {this.state.viewImage ? <ViewImage image={img} hideImage={this.hide} /> : null}
                     <GeneralLargeCard>
                         <h5 className="card-title grandma-card-title">{recipeName}</h5>
                         <div className="row card-graphics-container">
-                            <img className="card-img-top" src={img} alt="portrait of recipe" />
+                            <img className="card-img-top" src={img} alt="portrait of recipe" onClick={this.hide} />
                             <div className="col-12 card-graphics-container-light" />
                             <div className="col-12 card-graphics-container-dark" >
                             </div>

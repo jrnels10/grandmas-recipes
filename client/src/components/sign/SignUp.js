@@ -20,8 +20,8 @@ export default class SignUp extends Component {
     }
 
     onSubmit = async (value, e) => {
-        const { dispatch, axiosServerUrl } = value;
-        console.log(axiosServerUrl)
+        const { dispatch, axiosServerUrl, redirectTo } = value;
+
         e.preventDefault();
         // Step 1) User the data and to make HTTP request to our BE and send it along
         // Step 2) Take the BE's response (jwtToken)
@@ -37,7 +37,6 @@ export default class SignUp extends Component {
                 firstName: this.state.firstName,
                 lastName: this.state.lastName
             });
-            console.log(res)
             dispatch({
                 type: "SIGN_UP",
                 payload: {
@@ -48,8 +47,9 @@ export default class SignUp extends Component {
                 }
             });
             localStorage.setItem('JWT_TOKEN', res.data.token);
-            this.props.history.push('/dashboard');
             axios.defaults.headers.common['Authorization'] = res.data.token;
+            return redirectTo !== '' ? this.props.history.push(redirectTo) :
+                await this.props.history.push('/dashboard');
 
         } catch (err) {
             console.log(err)
@@ -65,12 +65,10 @@ export default class SignUp extends Component {
     }
 
     async responseGoogle(value, res) {
-        console.log(res)
-        const { dispatch, axiosServerUrl } = value;
+        const { dispatch, axiosServerUrl, redirectTo } = value;
+
         try {
             const data = await axios.post(`${axiosServerUrl}/users/oauth/google`, { access_token: res.accessToken });
-            // const data = await axios.post('https://fourteener-community.herokuapp.com/users/oauth/google', { access_token: res.accessToken });
-            console.log(data);
             dispatch({
                 type: "SIGN_UP",
                 payload: {
@@ -81,8 +79,8 @@ export default class SignUp extends Component {
             });
             localStorage.setItem('JWT_TOKEN', data.data.token);
             axios.defaults.headers.common['Authorization'] = data.data.token;
-
-            this.props.history.push('/dashboard');
+            return redirectTo !== '' ? await this.props.history.push(redirectTo) :
+                await this.props.history.push('/dashboard');
         } catch (err) {
             console.log(err)
         }

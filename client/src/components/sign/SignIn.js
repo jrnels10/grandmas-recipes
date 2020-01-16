@@ -19,7 +19,7 @@ export default class SignIn extends Component {
     }
 
     onSubmit = async (value, e) => {
-        const { dispatch, axiosServerUrl } = value;
+        const { dispatch, axiosServerUrl, redirectTo } = value;
         // console.log(this.state)
         e.preventDefault();
         // Step 1) User the data and to make HTTP request to our BE and send it along
@@ -42,7 +42,8 @@ export default class SignIn extends Component {
             dispatch({ type: "LOADER", payload: { display: false } });
             localStorage.setItem('JWT_TOKEN', res.data.token);
             axios.defaults.headers.common['Authorization'] = res.data.token;
-            await this.props.history.push('/dashboard');
+            return redirectTo !== '' ? this.props.history.push(redirectTo) :
+                await this.props.history.push('/dashboard');
         } catch (err) {
             console.log(err)
             this.setState({ errorMessage: 'Email or password incorrect' })
@@ -57,7 +58,8 @@ export default class SignIn extends Component {
     }
 
     async responseGoogle(value, res) {
-        const { dispatch, axiosServerUrl } = value;
+        const { dispatch, axiosServerUrl, redirectTo } = value;
+
         try {
             dispatch({ type: "LOADER", payload: { display: true } });
             const data = await axios.post(`${axiosServerUrl}/users/oauth/google`, { access_token: res.tokenId });
@@ -72,7 +74,8 @@ export default class SignIn extends Component {
             dispatch({ type: "LOADER", payload: { display: false } });
             localStorage.setItem('JWT_TOKEN', data.data.token);
             axios.defaults.headers.common['Authorization'] = data.data.token;
-            await this.props.history.push('/dashboard');
+            return redirectTo !== '' ? this.props.history.push(redirectTo) :
+                await this.props.history.push('/dashboard');
         } catch (err) {
             console.log(err)
         }

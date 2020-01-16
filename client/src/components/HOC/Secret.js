@@ -29,6 +29,7 @@ export default async (dispatch, userState) => {
                         homeTown: userType.google.homeTown,
                         homeState: userType.google.homeState,
                         myRecipes: userType.myRecipes,
+                        myFamilies: userType.myFamilies,
                         method: 'google',
                     }
                 });

@@ -100,7 +100,7 @@ const userSchema = new Schema({
         submittedBy: {
             type: String
         },
-        familyName: {
+        familyMembers: {
             type: String
         },
         chefRecipes: [{
@@ -116,6 +116,7 @@ const userSchema = new Schema({
             submittedBy: {
                 type: String
             },
+            groups: [],
             img: {
                 type: String
             },
@@ -145,17 +146,6 @@ const userSchema = new Schema({
         },
         familyChefs: [{
             chefName: {
-                type: String
-            },
-            chefId: {
-                type: String
-            }
-        }],
-        familyMembers: [{
-            memberName: {
-                type: String
-            },
-            memberId: {
                 type: String
             }
         }]

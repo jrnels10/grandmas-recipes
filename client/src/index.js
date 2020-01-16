@@ -13,6 +13,8 @@ import AddRecipe from './components/Recipe/AddRecipe';
 import RecipeCard from './components/cards/RecipeCard';
 import CardContainer from './components/cards/CardContainer';
 import AddChef from './components/cards/AddChef';
+import AddToFamily from './components/Family/AddToFamily';
+import SingleChefCard from './components/cards/SingleChefCard';
 
 ReactDOM.render(
     <Provider>
@@ -23,6 +25,7 @@ ReactDOM.render(
                     <Route exact path="/signup" component={SignUp} />
                     <Route path="/dashboard" component={authGuard(DashBoard)} />
                     <Route path="/familychefs" component={authGuard(CardContainer)} />
+                    <Route path="/familychef/:id" component={authGuard(SingleChefCard)} />
                     <Route path="/addnewchef" component={authGuard(AddChef)} />
                     <Route path="/addrecipe/:id" component={authGuard(AddRecipe)} />
                     <Route path={`/recipe/selectedrecipe/:recipeId`} component={authGuard(RecipeCard)} />
@@ -34,3 +37,4 @@ ReactDOM.render(
     , document.getElementById('root')
 );
 registerServiceWorker();
+

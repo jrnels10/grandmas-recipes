@@ -27,7 +27,7 @@ class RecipeCard extends Component {
     }
 
     selected = () => {
-        this.props.value.value.dispatch({
+        this.props.value.dispatch({
             type: 'VIEW_MY_RECIPE',
             payload: { selected: this.props.recipe }
         })

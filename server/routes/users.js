@@ -69,6 +69,10 @@ router.route('/updatemyrecipe/:id')
 
 router.route('/getmyrecipe/:id')
     .post(UserController.getMyRecipe);
+
+router.route('/findmychef/:id')
+    .post(UserController.findMyChef);
+
 router.route('/test')
     .post(UserController.connection);
 
