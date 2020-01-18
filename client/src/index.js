@@ -25,7 +25,7 @@ ReactDOM.render(
                     <Route exact path="/signup" component={SignUp} />
                     <Route path="/dashboard" component={authGuard(DashBoard)} />
                     <Route path="/familychefs" component={authGuard(CardContainer)} />
-                    <Route path="/familychef/:id" component={authGuard(SingleChefCard)} />
+                    <Route path="/familychef/:id" component={SingleChefCard} />
                     <Route path="/addnewchef" component={authGuard(AddChef)} />
                     <Route path="/addrecipe/:id" component={authGuard(AddRecipe)} />
                     <Route path={`/recipe/selectedrecipe/:recipeId`} component={authGuard(RecipeCard)} />
