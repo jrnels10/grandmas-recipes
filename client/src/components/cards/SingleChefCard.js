@@ -41,7 +41,7 @@ class SingleChefCard extends Component {
                                         {isAuthenticated ? <Link className="nav-link p-0 text-white" to={`/addrecipe/${_id}`} >Add New Recipe <svg className="bi bi-plus" width="1em" height="1em" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                             <path fillRule="evenodd" d="M10 5.5a.5.5 0 01.5.5v4a.5.5 0 01-.5.5H6a.5.5 0 010-1h3.5V6a.5.5 0 01.5-.5z" clipRule="evenodd" />
                                             <path fillRule="evenodd" d="M9.5 10a.5.5 0 01.5-.5h4a.5.5 0 010 1h-3.5V14a.5.5 0 01-1 0v-4z" clipRule="evenodd" />
-                                        </svg></Link> : <Link className="nav-link p-0 text-white" to={`/Home`} >Sign in to add new recipe </Link>}
+                                        </svg></Link> : <Link className="nav-link p-0 text-white" to={`/`} >Sign in to add new recipe </Link>}
                                     </div>
                                 </div>
                                 <div className="row w-100 m-0 mb-3 mini-card-container p-0">

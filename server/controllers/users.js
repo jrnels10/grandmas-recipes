@@ -136,7 +136,7 @@ module.exports = {
         res.send(foundChef)
     },
     addMyGrandma: async (req, res, next) => {
-        console.log(req.body)
+        console.log("reached controller!")
         let mine = req.body.myRecipes;
         let picture;
         const accountType = req.body.accountType === "google" ? 'google.email' :
