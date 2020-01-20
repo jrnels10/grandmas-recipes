@@ -21,7 +21,7 @@ app.use(cors());
 
 //middlewares
 app.use(morgan('dev'));
-app.use(express.static("uploads"));
+app.use(express.static(__dirname));
 app.use(bodyParser.json());
 
 //routes  http://localhost:3000/users
