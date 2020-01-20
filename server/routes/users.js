@@ -3,7 +3,7 @@ const router = require('express-promise-router')();
 const passport = require('passport');
 const passportSetup = require('../passport-setup');
 const User = require('./../models/user');
-
+const path = require('path');
 
 
 const { validateBody, schema } = require('../helpers/routeHelpers');
