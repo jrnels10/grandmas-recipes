@@ -62,7 +62,7 @@ router.route('/addmyrecipe/:email')
     .put(upload.single('picture'), UserController.addMyRecipe);
 
 router.route('/addmygrandma/:email')
-    .put(upload.single('picture'), UserController.addMyGrandma);
+    .put(UserController.addMyGrandma);
 
 router.route('/updatemyrecipe/:id')
     .put(upload.single('picture'), UserController.updateMyRecipe);
