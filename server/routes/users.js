@@ -15,6 +15,9 @@ const passportJWT = passport.authenticate('jwt', { session: false });
 const multer = require('multer');
 let storage;
 if (process.env.NODE_ENV === 'production') {
+    // Heroku will not accept folders that are emtpy. So either create folder after push to Heroku
+    // or add a file to uploads folder so that it is not empty on Heroku push.
+
     storage = multer.diskStorage({
         destination: function (req, file, cb) {
             cb(null, path.join(__dirname, '../uploads/'));
@@ -49,7 +52,7 @@ if (process.env.NODE_ENV === 'production') {
 const upload = multer({
     storage: storage,
     limits: {
-        fileSize: 1500 * 1500 * 1
+        fileSize: 2500 * 2500 * 1
     }
 });
 
