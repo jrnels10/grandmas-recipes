@@ -13,22 +13,39 @@ const passportSignIn = passport.authenticate('local', { session: false });
 const passportFacebook = passport.authenticate('facebookToken', { session: false });
 const passportJWT = passport.authenticate('jwt', { session: false });
 const multer = require('multer');
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        if (file === undefined) {
+let storage;
+if (process.env.NODE_ENV === 'production') {
+    storage = multer.diskStorage({
+        destination: function (req, file, cb) {
+            cb(null, path.resolve(__dirname, 'build'))
+        },
+        filename: function (req, file, cb) {
+            if (file === undefined) {
 
-        } else {
-            cb(null, './server/uploads');
+            } else {
+                cb(null, file.originalname)
+            }
         }
-    },
-    filename: function (req, file, cb) {
-        if (file === undefined) {
+    })
+} else {
+    storage = multer.diskStorage({
+        destination: function (req, file, cb) {
+            if (file === undefined) {
 
-        } else {
-            cb(null, file.originalname)
+            } else {
+                cb(null, './server/uploads');
+            }
+        },
+        filename: function (req, file, cb) {
+            if (file === undefined) {
+
+            } else {
+                cb(null, file.originalname)
+            }
         }
-    }
-})
+    });
+}
+
 const upload = multer({
     storage: storage,
     limits: {
@@ -62,7 +79,7 @@ router.route('/addmyrecipe/:email')
     .put(upload.single('picture'), UserController.addMyRecipe);
 
 router.route('/addmygrandma/:email')
-    .put(UserController.addMyGrandma);
+    .put(upload.single('picture'), UserController.addMyGrandma);
 
 router.route('/updatemyrecipe/:id')
     .put(upload.single('picture'), UserController.updateMyRecipe);
