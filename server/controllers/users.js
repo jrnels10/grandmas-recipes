@@ -137,30 +137,31 @@ module.exports = {
     },
     addMyGrandma: async (req, res, next) => {
         console.log("reached controller!")
+        console.log(req.file)
         res.send({ message: "Made it to controller" })
-        // let mine = req.body.myRecipes;
-        // let picture;
-        // const accountType = req.body.accountType === "google" ? 'google.email' :
-        //     req.body.accountType === "facebook" ? 'facebook.email' : 'local.email';
-        // const foundGrandmaList = await User.findOne({ [accountType]: req.params.email })
-        // if (req.file !== undefined) {
-        //     const imageUploaded = await uploadToGoogleCloud(req.file);
-        //     console.log(imageUploaded)
-        //     picture = `https://storage.googleapis.com/${imageUploaded[0].metadata.bucket}/${imageUploaded[0].metadata.name}`;
-        // }
+        let mine = req.body.myRecipes;
+        let picture;
+        const accountType = req.body.accountType === "google" ? 'google.email' :
+            req.body.accountType === "facebook" ? 'facebook.email' : 'local.email';
+        const foundGrandmaList = await User.findOne({ [accountType]: req.params.email })
+        if (req.file !== undefined) {
+            const imageUploaded = await uploadToGoogleCloud(req.file);
+            console.log(imageUploaded)
+            picture = `https://storage.googleapis.com/${imageUploaded[0].metadata.bucket}/${imageUploaded[0].metadata.name}`;
+        }
 
-        // let myRecipes = foundGrandmaList.myRecipes;
-        // myRecipes.push(Object.assign(JSON.parse(mine), { chefImage: picture }));
-        // return await User.findOneAndUpdate({ [accountType]: req.params.email }, {
-        //     "myRecipes": myRecipes
-        // }).then((profile) => {
-        //     User.findOne({ [accountType]: req.params.email }).then(function (item) {
-        //         res.send(item)
-        //     });
-        // }).catch(error => {
-        //     res.send(404)
-        //     return error
-        // });
+        let myRecipes = foundGrandmaList.myRecipes;
+        myRecipes.push(Object.assign(JSON.parse(mine), { chefImage: picture }));
+        return await User.findOneAndUpdate({ [accountType]: req.params.email }, {
+            "myRecipes": myRecipes
+        }).then((profile) => {
+            User.findOne({ [accountType]: req.params.email }).then(function (item) {
+                res.send(item)
+            });
+        }).catch(error => {
+            res.send(404)
+            return error
+        });
     },
     addMyRecipe: async (req, res, next) => {
         let submittedRecipe = JSON.parse(req.body.myRecipes);
