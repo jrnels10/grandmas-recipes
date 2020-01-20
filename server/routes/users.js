@@ -17,7 +17,7 @@ let storage;
 if (process.env.NODE_ENV === 'production') {
     storage = multer.diskStorage({
         destination: function (req, file, cb) {
-            cb(null, path.join(__dirname, '/uploads/'));
+            cb(null, path.join(__dirname, '../uploads/'));
         },
         filename: function (req, file, cb) {
             if (file === undefined) {
