@@ -75,31 +75,5 @@ router.route('/secret')
 router.route('/getUsersById')
     .post(UserController.getUsersById);
 
-router.route('/update/:email')
-    .put(upload.single('profilePicture'), UserController.updateUser);
-
-router.route('/addmyrecipe/:email')
-    .put(upload.single('picture'), UserController.addMyRecipe);
-
-router.route('/addmygrandma/:email')
-    .put(upload.single('picture'), UserController.addMyGrandma);
-
-router.route('/updatemyrecipe/:id')
-    .put(upload.single('picture'), UserController.updateMyRecipe);
-
-router.route('/getmyrecipe/:id')
-    .post(UserController.getMyRecipe);
-
-router.route('/findmychef/:id')
-    .post(UserController.findMyChef);
-
-router.route('/test')
-    .post(UserController.connection);
-
-router.route('/uploadGoogleCloud')
-    .post(upload.array('picture', 1), UserController.uploadToGoogleCloud)
-
-router.route('/deleteImageFromGoogleCloud/:fileName')
-    .delete(UserController.deleteFromGoogleCloud)
 
 module.exports = router;
