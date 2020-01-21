@@ -38,10 +38,7 @@ class SingleChefCard extends Component {
                             <p className="card-author"> -{submittedBy}</p>
                             <div className="row w-100 mb-3">
                                 <div className="col-8">
-                                    {isAuthenticated ? <Link className="nav-link p-0 text-white" to={`/addrecipe/${_id}`} >Add New Recipe <svg className="bi bi-plus" width="1em" height="1em" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                        <path fillRule="evenodd" d="M10 5.5a.5.5 0 01.5.5v4a.5.5 0 01-.5.5H6a.5.5 0 010-1h3.5V6a.5.5 0 01.5-.5z" clipRule="evenodd" />
-                                        <path fillRule="evenodd" d="M9.5 10a.5.5 0 01.5-.5h4a.5.5 0 010 1h-3.5V14a.5.5 0 01-1 0v-4z" clipRule="evenodd" />
-                                    </svg></Link> : <Link className="nav-link p-0 text-white" to={`/`} onClick={this.signInAndSave.bind(this, value)}>Sign in to save Chef </Link>}
+                                    <Link className="nav-link p-0 text-white" to={`/`} onClick={this.signInAndSave.bind(this, value)}>Sign in to save Chef </Link>}
                                 </div>
                             </div>
                             <div className="row w-100 m-0 mb-3 mini-card-container p-0">

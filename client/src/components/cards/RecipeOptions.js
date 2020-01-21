@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom'
 import {
     EmailShareButton,
     FacebookShareButton,
@@ -15,13 +16,20 @@ class RecipeOptions extends Component {
     }
 
     toggleOptions = () => {
-        // this.setState({ options: !this.state.options })
+        this.setState({ options: !this.state.options })
+    }
+
+    fullScreen = (props) => {
+        const { value: { dispatch }, image } = props.options;
+        dispatch({ type: 'FULLSCREEN_IMAGE', payload: { fullScreenImage: image } })
+        this.props.history.push('/fullscreen');
     }
 
     render() {
         // const { ingredients, img, cookingInstructions, submittedBy } = this.props.options;
         const privateStatus = this.props.options.private;
         const { options } = this.state;
+        // debugger
         return <div className="recipe-header-options" >
             {options ?
                 <svg className="bi bi-x x-icon" onClick={this.toggleOptions} width="1em" height="1em" viewBox="0 0 20 20" fill="#f7c9b6" xmlns="http://www.w3.org/2000/svg">
@@ -33,7 +41,7 @@ class RecipeOptions extends Component {
                 </svg>}
             {options ?
                 <div className={`container-fluid options-diplay`}>
-                    <div className='row w-100 m-0 p-0'>
+                    <div className='row w-100 m-0 p-0' onClick={this.fullScreen.bind(this, this.props)}>
                         <span className="privacy-label">View Image Full Screen</span>
                         <svg className="bi bi-arrows-fullscreen" width="1em" height="1em" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                             <path fillRule="evenodd" d="M4 11.5a.5.5 0 01.5.5v3.5H8a.5.5 0 010 1H4a.5.5 0 01-.5-.5v-4a.5.5 0 01.5-.5z" clipRule="evenodd" />
@@ -72,7 +80,7 @@ class RecipeOptions extends Component {
     }
 }
 
-export default RecipeOptions;
+export default withRouter(RecipeOptions);
 
 
 

@@ -29,6 +29,11 @@ const reducer = (state, action) => {
                 ...state,
                 errorMessage: action.payload.errorMessage
             }
+        case 'FULLSCREEN_IMAGE':
+            return {
+                ...state,
+                fullScreenImage: action.payload.fullScreenImage
+            }
         case 'USER_INFO':
             let userInfo = state;
             userInfo.user = action.payload;
@@ -113,6 +118,7 @@ export class Provider extends Component {
             }
         },
         redirectedFrom: '',
+        fullScreenImage: '',
         redirectTo: "",
         display: false,
         save: false,

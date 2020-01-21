@@ -75,7 +75,7 @@ class AddRecipe extends Component {
             grandma_Id: this.state.grandma_Id,
             recipeName: this.state.recipeName,
             groups: this.state.groups,
-            ingredients: [{ "ingredient": "Thinly sliced med. onions ", "amount": "4", "units": "" }, { "ingredient": "Chicken parts", "amount": "5-6", "units": "lb" }, { "ingredient": "minced garlic cloves", "amount": "4", "units": "" }, { "ingredient": "Tomatoes", "amount": "2", "units": "lb" }, { "ingredient": "Tomato sauce", "amount": "2-8", "units": "oz" }, { "ingredient": "Salt", "amount": "2", "units": "tsp" }, { "ingredient": "Pepper", "amount": "1.5", "units": "tsp" }, { "ingredient": "Oregano leaves", "amount": ".5", "units": "tsp" }, { "ingredient": "Basil", "amount": "1", "units": "tsp" }, { "ingredient": "Celery seed", "amount": "1", "units": "tsp" }, { "ingredient": "Bay Leaves", "amount": "2", "units": "" }, { "ingredient": "Dry White wine", "amount": ".5", "units": "cup" }],
+            ingredients: this.state.ingredients,
             cookingInstructions: this.state.cookingInstructions
         }
         const json = JSON.stringify(recipeObject);

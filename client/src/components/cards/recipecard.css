@@ -170,13 +170,22 @@ p {
 
 .grandma-card-title {
   position: absolute;
-  top: 10px;
-  left: 12px;
-  text-shadow: 2px 2px 2px #000;
+  top: 0px;
+  left: 10px;
+  /* text-shadow: 2px 2px 2px #000; */
   font-family: "Dancing Script", cursive;
-  color: #f0d1bf;
-  font-size: 2em;
+  color: #f7c9b6;
+  font-size: 2.5em;
   z-index: 100;
+}
+
+.grandma-recipe-card-date {
+  font-size: 0.7rem;
+  color: #ffffff;
+  padding-left: 15px;
+  position: absolute;
+  left: 2px;
+  bottom: 37px;
 }
 
 .card-author {

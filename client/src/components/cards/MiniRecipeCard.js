@@ -36,7 +36,7 @@ class RecipeCard extends Component {
         const { heart, description } = this.state;
         const { img, _id, recipeDescription } = this.props.recipe;
         return <div className="card mini-recipe-card" >
-            <RecipeCardHeader recipe={this.props.recipe} />
+            <RecipeCardHeader recipe={this.props.recipe} value={this.props.value} />
             <Link className="nav-link p-0 text-white" onClick={this.selected.bind(this)} to={`/recipe/selectedrecipe/${_id}`} >
                 <img className="mini-card-recipe-img" src={img} alt="recipe" />
             </Link>
