@@ -3,6 +3,7 @@ import axios from 'axios';
 import { secret } from './API/UsersAPI';
 import SimpleLoader from './components/loader/SimpleLoader';
 
+
 const Context = React.createContext();
 const reducer = (state, action) => {
     // debugger
@@ -92,12 +93,7 @@ export class Provider extends Component {
             homeState: '',
             method: '',
             _id: '',
-            myRecipes: [
-                // { id: '1', recipeName: "Recipe One", groups: [], img: "img-link", private: true },
-                // { id: '2', recipeName: "Recipe Two", groups: [], img: "img-link", private: false },
-                // { id: '3', recipeName: "Recipe Three", groups: [], img: "img-link", private: true },
-
-            ],
+            myRecipes: [],
             myFamilies: []
         },
         recipe: {
@@ -119,12 +115,12 @@ export class Provider extends Component {
         redirectedFrom: '',
         redirectTo: "",
         display: false,
+        save: false,
         isAuthenticated: false,
         token: '',
         facebookappId: "2368972536494612",
         googleClientId: "267196671122-298u06lbfo5ho1ollta67bm337ovluj9.apps.googleusercontent.com",
-        axiosServerUrl: process.env.NODE_ENV === 'development' ? 'http://localhost:5000' : 'https://grandmasrecipes.herokuapp.com'
-        ,
+        axiosServerUrl: process.env.NODE_ENV === 'development' ? 'http://localhost:5000' : 'https://grandmasrecipes.herokuapp.com',
         dispatch: action => this.setState(state => reducer(state, action))
     }
     async componentDidMount() {
@@ -133,21 +129,21 @@ export class Provider extends Component {
         axios.defaults.headers.common['Authorization'] = jwtToken;
         if (jwtToken) {
             await secret();
-
-            this.setState({ token: jwtToken, isAuthenticated: true, loader: false })
-
+            this.setState({ token: jwtToken, isAuthenticated: true, loader: false });
         }
         else {
             // this.props.history.push('/')
-        }
-    }
+        };
+    };
+
     environment = () => {
         return process.env.NODE_ENV === "development" ? null : this.setState({
             facebookappId: "2368972536494612",
             googleClientId: "267196671122-298u06lbfo5ho1ollta67bm337ovluj9.apps.googleusercontent.com",
             axiosServerUrl: process.env.NODE_ENV === 'development' ? 'http://localhost:5000' : 'https://grandmasrecipes.herokuapp.com'
         })
-    }
+    };
+
     render() {
 
         return (
@@ -156,7 +152,7 @@ export class Provider extends Component {
                 {this.props.children}
             </Context.Provider >
         )
-    }
-}
+    };
+};
 
 export const Consumer = Context.Consumer;

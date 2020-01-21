@@ -87,12 +87,8 @@ export default class SignUp extends Component {
     }
     async responseFacebook(value, res) {
         const { dispatch, axiosServerUrl } = value;
-        // console.log(dispatch, res)
-        debugger
         try {
             const data = await axios.post(`${axiosServerUrl}/users/oauth/facebook`, { access_token: res.accessToken });
-            // const data = await axios.post('https://fourteener-community.herokuapp.com/users/oauth/facebook', { access_token: res.accessToken });
-            // console.log(data);
             dispatch({
                 type: "SIGN_UP",
                 payload: {
@@ -115,7 +111,6 @@ export default class SignUp extends Component {
     }
 
     close = () => {
-        console.log("close");
         this.setState({ open: false })
         this.props.history.push('/');
     }
@@ -126,72 +121,71 @@ export default class SignUp extends Component {
                 {value => {
                     // const { dispatch } = value;
                     const open = !this.state.open ? "close" : "open";
-                    return <PageWrapper>
-                        <div className={` signin-menu signup-${open} `}>
-                            <div className={`w-100 signup-container`}>
-                                <span className="m-2" onClick={this.close}><i className="fas fa-arrow-circle-right fa-lg"></i></span>
-                                <form className={`mt-2`} onSubmit={this.onSubmit.bind(this, value)}>
-                                    <div className="form-group-sm">
-                                        <label className="sign-input-label" htmlFor="exampleInputEmail1">Email address</label>
-                                        <input
-                                            className="form-control-sm sign-input"
-                                            id="exampleInputEmail1"
-                                            type="email"
-                                            name="email"
-                                            onChange={this.onChange}
-                                            aria-describedby="emailHelp"
-                                            placeholder="John@smith.com"
-                                        />
-                                        <hr className='sign-underline' />
-                                    </div>
-                                    <div className="form-group">
-                                        <label className="sign-input-label" htmlFor="exampleInputPassword1 text-white">Password</label>
-                                        <input
-                                            className="form-control-sm sign-input"
-                                            id="exampleInputPassword1"
-                                            type="password"
-                                            name='password'
-                                            onChange={this.onChange}
-                                            placeholder="14ersRcool" />
-                                        <hr className='sign-underline' />
-                                    </div>
-                                    <div className="form-group">
-                                        <label className="sign-input-label" htmlFor="exampleInputFirstName1">First Name</label>
-                                        <input
-                                            className="form-control sign-input"
-                                            id="exampleInputFirstName1"
-                                            type="text"
-                                            name="firstName"
-                                            onChange={this.onChange}
-                                            placeholder="Enter your first name"
-                                        />
-                                        <hr className='sign-underline' />
-                                    </div>
-                                    <div className="form-group">
-                                        <label className="sign-input-label" htmlFor="exampleInputLastName1">Last Name</label>
-                                        <input
-                                            className="form-control sign-input"
-                                            id="exampleInputLastName1"
-                                            type="text"
-                                            name='lastName'
-                                            onChange={this.onChange}
-                                            placeholder="Enter your last name" />
-                                        <hr className='sign-underline' />
-                                    </div>
-
-                                    <div className='row w-100 m-0 pl-2 p-0 mt-3'>
-                                        <div className="w-50 text-center float-left">
-                                            <button type="submit" className="btn signin-button">Sign Up</button>
-                                        </div>
-                                    </div>
-                                </form>
-                                {this.state.errorMessage ? <div className='alert alert-danger'>{value.errorMessage}</div> : null}
-                                <div className='text-white pl-2 mt-2'><small>
-                                    Or sign up using Google
-                            </small>
+                    return <div className={` signin-menu signup-${open} `}>
+                        <div className={`w-100 signup-container`}>
+                            <span className="m-2" onClick={this.close}><i className="fas fa-arrow-circle-right fa-lg"></i></span>
+                            <form className={`mt-2`} onSubmit={this.onSubmit.bind(this, value)}>
+                                <div className="form-group-sm">
+                                    <label className="sign-input-label" htmlFor="exampleInputEmail1">Email address</label>
+                                    <input
+                                        className="form-control-sm sign-input"
+                                        id="exampleInputEmail1"
+                                        type="email"
+                                        name="email"
+                                        onChange={this.onChange}
+                                        aria-describedby="emailHelp"
+                                        placeholder="John@smith.com"
+                                    />
+                                    <hr className='sign-underline' />
                                 </div>
+                                <div className="form-group">
+                                    <label className="sign-input-label" htmlFor="exampleInputPassword1 text-white">Password</label>
+                                    <input
+                                        className="form-control-sm sign-input"
+                                        id="exampleInputPassword1"
+                                        type="password"
+                                        name='password'
+                                        onChange={this.onChange}
+                                        placeholder="14ersRcool" />
+                                    <hr className='sign-underline' />
+                                </div>
+                                <div className="form-group">
+                                    <label className="sign-input-label" htmlFor="exampleInputFirstName1">First Name</label>
+                                    <input
+                                        className="form-control sign-input"
+                                        id="exampleInputFirstName1"
+                                        type="text"
+                                        name="firstName"
+                                        onChange={this.onChange}
+                                        placeholder="Enter your first name"
+                                    />
+                                    <hr className='sign-underline' />
+                                </div>
+                                <div className="form-group">
+                                    <label className="sign-input-label" htmlFor="exampleInputLastName1">Last Name</label>
+                                    <input
+                                        className="form-control sign-input"
+                                        id="exampleInputLastName1"
+                                        type="text"
+                                        name='lastName'
+                                        onChange={this.onChange}
+                                        placeholder="Enter your last name" />
+                                    <hr className='sign-underline' />
+                                </div>
+
                                 <div className='row w-100 m-0 pl-2 p-0 mt-3'>
-                                    {/* <div className="w-50 m-auto text-center">
+                                    <div className="w-50 text-center float-left">
+                                        <button type="submit" className="btn signin-button">Sign Up</button>
+                                    </div>
+                                </div>
+                            </form>
+                            {this.state.errorMessage ? <div className='alert alert-danger'>{value.errorMessage}</div> : null}
+                            <div className='text-white pl-2 mt-2'><small>
+                                Or sign up using Google
+                            </small>
+                            </div>
+                            <div className='row w-100 m-0 pl-2 p-0 mt-3'>
+                                {/* <div className="w-50 m-auto text-center">
                                         <FacebookLogin
                                             appId='1431908256951062'
                                             autoLoad={false}
@@ -203,19 +197,18 @@ export default class SignUp extends Component {
                                             icon="fa-facebook fa-lg"
                                         />
                                     </div> */}
-                                    <div className="w-50 m-auto text-center">
-                                        <GoogleLogin
-                                            clientId={`267196671122-298u06lbfo5ho1ollta67bm337ovluj9.apps.googleusercontent.com`}
-                                            buttonText="Google"
-                                            onSuccess={this.responseGoogle.bind(this, value)}
-                                            onFailure={this.responseGoogle}
-                                            className='btn google-login'
-                                        />
-                                    </div>
+                                <div className="w-50 m-auto text-center">
+                                    <GoogleLogin
+                                        clientId={`267196671122-298u06lbfo5ho1ollta67bm337ovluj9.apps.googleusercontent.com`}
+                                        buttonText="Google"
+                                        onSuccess={this.responseGoogle.bind(this, value)}
+                                        onFailure={this.responseGoogle}
+                                        className='btn google-login'
+                                    />
                                 </div>
                             </div>
                         </div>
-                    </PageWrapper>
+                    </div>
                 }}
             </Consumer>
         );

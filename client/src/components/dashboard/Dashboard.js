@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { Consumer } from '../../Context';
 import secretResponse from './../HOC/Secret';
-import './dashBoard.css'
-import PageWrapper from '../tools/PageWrapper';
+import './dashBoard.css';
 import { NavigateButton } from './../tools/Buttons';
 
 class DashBoard extends Component {
@@ -20,14 +19,12 @@ class DashBoard extends Component {
     render() {
         return <Consumer>
             {value => {
-                return <PageWrapper>
-                    <div className="dashboard-container">
-                        <div className="dashboard-buttons-container">
-                            <NavigateButton customClassName='dashboard-button' pathTo={'/familychefs'}>View Chefs</NavigateButton>
-                            <NavigateButton customClassName='dashboard-button' pathTo={'/addnewchef'}>Add new Chef</NavigateButton>
-                        </div>
+                return <div className="dashboard-container">
+                    <div className="dashboard-buttons-container">
+                        <NavigateButton customClassName='dashboard-button' pathTo={'/familychefs'}>View Chefs</NavigateButton>
+                        <NavigateButton customClassName='dashboard-button' pathTo={'/addnewchef'}>Add new Chef</NavigateButton>
                     </div>
-                </PageWrapper>
+                </div>
             }}
         </Consumer >
     }

@@ -28,16 +28,13 @@ class CardContainer extends Component {
         };
         return <Consumer>
             {value => {
-                console.log(value)
-                return <PageWrapper value={value}>
-                    {value.user.myRecipes.length > 0 ?
-                        <Slider {...settings}>
-                            {value.user.myRecipes.map((chef, idx) => {
-                                return <GrandmaCard key={idx} chef={chef} value={value} />
-                            })}
-                        </Slider>
-                        : <NavigateButton pathTo={'/addnewchef'}>Add new Chef</NavigateButton>}
-                </PageWrapper>
+                return value.user.myRecipes.length > 0 ?
+                    <Slider {...settings}>
+                        {value.user.myRecipes.map((chef, idx) => {
+                            return <GrandmaCard key={idx} chef={chef} value={value} />
+                        })}
+                    </Slider>
+                    : <NavigateButton pathTo={'/addnewchef'}>Add new Chef</NavigateButton>
             }
             }
         </Consumer >

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './modal.css'
 // display, name, closeAction, children
 class ModalRecipes extends Component {
     constructor(props) {
@@ -6,6 +7,7 @@ class ModalRecipes extends Component {
         this.state = {}
     }
     render() {
+        // display, name closeAction, children
         console.log(this.props)
         return <div className={`modal ingredient-modal-${this.props.display}`} id="exampleModalCenter" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div className="modal-dialog modal-dialog-centered" role="document">
@@ -20,7 +22,7 @@ class ModalRecipes extends Component {
                         {this.props.children}
                     </div>
                     <div className="modal-footer">
-                        <button type="button" className="btn btn-secondary" onClick={this.props.closeAction}>Save</button>
+                        <button type="button" className="btn btn-secondary" onClick={this.props.closeAction}>{this.props.closeActionName ? this.props.closeActionName : 'Save'}</button>
                     </div>
                 </div>
             </div>

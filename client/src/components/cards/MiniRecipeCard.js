@@ -8,7 +8,7 @@ import {
     WhatsappIcon
 } from "react-share";
 import { Link } from 'react-router-dom';
-import './minirecipecard.css';
+import RecipeCardHeader from './RecipeCardHeader';
 
 class RecipeCard extends Component {
     constructor(props) {
@@ -29,22 +29,14 @@ class RecipeCard extends Component {
     selected = () => {
         this.props.value.dispatch({
             type: 'VIEW_MY_RECIPE',
-            payload: { selected: this.props.recipe }
+            payload: { selected: Object.assign(this.props.recipe, { chefName: this.props.chefName }) }
         })
     }
     render() {
-        // console.log(this.props.recipe)
         const { heart, description } = this.state;
-        const { recipeName, img, _id, recipeDescription, dateSubmitted } = this.props.recipe;
-        // const recipePrivate = this.props.recipe.private;
+        const { img, _id, recipeDescription } = this.props.recipe;
         return <div className="card mini-recipe-card" >
-            <div className='w-75 mini-recipe-care-title-container'>
-                <label className="card-title mini-recipe-card-title w-100">{recipeName}</label>
-                <span className="card-title mini-recipe-card-date">Submitted {new Date(dateSubmitted).toDateString()}</span>
-            </div>
-            <svg className="bi bi-three-dots-vertical mini-three-dot-icon" width="1em" height="1em" viewBox="0 0 20 20" fill="#f7c9b6" xmlns="http://www.w3.org/2000/svg">
-                <path fillRule="evenodd" d="M11.5 15a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zm0-5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zm0-5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z" clipRule="evenodd" />
-            </svg>
+            <RecipeCardHeader recipe={this.props.recipe} />
             <Link className="nav-link p-0 text-white" onClick={this.selected.bind(this)} to={`/recipe/selectedrecipe/${_id}`} >
                 <img className="mini-card-recipe-img" src={img} alt="recipe" />
             </Link>

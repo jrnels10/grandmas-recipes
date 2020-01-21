@@ -5,18 +5,6 @@
   /* overflow: hidden; */
 }
 
-.ingredient-modal-true {
-  display: block;
-}
-.modal-title {
-  font-weight: bold;
-}
-.modal-content {
-  background-color: #877785;
-}
-.ingredient-modal-false {
-  display: none;
-}
 .addrecipe-units {
   background-color: transparent;
   border: none;
