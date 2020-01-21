@@ -83,3 +83,12 @@
 .addrecipe-custom-file-input:active::before {
   background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
 }
+
+.ingredient-delete-button,
+.ingredient-edit-button {
+  border-radius: 9px;
+}
+
+.ingredient-edit-button {
+  float: left;
+}

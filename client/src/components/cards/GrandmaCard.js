@@ -13,7 +13,6 @@ import {
 } from "react-share";
 
 import './recipecard.css';
-import RecipeCardHeader from './RecipeCardHeader';
 import RecipeOptions from './RecipeOptions';
 
 
@@ -38,14 +37,12 @@ class GrandmaCard extends Component {
         const numberOfRecipes = chefRecipes.length;
         const inviteFamilyLink = `${window.location.origin}/familychef/${_id}`;
         return <GeneralLargeCard>
-            <div className='recipe-card-header'>
+            <div className='grandma-card-header'>
                 <div className='w-75 mini-recipe-care-title-container'>
                     <label className="card-title grandma-card-title w-75">{chefName}</label>
-                    {/* <span className="card-title grandma-recipe-card-date">Submitted {new Date(dateSubmitted).toDateString()}</span> */}
                 </div>
                 <RecipeOptions options={{ value: this.props.value, image: chefImage }} />
             </div>
-            {/* <h5 className="card-title grandma-card-title">{chefName}</h5> */}
             <div className="row card-graphics-container">
                 <img className="card-img-top" src={chefImage} alt="portrait of chef" />
                 <div className="col-12 card-graphics-container-light" />

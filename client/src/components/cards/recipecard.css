@@ -15,6 +15,14 @@
   height: 130px;
   background: black;
 }
+.grandma-card-header {
+  position: absolute;
+  z-index: 100;
+  top: 0;
+  font-size: 0.8rem;
+  width: 100%;
+  background-color: #5f525d;
+}
 
 .recipe-card-header {
   position: absolute;
@@ -84,9 +92,6 @@
   margin-bottom: 10px;
 }
 
-.ingredients-check-item {
-  /* visibility: hidden; */
-}
 .custom-checkbox-container {
   background-color: transparent;
   border-radius: 5px;
@@ -172,10 +177,10 @@ p {
   position: absolute;
   top: 0px;
   left: 10px;
-  /* text-shadow: 2px 2px 2px #000; */
+  text-shadow: 2px 2px 2px #000;
   font-family: "Dancing Script", cursive;
   color: #f7c9b6;
-  font-size: 2.5em;
+  font-size: 2.4em;
   z-index: 100;
 }
 

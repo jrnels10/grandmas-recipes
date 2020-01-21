@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import GeneralLargeCard from './GeneralLargeCard';
 import { Consumer } from '../../Context';
-import PageWrapper from '../tools/PageWrapper';
-import ModalRecipes from '../tools/Modal';
-import ViewImage from '../tools/ViewImage';
 import RecipeCardHeader from './RecipeCardHeader';
 
 class RecipeCard extends Component {
@@ -28,15 +25,11 @@ class RecipeCard extends Component {
         this.setState({ viewImage: !this.state.viewImage })
     }
     render() {
-        // console.log(this.state)
-        // const { img, groups, ingredients, recipeName } = this.props.recipe;
-        // const privateStatus = this.props.private
         return <Consumer>
             {value => {
-                console.log(value.recipe.selected)
                 const { ingredients, img, cookingInstructions, chefName } = value.recipe.selected;
                 return <GeneralLargeCard>
-                    <RecipeCardHeader recipe={value.recipe.selected} />
+                    <RecipeCardHeader recipe={value.recipe.selected} value={value} />
                     <div className="row card-graphics-container">
                         <img className="card-img-top" src={img} alt="portrait of recipe" onClick={this.hide} />
                         <div className="col-12 card-graphics-container-light" />
