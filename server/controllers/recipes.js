@@ -47,8 +47,7 @@ module.exports = {
                                 key == 'img' ? Object.assign(buildUpdateObject, { 'myRecipes.$.img': picture }) :
                                     key == 'chefImage' ? Object.assign(buildUpdateObject, { 'myRecipes.$.chefimage': chefImage }) :
                                         key == 'private' ? Object.assign(buildUpdateObject, { 'myRecipes.$.private': changeRequest[key] }) :
-                                            key == 'ingredients' ? Object.assign(buildUpdateObject, { 'myRecipes.$.ingredients': changeRequest[key] }) : null
-
+                                            key == 'ingredients' ? Object.assign(buildUpdateObject, { 'myRecipes.$.ingredients': changeRequest[key] }) : null;
         };
         await User.updateOne({ 'myRecipes._id': req.params.id },
             { $set: buildUpdateObject }).then(response => {

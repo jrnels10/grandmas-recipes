@@ -4,7 +4,6 @@ import './SignUpAndSignIn.css';
 import axios from 'axios';
 import GoogleLogin from 'react-google-login';
 // import FacebookLogin from 'react-facebook-login';
-import PageWrapper from './../tools/PageWrapper';
 
 
 export default class SignUp extends Component {

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PageWrapper from '../tools/PageWrapper';
 import { addNewRecipe } from '../../API/RecipeAPI';
 import ModalRecipes from './../tools/Modal';
 import { withRouter } from 'react-router-dom';

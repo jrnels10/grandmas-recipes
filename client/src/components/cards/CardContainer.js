@@ -3,7 +3,6 @@ import { Consumer } from '../../Context';
 import Slider from "react-slick";
 import secretResponse from './../HOC/Secret';
 import GrandmaCard from '../cards/GrandmaCard';
-import PageWrapper from '../tools/PageWrapper';
 import { NavigateButton } from './../tools/Buttons';
 
 class CardContainer extends Component {

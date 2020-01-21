@@ -33,7 +33,7 @@ class GrandmaCard extends Component {
         this.setState({ shareModal: !this.state.shareModal })
     }
     render() {
-        const { chefImage, chefName, chefBio, submittedBy, _id, chefRecipes, dateSubmitted } = this.props.chef;
+        const { chefImage, chefName, chefBio, submittedBy, _id, chefRecipes } = this.props.chef;
         const numberOfRecipes = chefRecipes.length;
         const inviteFamilyLink = `${window.location.origin}/familychef/${_id}`;
         return <GeneralLargeCard>

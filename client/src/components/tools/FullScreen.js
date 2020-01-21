@@ -15,7 +15,7 @@ class FullScreen extends Component {
     render() {
         return <Consumer>
             {value => {
-                return <img className='full-screen' src={value.fullScreenImage} onClick={this.redirect} />
+                return <img className='full-screen' src={value.fullScreenImage} onClick={this.redirect} alt='Uses entire screen for visualization' />
             }}
         </Consumer>
     }
