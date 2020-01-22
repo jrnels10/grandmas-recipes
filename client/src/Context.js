@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { secret } from './API/UsersAPI';
+import { secret } from './API/RecipeAPI';
 import SimpleLoader from './components/loader/SimpleLoader';
 
 

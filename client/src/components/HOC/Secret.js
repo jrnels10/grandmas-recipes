@@ -1,102 +1,35 @@
-// import axios from 'axios';
-// import { getAllPeaksCompleted } from './../../API/Peaks';
-import { secret } from './../../API/UsersAPI';
+import { secret } from './../../API/RecipeAPI';
 
 export default async (dispatch, userState) => {
-    // console.log(dispatch, userState)
     try {
         const res = await secret();
         const userType = res.data.profile;
-        if (userType.method === 'google') {
-            return userState.setState({
-                _id: userType._id,
-                email: userType.google.email,
-                firstName: userType.google.firstName,
-                lastName: userType.google.lastName,
-                profilePicture: userType.google.profilePicture,
-                homeTown: userType.google.homeTown,
-                homeState: userType.google.homeState,
-                method: 'google',
-            }, () => {
-                dispatch({
-                    type: "USER_INFO",
-                    payload: {
-                        _id: userType._id,
-                        email: userType.google.email,
-                        firstName: userType.google.firstName,
-                        lastName: userType.google.lastName,
-                        profilePicture: userType.google.profilePicture,
-                        homeTown: userType.google.homeTown,
-                        homeState: userType.google.homeState,
-                        myRecipes: userType.myRecipes,
-                        myFamilies: userType.myFamilies,
-                        method: 'google',
-                    }
-                });
-
+        return userState.setState({
+            _id: userType._id,
+            email: userType[userType.method].email,
+            firstName: userType[userType.method].firstName,
+            lastName: userType[userType.method].lastName,
+            profilePicture: userType[userType.method].profilePicture,
+            homeTown: userType[userType.method].homeTown,
+            homeState: userType[userType.method].homeState,
+            method: userType.method,
+        }, () => {
+            dispatch({
+                type: "USER_INFO",
+                payload: {
+                    _id: userType._id,
+                    email: userType[userType.method].email,
+                    firstName: userType[userType.method].firstName,
+                    lastName: userType[userType.method].lastName,
+                    profilePicture: userType[userType.method].profilePicture,
+                    homeTown: userType[userType.method].homeTown,
+                    homeState: userType[userType.method].homeState,
+                    myRecipes: userType.myRecipes,
+                    myFamilies: userType.myFamilies,
+                    method: userType.method,
+                }
             });
-        }
-        else if (userType.method === 'local') {
-            return userState.setState({
-                _id: userType._id,
-                email: userType.local.email,
-                firstName: userType.local.firstName,
-                lastName: userType.local.lastName,
-                profilePicture: userType.local.profilePicture,
-                homeTown: userType.local.homeTown,
-                homeState: userType.local.homeState,
-                method: 'local',
-
-            }, () => {
-
-                // console.log(dispatch)
-                dispatch({
-                    type: "USER_INFO",
-                    payload: {
-                        _id: userType._id,
-                        email: userType.local.email,
-                        firstName: userType.local.firstName,
-                        lastName: userType.local.lastName,
-                        profilePicture: userType.local.profilePicture,
-                        homeTown: userType.local.homeTown,
-                        homeState: userType.local.homeState,
-                        myRecipes: userType.myRecipes,
-                        method: 'local',
-                    }
-                })
-            })
-        }
-        else if (userType.method === 'facebook') {
-            // debugger
-            return userState.setState({
-                _id: userType._id,
-                email: userType.facebook.email,
-                firstName: userType.facebook.firstName,
-                lastName: userType.facebook.lastName,
-                profilePicture: userType.facebook.profilePicture,
-                homeTown: userType.facebook.homeTown,
-                homeState: userType.facebook.homeState,
-                method: 'facebook'
-
-            }, () => {
-
-                // console.log(dispatch)
-                dispatch({
-                    type: "USER_INFO",
-                    payload: {
-                        _id: userType._id,
-                        email: userType.facebook.email,
-                        firstName: userType.facebook.firstName,
-                        lastName: userType.facebook.lastName,
-                        profilePicture: userType.facebook.profilePicture,
-                        homeTown: userType.facebook.homeTown,
-                        homeState: userType.facebook.homeState,
-                        myRecipes: userType.myRecipes,
-                        method: 'facebook'
-                    }
-                })
-            })
-        };
+        });
     } catch (err) {
         console.log(err)
     }

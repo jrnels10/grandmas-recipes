@@ -2,7 +2,31 @@ import axios from 'axios';
 
 const baseUrl = process.env.NODE_ENV === 'development' ? 'http://localhost:5000' : 'https://grandmasrecipes.herokuapp.com';
 
+export async function secret() {
+    return await axios.get(`${baseUrl}/users/secret`);
+}
 
+
+// ==================== CHEF API ===========================
+export function findMyChef(chefId) {
+    try {
+        return axios.post(`${baseUrl}/chefs/findmychef/${chefId}`)
+    } catch (error) {
+        return 'Could not find recipe!'
+    }
+}
+export function addNewChef(bodyFormData, email) {
+    try {
+        return axios.put(`${baseUrl}/chefs/addmychef/${email}`,
+            bodyFormData,
+            { headers: { 'Content-Type': 'multipart/form-data' } })
+    } catch (error) {
+        return 'recipe was not saved!'
+    }
+}
+
+
+// ==================== RECIPE API ===========================
 export function addNewRecipe(bodyFormData, email) {
     try {
         return axios.put(`${baseUrl}/users/addmyrecipe/${email}`,
@@ -13,15 +37,6 @@ export function addNewRecipe(bodyFormData, email) {
     }
 }
 
-export function addNewChef(bodyFormData, email) {
-    try {
-        return axios.put(`${baseUrl}/users/addmygrandma/${email}`,
-            bodyFormData,
-            { headers: { 'Content-Type': 'multipart/form-data' } })
-    } catch (error) {
-        return 'recipe was not saved!'
-    }
-}
 
 export function getmyrecipe(recipeId) {
     try {
@@ -31,10 +46,3 @@ export function getmyrecipe(recipeId) {
     }
 }
 
-export function findMyChef(chefId) {
-    try {
-        return axios.post(`${baseUrl}/users/findmychef/${chefId}`)
-    } catch (error) {
-        return 'Could not find recipe!'
-    }
-}

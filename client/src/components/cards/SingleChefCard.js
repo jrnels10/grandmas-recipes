@@ -37,8 +37,8 @@ class SingleChefCard extends Component {
                         <p className="card-author"> -{submittedBy}</p>
                         <div className="row w-100 mb-3">
                             <div className="col-8">
-                                <Link className="nav-link p-0 text-white" to={`/`} onClick={this.signInAndSave.bind(this, value)}>Sign in to save Chef </Link>}
-                                </div>
+                                <Link className="nav-link p-0 text-white" to={`/`} onClick={this.signInAndSave.bind(this, value)}>Sign in to save Chef </Link>
+                            </div>
                         </div>
                         <div className="row w-100 m-0 mb-3 mini-card-container p-0">
                             {numberOfRecipes > 0 ?
