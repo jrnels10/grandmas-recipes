@@ -12,11 +12,6 @@ export default class Home extends Component {
         open: true,
     }
     componentDidMount() {
-        debugger
-        if (this.props.value !== undefined) {
-            console.log(this.props)
-            this.props.value.dispatch({ type: 'REDIRECT-FROM', payload: { redirectedFrom: this.props.redirectedFrom, redirectTo: this.props.redirectTo.pathname } })
-        }
     }
 
     closeSign = () => {

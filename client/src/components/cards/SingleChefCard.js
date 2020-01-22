@@ -18,6 +18,11 @@ class SingleChefCard extends Component {
 
     signInAndSave = (value) => {
         value.dispatch({ type: 'SIGN_IN_AND_SAVE', payload: { save: true } })
+        value.dispatch({ type: 'REDIRECT-FROM', payload: { redirectedFrom: document.referrer, redirectTo: window.location.pathname } })
+    }
+
+    saveChef = () => {
+
     }
     render() {
         return this.state.chef ? <Consumer>
@@ -37,7 +42,8 @@ class SingleChefCard extends Component {
                         <p className="card-author"> -{submittedBy}</p>
                         <div className="row w-100 mb-3">
                             <div className="col-8">
-                                <Link className="nav-link p-0 text-white" to={`/`} onClick={this.signInAndSave.bind(this, value)}>Sign in to save Chef </Link>
+                                {!value.isAuthenticated ? <Link className="nav-link p-0 text-white" to={`/`} onClick={this.signInAndSave.bind(this, value)}>Sign in to save Chef </Link>
+                                    : <label onClick={this.saveChef.bind(this)}>Save Recipe</label>}
                             </div>
                         </div>
                         <div className="row w-100 m-0 mb-3 mini-card-container p-0">
