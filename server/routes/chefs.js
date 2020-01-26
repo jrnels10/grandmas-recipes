@@ -1,6 +1,5 @@
 const express = require('express');
 const router = require('express-promise-router')();
-const path = require('path');
 const sharp = require("sharp");
 const upload = require('./imageStorage');
 const ChefController = require('../controllers/chefs');
