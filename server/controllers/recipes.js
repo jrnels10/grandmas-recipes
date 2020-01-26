@@ -11,7 +11,7 @@ module.exports = {
         const foundMyRecipeList = await User.findOne({ [accountType]: req.params.email });
         if (req.file !== undefined) {
             const imageUploaded = await uploadToGoogleCloud(req.file);
-            picture = `https://storage.cloud.google.com/${imageUploaded[0].metadata.bucket}/${imageUploaded[0].metadata.name}`;
+            picture = `https://storage.googleapis.com/${imageUploaded[0].metadata.bucket}/${imageUploaded[0].metadata.name}`;
         }
         let foundChef = await foundMyRecipeList.myRecipes.filter(chef => {
             return chef.id === submittedRecipe.grandma_Id
@@ -34,7 +34,7 @@ module.exports = {
         let picture;
         if (req.file !== undefined) {
             const imageUploaded = await uploadToGoogleCloud(req.file);
-            picture = `https://storage.cloud.google.com/${imageUploaded[0].metadata.bucket}/${imageUploaded[0].metadata.name}`;
+            picture = `https://storage.googleapis.com/${imageUploaded[0].metadata.bucket}/${imageUploaded[0].metadata.name}`;
             console.log(picture)
         }
         const buildUpdateObject = {};
