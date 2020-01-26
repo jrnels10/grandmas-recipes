@@ -2,6 +2,7 @@ const multer = require('multer');
 const path = require('path');
 
 let storage;
+let memStorage
 if (process.env.NODE_ENV === 'production') {
     // Heroku will not accept folders that are emtpy. So either create folder after push to Heroku
     // or add a file to uploads folder so that it is not empty on Heroku push.
@@ -19,6 +20,8 @@ if (process.env.NODE_ENV === 'production') {
         }
     })
 } else {
+    memStorage = multer.memoryStorage();
+
     storage = multer.diskStorage({
         destination: function (req, file, cb) {
             if (file === undefined) {

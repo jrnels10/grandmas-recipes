@@ -16,7 +16,7 @@ module.exports = {
     },
     addMyChef: async (req, res, next) => {
         try {
-            console.log('test')
+            // console.log('test')
             let mine = req.body.myRecipes;
             let picture;
             const accountType = req.body.accountType === "google" ? 'google.email' :
