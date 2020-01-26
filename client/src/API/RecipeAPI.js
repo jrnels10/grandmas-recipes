@@ -33,7 +33,7 @@ export function addNewChef(bodyFormData, email) {
 
 export function addNewRecipe(bodyFormData, email) {
     try {
-        return axios.put(`${baseUrl}/users/addmyrecipe/${email}`,
+        return axios.put(`${baseUrl}/recipes/addmyrecipe/${email}`,
             bodyFormData,
             { headers: { 'Content-Type': 'multipart/form-data' } })
     } catch (error) {
@@ -44,7 +44,7 @@ export function addNewRecipe(bodyFormData, email) {
 
 export function getmyrecipe(recipeId) {
     try {
-        return axios.post(`${baseUrl}/users/getmyrecipe/${recipeId}`)
+        return axios.post(`${baseUrl}/recipes/getmyrecipe/${recipeId}`)
     } catch (error) {
         return 'Could not find recipe!'
     }
