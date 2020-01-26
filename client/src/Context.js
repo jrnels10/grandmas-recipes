@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { secret } from './API/UsersAPI';
+import { secret } from './API/RecipeAPI';
+import SimpleLoader from './components/loader/SimpleLoader';
+
 
 const Context = React.createContext();
 const reducer = (state, action) => {
@@ -27,6 +29,11 @@ const reducer = (state, action) => {
                 ...state,
                 errorMessage: action.payload.errorMessage
             }
+        case 'FULLSCREEN_IMAGE':
+            return {
+                ...state,
+                fullScreenImage: action.payload.fullScreenImage
+            }
         case 'USER_INFO':
             let userInfo = state;
             userInfo.user = action.payload;
@@ -34,8 +41,12 @@ const reducer = (state, action) => {
                 ...state
             }
         case 'ADDED_MY_RECIPE':
-            let recipes = state;
-            recipes.user.myRecipes = action.payload.myRecipes;
+            state.user.myRecipes = action.payload.myRecipes;
+            return {
+                ...state
+            }
+        case 'VIEW_MY_RECIPE':
+            state.recipe.selected = action.payload.selected;
             return {
                 ...state
             }
@@ -54,7 +65,12 @@ const reducer = (state, action) => {
         case 'LOADER':
             return {
                 ...state,
-                loader: action.payload.loader,
+                display: action.payload.display,
+            }
+        case 'REDIRECT-FROM':
+            return {
+                redirectedFrom: action.payload.redirectedFrom,
+                redirectTo: action.payload.redirectTo
             }
         default:
             return state;
@@ -82,25 +98,35 @@ export class Provider extends Component {
             homeState: '',
             method: '',
             _id: '',
-            myRecipes: [
-                // { id: '1', recipeName: "Recipe One", groups: [], img: "img-link", private: true },
-                // { id: '2', recipeName: "Recipe Two", groups: [], img: "img-link", private: false },
-                // { id: '3', recipeName: "Recipe Three", groups: [], img: "img-link", private: true },
-
-            ],
-            myGroups: []
+            myRecipes: [],
+            myFamilies: []
         },
-        loader: true,
+        recipe: {
+            selected: {
+                groups: ["Nelson"],
+                ingredients: [{
+                    _id: "5e10cbdee149f9307cf6508f",
+                    ingredient: "test",
+                    amount: 2,
+                    units: "tsp"
+                }],
+                _id: "5e10cbdee149f9307cf6508e",
+                recipeName: "test recipe 3",
+                cookingInstructions: "cook it",
+                img: "https://storage.cloud.google.com/grandmas-recipes/coke.jpg",
+                private: true
+            }
+        },
+        redirectedFrom: '',
+        fullScreenImage: '',
+        redirectTo: "",
+        display: false,
+        save: false,
         isAuthenticated: false,
         token: '',
         facebookappId: "2368972536494612",
-<<<<<<< HEAD
-        googleClientId: "267196671122-t1r725c4lmflnnmola4mb0s1mv7gb2cg.apps.googleusercontent.com",
-        axiosServerUrl: 'http://localhost:5000',
-=======
-        googleClientId: "267196671122-kijg7hhm848n7klsgsiqav74vebejt45.apps.googleusercontent.com",
-        axiosServerUrl: 'https://grandmasrecipes.herokuapp.com',
->>>>>>> 1fb989e7436d69e012a378793c5a9a61d27337f3
+        googleClientId: "267196671122-298u06lbfo5ho1ollta67bm337ovluj9.apps.googleusercontent.com",
+        axiosServerUrl: process.env.NODE_ENV === 'development' ? 'http://localhost:5000' : 'https://grandmasrecipes.herokuapp.com',
         dispatch: action => this.setState(state => reducer(state, action))
     }
     async componentDidMount() {
@@ -109,32 +135,30 @@ export class Provider extends Component {
         axios.defaults.headers.common['Authorization'] = jwtToken;
         if (jwtToken) {
             await secret();
-
-            this.setState({ token: jwtToken, isAuthenticated: true, loader: false })
-
+            this.setState({ token: jwtToken, isAuthenticated: true, loader: false });
         }
         else {
             // this.props.history.push('/')
-        }
-    }
+        };
+    };
+
     environment = () => {
         return process.env.NODE_ENV === "development" ? null : this.setState({
             facebookappId: "2368972536494612",
-<<<<<<< HEAD
-            googleClientId: "267196671122-t1r725c4lmflnnmola4mb0s1mv7gb2cg.apps.googleusercontent.com",
-=======
-            googleClientId: "267196671122-kijg7hhm848n7klsgsiqav74vebejt45.apps.googleusercontent.com",
->>>>>>> 1fb989e7436d69e012a378793c5a9a61d27337f3
-            axiosServerUrl: 'https://grandmasrecipes.herokuapp.com'
+            googleClientId: "267196671122-298u06lbfo5ho1ollta67bm337ovluj9.apps.googleusercontent.com",
+            axiosServerUrl: process.env.NODE_ENV === 'development' ? 'http://localhost:5000' : 'https://grandmasrecipes.herokuapp.com'
         })
-    }
+    };
+
     render() {
+
         return (
-            <Context.Provider value={this.state}>
+            < Context.Provider value={this.state} >
+                {this.state.display ? <SimpleLoader /> : null}
                 {this.props.children}
-            </Context.Provider>
+            </Context.Provider >
         )
-    }
-}
+    };
+};
 
 export const Consumer = Context.Consumer;

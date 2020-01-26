@@ -1,7 +1,8 @@
 const passport = require('passport');
 const JwtStrategy = require('passport-jwt').Strategy;
 const LocalStrategy = require('passport-local').Strategy;
-const GooglePlusTokenStrategy = require('passport-google-plus-token');
+// const GooglePlusTokenStrategy = require('passport-google-plus-token');
+const GoogleStrategy = require('passport-token-google2').Strategy
 const FacebookTokenStrategy = require('passport-facebook-token');
 const { ExtractJwt } = require('passport-jwt');
 const User = require('./models/user');
@@ -31,37 +32,50 @@ passport.use(new JwtStrategy({
     }
 }));
 
-// GOOGLE OAUTH STRATEGY
-passport.use('googleToken', new GooglePlusTokenStrategy({
+// Google OAuth Strategy
+passport.use('google-token', new GoogleStrategy({
     clientID: google.clientID,
-    clientSecret: google.clientSecret
-}, async (accessToken, refreshToken, profile, done) => {
+    clientSecret: google.clientSecret,
+    passReqToCallback: true,
+}, async (req, accessToken, refreshToken, profile, done) => {
     try {
-        const existingUser = await User.findOne({ 'google.id': profile.id })
-        console.log('existingUser', existingUser)
-        if (existingUser) {
-            return done(null, existingUser);
+        // Could get accessed in two ways:
+        // 1) When registering for the first time
+        // 2) When linking account to the existing one
+
+        // Should have full user profile over here
+        console.log('profile', profile);
+        console.log('accessToken', accessToken);
+        console.log('refreshToken', refreshToken);
+        try {
+            const existingUser = await User.findOne({ 'google.id': profile.id })
+            console.log('existingUser', existingUser)
+            if (existingUser) {
+                return done(null, existingUser);
+            }
+
+            // If new account
+
+            const newUser = new User({
+                method: 'google',
+                google: {
+                    id: profile.id,
+                    email: profile.emails[0].value,
+                    firstName: profile.name.givenName,
+                    lastName: profile.name.familyName,
+                    profilePicture: profile._json.picture
+                }
+            });
+            await newUser.save();
+            done(null, newUser);
+        }
+        catch (error) {
+            done(error, false, error.message);
         }
 
-        // If new account
-
-        const newUser = new User({
-            method: 'google',
-            google: {
-                id: profile.id,
-                email: profile.emails[0].value,
-                firstName: profile.name.givenName,
-                lastName: profile.name.familyName,
-                profilePicture: profile.photos[0].value
-            }
-        });
-        await newUser.save();
-        done(null, newUser);
-    }
-    catch (error) {
+    } catch (error) {
         done(error, false, error.message);
     }
-
 }));
 
 passport.use('facebookToken', new FacebookTokenStrategy({
@@ -97,6 +111,7 @@ passport.use(new LocalStrategy({
 }, async (email, password, done) => {
     try {
         // Find the user with the email
+        console.log('test')
         const user = await User.findOne({ 'local.email': email });
         // If not, handle it
         if (!user) {

@@ -1,0 +1,94 @@
+.signin-menu {
+  position: absolute;
+  object-fit: cover;
+  height: calc(100% - 56px);
+  width: 100%;
+  overflow: hidden;
+}
+
+.fa-arrow-circle-right {
+  color: #877785;
+}
+
+.sign-container {
+  position: absolute;
+  bottom: 0px;
+  height: 85vh;
+  padding: 0px 50px 0px 50px;
+}
+.signup-container {
+  position: absolute;
+  bottom: 0px;
+  height: 90vh;
+  width: 100%;
+  padding: 30px 50px 0px 50px;
+}
+
+.sign-input {
+  background: none;
+  border: none;
+  color: #c59894;
+}
+/* Change the white to any color ;) */
+@-webkit-keyframes autofill {
+  to {
+    color: #666;
+    background: transparent !important;
+  }
+}
+
+.sign-input:-webkit-autofill {
+  -webkit-animation-name: autofill !important;
+  -webkit-animation-fill-mode: both !important;
+}
+.sign-input:focus {
+  background-color: rgba(0, 0, 0, 0);
+  color: #ffffff;
+  outline: none;
+  border: none;
+}
+
+.sign-input::placeholder {
+  color: #8777856c;
+}
+
+.sign-input-label {
+  width: 100vw;
+  color: #f0d1bf;
+  margin: 0px;
+}
+
+.signin-button {
+  background-color: #877785;
+  outline: none;
+  border-color: #c59894;
+  height: 45px;
+  width: 100px;
+  color: #ffffff;
+}
+
+.sign-underline {
+  margin-top: 2px;
+  background: #877785;
+  width: 100%;
+}
+
+.facebook-login,
+.google-login {
+  height: 45px;
+  width: 110px;
+  border-radius: 5px !important;
+  background-color: #877785 !important;
+  border-color: #ffffff !important;
+  color: #ffffff !important;
+}
+
+.google-login div {
+  height: 42px;
+  border-radius: 5px !important;
+  background-color: #877785 !important;
+}
+
+.fa-facebook {
+  color: #29487d;
+}

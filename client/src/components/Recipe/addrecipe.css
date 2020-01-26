@@ -1,0 +1,94 @@
+.addrecipe-container {
+  padding: 0px 20px;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  /* overflow: hidden; */
+}
+
+.addrecipe-units {
+  background-color: transparent;
+  border: none;
+  color: #f0d1bf;
+}
+.addrecipe-units:focus {
+  color: black;
+}
+
+#addrecipe-addingredient {
+  width: 100%;
+  background-color: #c59894;
+  color: #ffffff;
+  border-color: #ffffff;
+}
+
+.recipe-item {
+  padding-left: 5px;
+  margin: auto;
+  text-align: center;
+  color: #f0d1bf;
+}
+
+.addrecipe-ingredient-container {
+  background: #0000004b;
+  border-radius: 10px;
+  max-height: 50vh;
+  /* overflow-y: scroll; */
+  text-align: left;
+  margin: auto;
+}
+
+#addrecipe-instructions {
+  border: 1px solid #877785;
+  width: 100%;
+  border-radius: 10px;
+  resize: none;
+  /* overflow-y: scroll; */
+  padding: 10px;
+}
+
+#addrecipe-instructions::placeholder {
+  color: #f0d1bfc2;
+}
+
+.addrecipe-custom-file-input {
+  width: 100%;
+}
+
+.addrecipe-custom-file-input::-webkit-file-upload-button {
+  visibility: hidden;
+  width: 45%;
+  height: 42px;
+}
+.addrecipe-custom-file-input::before {
+  content: "Select some files";
+  width: 40%;
+  height: 45px;
+  display: inline-block;
+  background-color: #877785;
+  color: #ffffff;
+  /* background: linear-gradient(top, #f9f9f9, #e3e3e3); */
+  border: 1px solid #c59894;
+  text-align: center;
+  border-radius: 5px;
+  padding: 5px 8px;
+  outline: none;
+  white-space: nowrap;
+  -webkit-user-select: none;
+  cursor: pointer;
+  line-height: 32px;
+}
+.addrecipe-custom-file-input:hover::before {
+  border-color: #c59894;
+}
+.addrecipe-custom-file-input:active::before {
+  background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
+}
+
+.ingredient-delete-button,
+.ingredient-edit-button {
+  border-radius: 9px;
+}
+
+.ingredient-edit-button {
+  float: left;
+}

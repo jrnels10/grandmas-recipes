@@ -1,0 +1,12 @@
+.page-wrapper-container {
+  padding-top: 56px;
+  /* padding-bottom: 60px; */
+  width: 100vw;
+  padding-bottom: 56px;
+}
+
+.page-shade {
+  /* height: 100%; */
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.35);
+}

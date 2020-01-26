@@ -1,0 +1,34 @@
+#image-home {
+  object-fit: contain;
+  height: 100%;
+  text-align: center;
+  filter: grayscale(100%);
+}
+
+.login-container {
+  position: absolute;
+  bottom: 5px;
+  width: 100%;
+  height: 20%;
+  text-align: center;
+}
+
+.signin-button {
+  background-color: #877785;
+  outline: none;
+  border-color: #ffffff;
+  height: 45px;
+  width: 100px;
+}
+
+.fade-out {
+  opacity: 1;
+}
+
+.fade-in {
+  opacity: 0;
+  -webkit-transition: opacity 0.3s ease-in-out;
+  -moz-transition: opacity 0.3s ease-in-out;
+  -ms-transition: opacity 0.3s ease-in-out;
+  -o-transition: opacity 0.3s ease-in-out;
+}

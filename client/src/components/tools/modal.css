@@ -1,0 +1,18 @@
+.ingredient-modal-true {
+  display: block;
+}
+
+.modal {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.738);
+}
+
+.modal-title {
+  font-weight: bold;
+}
+.modal-content {
+  background-color: #877785;
+}
+.ingredient-modal-false {
+  display: none;
+}

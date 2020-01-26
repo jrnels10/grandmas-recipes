@@ -1,0 +1,44 @@
+/* #root, */
+
+html {
+  height: 100%;
+  overflow-y: auto;
+  background-color: rgb(17, 21, 22);
+}
+
+body {
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url(./Images/jordane-mathieu-CkirKRvqXUs-unsplash.jpg);
+  background-repeat: no-repeat;
+  background-position: center bottom;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+/* #877785
+#F7C9B6
+#F0D1BF
+#C59894
+#E85A4F */
+
+#app-div {
+  overflow: hidden;
+  position: static;
+}
+
+.signin-menu,
+.sign-container {
+  /* height: calc(100% - 66px) !important; */
+}
+
+/* #body-container{
+} */
+@media screen and (min-width: 600px) {
+  #app-div {
+    /* background: url(./Images/Betty-White.jpg); */
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    padding-top: 56px !important;
+  }
+}

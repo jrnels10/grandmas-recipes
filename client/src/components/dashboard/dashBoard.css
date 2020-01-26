@@ -1,0 +1,19 @@
+.dashboard-container > .row {
+  height: 33.33%;
+  padding: 0px;
+}
+.dashboard-container {
+  height: calc(100vh - 116px);
+}
+.dashboard-buttons-container {
+  padding: 10%;
+}
+
+.dashboard-button {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.dashboard-recipes {
+  height: 100%;
+}
