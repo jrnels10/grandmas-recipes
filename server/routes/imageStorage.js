@@ -1,6 +1,4 @@
 const multer = require('multer');
-const path = require('path');
-
 let storage;
 let memStorage
 if (process.env.NODE_ENV === 'production') {
