@@ -22,9 +22,10 @@ signToken = user => {
 
 module.exports = {
     signUp: async (req, res, next) => {
+        console.log('====================signUp controller====================')
         // console.log(req.file)
         const { email, password, firstName, lastName, profilePicture } = req.value.body;
-        console.log(req.value.body)
+        // console.log(req.value.body)
         // Check if user has the same email
         const foundUser = await User.findOne({ 'local.email': email });
         // console.log('foundUser', foundUser)
@@ -51,12 +52,17 @@ module.exports = {
         const token = await signToken(newUser);
 
         res.status(200).json({ token: token });
+        console.log('====================signUp controller completed====================')
+
     },
     signIn: async (req, res, next) => {
-        console.log('sign in', req.user)
+        console.log('====================signIn controller====================')
+
         //generate token
         const token = await signToken(req.user);
         res.status(200).json({ token });
+        console.log('====================signIn controller completed====================')
+
     },
 
     googleOAuth: async (req, res, next) => {

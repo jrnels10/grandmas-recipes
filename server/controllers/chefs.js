@@ -17,6 +17,8 @@ module.exports = {
     addMyChef: async (req, res, next) => {
         try {
             // console.log('test')
+            console.log('====================add new chef controller====================')
+
             let mine = req.body.myRecipes;
             let picture;
             const accountType = req.body.accountType === "google" ? 'google.email' :
@@ -26,6 +28,8 @@ module.exports = {
                 const imageUploaded = await uploadToGoogleCloud(req.file);
                 // console.log(imageUploaded)
                 picture = `https://storage.googleapis.com/${imageUploaded[0].metadata.bucket}/${imageUploaded[0].metadata.name}`;
+                console.log('====================chef picture uploaded controller====================')
+
             }
 
             let myRecipes = foundGrandmaList.myRecipes;
@@ -36,6 +40,8 @@ module.exports = {
                 User.findOne({ [accountType]: req.params.email }).then(function (item) {
                     res.send(item)
                 });
+                console.log('====================add new completed controller====================')
+
             }).catch(error => {
                 res.send(404)
                 return error

@@ -35,7 +35,7 @@ module.exports = {
         if (req.file !== undefined) {
             const imageUploaded = await uploadToGoogleCloud(req.file);
             picture = `https://storage.googleapis.com/${imageUploaded[0].metadata.bucket}/${imageUploaded[0].metadata.name}`;
-            console.log(picture)
+            // console.log(picture)
         }
         const buildUpdateObject = {};
         for (var key in changeRequest) {

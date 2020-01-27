@@ -44,12 +44,12 @@ passport.use('google-token', new GoogleStrategy({
         // 2) When linking account to the existing one
 
         // Should have full user profile over here
-        console.log('profile', profile);
-        console.log('accessToken', accessToken);
-        console.log('refreshToken', refreshToken);
+        // console.log('profile', profile);
+        // console.log('accessToken', accessToken);
+        // console.log('refreshToken', refreshToken);
         try {
             const existingUser = await User.findOne({ 'google.id': profile.id })
-            console.log('existingUser', existingUser)
+            // console.log('existingUser', existingUser)
             if (existingUser) {
                 return done(null, existingUser);
             }
