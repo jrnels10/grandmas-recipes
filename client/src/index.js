@@ -9,7 +9,7 @@ import SignIn from './components/sign/SignIn';
 import { Provider } from './Context';
 import authGuard from './components/HOC/authGuard';
 import DashBoard from './components/dashboard/Dashboard';
-import AddRecipe from './components/recipe';
+import AddRecipe from './components/recipe/AddRecipe';
 import RecipeCard from './components/cards/RecipeCard';
 import CardContainer from './components/cards/CardContainer';
 import AddChef from './components/cards/AddChef';
