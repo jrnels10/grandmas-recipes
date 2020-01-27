@@ -53,6 +53,7 @@ export default class SignUp extends Component {
         } catch (err) {
             console.log(err)
             this.setState({ errorMessage: 'Email already in use' })
+            dispatch({ type: "LOADER", payload: { display: false } });
             dispatch({
                 type: "AUTH_ERROR",
                 payload: {
@@ -81,6 +82,7 @@ export default class SignUp extends Component {
             return redirectTo !== '' ? await this.props.history.push(redirectTo) :
                 await this.props.history.push('/dashboard');
         } catch (err) {
+            dispatch({ type: "LOADER", payload: { display: false } });
             console.log(err)
         }
     }
@@ -101,6 +103,7 @@ export default class SignUp extends Component {
 
             this.props.history.push('/dashboard');
         } catch (err) {
+            dispatch({ type: "LOADER", payload: { display: false } });
             console.log(err)
         }
     }

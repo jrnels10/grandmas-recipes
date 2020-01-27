@@ -28,7 +28,8 @@ export default class SignIn extends Component {
         // Step 4) Save the jwtToken into our localStorage
         try {
             dispatch({ type: "LOADER", payload: { display: true } });
-            const res = await axios.post(`${axiosServerUrl}/users/signin`, { email: this.state.email, password: this.state.password })
+            debugger
+            const res = await axios.post(`${axiosServerUrl}/users/signin`, { email: this.state.email, password: this.state.password });
             dispatch({
                 type: "SIGN_IN",
                 payload: {
@@ -46,7 +47,9 @@ export default class SignIn extends Component {
                 await this.props.history.push('/dashboard');
         } catch (err) {
             console.log(err)
-            this.setState({ errorMessage: 'Email or password incorrect' })
+            this.setState({ errorMessage: 'Email or password incorrect' });
+            dispatch({ type: "LOADER", payload: { display: false } });
+
             dispatch({
                 type: "AUTH_ERROR",
                 payload: {
@@ -77,6 +80,9 @@ export default class SignIn extends Component {
             return redirectTo !== '' ? this.props.history.push(redirectTo) :
                 await this.props.history.push('/dashboard');
         } catch (err) {
+            dispatch({ type: "LOADER", payload: { display: false } });
+            this.setState({ errorMessage: 'Email or password incorrect' });
+
             console.log(err)
         }
     }
