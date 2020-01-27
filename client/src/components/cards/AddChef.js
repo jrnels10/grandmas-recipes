@@ -3,7 +3,7 @@ import PageWrapper from '../tools/PageWrapper';
 import { addNewChef } from '../../API/RecipeAPI';
 import { withRouter } from 'react-router-dom';
 
-import './../recipe/addrecipe.css';
+// import './../recipe/addrecipe.css';
 
 class AddChef extends Component {
     constructor(props) {
