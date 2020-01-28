@@ -15,23 +15,17 @@ module.exports = {
 
             const bucket = await storage.bucket('grandmas-recipes')
             const file = bucket.file(gcsname);
-            let status = 'hello'
-            fs.createReadStream(`./server/uploads/_resized_${req.file.originalname}`)
-                .pipe(file.createWriteStream({
+            let status = 'hello';
+            const myStream = fs.createReadStream(`./server/uploads/_resized_${req.file.originalname}`)
+            myStream.pipe(file.createWriteStream({
+                metadata: {
+                    contentType: 'image/jpeg',
                     metadata: {
-                        contentType: 'image/jpeg',
-                        metadata: {
-                            custom: 'metadata'
-                        }
+                        custom: 'metadata'
                     }
-                }))
-                .on('error', function (err) {
-                    return status = err
-                })
-                .on('finish', function () {
-                    req.file.cloudStorageObject = gcsname;
-                    return status
-                });
+                }
+            }));
+            return await streamToPromise(myStream);
         } catch (err) {
             console.error('ERROR:', err);
         };
@@ -42,3 +36,10 @@ module.exports = {
         // return myBucket.deleteFiles(name?:req);
     }
 };
+
+async function streamToPromise(stream) {
+    return new Promise(function (resolve, reject) {
+        stream.on("end", () => resolve('finished'));
+        stream.on("error", reject);
+    })
+}
