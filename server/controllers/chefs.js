@@ -19,7 +19,7 @@ module.exports = {
         try {
             // console.log('test')
             console.log('====================add new chef controller====================')
-            console.log(req.file)
+            // console.log(req.file)
 
             let mine = req.body.myRecipes;
             let picture;

@@ -10,8 +10,9 @@ module.exports = {
             req.body.accountType === "facebook" ? 'facebook.email' : 'local.email';
         const foundMyRecipeList = await User.findOne({ [accountType]: req.params.email });
         if (req.file !== undefined) {
-            const imageUploaded = await uploadToGoogleCloud(req.file);
-            picture = `https://storage.googleapis.com/${imageUploaded[0].metadata.bucket}/${imageUploaded[0].metadata.name}`;
+            await uploadToGoogleCloud({ file: req.file });
+            picture = `https://storage.googleapis.com/grandmas-recipes/_resized_${req.file.originalname}`;
+            console.log('====================chef picture uploaded controller====================');
         }
         let foundChef = await foundMyRecipeList.myRecipes.filter(chef => {
             return chef.id === submittedRecipe.grandma_Id
