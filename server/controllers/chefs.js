@@ -1,8 +1,6 @@
 const User = require('../models/user');
 const { uploadToGoogleCloud, deleteImageFromGoogleCloud } = require('../cloud/googleCloud');
-const sharp = require('sharp');
-const path = require('path')
-const fs = require('fs');
+
 
 module.exports = {
     findMyChef: async (req, res, next) => {
@@ -17,18 +15,12 @@ module.exports = {
         }
     },
     addMyChef: async (req, res, next) => {
-        const { filename: filename } = req.file
+
         try {
             // console.log('test')
             console.log('====================add new chef controller====================')
             console.log(req.file)
-            await sharp(req.file.path)
-                .resize(500)
-                .jpeg({ quality: 100 })
-                .toFile(
-                    path.resolve(req.file.destination, `_resized_${filename}`)
-                )
-            fs.unlinkSync(req.file.path)
+
             let mine = req.body.myRecipes;
             let picture;
             const accountType = req.body.accountType === "google" ? 'google.email' :

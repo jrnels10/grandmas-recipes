@@ -33,8 +33,9 @@ module.exports = {
         const changeRequest = JSON.parse(req.body.myRecipes);
         let picture;
         if (req.file !== undefined) {
-            const imageUploaded = await uploadToGoogleCloud(req.file);
-            picture = `https://storage.googleapis.com/${imageUploaded[0].metadata.bucket}/${imageUploaded[0].metadata.name}`;
+            await uploadToGoogleCloud({ file: req.file });
+
+            picture = `https://storage.googleapis.com/grandmas-recipes/_resized_${req.file.originalname}`;
             // console.log(picture)
         }
         const buildUpdateObject = {};
