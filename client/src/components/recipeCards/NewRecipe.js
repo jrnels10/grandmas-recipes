@@ -53,6 +53,10 @@ class AddRecipe extends Component {
     }
 
     upload = async (e) => {
+        const { dispatch } = this.props.data;
+
+        dispatch({ type: "LOADER", payload: { display: true } });
+
         // const test = {
         //     grandma_Id: '5e0e8b786a6570167c5c2770',
         //     recipeName: 'Jacobs secret recipe',
@@ -83,10 +87,12 @@ class AddRecipe extends Component {
         const res = await addNewRecipe(bodyFormData, this.props.data.user.email);
 
         if (res.status === 200) {
-            const { dispatch } = this.props.data;
+            dispatch({ type: "LOADER", payload: { display: false } });
             dispatch({ type: 'ADDED_MY_RECIPE', payload: { myRecipes: res.data.myRecipes } })
             this.setState({ updated: true });
-            this.props.history.push('/dashboard');
+            return this.props.history.push('/familychefs');
+        } else {
+            return dispatch({ type: "LOADER", payload: { display: false } });
         }
     }
 

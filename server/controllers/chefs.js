@@ -29,7 +29,7 @@ module.exports = {
             if (req.file !== undefined && accountType !== undefined) {
                 await uploadToGoogleCloud({ file: req.file });
                 picture = `https://storage.googleapis.com/grandmas-recipes/_resized_${req.file.originalname}`;
-                console.log('====================chef picture uploaded controller====================')
+                console.log('====================chef picture uploaded ====================')
                 // fs.unlinkSync(`_resized_${req.file.path}`)
             }
 
@@ -41,7 +41,7 @@ module.exports = {
                 User.findOne({ [accountType]: req.params.email }).then(function (item) {
                     res.send(item)
                 });
-                console.log('====================add new completed controller====================')
+                console.log('====================add new chef completed ====================')
 
             }).catch(error => {
                 res.send(404)

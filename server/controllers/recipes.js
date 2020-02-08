@@ -4,6 +4,7 @@ const { uploadToGoogleCloud, deleteImageFromGoogleCloud } = require('./../cloud/
 
 module.exports = {
     addMyRecipe: async (req, res, next) => {
+        console.log('test')
         let submittedRecipe = JSON.parse(req.body.myRecipes);
         let picture;
         const accountType = req.body.accountType === "google" ? 'google.email' :
@@ -12,7 +13,7 @@ module.exports = {
         if (req.file !== undefined) {
             await uploadToGoogleCloud({ file: req.file });
             picture = `https://storage.googleapis.com/grandmas-recipes/_resized_${req.file.originalname}`;
-            console.log('====================chef picture uploaded controller====================');
+            console.log('====================recipe picture uploaded to google cloud====================');
         }
         let foundChef = await foundMyRecipeList.myRecipes.filter(chef => {
             return chef.id === submittedRecipe.grandma_Id
@@ -35,7 +36,6 @@ module.exports = {
         let picture;
         if (req.file !== undefined) {
             await uploadToGoogleCloud({ file: req.file });
-
             picture = `https://storage.googleapis.com/grandmas-recipes/_resized_${req.file.originalname}`;
             // console.log(picture)
         }
@@ -59,8 +59,24 @@ module.exports = {
                 return error
             });
     },
+    deleteMyRecipe: async (req, res, next) => {
+        console.log(req.params.id)
+        let UserWithRecipe = await User.findOneAndUpdate(
+            { "myRecipes._id.chefRecipes._id": `${req.params.id}` },
+            { $pull: { "chefRecipes.$._id": { _id: `${req.params.id}` } } }
+        );
+
+        // const foundMyRecipeList = await User.findOne({ "_id ": paramsArray[0] });
+        console.log(UserWithRecipe)
+        //
+        // console.log(foundRecipe)
+        // if (req.file) {
+        //     const imageDeleted = await deleteImageFromGoogleCloud(req.file);
+        //     console.log(imageDeleted)
+        // }
+    },
     getMyRecipe: async (req, res, next) => {
-        // https://www.youtube.com/watch?v=Kk6Er0c7srU
+        // https://www.youtube.com/watch?v=Kk6Er0c7srU 
         // User.countDocuments({ "method": "google" }).then(resp => {
         //     console.log(resp)
 

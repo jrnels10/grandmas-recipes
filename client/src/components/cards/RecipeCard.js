@@ -40,7 +40,7 @@ class RecipeCard extends Component {
                         <div className="card-body recipe-card-body">
                             {ingredients.length > 0 ? ingredients.map((item, idx) => {
                                 return <div className="ingredients-check-container" key={idx}>
-                                    {this.state.checked.indexOf(item.ingredient) > -1 ? <svg className="bi bi-check check-mark" width="30px" height="30px" viewBox="0 0 20 20" fill="#877785;" xmlns="http://www.w3.org/2000/svg">
+                                    {this.state.checked.indexOf(item.ingredient) > -1 ? <svg className="bi bi-check check-mark" width="30px" height="30px" viewBox="0 0 20 20" fill="#877785" xmlns="http://www.w3.org/2000/svg">
                                         <path fillRule="evenodd" d="M15.854 5.646a.5.5 0 010 .708l-7 7a.5.5 0 01-.708 0l-3.5-3.5a.5.5 0 11.708-.708L8.5 12.293l6.646-6.647a.5.5 0 01.708 0z" clipRule="evenodd" />
                                     </svg> : null}
                                     <div className='custom-checkbox-container' id={item.ingredient} name={idx} onClick={this.checkBoxSelected} />

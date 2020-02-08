@@ -85,7 +85,7 @@ class Navbar extends Component {
                                     {this.state.show ?
                                         <React.Fragment>
                                             <li className="nav-item">
-                                                <Link className="nav-link" onClick={this.redirect} to="/myrecipes">My recipes</Link>
+                                                <Link className="nav-link" onClick={this.redirect} to="/familychefs">Family Chefs</Link>
                                             </li>
                                             <li className="nav-item">
                                                 <Link className="nav-link" onClick={this.redirect} to="/dashboard">Profile</Link>
