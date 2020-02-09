@@ -84,83 +84,9 @@ const userSchema = new Schema({
             type: String
         }
     },
-    myRecipes: [{
-        chefImage: {
-            type: String
-        },
-        chefName: {
-            type: String
-        },
-        dateSubmitted: {
-            type: Date
-        },
-        chefBio: {
-            type: String
-        },
-        submittedBy: {
-            type: String
-        },
-        familyName: {
-            type: String
-        },
-        chefRecipes: [{
-            recipeName: {
-                type: String
-            },
-            dateSubmitted: {
-                type: Date
-            },
-            recipeDescription: {
-                type: String
-            },
-            submittedBy: {
-                type: String
-            },
-            img: {
-                type: String
-            },
-            ingredients: [{
-                ingredient: {
-                    type: String
-                },
-                amount: {
-                    type: Number
-                },
-                units: {
-                    type: String
-                }
-            }],
-            cookingInstructions: {
-                type: String
-            },
-            private: Boolean
-        }]
-    }],
-    myFamilies: [{
-        familyName: {
-            type: String
-        },
-        founder: {
-            type: String
-        },
-        familyChefs: [{
-            chefName: {
-                type: String
-            },
-            chefId: {
-                type: String
-            }
-        }],
-        familyMembers: [{
-            memberName: {
-                type: String
-            },
-            memberId: {
-                type: String
-            }
-        }]
-    }]
-    // index: { unique: true }
+    myChefs: [
+        { type: String }
+    ]
 });
 
 // userSchema.plugin(uniqueValidator)

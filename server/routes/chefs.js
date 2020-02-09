@@ -8,6 +8,12 @@ const ChefController = require('../controllers/chefs');
 router.route('/addmychef/:email')
     .put(upload.single('picture'), ChefController.addMyChef);
 
+router.route('/updatemychef/:id')
+    .put(upload.single('picture'), ChefController.updateMyChef);
+
+router.route('/deletemychef/:id')
+    .delete(ChefController.deleteMyChef);
+
 router.route('/findmychef/:id')
     .post(ChefController.findMyChef);
 

@@ -7,9 +7,17 @@ const chefSchema = new Schema({
     chefOwner: {
         type: String
     },
+    chefOwnerId: {
+        type: String
+    },
     chefImage: {
         type: String
     },
+    chefOldImages: [
+        {
+            type: String
+        }
+    ],
     chefName: {
         type: String
     },
@@ -20,6 +28,9 @@ const chefSchema = new Schema({
         type: String
     },
     submittedBy: {
+        type: String
+    },
+    updatedBy: {
         type: String
     },
     familyName: {
@@ -86,5 +97,5 @@ const chefSchema = new Schema({
 });
 
 
-const Chef = process.env.NODE_ENV === "production" ? mongoose.model('user', chefSchema) : mongoose.model('dev', chefSchema);
+const Chef = process.env.NODE_ENV === "production" ? mongoose.model('chef', chefSchema) : mongoose.model('devChef', chefSchema);
 module.exports = Chef;

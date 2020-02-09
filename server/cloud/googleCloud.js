@@ -39,14 +39,15 @@ module.exports = {
                     }
                 }
             }));
-            return await streamToPromise(myStream);
+            return await streamToPromise(myStream, req.file.path);
         } catch (err) {
             console.error('ERROR:', err);
         };
     },
     deleteImageFromGoogleCloud: async (req, res, next) => {
         console.log("===========delete from google cloud initiated======================")
-        const file = await getAllBuckets(`_resized_${req.file.originalname}`);
+        console.log(req)
+        const file = await getAllBuckets(`${req}`);
         return file.delete(function (err, res) {
             if (err) {
                 console.log(err)
@@ -59,9 +60,10 @@ module.exports = {
     }
 };
 
-async function streamToPromise(stream) {
+async function streamToPromise(stream, imagePath) {
     return new Promise(function (resolve, reject) {
         stream.on("end", () => resolve('finished'));
         stream.on("error", reject);
+        // fs.unlinkSync(imagePath)
     })
 }
