@@ -1,5 +1,6 @@
 const JWT = require('jsonwebtoken');
 const User = require('./../models/user');
+const Chef = require('../models/chef');
 const { uploadToGoogleCloud, deleteImageFromGoogleCloud } = require('./../cloud/googleCloud');
 // import { uploadToGoogleCloud } from './../cloud/googleCloud';
 const { JWT_secret } = process.env.NODE_ENV === "production" ? require('./../prodKeys') : require('./../config/keys');
@@ -18,6 +19,21 @@ signToken = user => {
         exp: new Date().setDate(new Date().getDate() + 1)
     }, JWT_secret);
 
+}
+
+async function returnUserWithChefsAndRecipes(user) {
+    const allChefsThatBelongToUser = await Promise.all(
+        user.myChefs.map(async (chefId) => {
+            const chef = await Chef.find({ _id: chefId });
+            return chef[0];
+        })
+    );
+    return {
+        user,
+        method: user.method,
+        chefs: allChefsThatBelongToUser,
+        recipes: []
+    }
 }
 
 module.exports = {
@@ -86,7 +102,8 @@ module.exports = {
         }
     },
     secret: async (req, res, next) => {
-        res.json({ secret: 'resource', profile: req.user })
+        const user = await returnUserWithChefsAndRecipes(req.user);
+        res.json({ secret: 'resource', profile: user })
     },
     getAll: async (req, res, next) => {
         return User.find().then(user => {

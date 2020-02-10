@@ -98,8 +98,8 @@ export class Provider extends Component {
             homeState: '',
             method: '',
             _id: '',
-            myRecipes: [],
-            myFamilies: []
+            myChefs: [],
+            recipes: []
         },
         recipe: {
             selected: {

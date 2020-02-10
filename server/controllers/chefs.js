@@ -42,7 +42,10 @@ async function returnUserWithChefsAndRecipes(user) {
         })
     );
     return {
-        user: user, chefs: allChefsThatBelongToUser, recipes: []
+        user,
+        method: user.method,
+        chefs: allChefsThatBelongToUser,
+        recipes: []
     }
 }
 
