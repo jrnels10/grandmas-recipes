@@ -8,8 +8,9 @@ const upload = require('./imageStorage');
 const { validateBody, schema } = require('../helpers/routeHelpers');
 const RecipeController = require('../controllers/recipes');
 
-router.route('/addmyrecipe/:email')
-    .put(upload.single('picture'), RecipeController.addMyRecipe);
+// user id
+router.route('/addmyrecipe/:id')
+    .post(upload.single('picture'), RecipeController.addMyRecipe);
 
 router.route('/deletemyrecipe/:id')
     .delete(RecipeController.deleteMyRecipe);

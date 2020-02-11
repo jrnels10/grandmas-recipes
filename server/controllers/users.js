@@ -1,6 +1,7 @@
 const JWT = require('jsonwebtoken');
 const User = require('./../models/user');
 const Chef = require('../models/chef');
+const Recipe = require('../models/recipe');
 const { uploadToGoogleCloud, deleteImageFromGoogleCloud } = require('./../cloud/googleCloud');
 // import { uploadToGoogleCloud } from './../cloud/googleCloud';
 const { JWT_secret } = process.env.NODE_ENV === "production" ? require('./../prodKeys') : require('./../config/keys');
@@ -25,14 +26,19 @@ async function returnUserWithChefsAndRecipes(user) {
     const allChefsThatBelongToUser = await Promise.all(
         user.myChefs.map(async (chefId) => {
             const chef = await Chef.find({ _id: chefId });
-            return chef[0];
+            const allRecipesThatBelongToChef = await Promise.all(
+                chef[0].chefRecipes.map(async (recipeId) => {
+                    const recipe = await Recipe.find({ _id: recipeId });
+                    return recipe[0];
+                })
+            );
+            return { chef: chef[0], chefRecipes: allRecipesThatBelongToChef };
         })
     );
     return {
         user,
         method: user.method,
-        chefs: allChefsThatBelongToUser,
-        recipes: []
+        chefs: allChefsThatBelongToUser
     }
 }
 

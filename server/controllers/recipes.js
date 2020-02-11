@@ -1,79 +1,105 @@
 
 const User = require('./../models/user');
-const { uploadToGoogleCloud, deleteImageFromGoogleCloud } = require('./../cloud/googleCloud');
+const Chef = require('./../models/chef');
+const Recipe = require('./../models/recipe');
+const { uploadImages, returnUserWithChefsAndRecipes } = require('./generalFunctions');
+
+const { deleteImageFromGoogleCloud } = require('./../cloud/googleCloud');
+
 
 module.exports = {
     addMyRecipe: async (req, res, next) => {
-        console.log('test')
-        let submittedRecipe = JSON.parse(req.body.myRecipes);
-        let picture;
-        const accountType = req.body.accountType === "google" ? 'google.email' :
-            req.body.accountType === "facebook" ? 'facebook.email' : 'local.email';
-        const foundMyRecipeList = await User.findOne({ [accountType]: req.params.email });
-        if (req.file !== undefined) {
-            await uploadToGoogleCloud({ file: req.file });
-            picture = `https://storage.googleapis.com/grandmas-recipes/_resized_${req.file.originalname}`;
-            console.log('====================recipe picture uploaded to google cloud====================');
+        console.log('====================recipe adding initiated ====================')
+        const { recipeDescription, recipeName, cookingInstructions, ingredients, chefId, groups } = JSON.parse(req.body.myRecipes);
+        let recipeImage = '';
+        const foundUser = await User.findOne({ '_id': req.params.id });
+        const foundChef = await Chef.findOne({ '_id': chefId });
+        if (req.file) {
+            recipeImage = await uploadImages(req);
         }
-        let foundChef = await foundMyRecipeList.myRecipes.filter(chef => {
-            return chef.id === submittedRecipe.grandma_Id
-        })
-        foundChef[0].chefRecipes.push(Object.assign(submittedRecipe, { img: picture, private: true }));
-        return await User.findOneAndUpdate({ [accountType]: req.params.email }, {
-            "myRecipes": foundMyRecipeList.myRecipes
-        }).then((profile) => {
-            User.findOne({ [accountType]: req.params.email }).then(function (item) {
-                res.send(item)
-            });
+        const newRecipe = new Recipe({
+            recipeName: recipeName,
+            recipeDescription: recipeDescription,
+            chefId: chefId,
+            recipeOwnerId: req.params.id,
+            groups: groups,
+            dateSubmitted: new Date(),
+            recipeImage: recipeImage,
+            submittedBy: req.params.id,
+            cookingInstructions: cookingInstructions,
+            ingredients: ingredients,
+            private: true
+        });
+        const savedRecipe = await newRecipe.save();
+        await Chef.findOneAndUpdate({ '_id': chefId }, {
+            "chefRecipes": [...foundChef.chefRecipes, savedRecipe._id]
         }).catch(error => {
-            res.send(404)
+            console.log(error)
             return error
         });
+        res.send(savedRecipe);
     },
     updateMyRecipe: async (req, res, next) => {
         // https://stackoverflow.com/questions/15691224/mongoose-update-values-in-array-of-objects
-        const changeRequest = JSON.parse(req.body.myRecipes);
-        let picture;
-        if (req.file !== undefined) {
-            await uploadToGoogleCloud({ file: req.file });
-            picture = `https://storage.googleapis.com/grandmas-recipes/_resized_${req.file.originalname}`;
-            // console.log(picture)
-        }
-        const buildUpdateObject = {};
-        for (var key in changeRequest) {
-            key == 'recipeName' ? Object.assign(buildUpdateObject, { 'myRecipes.$.recipeName': changeRequest[key] }) :
-                key == 'families' ? Object.assign(buildUpdateObject, { 'myRecipes.$.families': changeRequest[key] }) :
-                    key == 'chefName' ? Object.assign(buildUpdateObject, { 'myRecipes.$.chefName': changeRequest[key] }) :
-                        key == 'chefBio' ? Object.assign(buildUpdateObject, { 'myRecipes.$.chefBio': changeRequest[key] }) :
-                            key == 'cookingInstructions' ? Object.assign(buildUpdateObject, { 'myRecipes.$.cookingInstructions': changeRequest[key] }) :
-                                key == 'img' ? Object.assign(buildUpdateObject, { 'myRecipes.$.img': picture }) :
-                                    key == 'chefImage' ? Object.assign(buildUpdateObject, { 'myRecipes.$.chefimage': chefImage }) :
-                                        key == 'private' ? Object.assign(buildUpdateObject, { 'myRecipes.$.private': changeRequest[key] }) :
-                                            key == 'ingredients' ? Object.assign(buildUpdateObject, { 'myRecipes.$.ingredients': changeRequest[key] }) : null;
-        };
-        await User.updateOne({ 'myRecipes._id': req.params.id },
-            { $set: buildUpdateObject }).then(response => {
-                res.send('Updated!')
-            }).catch(error => {
-                res.sendStatus(404)
+        const userSubmittedUpdatesToRecipe = JSON.parse(req.body.myRecipe);
+        const recipeFound = await Recipe.findOne({ '_id': userSubmittedUpdatesToRecipe.recipeId });
+        if (recipeFound) {
+            const buildUpdateObject = { updatedBy: req.params.id };
+            if (req.file !== undefined) {
+                const newRecipeImage = await uploadImages(req);
+                let recipeOldImages = [];
+                if (recipeFound.recipeOldImages.length > 1) {
+                    recipeOldImages = recipeFound.recipeOldImages.filter((oldestImage, idx) => {
+                        if (idx > 0) {
+                            try {
+                                deleteImageFromGoogleCloud(oldestImage.substring(oldestImage.lastIndexOf("/") + 1, oldestImage.length))
+                            } catch (error) {
+                                console.log(error)
+                            }
+                        }
+                        return idx === 0
+                    })
+                } else {
+                    recipeOldImages = recipeFound.recipeOldImages;
+                }
+                Object.assign(buildUpdateObject, { recipeOldImages: [...recipeOldImages, recipeFound.recipeImage] }, { recipeImage: newRecipeImage });
+            }
+            for (var key in userSubmittedUpdatesToRecipe) {
+                Object.assign(buildUpdateObject, { [key]: userSubmittedUpdatesToRecipe[key] });
+            };
+            await Recipe.updateOne({ '_id': userSubmittedUpdatesToRecipe.recipeId }, { $set: buildUpdateObject }).catch(error => {
+                console.log(error)
                 return error
             });
+            console.log('====================update recipe completed ====================')
+            const foundRecipe = await Recipe.findOne({ '_id': userSubmittedUpdatesToRecipe.recipeId })
+            res.send(foundRecipe);
+        }
     },
     deleteMyRecipe: async (req, res, next) => {
-        console.log(req.params.id)
-        let UserWithRecipe = await User.findOneAndUpdate(
-            { "myRecipes._id.chefRecipes._id": `${req.params.id}` },
-            { $pull: { "chefRecipes.$._id": { _id: `${req.params.id}` } } }
-        );
+        try {
+            console.log("============== delete my chef initiated ==================");
+            const foundChef = await Chef.findOne({ '_id': req.body.chefId });
+            const foundUser = await User.findOne({ '_id': req.params.id });
+            const foundRecipe = await Recipe.findOne({ '_id': req.body.recipeId });
 
-        // const foundMyRecipeList = await User.findOne({ "_id ": paramsArray[0] });
-        console.log(UserWithRecipe)
-        //
-        // console.log(foundRecipe)
-        // if (req.file) {
-        //     const imageDeleted = await deleteImageFromGoogleCloud(req.file);
-        //     console.log(imageDeleted)
-        // }
+            if (foundRecipe.recipeOwnerId == foundUser._id) {
+                console.log('recipe owner and user match');
+                Recipe.deleteOne({ '_id': req.body.recipeId });
+                await Chef.findOneAndUpdate({ '_id': req.body.chefId }, {
+                    "chefRecipes": foundChef.chefRecipes.filter(recipe => { recipe !== req.body.recipeId })
+                });
+                console.log('====================delete my recipe completed ====================');
+                const userResponse = await returnUserWithChefsAndRecipes(foundUser);
+                res.send(userResponse);
+            }
+            else {
+                res.status(403).send("You are not the owner of this recipe. Only the recipe owner can delete this record.");
+            };
+        } catch (error) {
+            console.log('++++++++++++++ Error in deleteMyRecipe +++++++++++++++');
+            console.log(error);
+        }
     },
     getMyRecipe: async (req, res, next) => {
         // https://www.youtube.com/watch?v=Kk6Er0c7srU 
@@ -81,10 +107,7 @@ module.exports = {
         //     console.log(resp)
 
         // })
-        const recipeOwner = await User.findOne({ "myRecipes._id": req.params.id })
-        const foundRecipe = await recipeOwner.myRecipes.filter(item => {
-            return item._id == req.params.id
-        });
-        await res.send(foundRecipe);
+        const recipeFound = await Recipe.findOne({ "_id": req.params.id });
+        await res.send(recipeFound);
     }
 }

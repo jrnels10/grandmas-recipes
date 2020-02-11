@@ -37,36 +37,7 @@ const chefSchema = new Schema({
         type: String
     },
     chefRecipes: [{
-        recipeName: {
-            type: String
-        },
-        dateSubmitted: {
-            type: Date
-        },
-        recipeDescription: {
-            type: String
-        },
-        submittedBy: {
-            type: String
-        },
-        img: {
-            type: String
-        },
-        ingredients: [{
-            ingredient: {
-                type: String
-            },
-            amount: {
-                type: Number
-            },
-            units: {
-                type: String
-            }
-        }],
-        cookingInstructions: {
-            type: String
-        },
-        private: Boolean
+        type: String
     }]
 
     // myFamilies: [{

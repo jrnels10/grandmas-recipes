@@ -1,53 +1,20 @@
 const User = require('../models/user');
 const Chef = require('../models/chef');
+const { uploadImages, returnUserWithChefsAndRecipes } = require('./generalFunctions');
 const { uploadToGoogleCloud, deleteImageFromGoogleCloud } = require('../cloud/googleCloud');
 
 
 async function updateUserWithChef(req, user, chef) {
-    console.log(chef)
-    const accountType = req.body.accountType === "google" ? 'google.email' :
-        req.body.accountType === "facebook" ? 'facebook.email' : 'local.email';
-    return await User.findOneAndUpdate({ [accountType]: req.params.email }, {
+    console.log(req.params)
+    return await User.findOneAndUpdate({ '_id': req.params.id }, {
         "myChefs": [...user.myChefs, chef._id]
     }).then((profile) => {
         console.log('====================add new chef to user completed ====================')
-        return User.findOne({ [accountType]: req.params.email })
-
+        return User.findOne({ '_id': req.params.id })
     }).catch(error => {
         return 404
     });
 };
-
-async function findUser(req) {
-    const accountType = req.body.accountType === "google" ? 'google.email' :
-        req.body.accountType === "facebook" ? 'facebook.email' : 'local.email';
-    return await User.findOne({ [accountType]: req.params.email });
-};
-
-async function uploadImages(req) {
-    if (req.file !== undefined) {
-        await uploadToGoogleCloud({ file: req.file });
-        console.log('====================chef picture uploaded ====================')
-        return `https://storage.googleapis.com/grandmas-recipes/_resized_${req.file.originalname}`;
-        // fs.unlinkSync(`_resized_${req.file.path}`)
-    }
-};
-
-
-async function returnUserWithChefsAndRecipes(user) {
-    const allChefsThatBelongToUser = await Promise.all(
-        user.myChefs.map(async (chefId) => {
-            const chef = await Chef.find({ _id: chefId });
-            return chef[0];
-        })
-    );
-    return {
-        user,
-        method: user.method,
-        chefs: allChefsThatBelongToUser,
-        recipes: []
-    }
-}
 
 
 //=====================
@@ -85,8 +52,9 @@ module.exports = {
     addMyChef: async (req, res, next) => {
         try {
             let chefImage = '';
-            const { submittedBy, chefName, _id, chefBio, familyName } = JSON.parse(req.body.myChef)
-            const foundUser = await findUser(req);
+            const { submittedBy, chefName, _id, chefBio, familyName } = JSON.parse(req.body.myChef);
+            console.log(req.params.id)
+            const foundUser = await User.findOne({ '_id': req.params.id });
             const foundChef = await Chef.findOne({ '_id': _id });
             if (foundUser && foundChef) {
                 return res.status(403).send({ error: 'Chef already exists' })
@@ -109,6 +77,7 @@ module.exports = {
                 const savedChef = await newChef.save();
                 console.log('====================add new chef completed ====================')
                 const updatedUser = await updateUserWithChef(req, foundUser, savedChef);
+                console.log('updatedUser', updatedUser)
                 const userResponse = await returnUserWithChefsAndRecipes(updatedUser);
                 res.send(userResponse);
             } else {
@@ -127,9 +96,6 @@ module.exports = {
     // ===============  update chef  =========================
     // =======================================================
     // =======================================================
-
-
-
 
     updateMyChef: async (req, res, next) => {
         try {
@@ -188,18 +154,22 @@ module.exports = {
     deleteMyChef: async (req, res, next) => {
         try {
             console.log("============== delete my chef initiated ==================")
-            const foundChef = await Chef.findOne({ '_id': req.body._id });
+            const foundChef = await Chef.findOne({ '_id': req.body.chefId });
             const foundUser = await User.findOne({ '_id': req.params.id });
 
             if (foundChef.chefOwnerId == foundUser._id) {
                 console.log('chef owner and user match')
-                Chef.deleteOne({ '_id': req.body._id })
-                await User.findOneAndUpdate({ '_id': req.params.id }, {
-                    "myChefs": foundUser.myChefs.filter(chef => { chef !== foundChef._id })
+                Chef.deleteOne({ '_id': req.body.chefId }).then(async (deleted) => {
+                    deleteImageFromGoogleCloud(foundChef.chefImage.substring(foundChef.chefImage.lastIndexOf("/") + 1, foundChef.chefImage.length));
+                    const remainingChefs = await foundUser.myChefs.filter(chef => { chef !== foundChef._id });
+                    await User.findOneAndUpdate({ '_id': req.params.id }, {
+                        "myChefs": remainingChefs
+                    }).then(async (results) => {
+                        const userResponse = await returnUserWithChefsAndRecipes(foundUser);
+                        res.send(userResponse);
+                    })
+                    console.log('====================delete my chef completed ====================');
                 });
-                console.log('====================delete my chef completed ====================');
-                const userResponse = await returnUserWithChefsAndRecipes(foundUser);
-                res.send(userResponse);
             }
             else {
                 res.status(403).send("You are not the owner of the chef. Only the chef owner can delete this record.")
@@ -209,5 +179,4 @@ module.exports = {
             console.log(error);
         }
     }
-
 };
