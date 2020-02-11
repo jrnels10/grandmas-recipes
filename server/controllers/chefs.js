@@ -53,7 +53,6 @@ module.exports = {
         try {
             let chefImage = '';
             const { submittedBy, chefName, _id, chefBio, familyName } = JSON.parse(req.body.myChef);
-            console.log(req.params.id)
             const foundUser = await User.findOne({ '_id': req.params.id });
             const foundChef = await Chef.findOne({ '_id': _id });
             if (foundUser && foundChef) {
@@ -74,18 +73,19 @@ module.exports = {
                     familyName: familyName,
                     chefRecipes: []
                 });
-                const savedChef = await newChef.save();
-                console.log('====================add new chef completed ====================')
-                const updatedUser = await updateUserWithChef(req, foundUser, savedChef);
-                console.log('updatedUser', updatedUser)
-                const userResponse = await returnUserWithChefsAndRecipes(updatedUser);
-                res.send(userResponse);
+                // const savedChef = await newChef.save();
+                // console.log('====================add new chef completed ====================')
+                // const updatedUser = await updateUserWithChef(req, foundUser, savedChef);
+                // console.log('updatedUser', updatedUser)
+                // const userResponse = await returnUserWithChefsAndRecipes(updatedUser);
+                // res.send(userResponse);
             } else {
-                return res.status(403).send({ error: 'User does not exist.' })
+                return res.status(400).send({ error: 'User does not exist.' })
             }
         } catch (error) {
             console.log('++++++++++++++ Error in addMyChef +++++++++++++++')
             console.log(error)
+            return res.status(403).send({ error: 'Error in chef object. Please contact developer with error.' })
         }
     },
 

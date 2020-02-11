@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PageWrapper from '../tools/PageWrapper';
-import { addNewChef } from '../../API/RecipeAPI';
+import { addNewChef } from '../../API/ChefAPI';
 import { withRouter } from 'react-router-dom';
 
 // import './../recipe/addrecipe.css';
@@ -34,32 +34,28 @@ class AddChef extends Component {
     upload = async (e) => {
         const { dispatch } = this.props.data;
         dispatch({ type: "LOADER", payload: { display: true } });
-        // const testChef = {
-        //     chefName: "Anna Nelson",
-        //     chefBio: "She was a loving mother that can cook very well",
-        //     author: "Jacob Nelson"
-        // }
-        // console.log(this.state)
-        // const chefObject = {
-        //    chefName: "Anna Nelson",
-        //   chefBio: "She was a loving mother that can cook very well",
-        //  author: "Jacob Nelson"
-        // }
-        debugger
         const json = JSON.stringify(this.state);
         var bodyFormData = new FormData();
         bodyFormData.append('picture', this.state.chefImage);
-        bodyFormData.append('accountType', this.props.data.user.method);
-        bodyFormData.append('myRecipes', json);
+        bodyFormData.append('myChef', json);
         bodyFormData.append('private', true);
-        const res = await addNewChef(bodyFormData, this.props.data.user.email);
+        try {
+            const res = await addNewChef(bodyFormData, this.props.data.user.id).catch(error => {
+                console.log('error:', error)
+                dispatch({ type: "LOADER", payload: { display: false } });
+            });
+            if (res.status === 200) {
+                dispatch({ type: "LOADER", payload: { display: false } });
+                dispatch({ type: 'ADDED_MY_RECIPE', payload: { user: res.data } })
+                this.setState({ updated: true });
+                this.props.history.push('/dashboard');
+            }
+            else if (res.status === 400) {
+                console.log('403 error')
 
-        if (res.status === 200) {
-            dispatch({ type: "LOADER", payload: { display: false } });
-            dispatch({ type: 'ADDED_MY_RECIPE', payload: { myRecipes: res.data.myRecipes } })
-            this.setState({ updated: true });
-            this.props.history.push('/dashboard');
-            // }
+                dispatch({ type: "LOADER", payload: { display: false } });
+            }
+        } catch (error) {
         }
     }
 

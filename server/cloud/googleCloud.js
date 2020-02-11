@@ -39,7 +39,7 @@ module.exports = {
                     }
                 }
             }));
-            return await streamToPromise(myStream, req.file.path);
+            return await streamToPromise(myStream, req.file);
         } catch (err) {
             console.error('ERROR:', err);
         };
@@ -62,7 +62,7 @@ module.exports = {
 
 async function streamToPromise(stream, imagePath) {
     return new Promise(function (resolve, reject) {
-        stream.on("end", () => resolve('finished'));
+        stream.on("end", () => resolve(`https://storage.googleapis.com/${bucketName}/_resized_${imagePath.originalname}`));
         stream.on("error", reject);
         // fs.unlinkSync(imagePath)
     })

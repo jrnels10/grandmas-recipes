@@ -8,7 +8,7 @@ const path = require('path');
 const cors = require('cors');
 const Promise = require('bluebird');
 
-mongoose.connect(keys.mongoDB.dbURI, { useNewUrlParser: true, useFindAndModify: false }, () => {
+mongoose.connect(keys.mongoDB.dbURI, { useCreateIndex: true, useNewUrlParser: true, useFindAndModify: false, useUnifiedTopology: true }, () => {
     console.log("connected to mongodb");
 });
 

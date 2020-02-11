@@ -4,30 +4,23 @@ export default async (dispatch, userState) => {
     try {
         const res = await secret();
         const userType = res.data.profile;
-        console.log(userType)
         return userState.setState({
             _id: userType.user._id,
-            email: userType.user[userType.method].email,
-            firstName: userType.user[userType.method].firstName,
-            lastName: userType.user[userType.method].lastName,
-            profilePicture: userType.user[userType.method].profilePicture,
-            homeTown: userType.user[userType.method].homeTown,
-            homeState: userType.user[userType.method].homeState,
+            email: userType.email,
+            firstName: userType.firstName,
+            lastName: userType.lastName,
+            profilePicture: userType.profilePicture,
             method: userType.method,
         }, () => {
             dispatch({
                 type: "USER_INFO",
                 payload: {
-                    _id: userType.user._id,
-                    email: userType.user[userType.method].email,
-                    firstName: userType.user[userType.method].firstName,
-                    lastName: userType.user[userType.method].lastName,
-                    profilePicture: userType.user[userType.method].profilePicture,
-                    homeTown: userType.user[userType.method].homeTown,
-                    homeState: userType.user[userType.method].homeState,
-                    myChefs: userType.chefs,
-                    myRecipes: userType.recipes,
-                    myFamilies: userType.myFamilies,
+                    _id: userType.id,
+                    email: userType.email,
+                    firstName: userType.firstName,
+                    lastName: userType.lastName,
+                    profilePicture: userType.profilePicture,
+                    chefs: userType.chefs,
                     method: userType.method,
                 }
             });

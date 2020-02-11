@@ -27,9 +27,10 @@ class CardContainer extends Component {
         };
         return <Consumer>
             {value => {
-                return value.user.myChefs.length > 0 ?
+                debugger
+                return value.user.chefs.length > 0 ?
                     <Slider {...settings}>
-                        {value.user.myChefs.map((chef, idx) => {
+                        {value.user.chefs.map((chef, idx) => {
                             return <GrandmaCard key={idx} chef={chef} value={value} />
                         })}
                     </Slider>

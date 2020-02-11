@@ -134,8 +134,8 @@ export class Provider extends Component {
         const jwtToken = localStorage.getItem('JWT_TOKEN');
         axios.defaults.headers.common['Authorization'] = jwtToken;
         if (jwtToken) {
-            await secret();
-            this.setState({ token: jwtToken, isAuthenticated: true, loader: false });
+            const user = await secret();
+            this.setState({ token: jwtToken, isAuthenticated: true, loader: false, user: user.data.profile });
         }
         else {
             // this.props.history.push('/')

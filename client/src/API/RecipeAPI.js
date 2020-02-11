@@ -7,25 +7,7 @@ export async function secret() {
 };
 
 
-// ==================== CHEF API ===========================
-//==========================================================
-export function findMyChef(chefId) {
-    try {
-        return axios.post(`${baseUrl}/chefs/findmychef/${chefId}`)
-    } catch (error) {
-        return 'Could not find recipe!'
-    };
-};
 
-export function addNewChef(bodyFormData, email) {
-    try {
-        return axios.put(`${baseUrl}/chefs/addmychef/${email}`,
-            bodyFormData,
-            { headers: { 'Content-Type': 'multipart/form-data' } })
-    } catch (error) {
-        return 'recipe was not saved!'
-    };
-};
 
 
 // ==================== RECIPE API ===========================

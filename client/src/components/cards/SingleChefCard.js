@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Consumer } from '../../Context';
 import { withRouter, Link } from 'react-router-dom';
 import GeneralLargeCard from './GeneralLargeCard';
-import { findMyChef } from './../../API/RecipeAPI';
+import { findMyChef } from './../../API/ChefAPI';
 import MiniRecipeCard from './MiniRecipeCard';
 
 
