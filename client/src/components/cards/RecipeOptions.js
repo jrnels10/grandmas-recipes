@@ -8,6 +8,7 @@ import {
     FacebookIcon,
     WhatsappIcon
 } from "react-share";
+import { NavigateButton } from './../tools/Buttons'
 
 class RecipeOptions extends Component {
     constructor(props) {
@@ -20,16 +21,14 @@ class RecipeOptions extends Component {
     }
 
     fullScreen = (props) => {
-        const { value: { dispatch }, image } = props.options;
+        const { value: { dispatch }, chef: { image } } = props.options;
         dispatch({ type: 'FULLSCREEN_IMAGE', payload: { fullScreenImage: image } })
         this.props.history.push('/fullscreen');
     }
 
     render() {
-        // const { ingredients, img, cookingInstructions, submittedBy } = this.props.options;
         const privateStatus = this.props.options.private;
         const { options } = this.state;
-        // debugger
         return <div className={`recipe-header-options `} >
             {options ?
                 <svg className="bi bi-x x-icon" onClick={this.toggleOptions} width="1em" height="1em" viewBox="0 0 20 20" fill="#f7c9b6" xmlns="http://www.w3.org/2000/svg">
@@ -43,6 +42,7 @@ class RecipeOptions extends Component {
                 <div className={`options-delay-${options}`}>
                     {options ?
                         <div className={`container-fluid options-diplay`}>
+                            <NavigateButton customClassName='dashboard-button' pathTo={'/updatechef'} type={'edit'} value={this.props.options.value} selected={this.props.options.chef}> Edit</NavigateButton>
                             <div className='row w-100 m-0 p-0' onClick={this.fullScreen.bind(this, this.props)}>
                                 <span className="privacy-label">View Image Full Screen</span>
                                 <svg className="bi bi-arrows-fullscreen" width="1em" height="1em" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg">

@@ -28,6 +28,10 @@ const chefSchema = new Schema({
         type: Date,
         required: true
     },
+    dateUpdated: {
+        type: Date,
+        required: true
+    },
     chefBio: {
         type: String
     },

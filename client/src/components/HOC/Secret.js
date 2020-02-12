@@ -5,7 +5,7 @@ export default async (dispatch, userState) => {
         const res = await secret();
         const userType = res.data.profile;
         return userState.setState({
-            _id: userType.user._id,
+            id: userType.id,
             email: userType.email,
             firstName: userType.firstName,
             lastName: userType.lastName,
@@ -15,7 +15,7 @@ export default async (dispatch, userState) => {
             dispatch({
                 type: "USER_INFO",
                 payload: {
-                    _id: userType.id,
+                    id: userType.id,
                     email: userType.email,
                     firstName: userType.firstName,
                     lastName: userType.lastName,

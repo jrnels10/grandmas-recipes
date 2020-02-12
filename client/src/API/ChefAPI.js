@@ -4,26 +4,35 @@ const baseUrl = process.env.NODE_ENV === 'development' ? 'http://localhost:5000'
 
 // ==================== CHEF API ===========================
 //==========================================================
-export function findMyChef(chefId) {
+export async function findMyChef(chefId) {
     try {
-        return axios.post(`${baseUrl}/chefs/findmychef/${chefId}`)
-    } catch (error) {
-        return 'Could not find recipe!'
-    };
+        return axios.post(`${baseUrl}/chefs/findmychef/${chefId}`);
+    }
+    catch (error) {
+        return error.response.data;
+    }
 };
 
 export function addNewChef(bodyFormData, id) {
-    debugger
-    try {
-        if (id !== '') {
+    if (id !== '') {
+        return axios.post(`${baseUrl}/chefs/addmychef/${id}`,
+            bodyFormData,
+            { headers: { 'Content-Type': 'multipart/form-data' } }).catch(function (error) {
+                return error.response.data
+            })
+    } else {
+        return 'no user was found';
+    }
+};
 
-            return axios.post(`${baseUrl}/chefs/addmychef/${id}`,
-                bodyFormData,
-                { headers: { 'Content-Type': 'multipart/form-data' } })
-        } else {
-            return 'no user was found';
-        }
-    } catch (error) {
-        return 'recipe was not saved!'
-    };
+export function updateMyChef(bodyFormData, id) {
+    if (id !== '') {
+        return axios.put(`${baseUrl}/chefs/updatemychef/${id}`,
+            bodyFormData,
+            { headers: { 'Content-Type': 'multipart/form-data' } }).catch(function (error) {
+                return error.response.data
+            })
+    } else {
+        return 'no user was found';
+    }
 };

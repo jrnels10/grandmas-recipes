@@ -28,9 +28,11 @@ module.exports = {
             }
         }
         class chefData {
-            constructor(chefName, chefImage, dateSubmitted, submittedBy, familyName) {
+            constructor(chefId, chefName, chefImage, chefBio, dateSubmitted, submittedBy, familyName) {
+                this.chefId = chefId;
                 this.chefName = chefName;
                 this.chefImage = chefImage;
+                this.chefBio = chefBio;
                 this.dateSubmitted = dateSubmitted;
                 this.submittedBy = submittedBy;
                 this.familyName = familyName;
@@ -51,7 +53,7 @@ module.exports = {
             await Promise.all(
                 req.myChefs.map(async (chefId) => {
                     const chef = await Chef.find({ _id: chefId });
-                    const newChef = new chefData(chef[0].chefName, chef[0].chefImage, chef[0].dateSubmitted, chef[0].submittedBy, chef[0].familyName)
+                    const newChef = new chefData(chefId, chef[0].chefName, chef[0].chefImage, chef[0].chefBio, chef[0].dateSubmitted, chef[0].submittedBy, chef[0].familyName)
                     if (chef[0] && chef[0].chefRecipes) {
                         await Promise.all(
                             chef[0].chefRecipes.map(async (recipeId) => {

@@ -46,8 +46,14 @@ const reducer = (state, action) => {
                 ...state
             }
         case 'VIEW_MY_RECIPE':
-            state.recipe.selected = action.payload.selected;
+            state.selected.recipe = action.payload.selected;
             return {
+                ...state
+            }
+        case 'VIEW_MY_CHEF':
+            state.selected.chef = action.payload.selected;
+            return {
+                ...state,
                 ...state
             }
         case 'SIGN_OUT':
@@ -101,8 +107,8 @@ export class Provider extends Component {
             myChefs: [],
             recipes: []
         },
-        recipe: {
-            selected: {
+        selected: {
+            recipe: {
                 groups: ["Nelson"],
                 ingredients: [{
                     _id: "5e10cbdee149f9307cf6508f",

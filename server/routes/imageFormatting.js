@@ -3,7 +3,7 @@ const sharp = require("sharp");
 module.exports = {
     imageFormatting: async (req, res, next) => {
         const image = sharp(req.file)
-            .resize(1300, 800)
+            .resize(1300, 1200)
             .toFile(`./server/uploads/optimized${req.file.originalname}`, function (err) {
                 // console.log(res)
                 console.log(err)

@@ -38,9 +38,17 @@ module.exports = {
             profilePicture: joi.string()
         }),
         chefSchema: joi.object().keys({
-            chefOwner: joi.string().required(),
             chefName: joi.string().required(),
             submittedBy: joi.string().required(),
+            dateSubmitted: joi.date().required(),
+            familyName: joi.string(),
+            chefBio: joi.string()
+        }),
+        updatedChefSchema: joi.object().keys({
+            chefId: joi.string().required(),
+            chefName: joi.string().required(),
+            updatedBy: joi.string().required(),
+            dateUpdated: joi.date().required(),
             familyName: joi.string(),
             chefBio: joi.string()
         }),

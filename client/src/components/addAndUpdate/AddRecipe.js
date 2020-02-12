@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { addNewRecipe } from '../../API/RecipeAPI';
-import ModalRecipes from './../tools/Modal';
+import ModalRecipes from '../tools/Modal';
 import { withRouter } from 'react-router-dom';
 
 import './addrecipe.css';

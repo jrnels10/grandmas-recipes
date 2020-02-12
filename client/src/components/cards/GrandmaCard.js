@@ -33,15 +33,15 @@ class GrandmaCard extends Component {
         this.setState({ shareModal: !this.state.shareModal })
     }
     render() {
-        const { chefImage, chefName, chefBio, submittedBy, _id, chefRecipes } = this.props.chef;
+        const { chefImage, chefName, chefBio, submittedBy, chefId, chefRecipes } = this.props.chef;
         const numberOfRecipes = chefRecipes.length;
-        const inviteFamilyLink = `${window.location.origin}/familychef/${_id}`;
+        const inviteFamilyLink = `${window.location.origin}/familychef/${chefId}`;
         return <GeneralLargeCard>
             <div className='grandma-card-header'>
                 <div className='w-75 mini-recipe-care-title-container'>
                     <label className="card-title grandma-card-title w-75">{chefName}</label>
                 </div>
-                <RecipeOptions options={{ value: this.props.value, image: chefImage }} />
+                <RecipeOptions options={{ value: this.props.value, chef: this.props.chef }} />
             </div>
             <div className="row card-graphics-container">
                 <img className="card-img-top" src={chefImage} alt="portrait of chef" />
@@ -55,7 +55,7 @@ class GrandmaCard extends Component {
                 {/* <div className="position-relative"> */}
                 <div className="row w-100 mb-3">
                     <div className="col-8">
-                        <Link className="nav-link p-0 text-white" to={`/addrecipe/${_id}`} >Add New Recipe <svg className="bi bi-plus" width="1em" height="1em" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <Link className="nav-link p-0 text-white" to={`/addrecipe/${chefId}`} >Add New Recipe <svg className="bi bi-plus" width="1em" height="1em" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                             <path fillRule="evenodd" d="M10 5.5a.5.5 0 01.5.5v4a.5.5 0 01-.5.5H6a.5.5 0 010-1h3.5V6a.5.5 0 01.5-.5z" clipRule="evenodd" />
                             <path fillRule="evenodd" d="M9.5 10a.5.5 0 01.5-.5h4a.5.5 0 010 1h-3.5V14a.5.5 0 01-1 0v-4z" clipRule="evenodd" />
                         </svg></Link>

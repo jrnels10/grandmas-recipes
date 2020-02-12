@@ -12,7 +12,7 @@ import DashBoard from './components/dashboard/Dashboard';
 import AddRecipe from './components/recipeCards/NewRecipe';
 import RecipeCard from './components/cards/RecipeCard';
 import CardContainer from './components/cards/CardContainer';
-import AddChef from './components/cards/AddChef';
+import AddChef from './components/addAndUpdate/AddChef';
 // import AddToFamily from './components/Family/AddToFamily';
 import SingleChefCard from './components/cards/SingleChefCard';
 import FullScreen from './components/tools/FullScreen';
@@ -27,6 +27,7 @@ ReactDOM.render(
                     <Route path="/dashboard" component={authGuard(DashBoard)} />
                     <Route path="/familychefs" component={authGuard(CardContainer)} />
                     <Route path="/addnewchef" component={authGuard(AddChef)} />
+                    <Route path="/updatechef" component={authGuard(AddChef)} />
                     <Route path="/addrecipe/:id" component={authGuard(AddRecipe)} />
                     <Route path="/familychef/:id" component={SingleChefCard} />
                     <Route path={`/recipe/selectedrecipe/:recipeId`} component={RecipeCard} />

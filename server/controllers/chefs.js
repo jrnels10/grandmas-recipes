@@ -73,12 +73,12 @@ module.exports = {
                     familyName: familyName,
                     chefRecipes: []
                 });
-                // const savedChef = await newChef.save();
-                // console.log('====================add new chef completed ====================')
-                // const updatedUser = await updateUserWithChef(req, foundUser, savedChef);
-                // console.log('updatedUser', updatedUser)
-                // const userResponse = await returnUserWithChefsAndRecipes(updatedUser);
-                // res.send(userResponse);
+                const savedChef = await newChef.save();
+                console.log('====================add new chef completed ====================')
+                const updatedUser = await updateUserWithChef(req, foundUser, savedChef);
+                console.log('updatedUser', updatedUser)
+                const userResponse = await returnUserWithChefsAndRecipes(updatedUser);
+                res.send(userResponse);
             } else {
                 return res.status(400).send({ error: 'User does not exist.' })
             }
@@ -100,9 +100,10 @@ module.exports = {
     updateMyChef: async (req, res, next) => {
         try {
             console.log("============== Update my chef initiated ==================");
-            const { _id } = JSON.parse(req.body.myChef)
+            const { chefId } = JSON.parse(req.body.myChef)
             const userSubmittedUpdatesToChef = JSON.parse(req.body.myChef);
-            const foundChef = await Chef.findOne({ '_id': _id });
+            const foundChef = await Chef.findOne({ '_id': chefId });
+            console.log(foundChef)
             if (foundChef) {
                 const buildUpdateObject = { updatedBy: req.params.id };
                 if (req.file) {
@@ -125,7 +126,7 @@ module.exports = {
                     Object.assign(buildUpdateObject, { [key]: userSubmittedUpdatesToChef[key] });
                 };
 
-                await Chef.updateOne({ '_id': _id }, { $set: buildUpdateObject }).catch(error => {
+                await Chef.updateOne({ '_id': chefId }, { $set: buildUpdateObject }).catch(error => {
                     res.sendStatus(404)
                     return error
                 });

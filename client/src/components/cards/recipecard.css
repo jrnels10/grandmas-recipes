@@ -317,7 +317,7 @@ p {
 /*============== HEADER OPTIONS =============*/
 .recipe-header-options {
   position: absolute;
-  width: 100vw;
+  width: 100%;
   right: 0px;
   top: 5px;
   background-color: #5f525d;
@@ -357,7 +357,7 @@ p {
   background-color: #5f525d;
   margin-top: 44px;
   width: 100%;
-  padding: 30px;
+  padding: 15px;
 }
 
 .bi-person-fill,

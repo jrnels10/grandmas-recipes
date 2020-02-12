@@ -10,7 +10,7 @@ router.route('/addmychef/:id')
     .post(upload.single('picture'), validateMyChef(schema.chefSchema), ChefController.addMyChef);
 
 router.route('/updatemychef/:id')
-    .put(upload.single('picture'), ChefController.updateMyChef);
+    .put(upload.single('picture'), validateMyChef(schema.updatedChefSchema), ChefController.updateMyChef);
 
 router.route('/deletemychef/:id')
     .delete(ChefController.deleteMyChef);
