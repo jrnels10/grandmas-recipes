@@ -9,7 +9,7 @@ import SignIn from './components/sign/SignIn';
 import { Provider } from './Context';
 import authGuard from './components/HOC/authGuard';
 import DashBoard from './components/dashboard/Dashboard';
-import AddRecipe from './components/recipeCards/NewRecipe';
+import AddRecipe from './components/addAndUpdate/NewRecipe';
 import RecipeCard from './components/cards/RecipeCard';
 import CardContainer from './components/cards/CardContainer';
 import AddChef from './components/addAndUpdate/AddChef';
@@ -29,6 +29,7 @@ ReactDOM.render(
                     <Route path="/addnewchef" component={authGuard(AddChef)} />
                     <Route path="/updatechef" component={authGuard(AddChef)} />
                     <Route path="/addrecipe/:id" component={authGuard(AddRecipe)} />
+                    <Route path="/updaterecipe" component={authGuard(AddRecipe)} />
                     <Route path="/familychef/:id" component={SingleChefCard} />
                     <Route path={`/recipe/selectedrecipe/:recipeId`} component={RecipeCard} />
                     <Route exact path="/signin" component={SignIn} />

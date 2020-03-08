@@ -13,9 +13,6 @@ class CardContainer extends Component {
     componentDidMount() {
         secretResponse(this.props.data.dispatch, this)
     }
-    reload = () => {
-        secretResponse(this.props.data.dispatch, this);
-    }
 
     render() {
         const settings = {

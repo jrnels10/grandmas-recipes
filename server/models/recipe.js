@@ -5,10 +5,12 @@ const Schema = mongoose.Schema;
 //create schema
 const recipeSchema = new Schema({
     recipeName: {
-        type: String
+        type: String,
+        required: true
     },
     dateSubmitted: {
-        type: Date
+        type: Date,
+        required: true
     },
     recipeOldImages: [
         { type: String }
@@ -17,16 +19,19 @@ const recipeSchema = new Schema({
         type: String
     },
     submittedBy: {
-        type: String
+        type: String,
+        required: true
     },
     updatedBy: {
         type: String
     },
     recipeOwnerId: {
-        type: String
+        type: String,
+        required: true
     },
     chefId: {
-        type: String
+        type: String,
+        required: true
     },
     groups: [],
     recipeImage: {
@@ -34,12 +39,6 @@ const recipeSchema = new Schema({
     },
     ingredients: [{
         ingredient: {
-            type: String
-        },
-        amount: {
-            type: Number
-        },
-        units: {
             type: String
         }
     }],

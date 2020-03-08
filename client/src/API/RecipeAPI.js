@@ -7,24 +7,35 @@ export async function secret() {
 };
 
 
-
-
-
 // ==================== RECIPE API ===========================
 //============================================================
 
-export function addNewRecipe(bodyFormData, email) {
+export async function addNewRecipe(bodyFormData, id) {
     try {
-        return axios.put(`${baseUrl}/recipes/addmyrecipe/${email}`,
+        return axios.post(`${baseUrl}/recipes/addmyrecipe/${id}`,
             bodyFormData,
-            { headers: { 'Content-Type': 'multipart/form-data' } })
+            { headers: { 'Content-Type': 'multipart/form-data' } }).catch(function (error) {
+                return error.response.data
+            })
+    } catch (error) {
+        return console.log(error)
+    }
+};
+
+export async function updateRecipe(bodyFormData, id) {
+    try {
+        return axios.put(`${baseUrl}/recipes/updatemyrecipe/${id}`,
+            bodyFormData,
+            { headers: { 'Content-Type': 'multipart/form-data' } }).catch(function (error) {
+                return error.response.data
+            })
     } catch (error) {
         return console.log(error)
     }
 };
 
 
-export function getmyrecipe(recipeId) {
+export async function getmyrecipe(recipeId) {
     try {
         return axios.post(`${baseUrl}/recipes/getmyrecipe/${recipeId}`)
     } catch (error) {

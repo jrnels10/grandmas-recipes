@@ -7,13 +7,13 @@ class RecipeCardHeader extends Component {
         this.state = {}
     }
     render() {
-        const { recipeName, dateSubmitted, img } = this.props.recipe;
+        const { recipeName, dateSubmitted, recipeImage, _id } = this.props.recipe;
         return <div className='recipe-card-header'>
             <div className='w-75 mini-recipe-care-title-container'>
                 <label className="card-title mini-recipe-card-title w-100">{recipeName}</label>
                 <span className="card-title mini-recipe-card-date">Submitted {new Date(dateSubmitted).toDateString()}</span>
             </div>
-            <RecipeOptions options={{ value: this.props.value, image: img }} />
+            <RecipeOptions options={{ value: this.props.value, image: recipeImage, recipeId: _id }} />
         </div>
     }
 }

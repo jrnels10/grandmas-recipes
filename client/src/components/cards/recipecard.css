@@ -4,7 +4,7 @@
   min-height: 90vh;
   background-color: black;
   position: relative;
-  width: 22rem;
+  width: 23rem;
   border-radius: 10px;
   overflow: hidden;
 }
@@ -362,7 +362,8 @@ p {
 
 .bi-person-fill,
 .bi-people-fill,
-.bi-arrows-fullscreen {
+.bi-arrows-fullscreen,
+.bi-gear {
   height: 30px;
   width: 30px;
   float: right;
@@ -371,4 +372,26 @@ p {
 
 .privacy-label {
   width: 70%;
+}
+.react-share__ShareButton[aria-label="facebook"] {
+  background-color: #3b5998 !important;
+}
+.react-share__ShareButton[aria-label="email"] {
+  background-color: #7f7f7f !important;
+}
+.react-share__ShareButton[aria-label="whatsapp"] {
+  background-color: #2cb742 !important;
+}
+
+.react-share__ShareButton {
+  width: 100%;
+  width: 100%;
+  margin-bottom: 10px;
+  outline: none;
+  border: 1px solid #c59894 !important;
+  border-radius: 5px !important;
+  height: 45px;
+  font-weight: 400;
+  color: #ffffff !important;
+  font-size: 1rem !important;
 }

@@ -36,3 +36,15 @@ export function updateMyChef(bodyFormData, id) {
         return 'no user was found';
     }
 };
+
+
+export function deleteMyChef(chefId, id) {
+    if (id !== '') {
+        return axios.delete(`${baseUrl}/chefs/deletemychef/${id}`, { data: { chefId } })
+            .catch(function (error) {
+                return error.response.data
+            })
+    } else {
+        return 'no user was found';
+    }
+};

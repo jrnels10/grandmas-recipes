@@ -50,6 +50,7 @@ module.exports = {
         );
 
         if (req.myChefs) {
+            console.log(req.myChefs.length)
             await Promise.all(
                 req.myChefs.map(async (chefId) => {
                     const chef = await Chef.find({ _id: chefId });

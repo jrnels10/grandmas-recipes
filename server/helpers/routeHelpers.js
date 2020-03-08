@@ -27,6 +27,19 @@ module.exports = {
             next();
         }
     },
+    validateMyRecipe: (schema) => {
+        return (req, res, next) => {
+            // console.log("validate",req.body)
+            const result = joi.validate(req.body.myRecipes, schema);
+            console.log("result", result)
+            if (result.error) {
+                return res.status(400).send({ error: result.error });
+            }
+            if (!req.value) { req.value = {}; }
+            req.value['body'] = result.value;
+            next();
+        }
+    },
     schema: {
         authSchema: joi.object().keys({
             email: joi.string().email().required(),
@@ -51,6 +64,18 @@ module.exports = {
             dateUpdated: joi.date().required(),
             familyName: joi.string(),
             chefBio: joi.string()
+        }),
+        recipeSchema: joi.object().keys({
+            recipeName: joi.string().required(),
+            chefId: joi.string().required(),
+            submittedBy: joi.string().required(),
+            dateSubmitted: joi.date().required(),
+            recipeOwnerId: joi.string().required(),
+            recipeImage: joi.string(),
+            cookingInstructions: joi.string(),
+            recipeDescription: joi.string(),
+            groups: joi.array(),
+            ingredients: joi.array().required()
         }),
     }
 }

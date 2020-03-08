@@ -5,12 +5,12 @@ const upload = require('./imageStorage');
 
 
 
-const { validateBody, schema } = require('../helpers/routeHelpers');
+const { validateMyRecipe, schema } = require('../helpers/routeHelpers');
 const RecipeController = require('../controllers/recipes');
 
 // user id
 router.route('/addmyrecipe/:id')
-    .post(upload.single('picture'), RecipeController.addMyRecipe);
+    .post(upload.single('picture'), validateMyRecipe(schema.recipeSchema), RecipeController.addMyRecipe);
 
 router.route('/deletemyrecipe/:id')
     .delete(RecipeController.deleteMyRecipe);
@@ -21,4 +21,4 @@ router.route('/updatemyrecipe/:id')
 router.route('/getmyrecipe/:id')
     .post(RecipeController.getMyRecipe);
 
-module.exports = router;
+module.exports = router; 

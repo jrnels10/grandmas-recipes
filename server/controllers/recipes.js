@@ -41,8 +41,9 @@ module.exports = {
     },
     updateMyRecipe: async (req, res, next) => {
         // https://stackoverflow.com/questions/15691224/mongoose-update-values-in-array-of-objects
-        const userSubmittedUpdatesToRecipe = JSON.parse(req.body.myRecipe);
+        const userSubmittedUpdatesToRecipe = JSON.parse(req.body.myRecipes);
         const recipeFound = await Recipe.findOne({ '_id': userSubmittedUpdatesToRecipe.recipeId });
+        console.log(userSubmittedUpdatesToRecipe)
         if (recipeFound) {
             const buildUpdateObject = { updatedBy: req.params.id };
             if (req.file !== undefined) {

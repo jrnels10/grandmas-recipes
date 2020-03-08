@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import GeneralLargeCard from './GeneralLargeCard';
 import { Consumer } from '../../Context';
 import RecipeCardHeader from './RecipeCardHeader';
-
+import RecipeOptions from './RecipeOptions';
 class RecipeCard extends Component {
     constructor(props) {
         super(props);
@@ -27,11 +27,17 @@ class RecipeCard extends Component {
     render() {
         return <Consumer>
             {value => {
-                const { ingredients, img, cookingInstructions, chefName } = value.recipe.selected;
+                const { ingredients, recipeImage, cookingInstructions, chefName, recipeName, dateSubmitted, _id } = value.selected.recipe;
                 return <GeneralLargeCard>
-                    <RecipeCardHeader recipe={value.recipe.selected} value={value} />
+                    <div className='recipe-card-header'>
+                        <div className='w-75 mini-recipe-care-title-container'>
+                            <label className="card-title mini-recipe-card-title w-100">{recipeName}</label>
+                            <span className="card-title mini-recipe-card-date">Submitted {new Date(dateSubmitted).toDateString()}</span>
+                        </div>
+                        <RecipeOptions options={{ value: value, image: recipeImage, recipeId: _id }} />
+                    </div>
                     <div className="row card-graphics-container">
-                        <img className="card-img-top" src={img} alt="portrait of recipe" onClick={this.hide} />
+                        <img className="card-img-top" src={recipeImage} alt="portrait of recipe" onClick={this.hide} />
                         <div className="col-12 card-graphics-container-light" />
                         <div className="col-12 card-graphics-container-dark" >
                         </div>

@@ -5,12 +5,10 @@ const Schema = mongoose.Schema;
 //create schema
 const chefSchema = new Schema({
     chefOwner: {
-        type: String,
-        required: true
+        type: String
     },
     chefOwnerId: {
-        type: String,
-        required: true
+        type: String
     },
     chefImage: {
         type: String
@@ -21,27 +19,22 @@ const chefSchema = new Schema({
         }
     ],
     chefName: {
-        type: String,
-        required: true
+        type: String
     },
     dateSubmitted: {
-        type: Date,
-        required: true
+        type: Date
     },
     dateUpdated: {
-        type: Date,
-        required: true
+        type: Date
     },
     chefBio: {
         type: String
     },
     submittedBy: {
-        type: String,
-        required: true
+        type: String
     },
     updatedBy: {
-        type: String,
-        required: true
+        type: String
     },
     familyName: {
         type: String

@@ -157,16 +157,20 @@ module.exports = {
             console.log("============== delete my chef initiated ==================")
             const foundChef = await Chef.findOne({ '_id': req.body.chefId });
             const foundUser = await User.findOne({ '_id': req.params.id });
-
             if (foundChef.chefOwnerId == foundUser._id) {
                 console.log('chef owner and user match')
                 Chef.deleteOne({ '_id': req.body.chefId }).then(async (deleted) => {
-                    deleteImageFromGoogleCloud(foundChef.chefImage.substring(foundChef.chefImage.lastIndexOf("/") + 1, foundChef.chefImage.length));
-                    const remainingChefs = await foundUser.myChefs.filter(chef => { chef !== foundChef._id });
+                    if (foundChef.chefImage !== '') {
+                        deleteImageFromGoogleCloud(foundChef.chefImage.substring(foundChef.chefImage.lastIndexOf("/") + 1, foundChef.chefImage.length));
+                    }
+                    const remainingChefs = await Promise.all(foundUser.myChefs.filter(chef => {
+                        return chef !== req.body.chefId
+                    }));
                     await User.findOneAndUpdate({ '_id': req.params.id }, {
                         "myChefs": remainingChefs
                     }).then(async (results) => {
-                        const userResponse = await returnUserWithChefsAndRecipes(foundUser);
+                        const updatedUser = await User.findOne({ '_id': req.params.id });
+                        const userResponse = await returnUserWithChefsAndRecipes(updatedUser);
                         res.send(userResponse);
                     })
                     console.log('====================delete my chef completed ====================');
