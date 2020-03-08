@@ -42,34 +42,8 @@ const chefSchema = new Schema({
     chefRecipes: [{
         type: String
     }]
-
-    // myFamilies: [{
-    //     familyName: {
-    //         type: String
-    //     },
-    //     founder: {
-    //         type: String
-    //     },
-    //     familyChefs: [{
-    //         chefName: {
-    //             type: String
-    //         },
-    //         chefId: {
-    //             type: String
-    //         }
-    //     }],
-    //     familyMembers: [{
-    //         memberName: {
-    //             type: String
-    //         },
-    //         memberId: {
-    //             type: String
-    //         }
-    //     }]
-    // }]
-    // index: { unique: true }
 });
 
 
-const Chef = process.env.NODE_ENV === "production" ? mongoose.model('prodChef', chefSchema) : mongoose.model('devChef', chefSchema);
+const Chef = process.env.NODE_ENV !== 'development' ? mongoose.model('devChef', chefSchema) : mongoose.model('prodChef', chefSchema);
 module.exports = Chef;

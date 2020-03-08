@@ -29,7 +29,6 @@ export default class SignIn extends Component {
         // Step 4) Save the jwtToken into our localStorage
         try {
             dispatch({ type: "LOADER", payload: { display: true } });
-            debugger
             const res = await axios.post(`${axiosServerUrl}/users/signin`, { email: this.state.email, password: this.state.password });
             dispatch({
                 type: "SIGN_IN",
