@@ -112,5 +112,5 @@ userSchema.methods.isValidPassword = async function (newPassword) {
     }
 };
 
-const User = process.env.NODE_ENV !== 'development' ? mongoose.model('devUser', userSchema) : mongoose.model('user', userSchema);
+const User = process.env.NODE_ENV !== 'development' ? mongoose.model('devUser', userSchema) : mongoose.model('prodUser', userSchema);
 module.exports = User;

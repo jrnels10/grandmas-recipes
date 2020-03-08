@@ -71,5 +71,5 @@ const chefSchema = new Schema({
 });
 
 
-const Chef = process.env.NODE_ENV === "production" ? mongoose.model('chef', chefSchema) : mongoose.model('devChef', chefSchema);
+const Chef = process.env.NODE_ENV === "production" ? mongoose.model('prodChef', chefSchema) : mongoose.model('devChef', chefSchema);
 module.exports = Chef;
