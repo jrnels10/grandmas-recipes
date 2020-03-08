@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { addNewRecipe, updateRecipe } from '../../API/RecipeAPI';
+import { addNewRecipe, updateRecipe, deleteMyRecipe } from '../../API/RecipeAPI';
 import ModalRecipes from '../tools/Modal';
 import { withRouter } from 'react-router-dom';
 
@@ -119,7 +119,6 @@ class AddRecipe extends Component {
         if (this.state.update) {
             res = await updateRecipe(body, this.props.data.user.id);
         } else {
-            debugger
             res = await addNewRecipe(body, this.props.data.user.id);
         }
         if (res.status === 200) {
@@ -153,6 +152,15 @@ class AddRecipe extends Component {
                 return item.ingredient !== ingre
             })]
         });
+    }
+
+    delete = async () => {
+        const res = await deleteMyRecipe(this.state.chefId, this.props.data.user.id);
+        if (res.status === 200) {
+            this.props.history.push('/familychefs');
+        } else if (res.error) {
+            console.log(res)
+        }
     }
     render() {
         let families = [];
@@ -225,7 +233,8 @@ class AddRecipe extends Component {
                 <textarea rows="4" cols="50" type="text" className="sign-input" id="addrecipe-instructions" placeholder="Directions on how to cook recipe" aria-label="Sizing example input" ref="theInstructionsDiv" tabIndex={0} name='cookingInstructions' aria-describedby="inputGroup-sizing-sm" onChange={this.onSelectedText.bind(this)} />
                 {/* <hr className='sign-underline' /> */}
             </div>
-            <button className="btn w-100 signin-button" onClick={this.upload}>Save Recipe</button>
+            <button className="btn w-100 signin-button" onClick={this.upload}>{this.state.update ? "Update" : "Save"} Recipe</button>
+            {this.state.update ? <button className="btn btn-danger mt-2 w-100 " onClick={this.delete}>Delete Recipe</button> : null}
         </div >
     }
 }
