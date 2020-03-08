@@ -5,7 +5,6 @@ const { uploadToGoogleCloud, deleteImageFromGoogleCloud } = require('../cloud/go
 
 
 async function updateUserWithChef(req, user, chef) {
-    console.log(req.params)
     return await User.findOneAndUpdate({ '_id': req.params.id }, {
         "myChefs": [...user.myChefs, chef._id]
     }).then((profile) => {

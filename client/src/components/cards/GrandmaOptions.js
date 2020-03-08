@@ -24,7 +24,6 @@ class RecipeOptions extends Component {
     }
 
     render() {
-        console.log(this.props.options)
         const privateStatus = this.props.options.private;
         const inviteFamilyLink = `${window.location.origin}/familychef/${this.props.options.chef.chefId}`;
         const { options } = this.state;

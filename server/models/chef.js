@@ -42,32 +42,6 @@ const chefSchema = new Schema({
     chefRecipes: [{
         type: String
     }]
-
-    // myFamilies: [{
-    //     familyName: {
-    //         type: String
-    //     },
-    //     founder: {
-    //         type: String
-    //     },
-    //     familyChefs: [{
-    //         chefName: {
-    //             type: String
-    //         },
-    //         chefId: {
-    //             type: String
-    //         }
-    //     }],
-    //     familyMembers: [{
-    //         memberName: {
-    //             type: String
-    //         },
-    //         memberId: {
-    //             type: String
-    //         }
-    //     }]
-    // }]
-    // index: { unique: true }
 });
 
 

@@ -87,11 +87,14 @@ module.exports = {
             if (foundRecipe.recipeOwnerId == foundUser._id) {
                 console.log('recipe owner and user match');
                 Recipe.deleteOne({ '_id': req.body.recipeId });
+                const remaingRecipes = await Promise.all(
+                    foundChef.chefRecipes.filter(recipe => { return recipe !== req.body.recipeId })
+                );
                 await Chef.findOneAndUpdate({ '_id': req.body.chefId }, {
-                    "chefRecipes": foundChef.chefRecipes.filter(recipe => { recipe !== req.body.recipeId })
+                    "chefRecipes": remaingRecipes
                 });
                 console.log('====================delete my recipe completed ====================');
-                const userResponse = await returnUserWithChefsAndRecipes(foundUser);
+                const userResponse = await returnUserWithChefsAndRecipes(req.params.id);
                 res.send(userResponse);
             }
             else {
