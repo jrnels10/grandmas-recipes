@@ -81,17 +81,7 @@ const reducer = (state, action) => {
         default:
             return state;
     }
-}
-
-// this.setState(prevState => ({
-//     input: {
-//         ...prevState.input,
-//         [stateKey]: wtr
-//     }
-// }))
-
-// create a main location for the state that can 
-// be accessed by any component directly
+};
 
 export class Provider extends Component {
     state = {
@@ -107,22 +97,7 @@ export class Provider extends Component {
             myChefs: [],
             recipes: []
         },
-        selected: {
-            recipe: {
-                groups: ["Nelson"],
-                ingredients: [{
-                    _id: "5e10cbdee149f9307cf6508f",
-                    ingredient: "test",
-                    amount: 2,
-                    units: "tsp"
-                }],
-                _id: "5e10cbdee149f9307cf6508e",
-                recipeName: "test recipe 3",
-                cookingInstructions: "cook it",
-                img: "https://storage.cloud.google.com/grandmas-recipes/coke.jpg",
-                private: true
-            }
-        },
+        selected: {},
         redirectedFrom: '',
         fullScreenImage: '',
         redirectTo: "",

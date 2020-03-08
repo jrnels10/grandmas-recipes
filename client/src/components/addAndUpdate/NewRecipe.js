@@ -56,7 +56,6 @@ class AddRecipe extends Component {
     componentDidMount() {
         const { selected: { recipe } } = this.props.data;
         if (recipe) {
-            console.log(recipe)
             this.setState({
                 dateUpdated: new Date(),
                 updatedBy: `${this.props.data.user.firstName} ${this.props.data.user.lastName}`,
@@ -120,6 +119,7 @@ class AddRecipe extends Component {
         if (this.state.update) {
             res = await updateRecipe(body, this.props.data.user.id);
         } else {
+            debugger
             res = await addNewRecipe(body, this.props.data.user.id);
         }
         if (res.status === 200) {
