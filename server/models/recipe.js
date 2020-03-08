@@ -50,4 +50,5 @@ const recipeSchema = new Schema({
 });
 
 const Recipe = process.env.NODE_ENV !== 'development' ? mongoose.model('devRecipe', recipeSchema) : mongoose.model('prodRecipe', recipeSchema);
+
 module.exports = Recipe;
