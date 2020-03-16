@@ -86,6 +86,9 @@ const userSchema = new Schema({
     },
     myChefs: [
         { type: String }
+    ],
+    recipesLiked: [
+        { type: String }
     ]
 });
 
