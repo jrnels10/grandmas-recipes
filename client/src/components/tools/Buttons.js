@@ -18,6 +18,7 @@ export class NavigateButton extends Component {
                 });
             }
             else if (type === 'editRecipe') {
+                debugger
                 this.props.value.dispatch({
                     type: 'EDIT_MY_RECIPE',
                     payload: { selected: selected }

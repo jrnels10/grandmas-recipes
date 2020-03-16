@@ -34,6 +34,9 @@ const recipeSchema = new Schema({
         required: true
     },
     groups: [],
+    liked: {
+        type: Number
+    },
     recipeImage: {
         type: String
     },

@@ -24,6 +24,7 @@ yarn-error.log*
 
 #file
 .keys.js
+.env
 .grandmasRecipes-49091d2bc82f.json
 *.yaml
 *.yml

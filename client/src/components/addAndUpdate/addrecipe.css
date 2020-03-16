@@ -32,7 +32,7 @@
   background: #0000004b;
   border-radius: 10px;
   max-height: 50vh;
-  /* overflow-y: scroll; */
+  overflow: auto;
   text-align: left;
   margin: auto;
 }
