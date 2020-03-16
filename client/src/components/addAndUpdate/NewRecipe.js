@@ -90,22 +90,16 @@ class AddRecipe extends Component {
 
     onSelectedText = (e) => {
         this.setState({ [e.target.name]: e.target.value });
+        if (e.charCode == 13) {
+            this.addIngredient(e);
+        }
     };
 
     onSelectedRecipeInfo = (e) => {
         this.setState({ [e.target.name]: e.target.value });
     };
 
-    addIngredient = (e) => {
-        this.setState({
-            ingredients: [...this.state.ingredients,
-            {
-                ingredient: this.state.ingredient
-            }]
-        });
-        this.refs.ingredientDiv.value = '';
-        this.refs.ingredientDiv.focus();
-    }
+
 
     upload = async (e) => {
         const { dispatch } = this.props.data;
@@ -136,6 +130,18 @@ class AddRecipe extends Component {
         this.setState({ ingredientModal: !this.state.ingredientModal })
     }
 
+    addIngredient = (e) => {
+        this.setState({
+            ingredients: [...this.state.ingredients,
+            {
+                ingredient: this.state.ingredient
+            }],
+            ingredientButton: 'Add'
+        });
+        this.refs.ingredientDiv.value = '';
+        this.refs.ingredientDiv.focus();
+    }
+
     editIngredient = (ingre) => {
         this.setState({
             ingredientButton: "Update", ingredients: [...this.state.ingredients.filter(item => {
@@ -146,6 +152,7 @@ class AddRecipe extends Component {
         this.refs.ingredientDiv.focus();
 
     }
+
     deleteIngredient = (ingre) => {
         this.setState({
             ingredients: [...this.state.ingredients.filter(item => {
@@ -155,7 +162,7 @@ class AddRecipe extends Component {
     }
 
     delete = async () => {
-        const res = await deleteMyRecipe(this.state.chefId, this.props.data.user.id);
+        const res = await deleteMyRecipe(this.state.recipeId, this.props.data.user.id);
         if (res.status === 200) {
             this.props.history.push('/familychefs');
         } else if (res.error) {

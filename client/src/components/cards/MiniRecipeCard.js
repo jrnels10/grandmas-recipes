@@ -1,14 +1,5 @@
 import React, { Component } from 'react';
-import {
-    EmailShareButton,
-    FacebookShareButton,
-    WhatsappShareButton,
-    EmailIcon,
-    FacebookIcon,
-    WhatsappIcon
-} from "react-share";
 import { Link } from 'react-router-dom';
-import RecipeCardHeader from './RecipeCardHeader';
 
 class RecipeCard extends Component {
     constructor(props) {
@@ -33,9 +24,14 @@ class RecipeCard extends Component {
 
     render() {
         const { heart, description } = this.state;
-        const { recipeImage, _id, recipeDescription } = this.props.recipe;
+        const { recipeImage, _id, recipeDescription, recipeName, dateSubmitted } = this.props.recipe;
         return <div className="card mini-recipe-card" >
-            <RecipeCardHeader recipe={this.props.recipe} value={this.props.value} />
+            <div className='recipe-card-header'>
+                <div className='w-75 mini-recipe-care-title-container'>
+                    <label className="card-title mini-recipe-card-title w-100">{recipeName}</label>
+                    <span className="card-title mini-recipe-card-date">Submitted {new Date(dateSubmitted).toDateString()}</span>
+                </div>
+            </div>
             <Link className="nav-link p-0 text-white" onClick={this.selected.bind(this)} to={`/recipe/selectedrecipe/${_id}`} >
                 <img className="mini-card-recipe-img" src={recipeImage} alt="recipe" />
             </Link>

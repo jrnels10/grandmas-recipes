@@ -79,23 +79,28 @@ module.exports = {
     },
     deleteMyRecipe: async (req, res, next) => {
         try {
-            console.log("============== delete my chef initiated ==================");
-            const foundChef = await Chef.findOne({ '_id': req.body.chefId });
+            console.log("============== delete my recipe initiated ==================");
             const foundUser = await User.findOne({ '_id': req.params.id });
             const foundRecipe = await Recipe.findOne({ '_id': req.body.recipeId });
-
+            const foundChef = await Chef.findOne({ '_id': foundRecipe.chefId });
             if (foundRecipe.recipeOwnerId == foundUser._id) {
                 console.log('recipe owner and user match');
-                Recipe.deleteOne({ '_id': req.body.recipeId });
-                const remaingRecipes = await Promise.all(
-                    foundChef.chefRecipes.filter(recipe => { return recipe !== req.body.recipeId })
-                );
-                await Chef.findOneAndUpdate({ '_id': req.body.chefId }, {
-                    "chefRecipes": remaingRecipes
+                Recipe.deleteOne({ '_id': req.body.recipeId }).then(async (deleted) => {
+                    console.log(deleted)
+                    if (foundRecipe.recipeImage !== '') {
+                        deleteImageFromGoogleCloud(foundRecipe.recipeImage.substring(foundRecipe.recipeImage.lastIndexOf("/") + 1, foundRecipe.recipeImage.length));
+                    }
+                    const remainingRecipes = await Promise.all(
+                        foundChef.chefRecipes.filter(recipe => { return recipe !== req.body.recipeId })
+                    );
+                    await Chef.findOneAndUpdate({ '_id': foundRecipe.chefId }, {
+                        "chefRecipes": remainingRecipes
+                    });
+
+                    res.send('deleted');
+                    console.log('====================delete my recipe completed ====================');
+                    // const userResponse = await returnUserWithChefsAndRecipes(req.params.id);
                 });
-                console.log('====================delete my recipe completed ====================');
-                const userResponse = await returnUserWithChefsAndRecipes(req.params.id);
-                res.send(userResponse);
             }
             else {
                 res.status(403).send("You are not the owner of this recipe. Only the recipe owner can delete this record.");
@@ -111,7 +116,11 @@ module.exports = {
         //     console.log(resp)
 
         // })
+        let recipe = {}
         const recipeFound = await Recipe.findOne({ "_id": req.params.id });
-        await res.send(recipeFound);
+        const { ingredients, recipeImage, cookingInstructions, groups, recipeDescription, recipeName, dateSubmitted, _id } = recipeFound;
+        const chefFound = await Chef.findOne({ "chefRecipes": req.params.id });
+        Object.assign(recipe, { chefName: chefFound.chefName, ingredients, groups, recipeDescription, recipeImage, cookingInstructions, recipeName, dateSubmitted, _id });
+        await res.send(recipe);
     }
 }
