@@ -8,11 +8,23 @@ import { NavigateButton } from './../tools/Buttons';
 class CardContainer extends Component {
     constructor(props) {
         super(props);
-        this.state = {}
+        this.state = {
+            likedRecipes: []
+        }
     }
     componentDidMount() {
         secretResponse(this.props.data.dispatch, this)
     }
+    componentWillUnmount() {
+        console.log(this.state)
+        debugger
+    }
+
+    myLikedRecipes = (recipeId, liked) => {
+        liked ?
+            this.setState({ likedRecipes: [...this.state.likedRecipes, recipeId] }) :
+            this.setState({ likedRecipes: [...this.state.likedRecipes.filter(recipe => { return recipe !== recipeId })] })
+    };
 
     render() {
         const settings = {
@@ -27,7 +39,7 @@ class CardContainer extends Component {
                 return value.user.chefs.length > 0 ?
                     <Slider {...settings}>
                         {value.user.chefs.map((chef, idx) => {
-                            return <GrandmaCard key={idx} chef={chef} value={value} />
+                            return <GrandmaCard key={idx} chef={chef} value={value} myLikedRecipes={this.myLikedRecipes} />
                         })}
                     </Slider>
                     : <NavigateButton pathTo={'/addnewchef'}>Add new Chef</NavigateButton>

@@ -61,7 +61,7 @@ class GrandmaCard extends Component {
                     {numberOfRecipes > 0 ?
                         <div className='w-100'>
                             {chefRecipes.map((recipe, idx) => {
-                                return <MiniRecipeCard key={idx} recipe={recipe} value={this.props.value} chefName={chefName} />
+                                return <MiniRecipeCard key={idx} recipe={recipe} value={this.props.value} chefName={chefName} myLikedRecipes={this.props.myLikedRecipes} />
                             })}
                         </div>
                         : <span>No recipes.</span>}

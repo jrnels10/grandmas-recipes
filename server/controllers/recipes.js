@@ -122,5 +122,10 @@ module.exports = {
         const chefFound = await Chef.findOne({ "chefRecipes": req.params.id });
         Object.assign(recipe, { chefName: chefFound.chefName, ingredients, groups, recipeDescription, recipeImage, cookingInstructions, recipeName, dateSubmitted, _id });
         await res.send(recipe);
+    },
+    likedMyRecipe: async (req, res, next) => {
+        const foundUser = await User.findOne({ '_id': req.params.id });
+        const recipeFound = await Recipe.findOne({ "_id": req.body.id });
+
     }
 }
