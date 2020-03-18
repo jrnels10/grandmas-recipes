@@ -1,6 +1,7 @@
 const { uploadToGoogleCloud, deleteImageFromGoogleCloud } = require('./../cloud/googleCloud');
 const Chef = require('./../models/chef');
 const Recipe = require('./../models/recipe');
+const Family = require('./../models/family');
 
 module.exports = {
     uploadImages: async (req, res, next) => {
@@ -14,14 +15,16 @@ module.exports = {
     },
     returnUserWithChefsAndRecipes: async (req, res, next) => {
         class userData {
-            constructor(id, email, firstName, lastName, profilePicture, method) {
+            constructor(id, email, firstName, lastName, profilePicture, recipesLiked, method) {
                 this.id = id;
                 this.email = email;
                 this.firstName = firstName;
                 this.lastName = lastName;
+                this.recipesLiked = recipesLiked;
                 this.profilePicture = profilePicture;
                 this.method = method;
                 this.chefs = [];
+                this.families = [];
                 this.fullName = function () {
                     return `${this.firstName} ${this.lastName}`;
                 };
@@ -40,17 +43,30 @@ module.exports = {
             }
         };
 
+        class familyData {
+            constructor(familyName, familyOwnerName, familyId, chefName, familyMembers, dateSubmitted, submittedBy, familyBio) {
+                this.familyId = familyId;
+                this.familyOwnerName = familyOwnerName;
+                this.familyMembers = familyMembers;
+                this.chefName = chefName;
+                this.familyBio = familyBio;
+                this.dateSubmitted = dateSubmitted;
+                this.submittedBy = submittedBy;
+                this.familyName = familyName;
+            }
+        };
+
         const clientData = new userData(
             req._id,
             req[req.method].email,
             req[req.method].firstName,
             req[req.method].lastName,
             req[req.method].profilePicture,
+            req.recipesLiked,
             req.method
         );
 
         if (req.myChefs) {
-            console.log(req.myChefs.length)
             await Promise.all(
                 req.myChefs.map(async (chefId) => {
                     const chef = await Chef.find({ _id: chefId });
@@ -69,11 +85,18 @@ module.exports = {
                         clientData.chefs.push(newChef);
                         return null;
                     }
-                }));
+                })
+            );
+            await Promise.all(
+                req.myFamilies.map(async (familyId) => {
+                    const family = await Family.find({ _id: familyId });
+                    const newFamily = new familyData(family[0].familyName, family[0].familyOwnerName, family[0].chefId, family[0].familyMembers, family[0].chefName, family[0].dateSubmitted, family[0].submittedBy, family[0].familyBio)
+                    clientData.families.push(newFamily);
+                })
+            );
             return clientData
         } else {
             return clientData
         }
     }
-}
-
+};

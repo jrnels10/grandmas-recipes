@@ -25,6 +25,7 @@ app.use(bodyParser.json());
 app.use('/users', require('./routes/users'));
 app.use('/chefs', require('./routes/chefs'));
 app.use('/recipes', require('./routes/recipes'));
+app.use('/families', require('./routes/families'));
 
 
 if (process.env.NODE_ENV === "production") {

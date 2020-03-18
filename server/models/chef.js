@@ -41,6 +41,9 @@ const chefSchema = new Schema({
     },
     chefRecipes: [{
         type: String
+    }],
+    families: [{
+        type: String
     }]
 });
 

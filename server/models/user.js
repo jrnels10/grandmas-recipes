@@ -89,6 +89,9 @@ const userSchema = new Schema({
     ],
     recipesLiked: [
         { type: String }
+    ],
+    myFamilies: [
+        { type: String }
     ]
 });
 

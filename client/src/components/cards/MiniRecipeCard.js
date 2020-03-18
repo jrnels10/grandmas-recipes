@@ -6,7 +6,13 @@ import { Link } from 'react-router-dom';
 class RecipeCard extends Component {
     constructor(props) {
         super(props);
-        this.state = { description: false, heart: false, modal: false, likedRecipes: [], liked: this.props.recipe.liked }
+        this.state = {
+            description: false,
+            heart: props.value.user.recipesLiked.includes(props.recipe._id),
+            modal: false,
+            likedRecipes: props.value.user.recipesLiked,
+            liked: this.props.recipe.liked
+        }
     };
 
     toggle = (title) => {
@@ -14,14 +20,10 @@ class RecipeCard extends Component {
     };
 
     toggleHeart = async (e) => {
-        this.setState({ heart: !this.state.heart });
-        const res = await likemyrecipe(this.props.recipe._id, { userId: this.props.value.user.id })
-        this.setState({ liked: res.data.liked });
+        const initialHeart = this.state.heart;
+        this.setState({ liked: initialHeart ? --this.state.liked : ++this.state.liked, heart: !initialHeart });
+        await likemyrecipe(this.props.recipe._id, { userId: this.props.value.user.id })
     };
-
-    componentWillUnmount() {
-
-    }
 
     selected = () => {
         this.props.value.dispatch({
@@ -48,7 +50,7 @@ class RecipeCard extends Component {
             </div>
             <div className="mini-recipe-card-actions row">
                 <div className="mini-recipe-card-heart-container col-2">
-                    {heart || liked ?
+                    {heart ?
                         <svg className="bi bi-heart-fill mini-heart" onClick={this.toggleHeart} width="1em" height="1em" viewBox="0 0 20 20" fill="#f7c9b6" xmlns="http://www.w3.org/2000/svg">
                             <path fillRule="evenodd" d="M10 3.314C14.438-1.248 25.534 6.735 10 17-5.534 6.736 5.562-1.248 10 3.314z" clipRule="evenodd" />
                         </svg> :

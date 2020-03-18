@@ -90,7 +90,6 @@ module.exports = {
         }
     },
     secret: async (req, res, next) => {
-        // console.log(req.user)
         const user = await returnUserWithChefsAndRecipes(req.user);
         res.json({ secret: 'resource', profile: user })
     },
