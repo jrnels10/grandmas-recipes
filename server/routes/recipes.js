@@ -21,4 +21,7 @@ router.route('/updatemyrecipe/:id')
 router.route('/getmyrecipe/:id')
     .post(RecipeController.getMyRecipe);
 
+router.route('/likedmyrecipe/:id')
+    .post(RecipeController.likedMyRecipe);
+
 module.exports = router; 

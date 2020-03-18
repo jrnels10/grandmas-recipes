@@ -1,22 +1,27 @@
 import React, { Component } from 'react';
+import { likemyrecipe } from './../../API/RecipeAPI';
 import { Link } from 'react-router-dom';
 
 
 class RecipeCard extends Component {
     constructor(props) {
         super(props);
-        this.state = { description: false, heart: false, modal: false }
+        this.state = { description: false, heart: false, modal: false, likedRecipes: [], liked: this.props.recipe.liked }
     };
 
     toggle = (title) => {
         this.setState({ [title]: !this.state[title] })
     };
 
-    toggleHeart = (e) => {
-        this.setState({ heart: !this.state.heart }, () => {
-            this.props.myLikedRecipes(this.props.recipe._id, this.state.heart);
-        });
+    toggleHeart = async (e) => {
+        this.setState({ heart: !this.state.heart });
+        const res = await likemyrecipe(this.props.recipe._id, { userId: this.props.value.user.id })
+        this.setState({ liked: res.data.liked });
     };
+
+    componentWillUnmount() {
+
+    }
 
     selected = () => {
         this.props.value.dispatch({
@@ -26,7 +31,7 @@ class RecipeCard extends Component {
     };
 
     render() {
-        const { heart, description } = this.state;
+        const { heart, description, liked } = this.state;
         const { recipeImage, _id, recipeDescription, recipeName, dateSubmitted } = this.props.recipe;
         return <div className="card mini-recipe-card" >
             <div className='recipe-card-header'>
@@ -43,7 +48,7 @@ class RecipeCard extends Component {
             </div>
             <div className="mini-recipe-card-actions row">
                 <div className="mini-recipe-card-heart-container col-2">
-                    {heart ?
+                    {heart || liked ?
                         <svg className="bi bi-heart-fill mini-heart" onClick={this.toggleHeart} width="1em" height="1em" viewBox="0 0 20 20" fill="#f7c9b6" xmlns="http://www.w3.org/2000/svg">
                             <path fillRule="evenodd" d="M10 3.314C14.438-1.248 25.534 6.735 10 17-5.534 6.736 5.562-1.248 10 3.314z" clipRule="evenodd" />
                         </svg> :
@@ -51,6 +56,14 @@ class RecipeCard extends Component {
                             <path fillRule="evenodd" d="M10 4.748l-.717-.737C7.6 2.281 4.514 2.878 3.4 5.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.837-3.362.314-4.385-1.114-2.175-4.2-2.773-5.883-1.043L10 4.748zM10 17C-5.333 6.868 5.279-1.04 9.824 3.143c.06.055.119.112.176.171a3.12 3.12 0 01.176-.17C14.72-1.042 25.333 6.867 10 17z" clipRule="evenodd" />
                         </svg>}
                 </div>
+                {liked > 0 ?
+                    <React.Fragment>
+                        <svg className="bi bi-circle-fill liked-icon" width="1.2em" height="1.2em" viewBox="0 0 20 20" fill="#bf0d00" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="10" cy="10" r="8" />
+                        </svg>
+                        <span className='liked-number'>{liked}</span>
+                    </React.Fragment>
+                    : null}
                 <div className="mini-share col-8">
 
                 </div>

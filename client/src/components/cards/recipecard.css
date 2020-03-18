@@ -293,6 +293,21 @@ p {
   z-index: 100;
   padding-top: 1px;
 }
+.liked-icon {
+  position: absolute;
+  z-index: 100;
+  left: 31px;
+  bottom: 20px;
+}
+
+.liked-number {
+  position: absolute;
+  z-index: 100;
+  left: 39px;
+  bottom: 22px;
+  color: #ffffff;
+  font-size: 11px;
+}
 
 .mini-heart,
 .mini-chevron-down {

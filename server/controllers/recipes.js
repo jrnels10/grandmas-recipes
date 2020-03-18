@@ -28,7 +28,8 @@ module.exports = {
             submittedBy: req.params.id,
             cookingInstructions: cookingInstructions,
             ingredients: ingredients,
-            private: true
+            private: true,
+            liked: 0
         });
         const savedRecipe = await newRecipe.save();
         await Chef.findOneAndUpdate({ '_id': chefId }, {
@@ -124,8 +125,53 @@ module.exports = {
         await res.send(recipe);
     },
     likedMyRecipe: async (req, res, next) => {
-        const foundUser = await User.findOne({ '_id': req.params.id });
-        const recipeFound = await Recipe.findOne({ "_id": req.body.id });
+        try {
+            const foundRecipeInUsersLikedArray = await User.findOne({ '_id': req.body.userId });
+            const recipeAlreadyLiked = foundRecipeInUsersLikedArray.recipesLiked.indexOf(req.params.id) >= 0;
+            console.log(recipeAlreadyLiked)
+            if (recipeAlreadyLiked) {
+                console.log('add')
 
+                await User.update(
+                    { _id: req.body.userId },
+                    { $pull: { recipesLiked: { $in: req.params.id } } }
+                ).catch(error => {
+                    console.log(error)
+                    return error
+                });
+            } else {
+                console.log('remove')
+                await User.update(
+                    { _id: req.body.userId },
+                    { $push: { recipesLiked: req.params.id } }
+                ).catch(error => {
+                    console.log(error)
+                    return error
+                });
+            }
+            console.log("============== user recipe collection liked updated ==================");
+
+
+
+            console.log("============== like my recipe initiated ==================");
+            const recipeFound = await Recipe.findOne({ "_id": req.params.id });
+            const newLikedNumber = recipeAlreadyLiked ? --recipeFound.liked : ++recipeFound.liked;
+            console.log(recipeFound, newLikedNumber, foundRecipeInUsersLikedArray)
+            await Recipe.updateOne({ '_id': req.params.id }, { $set: { 'liked': newLikedNumber < 1 ? 0 : newLikedNumber } }).catch(error => {
+                console.log(error)
+                return error
+            });
+            console.log("============== recipe collection liked updated ==================");
+
+            const recipeFoundAfterLikedCount = await Recipe.findOne({ "_id": req.params.id });
+            // const foundUserAfterLiked = await User.findOne({ '_id': req.body.userId });
+            res.send({ liked: recipeFoundAfterLikedCount.liked })
+
+
+        }
+        catch (error) {
+            console.log('++++++++++++++ Error in likedMyRecipe +++++++++++++++');
+            console.log(error);
+        }
     }
-}
+};

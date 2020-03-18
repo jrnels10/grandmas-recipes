@@ -44,6 +44,15 @@ export async function getmyrecipe(recipeId) {
 };
 
 
+export async function likemyrecipe(recipeId, user) {
+    try {
+        return axios.post(`${baseUrl}/recipes/likedmyrecipe/${recipeId}`, user)
+    } catch (error) {
+        return 'Could not find recipe!'
+    }
+};
+
+
 export async function deleteMyRecipe(recipeId, id) {
     try {
         return axios.delete(`${baseUrl}/recipes/deletemyrecipe/${id}`, { data: { recipeId } })
