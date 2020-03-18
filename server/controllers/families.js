@@ -110,8 +110,6 @@ module.exports = {
             const foundUser = await User.findOne({ '_id': req.params.id });
             const foundNewFamilyMember = await User.findOne({ '_id': newFamilyMember });
             const foundFamily = await Family.findOne({ '_id': familyId });
-            console.log(foundUser._id, foundFamily.familyOwner)
-
             if (foundUser._id != foundFamily.familyOwner) {
                 res.status(403).send({ error: "You do not have permissions to add new family members. Contact the Family creator to add new member" })
             }
