@@ -11,16 +11,9 @@ export class NavigateButton extends Component {
 
     selected = (selected, type) => {
         if (selected && type) {
-            if (type === 'editChef') {
+            if (type === 'editChef' || type === 'editRecipe' || type === 'createFamily') {
                 this.props.value.dispatch({
-                    type: 'VIEW_MY_CHEF',
-                    payload: { selected: selected }
-                });
-            }
-            else if (type === 'editRecipe') {
-                debugger
-                this.props.value.dispatch({
-                    type: 'EDIT_MY_RECIPE',
+                    type: 'ITEM_SELECTED',
                     payload: { selected: selected }
                 });
             }
@@ -28,9 +21,10 @@ export class NavigateButton extends Component {
                 this.props.value.dispatch({ type: 'FULLSCREEN_IMAGE', payload: { fullScreenImage: selected.chefImage } })
             }
             else if (type === 'fullscreenRecipe') {
-                debugger
+
                 this.props.value.dispatch({ type: 'FULLSCREEN_IMAGE', payload: { fullScreenImage: selected.image } })
             }
+
         };
     };
 

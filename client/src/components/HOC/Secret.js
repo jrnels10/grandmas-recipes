@@ -11,6 +11,9 @@ export default async (dispatch, userState) => {
             lastName: userType.lastName,
             profilePicture: userType.profilePicture,
             method: userType.method,
+            chefs: userType.chefs,
+            recipesLiked: userType.recipesLiked,
+            families: userType.myFamilies
         }, () => {
             dispatch({
                 type: "USER_INFO",
@@ -22,6 +25,9 @@ export default async (dispatch, userState) => {
                     profilePicture: userType.profilePicture,
                     chefs: userType.chefs,
                     method: userType.method,
+                    recipesLiked: userType.recipesLiked,
+                    families: userType.myFamilies
+
                 }
             });
         });

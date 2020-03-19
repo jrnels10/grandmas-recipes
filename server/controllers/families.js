@@ -62,7 +62,7 @@ module.exports = {
 
     createMyFamily: async (req, res, next) => {
         try {
-
+            console.log('add new family initiated')
             const { submittedBy, chefId, familyBio, familyName } = JSON.parse(req.body.myFamily);
             const foundUser = await User.findOne({ '_id': req.params.id });
             const foundChef = await Chef.findOne({ '_id': chefId });
@@ -78,6 +78,7 @@ module.exports = {
                     familyName: familyName,
                     familyMembers: [foundUser._id]
                 });
+                console.log(req.body.myFamily)
                 const savedFamily = await newFamily.save();
                 console.log('====================add new Family completed ====================')
                 const updatedUser = await updateUserWithFamily(req, foundUser, savedFamily);
