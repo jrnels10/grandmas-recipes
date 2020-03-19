@@ -46,15 +46,8 @@ const reducer = (state, action) => {
                 ...state
             }
         case 'ITEM_SELECTED':
-            debugger
             state.selected = action.payload.selected;
             return {
-                ...state
-            }
-        case 'ITEM_SELECTED':
-            state.selected.chef = action.payload.selected;
-            return {
-                ...state,
                 ...state
             }
         case 'SIGN_OUT':
