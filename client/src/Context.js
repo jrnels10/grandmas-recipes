@@ -46,6 +46,7 @@ const reducer = (state, action) => {
                 ...state
             }
         case 'ITEM_SELECTED':
+            debugger
             state.selected = action.payload.selected;
             return {
                 ...state

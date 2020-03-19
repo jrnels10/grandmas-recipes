@@ -13,7 +13,7 @@ class RecipeCard extends Component {
         const last = recipeUrl.substring(recipeUrl.lastIndexOf("/") + 1, recipeUrl.length);
         const foundRecipe = await getmyrecipe(last);
         dispatch({
-            type: 'VIEW_MY_RECIPE',
+            type: 'ITEM_SELECTED',
             payload: { selected: foundRecipe.data }
         });
     };
@@ -38,15 +38,15 @@ class RecipeCard extends Component {
     render() {
         return <Consumer>
             {value => {
-                if (value.selected.recipe) {
-                    const { ingredients, recipeImage, cookingInstructions, chefName, recipeName, dateSubmitted, _id } = value.selected.recipe;
+                if (value.selected) {
+                    const { ingredients, recipeImage, cookingInstructions, chefName, recipeName, dateSubmitted, _id } = value.selected;
                     return <GeneralLargeCard>
                         <div className='recipe-card-header'>
                             <div className='w-75 mini-recipe-care-title-container'>
                                 <label className="card-title mini-recipe-card-title w-100">{recipeName}</label>
                                 <span className="card-title mini-recipe-card-date">Submitted {new Date(dateSubmitted).toDateString()}</span>
                             </div>
-                            <RecipeOptions options={{ value: value, image: recipeImage, recipe: value.selected.recipe }} />
+                            <RecipeOptions options={{ value: value, image: recipeImage, recipe: value.selected }} />
                         </div>
                         <div className="row card-graphics-container">
                             <img className="card-img-top" src={recipeImage} alt="portrait of recipe" onClick={this.hide} />
