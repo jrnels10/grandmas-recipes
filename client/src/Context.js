@@ -45,12 +45,12 @@ const reducer = (state, action) => {
             return {
                 ...state
             }
-        case 'VIEW_MY_RECIPE':
-            state.selected.recipe = action.payload.selected;
+        case 'ITEM_SELECTED':
+            state.selected = action.payload.selected;
             return {
                 ...state
             }
-        case 'VIEW_MY_CHEF':
+        case 'ITEM_SELECTED':
             state.selected.chef = action.payload.selected;
             return {
                 ...state,

@@ -45,7 +45,6 @@ class AddChef extends Component {
             this.setState({
                 chefName: chefName,
                 chefBio: chefBio,
-                familyName: familyName,
                 chefId: chefId,
                 dateUpdated: new Date(),
                 updatedBy: `${this.props.data.user.firstName} ${this.props.data.user.lastName}`,
@@ -118,19 +117,7 @@ class AddChef extends Component {
                     <hr className='sign-underline' />
                     {this.state.errorKey === 'chefName' ? <p className="text-danger">required</p> : null}
                 </div>
-                <div className="input-group input-group-sm mb-3">
-                    <label className="sign-input-label" htmlFor="exampleInputEmail1">Families</label>
-                    {families.length > 0 ? <select className="col-4 custom-select custom-select-sm"
-                        name="familyName"
-                        value={this.state.selectSectionValue}
-                        onChange={this.onSelectedText.bind(this)}>
-                        {families.map((item) => {
-                            return <option key={item}>{item}</option>
-                        })}
-                    </select> : null}
-                    <input type="text" className="sign-input w-100" placeholder="Family Name" aria-label="Sizing example input" ref="theDiv" tabIndex={0} name='familyName' aria-describedby="inputGroup-sizing-sm" onChange={this.onSelectedText.bind(this)} />
-                    <hr className='sign-underline' />
-                </div>
+
                 <div className="input-group input-group-sm mb-3">
                     <label className="sign-input-label" htmlFor="exampleInputEmail1">Chef Portrait</label>
                     <input className="sign-input addrecipe-custom-file-input" type="file" name='chefImage' onChange={this.onSelected.bind(this)} />
