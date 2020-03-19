@@ -54,23 +54,23 @@ class AddRecipe extends Component {
     }
 
     componentDidMount() {
-        const { selected: { recipe } } = this.props.data;
-        if (recipe) {
+        const { selected } = this.props.data;
+        if (selected) {
             this.setState({
                 dateUpdated: new Date(),
                 updatedBy: `${this.props.data.user.firstName} ${this.props.data.user.lastName}`,
                 update: true,
-                ingredients: [...recipe.ingredients],
-                recipeId: recipe._id,
-                recipeDescription: recipe.recipeDescription,
-                recipeName: recipe.recipeName,
-                groups: [...recipe.groups],
-                cookingInstructions: recipe.cookingInstructions,
-                grandma_Id: recipe.chefId
+                ingredients: [...selected.ingredients],
+                recipeId: selected._id,
+                recipeDescription: selected.recipeDescription,
+                recipeName: selected.recipeName,
+                groups: [...selected.groups],
+                cookingInstructions: selected.cookingInstructions,
+                grandma_Id: selected.chefId
             });
-            this.refs.theDiv.value = recipe.recipeName;
-            this.refs.theRecipeDescriptionDiv.value = recipe.recipeDescription;
-            this.refs.theInstructionsDiv.value = recipe.cookingInstructions;
+            this.refs.theDiv.value = selected.recipeName;
+            this.refs.theRecipeDescriptionDiv.value = selected.recipeDescription;
+            this.refs.theInstructionsDiv.value = selected.cookingInstructions;
             this.refs.theDiv.focus();
         }
         else {
