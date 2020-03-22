@@ -1,4 +1,4 @@
-import { secret } from './../../API/RecipeAPI';
+import { secret } from './../../API/UserAPI';
 
 export default async (dispatch, userState) => {
     try {
@@ -13,7 +13,7 @@ export default async (dispatch, userState) => {
             method: userType.method,
             chefs: userType.chefs,
             recipesLiked: userType.recipesLiked,
-            families: userType.myFamilies
+            families: userType.families
         }, () => {
             dispatch({
                 type: "USER_INFO",
@@ -26,7 +26,7 @@ export default async (dispatch, userState) => {
                     chefs: userType.chefs,
                     method: userType.method,
                     recipesLiked: userType.recipesLiked,
-                    families: userType.myFamilies
+                    families: userType.families
 
                 }
             });

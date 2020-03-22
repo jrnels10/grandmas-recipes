@@ -29,7 +29,10 @@ class CardContainer extends Component {
                 return value.user.chefs.length > 0 ?
                     <Slider {...settings}>
                         {value.user.chefs.map((chef, idx) => {
-                            return <GrandmaCard key={idx} chef={chef} value={value} />
+                            const chefFamilies = value.user.families.filter(family => {
+                                return family.chefId === chef.chefId
+                            });
+                            return <GrandmaCard key={idx} chef={chef} value={value} families={chefFamilies} />
                         })}
                     </Slider>
                     : <NavigateButton pathTo={'/addnewchef'}>Add new Chef</NavigateButton>

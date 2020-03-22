@@ -19,7 +19,20 @@ export async function createFamily(userId, data) {
 
 export async function addNewfamilyMember(userId, body) {
     try {
-        return axios.post(`${baseUrl}/families/createmyfamily/${userId}`, body)
+        return axios.post(`${baseUrl}/families/addmembertofamily/${userId}`, body).catch(function (error) {
+            return error.response.data
+        })
+    }
+    catch (error) {
+        return error.response.data;
+    }
+}
+
+export async function findMyFamily(familyId) {
+    try {
+        return axios.post(`${baseUrl}/families/findmyfamily/${familyId}`).catch(function (error) {
+            return error.response.data
+        })
     }
     catch (error) {
         return error.response.data;

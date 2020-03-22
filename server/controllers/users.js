@@ -105,6 +105,14 @@ module.exports = {
             return userMap
         });
     },
+    findMyUser: async (req, res, next) => {
+        try {
+            const foundUser = await User.findOne({ '_id': req.params.id });
+            res.send(foundUser)
+        } catch (error) {
+            res.send({ error: error, errorMessage: 'Cannot find user' })
+        }
+    },
     getUsersById: async (req, res, next) => {
         return User.find({ '_id': { $in: req.body } }).then((users) => {
             var userMap = [];

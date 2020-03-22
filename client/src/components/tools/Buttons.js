@@ -11,7 +11,7 @@ export class NavigateButton extends Component {
 
     selected = (selected, type) => {
         if (selected && type) {
-            if (type === 'editChef' || type === 'editRecipe' || type === 'createFamily') {
+            if (type === 'editChef' || type === 'editRecipe' || type === 'familyHome') {
                 this.props.value.dispatch({
                     type: 'ITEM_SELECTED',
                     payload: { selected: selected }

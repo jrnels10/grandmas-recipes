@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { secret } from './API/RecipeAPI';
+import { secret } from './API/UserAPI';
 import SimpleLoader from './components/loader/SimpleLoader';
 
 
@@ -113,7 +113,8 @@ export class Provider extends Component {
             this.setState({ token: jwtToken, isAuthenticated: true, loader: false, user: user.data.profile });
         }
         else {
-            // this.props.history.push('/')
+            this.setState({ loader: false });
+
         };
     };
 

@@ -11,11 +11,9 @@ export default class Home extends Component {
     state = {
         open: true,
     }
-    componentDidMount() {
-    }
+
 
     closeSign = () => {
-        console.log('test')
         this.setState({
             open: true
         })
@@ -30,6 +28,15 @@ export default class Home extends Component {
         return (
             <Consumer>
                 {value => {
+                    if (this.props.redirectTo && value.redirectTo === '') {
+                        value.dispatch({
+                            type: "REDIRECT-FROM",
+                            payload: {
+                                redirectedFrom: this.props.redirectedFrom,
+                                redirectTo: this.props.redirectTo
+                            }
+                        })
+                    }
                     return <div className="w-100 h-100 row m-0">
                         {!value.isAuthenticated ?
                             <React.Fragment>

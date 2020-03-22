@@ -18,7 +18,7 @@ router.route('/addmembertofamily/:id')
 // router.route('/deletemychef/:id')
 //     .delete(FamilyController.deleteMyChef);
 
-// router.route('/findmychef/:id')
-//     .post(FamilyController.findMyChef);
+router.route('/findmyfamily/:id')
+    .post(FamilyController.findMyFamily);
 
 module.exports = router;

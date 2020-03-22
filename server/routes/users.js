@@ -75,5 +75,7 @@ router.route('/secret')
 router.route('/getUsersById')
     .post(UserController.getUsersById);
 
+router.route('/findmyuser/:id')
+    .post(UserController.findMyUser);
 
 module.exports = router;

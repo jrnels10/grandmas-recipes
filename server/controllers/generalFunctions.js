@@ -44,15 +44,16 @@ module.exports = {
         };
 
         class familyData {
-            constructor(familyName, familyOwnerName, familyId, chefName, familyMembers, dateSubmitted, submittedBy, familyBio) {
+            constructor(chefId, familyId, familyName, familyOwnerName, chefName, familyMembers, familyBio, dateSubmitted, submittedBy) {
+                this.chefId = chefId;
                 this.familyId = familyId;
+                this.familyName = familyName;
                 this.familyOwnerName = familyOwnerName;
-                this.familyMembers = familyMembers;
                 this.chefName = chefName;
+                this.familyMembers = familyMembers;
                 this.familyBio = familyBio;
                 this.dateSubmitted = dateSubmitted;
                 this.submittedBy = submittedBy;
-                this.familyName = familyName;
             }
         };
 
@@ -70,7 +71,15 @@ module.exports = {
             await Promise.all(
                 req.myChefs.map(async (chefId) => {
                     const chef = await Chef.find({ _id: chefId });
-                    const newChef = new chefData(chefId, chef[0].chefName, chef[0].chefImage, chef[0].chefBio, chef[0].dateSubmitted, chef[0].submittedBy, chef[0].familyName)
+                    const newChef = new chefData(
+                        chefId,
+                        chef[0].chefName,
+                        chef[0].chefImage,
+                        chef[0].chefBio,
+                        chef[0].dateSubmitted,
+                        chef[0].submittedBy,
+                        chef[0].familyName
+                    )
                     if (chef[0] && chef[0].chefRecipes) {
                         await Promise.all(
                             chef[0].chefRecipes.map(async (recipeId) => {
@@ -90,7 +99,17 @@ module.exports = {
             await Promise.all(
                 req.myFamilies.map(async (familyId) => {
                     const family = await Family.find({ _id: familyId });
-                    const newFamily = new familyData(family[0].familyName, family[0].familyOwnerName, family[0].chefId, family[0].familyMembers, family[0].chefName, family[0].dateSubmitted, family[0].submittedBy, family[0].familyBio)
+                    const newFamily = new familyData(
+                        family[0].chefId,
+                        family[0]._id,
+                        family[0].familyName,
+                        family[0].familyOwnerName,
+                        family[0].chefName,
+                        family[0].familyMembers,
+                        family[0].familyBio,
+                        family[0].dateSubmitted,
+                        family[0].submittedBy,
+                    );
                     clientData.families.push(newFamily);
                 })
             );

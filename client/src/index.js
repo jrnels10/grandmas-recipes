@@ -13,10 +13,11 @@ import AddRecipe from './components/addAndUpdate/NewRecipe';
 import RecipeCard from './components/cards/RecipeCard';
 import CardContainer from './components/cards/CardContainer';
 import AddChef from './components/addAndUpdate/AddChef';
-import CreateFamily from './components/addAndUpdate/CreateFamily';
+import CreateFamily from './components/Family/CreateFamily';
 import SingleChefCard from './components/cards/SingleChefCard';
 import FullScreen from './components/tools/FullScreen';
-import NewFamilyMember from './components/addAndUpdate/NewFamilyMember';
+import FamilyHome from './components/Family/FamilyHome';
+import InvitationToFamily from './components/Family/InvitationToFamily';
 
 ReactDOM.render(
     <Provider>
@@ -28,8 +29,8 @@ ReactDOM.render(
                     <Route path="/dashboard" component={authGuard(DashBoard)} />
                     <Route path="/familychefs" component={authGuard(CardContainer)} />
                     <Route path="/addnewchef" component={authGuard(AddChef)} />
-                    <Route path="/createfamily" component={authGuard(CreateFamily)} />
-                    <Route path="/addfamilymember" component={authGuard(NewFamilyMember)} />
+                    <Route path="/familyhome" component={authGuard(FamilyHome)} />
+                    <Route path="/familyinvite/:id/:id" component={authGuard(InvitationToFamily)} />
                     <Route path="/updatechef" component={authGuard(AddChef)} />
                     <Route path="/addrecipe/:id" component={authGuard(AddRecipe)} />
                     <Route path="/updaterecipe" component={authGuard(AddRecipe)} />

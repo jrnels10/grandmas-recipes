@@ -35,21 +35,18 @@ async function updateChefWithFamily(req, chef, family) {
 module.exports = {
     // =======================================================
     // =======================================================
-    // =================  find chef  =========================
+    // =================  find family  =========================
     // =======================================================
     // =======================================================
 
-    // findMyFamily: async (req, res, next) => {
-    //     try {
-    //         const foundGrandmaList = await User.findOne({ 'myRecipes._id': req.params.id })
-    //         const foundChef = foundGrandmaList.myRecipes.filter(item => {
-    //             return item._id == req.params.id
-    //         })
-    //         res.send(foundChef)
-    //     } catch (error) {
-    //         res.send({ error: error, errorMessage: 'Cannot find chef' })
-    //     }
-    // },
+    findMyFamily: async (req, res, next) => {
+        try {
+            const foundFamily = await Family.findOne({ '_id': req.params.id });
+            res.send(foundFamily)
+        } catch (error) {
+            res.send({ error: error, errorMessage: 'Cannot find family' })
+        }
+    },
 
 
     // =======================================================
@@ -108,9 +105,10 @@ module.exports = {
         try {
             console.log("============== Add member to Family initiated ==================");
             const { familyId, newFamilyMember } = req.body;
-            const foundUser = await User.findOne({ '_id': req.params.id });
-            const foundNewFamilyMember = await User.findOne({ '_id': newFamilyMember });
+            const foundUser = await User.findOne({ '_id': newFamilyMember });
+            const foundNewFamilyMember = await User.findOne({ '_id': req.params.id });
             const foundFamily = await Family.findOne({ '_id': familyId });
+            // console.log(foundFamily, newFamilyMember)
             if (foundUser._id != foundFamily.familyOwner) {
                 res.status(403).send({ error: "You do not have permissions to add new family members. Contact the Family creator to add new member" })
             }

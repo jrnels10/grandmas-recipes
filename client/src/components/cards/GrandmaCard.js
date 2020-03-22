@@ -27,7 +27,7 @@ class GrandmaCard extends Component {
     };
 
     render() {
-        const { chefImage, chefName, chefBio, submittedBy, chefId, chefRecipes } = this.props.chef;
+        const { chefImage, chefName, chefBio, submittedBy, chefId, chefRecipes, families } = this.props.chef;
         const numberOfRecipes = chefRecipes.length;
         return <GeneralLargeCard>
             <div className='grandma-card-header'>
@@ -49,7 +49,12 @@ class GrandmaCard extends Component {
                         <p className="card-author"> -{submittedBy}</p>
                     </React.Fragment>
                     : null}
-                <div className="row w-100 mb-3">
+                <div className="row w-100 mb-4">
+                    {
+                        this.props.families.length > 0 ? this.props.families.map(family => {
+                            console.log(family)
+                        }) : null
+                    }
                     <div className="col-8">
                         <Link className="nav-link p-0 text-white" to={`/addrecipe/${chefId}`} >Add New Recipe <svg className="bi bi-plus" width="1.2em" height="1.2em" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                             <path fillRule="evenodd" d="M10 5.5a.5.5 0 01.5.5v4a.5.5 0 01-.5.5H6a.5.5 0 010-1h3.5V6a.5.5 0 01.5-.5z" clipRule="evenodd" />
