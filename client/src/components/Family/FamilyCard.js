@@ -29,7 +29,7 @@ class Family extends Component {
         return <Slider {...settings}>
             {this.props.myFamilies.map((family, idx) => {
                 const { familyName, familyMembers, familyBio, familyId } = family;
-                const inviteFamilyLink = `${window.location.origin}/familyinvite/${this.props.user._id}/${familyId}`;
+                const inviteFamilyLink = `${window.location.origin}/familyinvite/${this.props.user.id}/${familyId}`;
                 return <div key={idx} className="card family-card " style={{ width: "18rem" }}>
                     {/* <img className="card-img-top" src="..." alt="Card image cap"/> */}
                     <div className="card-body">
