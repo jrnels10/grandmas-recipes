@@ -18,15 +18,13 @@
   color: white;
 }
 
-.slick-prev {
+/* .slick-prev {
   display: block !important;
-  /* position: absolute; */
   left: 0 !important;
   z-index: 100 !important;
 }
 .slick-next {
   display: block !important;
-  /* position: absolute; */
   right: 2px !important;
   z-index: 100 !important;
 }
@@ -36,4 +34,4 @@
   color: #5f525d !important;
   opacity: 1;
   font-size: 1.5rem;
-}
+} */
