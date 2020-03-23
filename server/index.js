@@ -26,6 +26,7 @@ app.use('/users', require('./routes/users'));
 app.use('/chefs', require('./routes/chefs'));
 app.use('/recipes', require('./routes/recipes'));
 app.use('/families', require('./routes/families'));
+app.use('/analytics', require('./routes/analytics'));
 
 
 if (process.env.NODE_ENV === "production") {

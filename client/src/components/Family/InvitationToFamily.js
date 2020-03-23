@@ -33,15 +33,23 @@ class InviteConfirm extends Component {
     }
     render() {
         return <PageWrapper>
-            <div className='invitation-div'>
+            <div className='invitation-div text-center'>
 
-                <h4>Welcome to Family Recipes</h4>
-                {this.state.user ? <span>{this.state.user.data[this.state.user.data.method].firstName} would like you to join family, {this.state.family.familyName}</span> : null}
+                <h4>Welcome to Family Recipes! A place where you can share family recipes with your family members, relatives, friends or even just a place to store your recipe instead of just on a illegible note card.</h4>
+                {this.state.user ? <h4>{this.state.user.data[this.state.user.data.method].firstName} has created a family to store and share recipes and they would like you to join their family, {this.state.family.familyName}</h4> : null}
 
-                {this.state.question ? <React.Fragment>
+                {this.state.question ? <div className="w-100 text-center">
                     <h4>Would you like to join?</h4>
-                    <button onClick={this.addUser.bind(this, true)}>Yes</button>
-                    <button onClick={this.addUser.bind(this, false)}>No</button></React.Fragment> : <h1>You suck!</h1>}
+                    <button className='btn signin-button w-75 mt-3 text-center m-auto' onClick={this.addUser.bind(this, true)}>Yes</button>
+                    <button className='btn signin-button w-75 mt-3 text-center m-auto' onClick={this.addUser.bind(this, false)}>No</button>
+                </div> :
+                    <div className="w-100 text-center">
+                        <h4>Ok... no hard feelings. We will just let {this.state.user.data[this.state.user.data.method].firstName} that you did not want to be a part of their family. I'm sure they'll understand.</h4>
+                        <button className='btn signin-button w-75 mt-3 text-center m-auto' onClick={this.addUser.bind(this, true)}>On second thought... Yes!!!</button>
+                        <button className='btn signin-button w-75 mt-3 text-center m-auto' onClick={this.addUser.bind(this, false)}>No! {this.state.user.data[this.state.user.data.method].firstName} is no family of mine</button>
+                    </div>
+
+                }
                 {this.state.error ? <span className='text-danger'>{this.state.error}</span> : null}
             </div>
         </PageWrapper>

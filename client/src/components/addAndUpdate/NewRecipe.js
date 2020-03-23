@@ -55,7 +55,7 @@ class AddRecipe extends Component {
 
     componentDidMount() {
         const { selected } = this.props.data;
-        if (selected) {
+        if (Object.keys(selected).length > 0) {
             this.setState({
                 dateUpdated: new Date(),
                 updatedBy: `${this.props.data.user.firstName} ${this.props.data.user.lastName}`,
