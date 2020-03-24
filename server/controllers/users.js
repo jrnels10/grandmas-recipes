@@ -45,7 +45,8 @@ module.exports = {
                 password: password,
                 firstName: firstName,
                 lastName: lastName,
-                profilePicture: "default"
+                profilePicture: "default",
+                dateSubmitted: new Date()
             }
         });
         await newUser.save();
@@ -72,8 +73,6 @@ module.exports = {
     googleOAuth: async (req, res, next) => {
         // Generate token
         try {
-
-            console.log(req.user)
             const token = signToken(req.user);
             res.status(200).json({ token });
         } catch (error) {
@@ -91,6 +90,10 @@ module.exports = {
     },
     secret: async (req, res, next) => {
         const user = await returnUserWithChefsAndRecipes(req.user);
+        await User.updateOne({ '_id': user.id }, { $set: { lastLogin: new Date() } }).catch(error => {
+            res.sendStatus(404)
+            return error
+        });
         res.json({ secret: 'resource', profile: user })
     },
     getAll: async (req, res, next) => {

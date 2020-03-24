@@ -13,7 +13,7 @@ import AddRecipe from './components/addAndUpdate/NewRecipe';
 import RecipeCard from './components/cards/RecipeCard';
 import CardContainer from './components/cards/CardContainer';
 import AddChef from './components/addAndUpdate/AddChef';
-import CreateFamily from './components/Family/CreateFamily';
+import Analytics from './components/Analytics/Analytics';
 import SingleChefCard from './components/cards/SingleChefCard';
 import FullScreen from './components/tools/FullScreen';
 import FamilyHome from './components/Family/FamilyHome';
@@ -38,6 +38,7 @@ ReactDOM.render(
                     <Route path={`/recipe/selectedrecipe/:recipeId`} component={RecipeCard} />
                     <Route exact path="/signin" component={SignIn} />
                     <Route exact path="/fullscreen" component={FullScreen} />
+                    <Route exact path="/admin" component={Analytics} />
                 </Switch>
             </App>
         </BrowserRouter>

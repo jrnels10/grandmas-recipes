@@ -92,7 +92,16 @@ const userSchema = new Schema({
     ],
     myFamilies: [
         { type: String }
-    ]
+    ],
+    dateSubmitted: {
+        type: Date
+    },
+    dateUpdated: {
+        type: Date
+    },
+    lastLogin: {
+        type: Date
+    }
 });
 
 // userSchema.plugin(uniqueValidator)

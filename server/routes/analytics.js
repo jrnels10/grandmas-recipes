@@ -7,6 +7,16 @@ const { validateMyChef, schema } = require('../helpers/routeHelpers');
 
 
 router.route('/getDataByDates')
-    .post(AnalyticsController.getDataByDates);
+    .post(AnalyticsController.getSubmittedDataByDates);
+
+
+router.route('/getDataByDayWithinDates')
+    .post(AnalyticsController.getSubmittedDataByDayWithinDates);
+
+router.route('/getDataByWeekWithinDates')
+    .post(AnalyticsController.getSubmittedDataByWeekWithinDates);
+
+router.route('/getlastLoginDataByDayWithinDates')
+    .post(AnalyticsController.getlastLoginDataByDayWithinDates);
 
 module.exports = router;
