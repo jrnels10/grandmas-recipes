@@ -54,7 +54,6 @@ class DataByDate extends Component {
                 data={this.state.data}
                 width={100}
                 height={50}
-
             />
         </div >
     }

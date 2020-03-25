@@ -37,7 +37,7 @@ class Analytics extends Component {
         this.setState({ dailyDataByDate: res.data, weeklyDataByDate: resWeek.data, dailyUserLogin: resUserLogin.data });
     }
     render() {
-        const { dailyDataByDate, weeklyDataByDate } = this.state;
+        const { dailyDataByDate, weeklyDataByDate, dailyUserLogin } = this.state;
         if (dailyDataByDate) {
             return <div className='analytics container-fluid'>
                 <div className='row'>
@@ -48,7 +48,10 @@ class Analytics extends Component {
 
                         <DataByDate data={weeklyDataByDate} header='Weekly Submitted' />
                     </div>
+                    <div className='col-md-6 col-xs-12'>
 
+                        <DataByDate data={dailyUserLogin} header='Logged in by date' />
+                    </div>
                 </div>
             </div>
         } {

@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { Consumer } from '../../Context';
 import { Link } from 'react-router-dom';
+import DashBoard from './../dashboard/Dashboard';
 
 
 
 import './home.css'
 
-export default class Home extends Component {
+class Home extends Component {
 
     state = {
         open: true,
@@ -58,11 +59,12 @@ export default class Home extends Component {
                                         </button>
                                     </div>
                                 </div>
-                            </React.Fragment> : null}
+                            </React.Fragment> : <DashBoard data={value} />}
                         <div className="row"></div>
                     </div>
                 }}
             </Consumer>
         )
     }
-}
+};
+export default Home;
