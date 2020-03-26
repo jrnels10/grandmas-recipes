@@ -168,7 +168,14 @@ class AddRecipe extends Component {
         } else if (res.error) {
             console.log(res)
         }
-    }
+    };
+
+    // keyPress = (e) => {
+    //     if (e.charCode === 13) {
+    //         this.setState({ cookingInstructions: this.state.cookingInstructions.concat(" new-Line-Break ") })
+    //     }
+
+    // }
     render() {
         let families = [];
         return <div className='addrecipe-container'>

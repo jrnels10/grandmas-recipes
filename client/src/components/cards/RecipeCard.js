@@ -3,6 +3,10 @@ import GeneralLargeCard from './GeneralLargeCard';
 import { getmyrecipe } from './../../API/RecipeAPI';
 import { Consumer } from '../../Context';
 import RecipeOptions from './RecipeOptions';
+import './recipe.css';
+
+
+
 class RecipeCard extends Component {
     constructor(props) {
         super(props);
@@ -40,6 +44,10 @@ class RecipeCard extends Component {
             {value => {
                 if (value.selected) {
                     const { ingredients, recipeImage, cookingInstructions, chefName, recipeName, dateSubmitted, _id } = value.selected;
+                    const textSplit = cookingInstructions.split('\n');
+                    const listItems = textSplit.map((textSplit, idx) =>
+                        <li key={idx}>{textSplit}</li>
+                    );
                     return <GeneralLargeCard>
                         <div className='recipe-card-header'>
                             <div className='w-75 mini-recipe-care-title-container'>
@@ -66,7 +74,7 @@ class RecipeCard extends Component {
 
                                     </div>
                                 }) : null}
-                                <p className="card-text mt-3">{cookingInstructions}</p>
+                                <ul className="card-text recipe-card-text mt-3">{listItems}</ul>
                                 <p className="card-author"> -{chefName}</p>
                                 <div className="row w-100 mb-3">
                                     <div className="col-8">
