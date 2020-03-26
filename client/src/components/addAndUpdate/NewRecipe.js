@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { addNewRecipe, updateRecipe, deleteMyRecipe } from '../../API/RecipeAPI';
 import ModalRecipes from '../tools/Modal';
 import { withRouter } from 'react-router-dom';
+import IngredientCards from './IngredientCards';
 
 import './addrecipe.css';
 
@@ -45,7 +46,7 @@ class AddRecipe extends Component {
             ingredientModal: false,
             units: "",
             ingredient: '',
-            ingredientButton: "Add",
+            ingredientButton: "Save",
             recipeDescription: '',
             recipeName: '',
             groups: [],
@@ -132,11 +133,8 @@ class AddRecipe extends Component {
 
     addIngredient = (e) => {
         this.setState({
-            ingredients: [...this.state.ingredients,
-            {
-                ingredient: this.state.ingredient
-            }],
-            ingredientButton: 'Add'
+            ingredients: [...this.state.ingredients, { ingredient: this.state.ingredient }],
+            ingredientButton: 'Save'
         });
         this.refs.ingredientDiv.value = '';
         this.refs.ingredientDiv.focus();
@@ -170,14 +168,37 @@ class AddRecipe extends Component {
         }
     };
 
-    // keyPress = (e) => {
-    //     if (e.charCode === 13) {
-    //         this.setState({ cookingInstructions: this.state.cookingInstructions.concat(" new-Line-Break ") })
-    //     }
+    onDragStart = (event, taskName) => {
+        console.log('dragstart on div: ', taskName);
+        event.dataTransfer.setData("taskName", taskName);
+    }
+    onDragOver = (event) => {
+        console.log(event)
+    }
 
-    // }
+    onDrop = (event, cat) => {
+        let taskName = event.dataTransfer.getData("taskName");
+
+        let selectedIngredient = this.state.ingredients.filter((selected) => {
+            if (selected.ingredient == taskName) {
+                debugger
+            }
+            return selected;
+        });
+
+        this.setState({
+            ...this.state,
+            selectedIngredient
+        });
+    }
+
+    reorderList = (list) => {
+        this.setState({ ingredients: list })
+    }
+
     render() {
         let families = [];
+        console.log(this.state.ingredients)
         return <div className='addrecipe-container'>
             <div className="input-group input-group-sm mb-3">
                 <label className="sign-input-label" htmlFor="exampleInputEmail1">Recipe Name</label>
@@ -204,37 +225,23 @@ class AddRecipe extends Component {
                 <hr className='sign-underline' />
             </div>
             <div className='row w-100 m-0 mb-3'>
+                <span className="sign-input-label ingredients-text-list">{this.state.ingredients.map(item => { return item.ingredient }).join(', ')}</span>
                 <div className='col-10 w-100 pl-0'>
-                    <button className="btn w-100 signin-button" id="addrecipe-add-ingredients" onClick={this.toggleIngredientModal}>Add ingredients</button>
+                    <button className="btn w-100 signin-button" id="addrecipe-add-ingredients" onClick={this.toggleIngredientModal}>Add{this.state.ingredients.length > 0 ? '/Edit' : ''} ingredients</button>
                 </div>
-                <ModalRecipes display={this.state.ingredientModal} name={this.state.recipeName} closeAction={this.toggleIngredientModal}>
-                    <div className='col-7 w-100 pl-0'>
+                <ModalRecipes display={this.state.ingredientModal} name={this.state.recipeName} closeAction={this.toggleIngredientModal} closeActionName={"Close"}>
+                    <div className='col-9 w-100 pl-0'>
                         <div className="input-group input-group-sm mb-3">
                             <label className="sign-input-label" htmlFor="exampleInputEmail1">Ingredient</label>
-                            <input type="text" className="sign-input" placeholder="2 Cups of Flour" aria-label="Sizing example input" ref="ingredientDiv" tabIndex={0} name='ingredient' aria-describedby="inputGroup-sizing-sm" onChange={this.onSelectedText.bind(this)} />
+                            <input type="text" className="ingredient-input" placeholder="Type in ingredient and amount" aria-label="Sizing example input" ref="ingredientDiv" tabIndex={0} name='ingredient' aria-describedby="inputGroup-sizing-sm" onChange={this.onSelectedText.bind(this)} />
                             <hr className='sign-underline' />
                         </div>
                     </div>
-                    <div className='col-5 w-100 pl-0'>
-                        <button className="btn signin-button" id="addrecipe-addingredient" onClick={this.addIngredient}>{this.state.ingredientButton}</button>
+                    <div className='col-3 w-100 pl-0'>
+                        {this.state.ingredient.length > 0 ? <button className="btn signin-button" id="addrecipe-addingredient" onClick={this.addIngredient}>{this.state.ingredientButton}</button> : null}
                     </div>
-                    <div className='col-12 w-100 p-0'>
-                        <div className="addrecipe-ingredient-container">
-                            <table>
-                                <tbody>
-                                    {this.state.ingredients.length > 0 ? this.state.ingredients.map((item, idx) => {
-                                        return <tr key={idx} className="recipe-item">
-                                            <td className="edit-ingredient" width="20%" >
-                                                <button className='btn btn-warning ingredient-edit-button' onClick={this.editIngredient.bind(this, item.ingredient)}>Edit</button></td>
-                                            <td width="70%">{item.ingredient}</td>
-                                            <td className="delete-ingredient" width="20%" >
-                                                <button className='btn btn-danger ingredient-delete-button' onClick={this.deleteIngredient.bind(this, item.ingredient)}>Delete</button>
-                                            </td>
-                                        </tr>
-                                    }) : null}
-                                </tbody>
-                            </table>
-                        </div>
+                    <div className='col-12 w-100 p-0 ingredients-container'>
+                        <IngredientCards ingredients={this.state.ingredients} reorderList={this.reorderList} editIngredient={this.editIngredient} deleteIngredient={this.deleteIngredient} />
                     </div>
                 </ModalRecipes>
             </div>

@@ -89,6 +89,40 @@
   border-radius: 9px;
 }
 
-.ingredient-edit-button {
+.ingredients-container {
+  max-height: 300px;
+  overflow: auto;
+}
+.ingredients-text-list {
+  word-wrap: break-word;
+  width: 90vw;
+}
+
+.ingredient-input {
+  background: none;
+  border: none;
+  color: #ffffff;
+  width: 100%;
+}
+.ingredient-input::placeholder {
+  color: #c59894;
+}
+.edit-ingredient {
   float: left;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.main-ingredient {
+  width: 75%;
+  margin: auto;
+  text-align: center;
+  min-width: 200px;
+  word-wrap: normal;
+}
+.delete-ingredient {
+  float: right;
+  position: absolute;
+  right: 0;
+  top: 0;
 }
