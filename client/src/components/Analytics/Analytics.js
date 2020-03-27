@@ -15,25 +15,25 @@ class Analytics extends Component {
         const res = await getDataByDayWithinDates(
             {
                 dataType: 'Family',
-                beginDate: "2020-03-01T00:00:00Z", //new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(),
+                beginDate: "2020-03-03:00:00Z", //new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(),
                 finalDate: new Date()
             }
         );
         const resWeek = await getDateByWeekWithinDates(
             {
                 dataType: 'Chef',
-                beginDate: "2020-03-01T00:00:00Z",
+                beginDate: "2020-03-03:00:00Z",
                 finalDate: new Date()
             }
         );
         const resUserLogin = await getlastLoginDataByDayWithinDates(
             {
                 dataType: 'User',
-                beginDate: "2020-03-01T00:00:00Z", //new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(),
+                beginDate: "2020-03-03T00:00:00Z", //new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(),
                 finalDate: new Date()
             }
         );
-        console.log(resUserLogin)
+        console.log(res)
         this.setState({ dailyDataByDate: res.data, weeklyDataByDate: resWeek.data, dailyUserLogin: resUserLogin.data });
     }
     render() {
