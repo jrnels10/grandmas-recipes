@@ -20,7 +20,7 @@ class DataByDate extends Component {
             const color2 = Math.floor(Math.random() * 169);
             const color3 = Math.floor(Math.random() * 169);
             return {
-                fill: `rgba(${color1}, ${color2}, ${color3}, 0.4)`,
+                fill: `rgba(${color1}, ${color2}, ${color3}, 0.64)`,
                 border: `rgba(${color1}, ${color2}, ${color3}, 1)`
             }
         });

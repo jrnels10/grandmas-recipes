@@ -10,13 +10,16 @@ class Analytics extends Component {
         this.state = {}
     }
     async componentDidMount() {
-        console.log(new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString())
+        var dt = new Date()
+        dt.setDate(dt.getDate() - 10);
+        console.log(dt)
+        console.log(dt)
 
         const res = await getDataByDayWithinDates(
             {
-                dataType: 'Family',
-                beginDate: "2020-03-01T00:00:00Z", //new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(),
-                finalDate: new Date()
+                dataType: 'Recipe',
+                beginDate: "2020-03-04T00:00:00Z",//new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(),
+                finalDate: new Date().toISOString()
             }
         );
         const resWeek = await getDateByWeekWithinDates(
@@ -29,11 +32,11 @@ class Analytics extends Component {
         const resUserLogin = await getlastLoginDataByDayWithinDates(
             {
                 dataType: 'User',
-                beginDate: "2020-03-01T00:00:00Z", //new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(),
+                beginDate: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(),
                 finalDate: new Date()
             }
         );
-        console.log(resUserLogin)
+        console.log(res)
         this.setState({ dailyDataByDate: res.data, weeklyDataByDate: resWeek.data, dailyUserLogin: resUserLogin.data });
     }
     render() {

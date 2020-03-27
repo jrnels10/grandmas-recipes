@@ -65,7 +65,7 @@ module.exports = {
                 ModelSelected = require('../models/family');
         };
         const data = await ModelSelected.aggregate([
-            { $match: { "dateSubmitted": { $gte: new Date(beginDate), $lt: endDate } } },
+            { $match: { "dateSubmitted": { $gte: startDate, $lt: endDate } } },
             {
                 $addFields: {
                     dateAdded: {
@@ -77,7 +77,7 @@ module.exports = {
                     },
                     dateRange: {
                         $map: {
-                            input: { $range: [0, { $subtract: [new Date(), startDate] }, 1000 * 60 * 60 * 24] },
+                            input: { $range: [0, { $subtract: [endDate, startDate] }, 1000 * 60 * 60 * 24] },
                             in: { $add: [startDate, "$$this"] }
                         }
                     }
