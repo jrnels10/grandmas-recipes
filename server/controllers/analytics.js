@@ -64,6 +64,7 @@ module.exports = {
             case 'Family':
                 ModelSelected = require('../models/family');
         };
+
         const data = await ModelSelected.aggregate([
             { $match: { "dateSubmitted": { $gte: startDate, $lt: endDate } } },
             {
@@ -77,7 +78,7 @@ module.exports = {
                     },
                     dateRange: {
                         $map: {
-                            input: { $range: [0, { $subtract: [endDate, startDate] }, 1000 * 60 * 60 * 24] },
+                            input: { $range: [0, { $subtract: [endDate, startDate] }, 1000 * 60 * 60 * 24] }, // $range requires an ending value that can be represented as a 32-bit integer, which means the date difference cannot be more than 20 days.
                             in: { $add: [startDate, "$$this"] }
                         }
                     }
@@ -90,9 +91,9 @@ module.exports = {
                     added: {
                         $push: {
                             $cond: [
-                                { $eq: ["$dateRange", "$dateAdded"] },
-                                { make: "$dateSubmitted", count: 1 },
-                                { count: 0 }
+                                { $eq: ["$dateRange", "$dateAdded"] }, // if date added and date in range are the same
+                                { count: 1 }, // if true increase count by 1
+                                { count: 0 } // if false increase count by 0
                             ]
                         }
                     }
@@ -129,6 +130,15 @@ module.exports = {
             case 'Family':
                 ModelSelected = require('../models/family');
         };
+        // let initialTime = new Date(beginDate)
+        //     , endTime = new Date(finalDate)
+        //     , arrTime = []
+        //     , dayMillisec = 24 * 60 * 60 * 1000
+        //     ;
+        // for (let q = initialTime; q <= endTime; q = new Date(q.getTime() + dayMillisec)) {
+        //     arrTime.push(q);
+        // }
+        // console.log(arrTime);
         const data = await ModelSelected.aggregate([
             { $match: { "dateSubmitted": { $gte: new Date(beginDate), $lt: endDate } } },
             {
@@ -139,8 +149,9 @@ module.exports = {
             },
             { $sort: { _id: 1 } }
         ]);
+
         const date = data.map(dateData => {
-            return { addDate: moment('2020').add(dateData._id, 'weeks'), totalSubmitted: dateData.documentCount };
+            return { addDate: moment().isoWeek(dateData._id), totalSubmitted: dateData.documentCount };
         });
         res.send(date)
     },
@@ -163,8 +174,9 @@ module.exports = {
             case 'Family':
                 ModelSelected = require('../models/family');
         };
+
         const data = await ModelSelected.aggregate([
-            { $match: { "lastLogin": { $gte: new Date(beginDate), $lt: endDate } } },
+            { $match: { "lastLogin": { $gte: startDate, $lt: endDate } } },
             {
                 $addFields: {
                     dateAdded: {
@@ -176,7 +188,7 @@ module.exports = {
                     },
                     dateRange: {
                         $map: {
-                            input: { $range: [0, { $subtract: [new Date(), startDate] }, 1000 * 60 * 60 * 24] },
+                            input: { $range: [0, { $subtract: [endDate, startDate] }, 1000 * 60 * 60 * 24] },
                             in: { $add: [startDate, "$$this"] }
                         }
                     }
@@ -202,12 +214,12 @@ module.exports = {
                 $project: {
                     _id: 0,
                     addDate: "$_id",
-                    loginCount: { $sum: "$added.count" }
+                    totalSubmitted: { $sum: "$added.count" }
                 }
             }
         ]);
 
         res.send(data)
-    },
+    }
 
 };

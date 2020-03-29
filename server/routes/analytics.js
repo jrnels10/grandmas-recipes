@@ -19,4 +19,8 @@ router.route('/getDataByWeekWithinDates')
 router.route('/getlastLoginDataByDayWithinDates')
     .post(AnalyticsController.getlastLoginDataByDayWithinDates);
 
+
+// router.route('/test')
+//     .post(AnalyticsController.test);
+
 module.exports = router;
