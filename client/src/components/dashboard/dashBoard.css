@@ -4,6 +4,7 @@
 }
 .dashboard-container {
   height: calc(100vh - 116px);
+  width: 100%;
 }
 .dashboard-buttons-container {
   padding: 10%;

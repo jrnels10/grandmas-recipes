@@ -1,13 +1,45 @@
 .page-wrapper-container {
-  padding-top: 56px;
+  height: 100%;
+  z-index: 1000;
   width: 100vw;
   padding-bottom: 56px;
+  position: relative;
+}
+.background {
+  height: 100vh;
+  width: 100vw;
+  background: linear-gradient(rgba(0, 0, 0, 0.46), rgba(0, 0, 0, 0.46)),
+    url(./../../Images/photoshop_knife.png);
+  background-color: #ffffff;
+  background-repeat: no-repeat;
+  background-position: center bottom;
+  background-size: cover;
+  z-index: 0;
+  position: fixed;
+  /* background-image: linear-gradient(rgba(0, 0, 0, 0.46), rgba(0, 0, 0, 0.46)); */
 }
 
+.page-wrapper-content {
+  position: relative;
+  /* overflow: auto; */
+}
+/* .page-wrapper-image {
+  background: linear-gradient(rgba(0, 0, 0, 0.46), rgba(0, 0, 0, 0.46)),
+    url(./../../Images/photoshop_knife.png);
+  background-color: #ffffff;
+  background-repeat: no-repeat;
+  background-position: center bottom;
+  background-size: cover;
+} */
 .page-shade {
   /* height: 100%; */
   width: 100vw;
   background-color: rgba(0, 0, 0, 0.35);
+}
+
+.page-wrapper-open {
+  box-shadow: 0px -8px 13px 1px rgba(0, 0, 0, 0.65);
+  border-radius: 20px 20px 0px 0px;
 }
 
 @media screen and (min-width: 600px) {

@@ -23,23 +23,25 @@ ReactDOM.render(
     <Provider>
         <BrowserRouter >
             <App>
-                <Switch>
-                    <Route exact path="/" component={Home} />
-                    <Route exact path="/signup" component={SignUp} />
-                    <Route path="/dashboard" component={authGuard(DashBoard)} />
-                    <Route path="/familychefs" component={authGuard(CardContainer)} />
-                    <Route path="/addnewchef" component={authGuard(AddChef)} />
-                    <Route path="/familyhome" component={authGuard(FamilyHome)} />
-                    <Route path="/familyinvite/:id/:id" component={authGuard(InvitationToFamily)} />
-                    <Route path="/updatechef" component={authGuard(AddChef)} />
-                    <Route path="/addrecipe/:id" component={authGuard(AddRecipe)} />
-                    <Route path="/updaterecipe" component={authGuard(AddRecipe)} />
-                    <Route path="/familychef/:id" component={SingleChefCard} />
-                    <Route path={`/recipe/selectedrecipe/:recipeId`} component={RecipeCard} />
-                    <Route exact path="/signin" component={SignIn} />
-                    <Route exact path="/fullscreen" component={FullScreen} />
-                    <Route exact path="/admin" component={Analytics} />
-                </Switch>
+                <div className="scrollable-div">
+                    <Switch>
+                        <Route exact path="/" component={Home} />
+                        <Route exact path="/signup" component={SignUp} />
+                        <Route path="/dashboard" component={authGuard(DashBoard)} />
+                        <Route path="/familychefs" component={authGuard(CardContainer)} />
+                        <Route path="/addnewchef" component={authGuard(AddChef)} />
+                        <Route path="/familyhome" component={authGuard(FamilyHome)} />
+                        <Route path="/familyinvite/:id/:id" component={authGuard(InvitationToFamily)} />
+                        <Route path="/updatechef" component={authGuard(AddChef)} />
+                        <Route path="/addrecipe/:id" component={authGuard(AddRecipe)} />
+                        <Route path="/updaterecipe" component={authGuard(AddRecipe)} />
+                        <Route path="/familychef/:id" component={SingleChefCard} />
+                        <Route path={`/recipe/selectedrecipe/:recipeId`} component={RecipeCard} />
+                        <Route exact path="/signin" component={SignIn} />
+                        <Route exact path="/fullscreen" component={FullScreen} />
+                        <Route exact path="/admin" component={Analytics} />
+                    </Switch>
+                </div>
             </App>
         </BrowserRouter>
     </Provider>

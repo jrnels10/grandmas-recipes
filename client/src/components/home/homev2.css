@@ -1,0 +1,69 @@
+.recipe-logo-container {
+  margin-top: 27vh;
+  text-align: center;
+  width: 100vw;
+}
+
+.recipe-book {
+  display: block;
+  fill: #725f6f !important;
+}
+
+.navbar-brand-home {
+  font-size: 3.3rem;
+  font-family: "Dancing Script", cursive;
+  color: #f7c9b6;
+  text-shadow: 0px 12px 13px rgba(0, 0, 0, 0.65);
+}
+
+.recipe-plate {
+  height: 35px;
+  fill: none;
+  stroke: #f0d1bf;
+  stroke-width: 5px;
+  margin-left: 0%;
+  margin-right: 0%;
+  filter: drop-shadow(0px 9px 5px black);
+}
+
+.login-container {
+  width: 100vw;
+  text-align: center;
+  margin-top: 30%;
+}
+
+.signin-button-v2 {
+  background-color: #f0d1bf;
+  border-color: #f0d1bf;
+  position: relative;
+  width: 65vw;
+  -webkit-box-shadow: 0px 10px 15px 0px rgba(0, 0, 0, 0.35);
+  box-shadow: 0px 10px 15px 0px rgba(0, 0, 0, 0.35);
+}
+
+.sign-in-v2 {
+  color: #252525;
+  font-weight: 600;
+}
+
+.sign-in-arrow {
+  position: absolute;
+  top: 0;
+  right: 29px;
+  font-size: 35px;
+  font-weight: bold;
+}
+
+.sign-up-link-span {
+  font-size: 13px;
+  color: #252525;
+  margin-left: 35px;
+  font-weight: 500;
+}
+
+.sign-up-link {
+  color: #c59894;
+  font-weight: 600;
+  font-size: 15px;
+}
+/*# sourceMappingURL=homev2.css.map */

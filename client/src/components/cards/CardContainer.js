@@ -26,7 +26,7 @@ class CardContainer extends Component {
         };
         return <Consumer>
             {value => {
-                return value.user.chefs.length > 0 ?
+                return value.user.chefs ?
                     <Slider {...settings}>
                         {value.user.chefs.map((chef, idx) => {
                             const chefFamilies = value.user.families.filter(family => {
