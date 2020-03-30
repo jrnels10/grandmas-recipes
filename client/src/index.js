@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, useLocation } from 'react-router-dom';
 // import registerServiceWorker from './registerServiceWorker';
 import App from './App';
 import Home from './components/home/Home';
@@ -18,29 +18,34 @@ import SingleChefCard from './components/cards/SingleChefCard';
 import FullScreen from './components/tools/FullScreen';
 import FamilyHome from './components/Family/FamilyHome';
 import InvitationToFamily from './components/Family/InvitationToFamily';
+import { AnimatePresence } from 'framer-motion';
+
+
 
 ReactDOM.render(
     <Provider>
         <BrowserRouter >
             <App>
                 <div className="scrollable-div">
-                    <Switch>
-                        <Route exact path="/" component={Home} />
-                        <Route exact path="/signup" component={SignUp} />
-                        <Route path="/dashboard" component={authGuard(DashBoard)} />
-                        <Route path="/familychefs" component={authGuard(CardContainer)} />
-                        <Route path="/addnewchef" component={authGuard(AddChef)} />
-                        <Route path="/familyhome" component={authGuard(FamilyHome)} />
-                        <Route path="/familyinvite/:id/:id" component={authGuard(InvitationToFamily)} />
-                        <Route path="/updatechef" component={authGuard(AddChef)} />
-                        <Route path="/addrecipe/:id" component={authGuard(AddRecipe)} />
-                        <Route path="/updaterecipe" component={authGuard(AddRecipe)} />
-                        <Route path="/familychef/:id" component={SingleChefCard} />
-                        <Route path={`/recipe/selectedrecipe/:recipeId`} component={RecipeCard} />
-                        <Route exact path="/signin" component={SignIn} />
-                        <Route exact path="/fullscreen" component={FullScreen} />
-                        <Route exact path="/admin" component={Analytics} />
-                    </Switch>
+                    <AnimatePresence exitBeforeEnter>
+                        <Switch location={window.location} key={window.location.pathname}>
+                            <Route exact path="/" component={Home} />
+                            <Route exact path="/signup" component={SignUp} />
+                            <Route exact path="/dashboard" component={authGuard(DashBoard)} />
+                            <Route exact path="/familychefs" component={authGuard(CardContainer)} />
+                            <Route exact path="/addnewchef" component={authGuard(AddChef)} />
+                            <Route exact path="/familyhome" component={authGuard(FamilyHome)} />
+                            <Route exact path="/familyinvite/:id/:id" component={authGuard(InvitationToFamily)} />
+                            <Route exact path="/updatechef" component={authGuard(AddChef)} />
+                            <Route exact path="/addrecipe/:id" component={authGuard(AddRecipe)} />
+                            <Route exact path="/updaterecipe" component={authGuard(AddRecipe)} />
+                            <Route exact path="/familychef/:id" component={SingleChefCard} />
+                            <Route exact path={`/recipe/selectedrecipe/:recipeId`} component={RecipeCard} />
+                            <Route exact path="/signin" component={SignIn} />
+                            <Route exact path="/fullscreen" component={FullScreen} />
+                            <Route exact path="/admin" component={Analytics} />
+                        </Switch>
+                    </AnimatePresence>
                 </div>
             </App>
         </BrowserRouter>

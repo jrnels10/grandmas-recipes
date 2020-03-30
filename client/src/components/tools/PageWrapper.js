@@ -22,7 +22,7 @@ class PageWrapper extends Component {
 
     render() {
         return <div className={`page-wrapper-container page-wrapper-${this.props.navOpen ? 'open' : "close"}`} >
-            <div className="background" />
+            <div className={`background background-${this.props.navOpen}`} />
             <div className="page-wrapper-content">
                 {this.props.children}
             </div>

@@ -3,6 +3,8 @@ import { Consumer } from '../../Context';
 import { Link } from 'react-router-dom';
 import DashBoard from './../dashboard/Dashboard';
 import GrandParents from './grandparents';
+import { motion } from 'framer-motion';
+
 import './homev2.css';
 
 // import './home.css'
@@ -27,6 +29,19 @@ class Home extends Component {
     }
 
     render() {
+        const pageVariant = {
+            in: {
+                opacity: 1,
+                x: 0
+            },
+            out: {
+                opacity: 0,
+                x: "-100vw"
+            }
+        };
+        const pageTransition = {
+            transition: "linear"
+        }
         return (
             <Consumer>
                 {value => {
@@ -39,12 +54,19 @@ class Home extends Component {
                             }
                         })
                     }
-                    return <div className="w-100 h-100 row m-0">
+                    return <motion.div
+                        className="w-100 h-100 row m-0"
+                        initial='out'
+                        animate='in'
+                        exit='out'
+                        variants={pageVariant}
+                        transition={pageTransition}
+                    >
                         {!value.isAuthenticated ?
                             <React.Fragment>
                                 <div className='recipe-logo-container'>
                                     <label className={`navbar-brand-home`}>Family Recipes</label>
-                                    <GrandParents />
+                                    {/* <GrandParents /> */}
                                 </div>
 
                                 <div className="login-container">
@@ -59,13 +81,13 @@ class Home extends Component {
                                             </svg>
                                         </Link>
                                     </button>
-                                    <div className='w-100 m-1'>
+                                    <div className='w-100 m-2'>
                                         <span className='sign-up-link-span'>Dont have an account? <Link className="sign-up-link " to="/signup" >Sign Up</Link></span>
                                     </div>
                                 </div>
                             </React.Fragment> : <DashBoard data={value} />}
                         <div className="row"></div>
-                    </div>
+                    </motion.div>
                 }}
             </Consumer>
         )

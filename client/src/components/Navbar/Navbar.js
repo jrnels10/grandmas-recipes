@@ -49,8 +49,8 @@ class Navbar extends Component {
     }
 
     redirect = (e) => {
-        this.hide(e);
-        e.target.pathname !== '/' ? this.setState({ homePage: false }) : this.setState({ homePage: true });
+        // this.hide(e);
+        // e.target.pathname !== '/' ? this.setState({ homePage: false }) : this.setState({ homePage: true });
         this.props.toggleNav();
     }
     hide = (e) => {

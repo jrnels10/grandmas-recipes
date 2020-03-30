@@ -1,5 +1,5 @@
 .recipe-logo-container {
-  margin-top: 27vh;
+  margin-top: 25vh;
   text-align: center;
   width: 100vw;
 }
@@ -10,20 +10,19 @@
 }
 
 .navbar-brand-home {
-  font-size: 3.3rem;
+  font-size: 3.8rem;
   font-family: "Dancing Script", cursive;
+  text-shadow: 0px 5px 6px #252525;
   color: #f7c9b6;
-  text-shadow: 0px 12px 13px rgba(0, 0, 0, 0.65);
 }
 
 .recipe-plate {
   height: 35px;
   fill: none;
   stroke: #f0d1bf;
-  stroke-width: 5px;
+  stroke-width: 3px;
   margin-left: 0%;
   margin-right: 0%;
-  filter: drop-shadow(0px 9px 5px black);
 }
 
 .login-container {
@@ -62,7 +61,7 @@
 }
 
 .sign-up-link {
-  color: #c59894;
+  color: #725f6f;
   font-weight: 600;
   font-size: 15px;
 }

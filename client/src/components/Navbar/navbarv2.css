@@ -6,7 +6,7 @@
 
 .icon-chef {
   height: 35px;
-  fill: #877785;
+  fill: #f0d1bf;
 }
 .profile-icon-container {
   text-align: center;
@@ -14,12 +14,12 @@
 }
 .icon-house {
   font-size: 40px;
-  color: #877785;
+  color: #f0d1bf;
 }
 
 .icon-profile {
   font-size: 30px;
-  color: #877785;
+  color: #f0d1bf;
 }
 
 .top-nav-open {
@@ -28,4 +28,10 @@
   z-index: 0;
   top: 0;
   transition: ease 300ms height;
+  background-color: #877785;
+}
+
+.navbar-toggler-button {
+  float: right;
+  font-size: 1.5rem;
 }

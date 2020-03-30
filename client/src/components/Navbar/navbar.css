@@ -6,7 +6,7 @@
   top: 0;
   padding-left: 0px;
   padding-right: 0px;
-  /* background-color: rgb(18, 21, 23); */
+  background-color: #f0d1bf;
 }
 
 #navbarSupportedContent {
@@ -26,14 +26,7 @@
   margin-left: 15px;
   transition: all 0.3s;
 }
-.nav-scroll-false {
-  background-color: #877785;
-}
 
-.nav-scroll-false label,
-.nav-scroll-false-hamburger {
-  color: #f7c9b6 !important;
-}
 .navbar-brand-open {
   font-family: "Dancing Script", cursive;
   font-size: 2em;
@@ -44,52 +37,7 @@
   transition: all 0.7s;
 }
 
-.navbar-custom-close {
-  height: 0px;
-  opacity: 0;
-  background-color: rgba(247, 201, 182, 0);
-  transition: all 0.3s ease-in;
-}
-
-.navbar-custom-open {
-  height: auto;
-  border-top: solid 1px #877785;
-  color: #f7c9b6;
-  opacity: 1;
-  transition: color 0.3s ease-in, height 0.2s ease-in, opacity 0.3s ease-in;
-  background-color: #877785;
-  display: block !important;
-}
-
 .navbar-open {
   background-color: #877785;
   transition: all 0.3s;
-}
-
-.ul-open > li {
-  opacity: 0;
-  transition: all 3s;
-}
-.ul-open > li {
-  opacity: 0.8;
-  transition: all 3s;
-}
-.text-blueish > li > a,
-.ul-open > li > a {
-  color: #f7c9b6;
-  transition: all 0.3s;
-}
-/* .navbar-open label,
-.navbar-open > .navbar-toggler,
-.navbar-open > .navbar-toggler > #nav-hamburger {
-  color: #ffffff !important;
-  border-color: #ffffff !important;
-} */
-
-.ham-close {
-  color: #f7c9b6;
-}
-
-.ham-open {
-  color: #f7c9b6 !important;
 }
