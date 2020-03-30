@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+
 import { Consumer } from './../../Context';
 import axios from 'axios';
 import GoogleLogin from 'react-google-login';
 // import FacebookLogin from 'react-facebook-login';
-import PageWrapper from './../tools/PageWrapper';
+import { motion } from 'framer-motion';
+
 
 import './SignUpAndSignIn.css';
 
@@ -130,53 +133,73 @@ export default class SignIn extends Component {
 
 
     render() {
+        const pageVariant = {
+            in: {
+                opacity: 1,
+                x: 0
+            },
+            out: {
+                opacity: 0,
+                x: "100vw"
+            }
+        };
+        const pageTransition = {
+            transition: "linear"
+        }
         return (
             <Consumer>
                 {value => {
                     const open = !this.state.open ? "open" : "close";
                     // console.log(value)
-                    return <PageWrapper>
-                        <div className={`signin-${open} signin-menu`}>
-                            <div className={`w-100 fade-${open} sign-container`}>
-                                <span className="m-2 pb-4" onClick={this.close}><i className="fas fa-arrow-circle-right fa-lg"></i></span>
-                                <form className={`mt-3`} onSubmit={this.onSubmit.bind(this, value)}>
-                                    <div className="form-group-sm">
-                                        <label className="sign-input-label" htmlFor="exampleInputEmail1">Email address</label>
-                                        <input
-                                            className="form-control-sm sign-input"
-                                            id="exampleInputEmail1"
-                                            type="email"
-                                            name="email"
-                                            onChange={this.onChange}
-                                            aria-describedby="emailHelp"
-                                            placeholder="John@smith.com"
-                                        />
-                                        <hr className='sign-underline' />
-                                    </div>
-                                    <div className="form-group">
-                                        <label className="sign-input-label" htmlFor="exampleInputPassword1 text-white">Password</label>
-                                        <input
-                                            className="form-control-sm sign-input"
-                                            id="exampleInputPassword1"
-                                            type="password"
-                                            name='password'
-                                            onChange={this.onChange}
-                                            placeholder="mysecretpassword" />
-                                        <hr className='sign-underline' />
-                                    </div>
-                                    <div className='row w-100 m-0 pl-2 p-0 mt-3'>
-                                        <div className="w-50 text-center float-left">
-                                            <button type="submit" className="btn btn-primary signin-button">Sign In</button>
-                                        </div>
-                                    </div>
-                                </form>
-                                {this.state.errorMessage ? <div className='alert alert-danger'>{value.errorMessage}</div> : null}
-                                <div className='text-white pl-2 mt-5'><small>
-                                    Or sign in using with Google
-                            </small>
+                    return <motion.div
+                        className={`signin-${open} signin-menu`}
+                        initial='out'
+                        animate='in'
+                        exit='out'
+                        variants={pageVariant}
+                        transition={pageTransition}>
+                        <div className={`w-100 fade-${open} sign-container`}>
+                            <div className="w-100 sign-welcome">
+                                <h4>Welcome back!</h4>
+                            </div>
+                            <form className={`mt-3`} onSubmit={this.onSubmit.bind(this, value)}>
+                                <div className="form-group mb-5">
+                                    <label className="sign-input-label" htmlFor="exampleInputEmail1">Email address</label>
+                                    <input
+                                        className="form-control-sm sign-input"
+                                        id="exampleInputEmail1"
+                                        type="email"
+                                        name="email"
+                                        onChange={this.onChange}
+                                        aria-describedby="emailHelp"
+                                        placeholder="Enter your email address"
+                                    />
+                                    <hr className='sign-underline' />
                                 </div>
-                                <div className='row w-50 m-0 pl-2 p-0 mt-3'>
-                                    {/* <div className="w-50 m-auto text-center">
+                                <div className="form-group mb-5">
+                                    <label className="sign-input-label" htmlFor="exampleInputPassword1 text-white">Password</label>
+                                    <input
+                                        className="form-control-sm sign-input"
+                                        id="exampleInputPassword1"
+                                        type="password"
+                                        name='password'
+                                        onChange={this.onChange}
+                                        placeholder="Enter a password" />
+                                    <hr className='sign-underline' />
+                                </div>
+                                <div className='w-100 text-center'>
+
+                                    <button type="submit" className="btn signin-button-v2">Sign In</button>
+
+                                </div>
+                            </form>
+                            {this.state.errorMessage ? <div className='alert alert-danger mt-2'>{value.errorMessage}</div> : null}
+                            <div className='text-white pl-2 mt-5'><small>
+                                Or sign in using with Google
+                            </small>
+                            </div>
+                            <div className='row w-50 m-0 pl-2 p-0 mt-3'>
+                                {/* <div className="w-50 m-auto text-center">
                                         <FacebookLogin
                                             appId='1431908256951062'
                                             autoLoad={false}
@@ -188,20 +211,19 @@ export default class SignIn extends Component {
                                             icon="fa-facebook fa-lg"
                                         />
                                     </div> */}
-                                    <div className="w-100 m-auto text-center">
-                                        <GoogleLogin
-                                            clientId={`267196671122-298u06lbfo5ho1ollta67bm337ovluj9.apps.googleusercontent.com`}
-                                            buttonText="Google"
-                                            onSuccess={this.responseGoogle.bind(this, value)}
-                                            onFailure={this.responseGoogle.bind(this, value)}
-                                            className='btn google-login'
-                                            cookiePolicy={'single_host_origin'}
-                                        />
-                                    </div>
+                                <div className="w-100 m-auto text-center">
+                                    <GoogleLogin
+                                        clientId={`267196671122-298u06lbfo5ho1ollta67bm337ovluj9.apps.googleusercontent.com`}
+                                        buttonText="Google"
+                                        onSuccess={this.responseGoogle.bind(this, value)}
+                                        onFailure={this.responseGoogle.bind(this, value)}
+                                        className='btn google-login '
+                                        cookiePolicy={'single_host_origin'}
+                                    />
                                 </div>
                             </div>
                         </div>
-                    </PageWrapper>
+                    </motion.div>
                 }}
             </Consumer>
         );

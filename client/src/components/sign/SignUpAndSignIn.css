@@ -1,7 +1,6 @@
 .signin-menu {
   position: absolute;
   object-fit: cover;
-  height: calc(100% - 56px);
   width: 100%;
   overflow: hidden;
 }
@@ -11,11 +10,16 @@
 }
 
 .sign-container {
-  position: absolute;
   bottom: 0px;
-  height: 85vh;
-  padding: 0px 50px 0px 50px;
+  height: calc(100% - 50px);
+  padding: 15px 50px 0px 50px;
 }
+
+.welcome-sign {
+  color: #f7c9b6;
+  margin-bottom: 75px;
+}
+
 .signup-container {
   position: absolute;
   bottom: 0px;
@@ -28,6 +32,7 @@
   background: none;
   border: none;
   color: #c59894;
+  width: 100%;
 }
 /* Change the white to any color ;) */
 @-webkit-keyframes autofill {
@@ -49,13 +54,17 @@
 }
 
 .sign-input::placeholder {
-  color: #8777856c;
+  color: #c59894;
+  font-size: 15px;
+  /* text-shadow: 0px 1px 6px #252525; */
 }
 
 .sign-input-label {
   width: 100vw;
   color: #f0d1bf;
   margin: 0px;
+  font-size: 20px;
+  text-shadow: 0px 5px 10px #252525;
 }
 
 .signin-button {
@@ -71,6 +80,10 @@
   margin-top: 2px;
   background: #877785;
   width: 100%;
+  border: solid 1.5px #877785 !important;
+  border-radius: 50px;
+  -webkit-box-shadow: 0px 3px 10px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.75);
 }
 
 .facebook-login,
@@ -91,4 +104,20 @@
 
 .fa-facebook {
   color: #29487d;
+}
+
+.sign-welcome {
+  color: #f7c9b6;
+  margin-bottom: 30%;
+  margin-top: 5%;
+  text-shadow: 0px 5px 13px #252525;
+}
+
+.back-to-home {
+  position: absolute;
+  top: 3px;
+  left: 20px;
+  font-size: 40px;
+  font-weight: bold;
+  fill: #f0d1bf;
 }

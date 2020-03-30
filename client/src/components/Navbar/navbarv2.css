@@ -1,0 +1,37 @@
+.top-nav-close {
+  height: 0px;
+  z-index: 0;
+  transition: ease 300ms height;
+}
+
+.icon-chef {
+  height: 35px;
+  fill: #f0d1bf;
+}
+.profile-icon-container {
+  text-align: center;
+  padding-top: 13px;
+}
+.icon-house {
+  font-size: 40px;
+  color: #f0d1bf;
+}
+
+.icon-profile {
+  font-size: 30px;
+  color: #f0d1bf;
+}
+
+.top-nav-open {
+  display: block;
+  height: 60px;
+  z-index: 0;
+  top: 0;
+  transition: ease 300ms height;
+  background-color: #877785;
+}
+
+.navbar-toggler-button {
+  float: right;
+  font-size: 1.5rem;
+}

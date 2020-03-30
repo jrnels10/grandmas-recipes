@@ -1,19 +1,15 @@
-/* #root, */
+#root,
+body {
+  height: 100%;
+}
 
 html {
   height: 100%;
-  overflow-y: auto;
-  background-color: rgb(17, 21, 22);
+  /* overflow-y: auto; */
 }
 
 body {
-  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
-    url(./Images/jordane-mathieu-CkirKRvqXUs-unsplash.jpg);
-  background-repeat: no-repeat;
-  background-position: center bottom;
-  background-size: cover;
-  background-attachment: fixed;
-  height: 100vh;
+  background-color: #877785;
 }
 
 /* #877785
@@ -21,19 +17,19 @@ body {
 #F0D1BF
 #C59894
 #E85A4F */
-
+.grandparents {
+  height: 200px;
+}
 #app-div {
-  overflow: hidden;
   position: static;
 }
 
-.signin-menu,
-.sign-container {
-  /* height: calc(100% - 66px) !important; */
+.scrollable-div {
+  overflow: auto;
+  height: calc(100vh - 46px);
+  width: 100vw;
 }
 
-/* #body-container{
-} */
 @media screen and (min-width: 600px) {
   #app-div {
     /* background: url(./Images/Betty-White.jpg); */

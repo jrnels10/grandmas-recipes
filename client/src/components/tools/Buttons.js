@@ -34,7 +34,7 @@ export class NavigateButton extends Component {
             className="nav-link p-0 text-white"
             to={`${this.props.pathTo}`}
             onClick={this.selected.bind(this, this.props.selected, this.props.type)}>
-            <button type="submit" className={`btn signin-button ${customClass}`}>{this.props.children}</button>
+            <button type="submit" className={`btn signin-button-v2 ${customClass}`}>{this.props.children}</button>
         </Link>
     }
 }

@@ -9,6 +9,7 @@ class DashBoard extends Component {
         this.state = {}
     }
     componentDidMount() {
+
         secretResponse(this.props.data.dispatch, this)
     }
     reload = () => {
