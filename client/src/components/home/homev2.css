@@ -1,18 +1,17 @@
 .recipe-logo-container {
-  margin-top: 25vh;
+  margin-top: 10vh;
   text-align: center;
   width: 100vw;
 }
 
 .recipe-book {
   display: block;
-  fill: #725f6f !important;
+  fill: #ffaaa5 !important;
 }
 
 .navbar-brand-home {
-  font-size: 3.8rem;
+  font-size: 3.3rem;
   font-family: "Dancing Script", cursive;
-  text-shadow: 0px 5px 6px #252525;
   color: #f7c9b6;
 }
 
@@ -32,16 +31,16 @@
 }
 
 .signin-button-v2 {
-  background-color: #f0d1bf;
-  border-color: #f0d1bf;
+  background-color: #698474;
+  border-color: #698474;
   position: relative;
   width: 65vw;
   -webkit-box-shadow: 0px 10px 15px 0px rgba(0, 0, 0, 0.35);
-  box-shadow: 0px 10px 15px 0px rgba(0, 0, 0, 0.35);
+          box-shadow: 0px 10px 15px 0px rgba(0, 0, 0, 0.35);
 }
 
 .sign-in-v2 {
-  color: #252525;
+  color: #fcf8f3;
   font-weight: 600;
 }
 
@@ -61,7 +60,7 @@
 }
 
 .sign-up-link {
-  color: #725f6f;
+  color: #ffaaa5;
   font-weight: 600;
   font-size: 15px;
 }
