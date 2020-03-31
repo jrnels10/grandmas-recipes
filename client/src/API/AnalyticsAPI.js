@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseUrl = process.env.NODE_ENV === 'development' ? 'http://localhost:5000' : 'https://grandmasrecipes.herokuapp.com';
+const baseUrl = process.env.NODE_ENV === 'development' ? 'http://localhost:5000' : 'https://familyrecipes-app.herokuapp.com';
 
 // ==================== CHEF API ===========================
 //==========================================================

@@ -101,7 +101,7 @@ export class Provider extends Component {
         token: '',
         facebookappId: "2368972536494612",
         googleClientId: "267196671122-298u06lbfo5ho1ollta67bm337ovluj9.apps.googleusercontent.com",
-        axiosServerUrl: process.env.NODE_ENV === 'development' ? 'http://localhost:5000' : 'https://grandmasrecipes.herokuapp.com',
+        axiosServerUrl: process.env.NODE_ENV === 'development' ? 'http://localhost:5000' : 'https://familyrecipes-app.herokuapp.com',
         dispatch: action => this.setState(state => reducer(state, action))
     }
     async componentDidMount() {
@@ -122,7 +122,7 @@ export class Provider extends Component {
         return process.env.NODE_ENV === "development" ? null : this.setState({
             facebookappId: "2368972536494612",
             googleClientId: "267196671122-298u06lbfo5ho1ollta67bm337ovluj9.apps.googleusercontent.com",
-            axiosServerUrl: process.env.NODE_ENV === 'development' ? 'http://localhost:5000' : 'https://grandmasrecipes.herokuapp.com'
+            axiosServerUrl: process.env.NODE_ENV === 'development' ? 'http://localhost:5000' : 'https://familyrecipes-app.herokuapp.com'
         })
     };
 
