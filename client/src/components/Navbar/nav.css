@@ -1,0 +1,42 @@
+.top-nav-open {
+  display: block;
+  height: 60px;
+  z-index: 0;
+  top: 0;
+  -webkit-transition: ease 300ms height;
+  transition: ease 300ms height;
+  background-color: #fcf8f3;
+}
+
+.top-nav-close {
+  height: 0px;
+  z-index: 0;
+  -webkit-transition: ease 300ms height;
+  transition: ease 300ms height;
+}
+
+.icon-chef {
+  height: 35px;
+  fill: #698474;
+}
+
+.profile-icon-container {
+  text-align: center;
+  padding-top: 13px;
+}
+
+.icon-house {
+  font-size: 40px;
+  color: #698474;
+}
+
+.icon-profile {
+  font-size: 30px;
+  color: #698474;
+}
+
+.navbar-toggler-button {
+  float: right;
+  font-size: 1.5rem;
+}
+/*# sourceMappingURL=nav.css.map */

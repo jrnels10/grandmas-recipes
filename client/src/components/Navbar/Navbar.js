@@ -5,7 +5,7 @@ import { withRouter } from 'react-router-dom';
 import ChefIcon from './../../Images/ChefIcon';
 import axios from 'axios';
 
-import './navbarv2.css';
+import './nav.css';
 
 class Navbar extends Component {
     constructor(props, ...rest) {

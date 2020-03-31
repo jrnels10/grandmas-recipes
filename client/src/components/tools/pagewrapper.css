@@ -1,5 +1,5 @@
 .page-wrapper-container {
-  height: 100%;
+  /* height: 100%; */
   z-index: 1000;
   width: 100vw;
   padding-bottom: 56px;
@@ -15,7 +15,7 @@
   background-position: center bottom;
   background-size: cover;
   z-index: 0;
-  position: fixed;
+  position: absolute;
   border-radius: 0px 0px 0px 0px;
 }
 
@@ -34,7 +34,8 @@
 }
 
 .page-wrapper-open {
-  box-shadow: 0px -8px 13px 1px rgba(0, 0, 0, 0.65);
+  box-shadow: 0px -8px 30px 0px rgba(0, 0, 0, 0.65),
+    0px -5px 10px -5px rgba(0, 0, 0, 0.75);
   border-radius: 20px 20px 0px 0px;
   background-color: #f0d1bf;
 }

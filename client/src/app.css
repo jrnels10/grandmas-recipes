@@ -1,15 +1,14 @@
-#root,
-body {
+#root {
   height: 100%;
 }
 
 html {
-  height: 100%;
-  /* overflow-y: auto; */
+  overflow: hidden;
 }
 
 body {
-  background-color: #877785;
+  background-color: #fcf8f3;
+  height: auto;
 }
 
 /* #877785
@@ -22,6 +21,8 @@ body {
 }
 #app-div {
   position: static;
+  width: 100vw;
+  overflow: hidden;
 }
 
 .scrollable-div {
@@ -36,6 +37,6 @@ body {
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
-    padding-top: 56px !important;
+    /* padding-top: 56px !important; */
   }
 }

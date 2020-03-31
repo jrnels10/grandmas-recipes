@@ -1,0 +1,42 @@
+$pinkiishColor: #ffaaa5;
+$tanishColor: #ffd3b6;
+$whiteColor: #fcf8f3;
+$greenishColor: #698474;
+
+.top-nav-open {
+  display: block;
+  height: 60px;
+  z-index: 0;
+  top: 0;
+  transition: ease 300ms height;
+  background-color: $whiteColor;
+}
+
+.top-nav-close {
+  height: 0px;
+  z-index: 0;
+  transition: ease 300ms height;
+}
+
+.icon-chef {
+  height: 35px;
+  fill: $greenishColor;
+}
+.profile-icon-container {
+  text-align: center;
+  padding-top: 13px;
+}
+.icon-house {
+  font-size: 40px;
+  color: $greenishColor;
+}
+
+.icon-profile {
+  font-size: 30px;
+  color: $greenishColor;
+}
+
+.navbar-toggler-button {
+  float: right;
+  font-size: 1.5rem;
+}

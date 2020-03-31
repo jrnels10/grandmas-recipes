@@ -2,37 +2,23 @@ $pinkiishColor: #ffaaa5;
 $tanishColor: #ffd3b6;
 $whiteColor: #fcf8f3;
 $greenishColor: #698474;
+
 .recipe-logo-container {
-  margin-top: 10vh;
+  margin-top: 40%;
   text-align: center;
   width: 100vw;
-}
-
-.recipe-book {
-  display: block;
-  fill: $pinkiishColor !important;
 }
 
 .navbar-brand-home {
   font-size: 3.3rem;
   font-family: "Dancing Script", cursive;
   color: #f7c9b6;
-}
-
-.recipe-plate {
-  height: 35px;
-  fill: none;
-  stroke: #f0d1bf;
-  stroke-width: 3px;
-  margin-left: 0%;
-  margin-right: 0%;
+  text-shadow: 0px 5px 15px black;
 }
 
 .login-container {
   width: 100vw;
   text-align: center;
-  margin-top: 30%;
-  // position: relative;
 }
 
 .signin-button-v2 {
@@ -41,9 +27,10 @@ $greenishColor: #698474;
   position: relative;
   width: 65vw;
   box-shadow: 0px 10px 15px 0px rgba(0, 0, 0, 0.35);
+  color: $whiteColor;
 }
 .sign-in-v2 {
-  color: $whiteColor;
+  color: $tanishColor;
   font-weight: 600;
 }
 .sign-in-arrow {
@@ -61,7 +48,7 @@ $greenishColor: #698474;
   font-weight: 500;
 }
 .sign-up-link {
-  color: $pinkiishColor;
+  color: $tanishColor;
   font-weight: 600;
   font-size: 15px;
 }
