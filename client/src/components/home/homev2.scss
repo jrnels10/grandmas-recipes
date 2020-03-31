@@ -1,5 +1,7 @@
-$purplishColor: #725f6f;
-
+$pinkiishColor: #ffaaa5;
+$tanishColor: #ffd3b6;
+$whiteColor: #fcf8f3;
+$greenishColor: #698474;
 .recipe-logo-container {
   margin-top: 10vh;
   text-align: center;
@@ -8,7 +10,7 @@ $purplishColor: #725f6f;
 
 .recipe-book {
   display: block;
-  fill: $purplishColor !important;
+  fill: $pinkiishColor !important;
 }
 
 .navbar-brand-home {
@@ -34,14 +36,14 @@ $purplishColor: #725f6f;
 }
 
 .signin-button-v2 {
-  background-color: #f0d1bf;
-  border-color: #f0d1bf;
+  background-color: $greenishColor;
+  border-color: $greenishColor;
   position: relative;
   width: 65vw;
   box-shadow: 0px 10px 15px 0px rgba(0, 0, 0, 0.35);
 }
 .sign-in-v2 {
-  color: rgb(37, 37, 37);
+  color: $whiteColor;
   font-weight: 600;
 }
 .sign-in-arrow {
@@ -59,7 +61,7 @@ $purplishColor: #725f6f;
   font-weight: 500;
 }
 .sign-up-link {
-  color: $purplishColor;
+  color: $pinkiishColor;
   font-weight: 600;
   font-size: 15px;
 }
