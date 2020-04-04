@@ -1,0 +1,25 @@
+$pinkiishColor: #ffaaa5;
+$tanishColor: #ffd3b6;
+$whiteColor: #fcf8f3;
+$greenishColor: #698474;
+
+.options {
+  color: $tanishColor;
+  height: 100%;
+  width: 100%;
+  float: right;
+
+  .options-three-dot-icon,
+  .options-x-icon {
+    position: absolute;
+    font-size: 30px;
+    right: 5px;
+    top: 5px;
+    fill: $whiteColor;
+  }
+
+  .options-display {
+    padding-top: 10px;
+    color: black;
+  }
+}

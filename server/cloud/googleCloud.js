@@ -1,5 +1,7 @@
 'use strict';
+require('dotenv').config();
 const { Storage } = require('@google-cloud/storage');
+const vision = require('@google-cloud/vision');
 const keyFilename = process.env.NODE_ENV === "production" ? process.env.GOOGLE_APPLICATION_CREDENTIALS : './server/config/grandmasRecipes-49091d2bc82f.json';
 const projectId = 'grandmasrecipes';
 const bucketName = process.env.NODE_ENV === "production" ? 'grandmas-recipes' : 'grandmas-recipes-dev';
@@ -57,6 +59,18 @@ module.exports = {
             }
         })
 
+    },
+    readImageWithGoogleCloud: async (req, res, next) => {
+        //https://morioh.com/p/0tNONZvfChiS
+        const client = new vision.ImageAnnotatorClient();
+        const fileName = './server/uploads/test.png';
+
+        // Performs text detection on the local file
+        const [result] = await client.textDetection(fileName);
+        const detections = result.textAnnotations;
+        console.log('Text:');
+        detections.forEach(text => console.log(text));
+        return detections
     }
 };
 
@@ -67,3 +81,4 @@ async function streamToPromise(stream, imagePath) {
         // fs.unlinkSync(imagePath)
     })
 }
+

@@ -41,5 +41,4 @@ class App extends Component {
         )
     }
 };
-//test
 export default withRouter(App);

@@ -70,6 +70,7 @@ module.exports = {
                     chefBio: chefBio,
                     submittedBy: submittedBy,
                     familyName: familyName,
+                    chefPrivate: true,
                     chefRecipes: []
                 });
                 const savedChef = await newChef.save();

@@ -1,0 +1,21 @@
+.options {
+  color: #ffd3b6;
+  height: 100%;
+  width: 100%;
+  float: right;
+}
+
+.options .options-three-dot-icon,
+.options .options-x-icon {
+  position: absolute;
+  font-size: 30px;
+  right: 5px;
+  top: 5px;
+  fill: #fcf8f3;
+}
+
+.options .options-display {
+  padding-top: 10px;
+  color: black;
+}
+/*# sourceMappingURL=options.css.map */

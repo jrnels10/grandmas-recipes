@@ -7,6 +7,7 @@ import Home from './../home/Home';
 export default (OriginalComponent) => {
     class MixedComponent extends Component {
 
+
         render() {
             return <Consumer>
                 {value => {

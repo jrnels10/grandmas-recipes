@@ -24,6 +24,7 @@ app.use(bodyParser.json());
 //routes  http://localhost:3000/users
 app.use('/users', require('./routes/users'));
 app.use('/chefs', require('./routes/chefs'));
+app.use('/test', require('./routes/test'));
 app.use('/recipes', require('./routes/recipes'));
 app.use('/families', require('./routes/families'));
 app.use('/analytics', require('./routes/analytics'));

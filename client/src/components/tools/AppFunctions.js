@@ -6,3 +6,22 @@ export async function formatTextToList(text) {
         <li key={idx}>{textSplit}</li>
     );
 };
+
+
+
+export async function horizontalPageTransition() {
+    const pageVariant = {
+        in: {
+            opacity: 1,
+            x: 0
+        },
+        out: {
+            opacity: 0,
+            x: "-100vw"
+        }
+    };
+    const pageTransition = {
+        transition: "linear"
+    }
+    return { pageVariant, pageTransition }
+}

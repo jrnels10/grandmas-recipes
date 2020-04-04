@@ -36,6 +36,9 @@ const chefSchema = new Schema({
     updatedBy: {
         type: String
     },
+    chefPrivate: {
+        type: Boolean
+    },
     familyName: {
         type: String
     },

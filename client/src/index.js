@@ -11,7 +11,7 @@ import authGuard from './components/HOC/authGuard';
 import DashBoard from './components/dashboard/Dashboard';
 import AddRecipe from './components/addAndUpdate/NewRecipe';
 import RecipeCard from './components/cards/RecipeCard';
-import CardContainer from './components/cards/CardContainer';
+import CardsHome from './components/cards/CardsHome';
 import AddChef from './components/addAndUpdate/AddChef';
 import Analytics from './components/Analytics/Analytics';
 import SingleChefCard from './components/cards/SingleChefCard';
@@ -29,10 +29,10 @@ ReactDOM.render(
                 <div className="scrollable-div">
                     <AnimatePresence exitBeforeEnter>
                         <Switch location={window.location} key={window.location.pathname}>
-                            <Route exact path="/" component={Home} />
+                            <Route exact path="/" component={authGuard(Home)} />
                             <Route exact path="/signup" component={SignUp} />
                             <Route exact path="/dashboard" component={authGuard(DashBoard)} />
-                            <Route exact path="/familychefs" component={authGuard(CardContainer)} />
+                            <Route exact path="/familychefs" component={authGuard(CardsHome)} />
                             <Route exact path="/addnewchef" component={authGuard(AddChef)} />
                             <Route exact path="/familyhome" component={authGuard(FamilyHome)} />
                             <Route exact path="/familyinvite/:id/:id" component={authGuard(InvitationToFamily)} />
