@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import GeneralLargeCard from './GeneralLargeCard';
 import { getmyrecipe } from './../../API/RecipeAPI';
 import { Consumer } from '../../Context';
-import RecipeOptions from './RecipeOptions';
+import RecipeOptions from './CardOptions/RecipeOptions';
 import './recipe.css';
 
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { likemyrecipe } from './../../API/RecipeAPI';
+import { likemyrecipe } from '../../../API/RecipeAPI';
 import { Link } from 'react-router-dom';
 
 

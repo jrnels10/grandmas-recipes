@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import CardListContainer from './CardListContainer';
 import secretResponse from '../HOC/Secret';
-import Card from './Card';
 
 
 class CardsHome extends Component {

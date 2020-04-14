@@ -41,9 +41,6 @@ class RecipeOptions extends Component {
     }
 
     render() {
-        // const [isOpen, toggleOpen] = useCycle(false, true);
-        // const containerRef = useRef(null);
-
         const privateStatus = this.props.options.private;
         const inviteFamilyLink = `${window.location.origin}/familychef/${this.props.options.chef.chefId}`;
         const { options } = this.state;

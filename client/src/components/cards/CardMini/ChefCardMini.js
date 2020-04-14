@@ -22,11 +22,19 @@ class ChefCardMini extends Component {
             heart: false,//props.value.user.chefsLiked.includes(props.chef.chefId),
             modal: false,
             likedRecipes: [],// props.value.user.recipesLiked,
-            liked: 12345 //this.props.recipe.liked
+            liked: 12345, //this.props.recipe.liked
+            isOpen: false
         }
     }
 
-
+    setIsOpen = () => {
+        const { dispatch } = this.props.value;
+        this.setState({ isOpen: !this.state.isOpen });
+        dispatch({
+            type: 'ITEM_SELECTED',
+            payload: { selected: this.props.chef }
+        });
+    }
     toggle = (title) => {
         this.setState({ [title]: !this.state[title] })
     };
@@ -37,37 +45,41 @@ class ChefCardMini extends Component {
         // await likemyrecipe(this.props.recipe._id, { userId: this.props.value.user.id })
     };
 
-    selected = () => {
-        this.props.value.dispatch({
-            type: 'ITEM_SELECTED',
-            payload: { selected: Object.assign(this.props.recipe, { chefName: this.props.chefName }) }
-        });
-    };
 
 
     render() {
         const { heart, description, liked } = this.state;
         const { chefId, chefName, chefImage, chefBio, dateSubmitted, chefRecipes, chefPrivate } = this.props.chef;
+        const { dispatch } = this.props.value;
         const inviteFamilyLink = `${window.location.origin}/familychef/${chefId}`;
         const pageVariant = {
-            in: {
-                opacity: 1,
-                x: 0
+            closed: {
+                // height: '100%',
+                // width: '100%',
+                // margin: 'auto',
+                // marginBottom: '40px'
+                opacity: 0
             },
-            out: {
-                opacity: 0,
-                x: "-100vw"
-            }
+            open: {
+                // height: 'auto',
+                // width: '70vw',
+                // display: 'flex',
+                // justifyContent: 'center',
+                // position: 'relative',
+                // marginBottom: '40px'
+                opacity: 1
+            },
         };
         const pageTransition = {
-            transition: "linear"
+            duration: .3
         }
+
         return <motion.div
             className="card card-mini-chef"
-            initial='out'
-            animate='in'
-            exit='out'
             variants={pageVariant}
+            initial='closed'
+            animate='open'
+            exit='closed'
             transition={pageTransition}
         >
             <div className='card-mini-chef-header'>
@@ -77,8 +89,12 @@ class ChefCardMini extends Component {
                 </div>
                 {/* <Options options={{ value: this.props.value, chef: this.props.chef }} /> */}
             </div>
-            <Link className="nav-link p-0 text-white" onClick={this.selected.bind(this)} to={`/recipe/selectedrecipe/${chefId}`} >
-                <img className="card-mini-chef-img" src={chefImage} alt="recipe" />
+            <Link className="nav-link p-0 text-white" onClick={this.setIsOpen.bind(this)} to={`/familychefs/selected/${chefId}`} >
+                <img
+                    className="card-mini-chef-img"
+                    src={chefImage}
+                    alt="chef"
+                />
             </Link>
             <div className="card-mini-chef-actions">
                 <div className='row p-2 w-100 m-0'>
@@ -116,7 +132,7 @@ class ChefCardMini extends Component {
                     </NavigateButton>
                 </div>
             </div>
-        </motion.div>
+        </motion.div >
     }
 }
 

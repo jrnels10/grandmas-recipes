@@ -23,9 +23,10 @@ class Home extends Component {
         })
     }
     componentDidMount = () => {
-        const { value, redirectTo, redirectedFrom } = this.props;
-        if (value.redirectTo === '') {
-            value.dispatch({
+        const { data, redirectTo, redirectedFrom } = this.props;
+
+        if (data.redirectTo === '' && redirectTo !== '/') {
+            data.dispatch({
                 type: "REDIRECT-FROM",
                 payload: {
                     redirectedFrom: redirectedFrom,
@@ -36,7 +37,6 @@ class Home extends Component {
     }
 
     render() {
-        console.log(this.props)
         const pageVariant = {
             in: {
                 opacity: 1,

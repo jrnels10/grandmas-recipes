@@ -3,7 +3,7 @@ import { Consumer } from '../../Context';
 import { withRouter, Link } from 'react-router-dom';
 import GeneralLargeCard from './GeneralLargeCard';
 import { findMyChef } from './../../API/ChefAPI';
-import MiniRecipeCard from './MiniRecipeCard';
+import MiniRecipeCard from './CardMini/MiniRecipeCard';
 
 
 class SingleChefCard extends Component {

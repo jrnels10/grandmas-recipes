@@ -12,7 +12,7 @@ export default (OriginalComponent) => {
             return <Consumer>
                 {value => {
                     const { isAuthenticated } = value;
-                    return isAuthenticated ? <OriginalComponent data={value} /> : <Home value={value} redirectedFrom={document.referrer} redirectTo={window.location.pathname} />
+                    return isAuthenticated ? <OriginalComponent data={value} /> : <Home data={value} redirectedFrom={document.referrer} redirectTo={window.location.pathname} />
                 }}
             </Consumer>
         }

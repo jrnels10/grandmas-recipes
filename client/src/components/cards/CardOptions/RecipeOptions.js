@@ -8,7 +8,7 @@ import {
     FacebookIcon,
     WhatsappIcon
 } from "react-share";
-import { NavigateButton } from './../tools/Buttons'
+import { NavigateButton } from './../../tools/Buttons'
 
 class RecipeOptions extends Component {
     constructor(props) {
