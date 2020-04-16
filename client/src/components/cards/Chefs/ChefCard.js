@@ -153,21 +153,21 @@ class ChefCard extends Component {
                                 className='card-selected-actions row'>
                                 <div className='col-12'>
                                     <motion.div className='row' animate={actionType !== '' ? { borderBottom: '1px solid rgba(0,0,0,0.4)' } : { borderBottom: '1px solid rgba(0,0,0,0.0)' }}>
-                                        <div className='col' onClick={this.chefAction.bind(this, 'family')}>
+                                        <div className='col action-button' animate={actionType !== '' ? { opacity: 0 } : { opacity: 1 }} onClick={this.chefAction.bind(this, 'family')}>
                                             <motion.div
                                                 animate={ChefAction(actionType, 'family')}
                                                 className='icon-background'>
                                                 <Family action={actionType} />
                                             </motion.div>
                                         </div>
-                                        <div className='col ' onClick={this.chefAction.bind(this, 'recipe')}>
+                                        {/* <div className='col action-button' onClick={this.chefAction.bind(this, 'recipe')}>
                                             <motion.div
                                                 animate={ChefAction(actionType, 'recipe')}
                                                 className='icon-background'>
                                                 <Recipe action={actionType} />
                                             </motion.div>
-                                        </div>
-                                        <div className='col ' onClick={this.chefAction.bind(this, 'share')}>
+                                        </div> */}
+                                        <div className='col action-button' onClick={this.chefAction.bind(this, 'share')}>
                                             <motion.div
                                                 animate={ChefAction(actionType, 'share')}
                                                 className='icon-background'>
@@ -175,7 +175,7 @@ class ChefCard extends Component {
                                             </motion.div>
                                         </div>
                                     </motion.div>
-                                    <motion.div className='row' animate={actionType !== '' ? { display: 'block', opacity: 1, transition: { delay: .3 } } : { display: 'none', opacity: 0 }} >
+                                    <motion.div className='row' animate={actionType !== '' ? { opacity: 1, transition: { delay: .3 } } : { opacity: 0 }} style={actionType !== '' ? { display: 'block' } : { display: 'none' }}>
                                         {chefRecipes.map(recipe => {
                                             return <div className='card w-25' key={recipe.id}>hello</div>
                                         })}

@@ -66,7 +66,12 @@
   margin: 0;
 }
 
-.card-chef .card-selected-chef-actions .card-selected-actions .icon-background {
+.card-chef .card-selected-chef-actions .card-selected-actions .action-button {
+  border: 2px solid #ffd3b6;
+  border-radius: 12px;
+}
+
+.card-chef .card-selected-chef-actions .card-selected-actions .action-button .icon-background {
   text-align: center;
   margin: auto;
   width: 50px;
@@ -74,9 +79,9 @@
   position: relative;
 }
 
-.card-chef .card-selected-chef-actions .card-selected-actions .icon-background .icon-family,
-.card-chef .card-selected-chef-actions .card-selected-actions .icon-background .icon-recipe,
-.card-chef .card-selected-chef-actions .card-selected-actions .icon-background .icon-share {
+.card-chef .card-selected-chef-actions .card-selected-actions .action-button .icon-background .icon-family,
+.card-chef .card-selected-chef-actions .card-selected-actions .action-button .icon-background .icon-recipe,
+.card-chef .card-selected-chef-actions .card-selected-actions .action-button .icon-background .icon-share {
   width: 35px;
   height: 35px;
   padding-top: 5px;
