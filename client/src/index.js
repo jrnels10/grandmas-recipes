@@ -19,7 +19,8 @@ import FamilyHome from './components/Family/FamilyHome';
 import InvitationToFamily from './components/Family/InvitationToFamily';
 import ChefCard from './components/cards/Chefs/ChefCard';
 import { AnimatePresence } from 'framer-motion';
-
+import CreateFamily from './components/Family/CreateFamily';
+import UpdateRecipe from './components/addAndUpdate/UpdateRecipe';
 
 
 ReactDOM.render(
@@ -38,8 +39,9 @@ ReactDOM.render(
                             <Route exact path="/familyhome" component={authGuard(FamilyHome)} />
                             <Route exact path="/familyinvite/:id/:id" component={authGuard(InvitationToFamily)} />
                             <Route exact path="/updatechef" component={authGuard(AddChef)} />
-                            <Route exact path="/addrecipe/:id" component={authGuard(AddRecipe)} />
-                            <Route exact path="/updaterecipe" component={authGuard(AddRecipe)} />
+                            <Route path="/addrecipe/:id" component={authGuard(AddRecipe)} />
+                            <Route exact path="/addfamily/:id" component={authGuard(CreateFamily)} />
+                            {/* <Route path="/updaterecipe" component={authGuard(UpdateRecipe)} /> */}
                             <Route exact path="/familychef/:id" component={ChefCard} />
                             <Route exact path={`/recipe/selectedrecipe/:recipeId`} component={RecipeCard} />
                             <Route exact path="/signin" component={SignIn} />

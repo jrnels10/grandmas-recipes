@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import Options from './../CardOptions/ChefOptions';
+import Slider from "react-slick";
+
 import { NavigateButton } from './../../tools/Buttons';
 import { motion } from 'framer-motion';
-
+import Family from '../../../Images/FamilyIcon';
+import Recipe from '../../../Images/RecipeIcon';
+import Share from '../../../Images/ShareIcon';
 import {
     EmailShareButton,
     FacebookShareButton,
@@ -12,8 +15,14 @@ import {
     FacebookIcon,
     WhatsappIcon
 } from "react-share";
-import './minicard.css'
+import './minicard.css';
+import ItemCardMini from './ItemCardMini';
 
+const ChefAction = (actionType, action) => {
+    return actionType === action ? { y: -35, borderRadius: '50%', backgroundColor: '#ffaaa5', fill: '#610500' } :
+        actionType === '' ? { y: 0, borderRadius: '0%', backgroundColor: '#698474', fill: '#000000' } :
+            { y: 0, borderRadius: '0%', backgroundColor: '#fcf8f3', fill: '#000000' }
+}
 class ChefCardMini extends Component {
     constructor(props) {
         super(props);
@@ -23,7 +32,8 @@ class ChefCardMini extends Component {
             modal: false,
             likedRecipes: [],// props.value.user.recipesLiked,
             liked: 12345, //this.props.recipe.liked
-            isOpen: false
+            isOpen: false,
+            actionType: ''
         }
     }
 
@@ -45,35 +55,35 @@ class ChefCardMini extends Component {
         // await likemyrecipe(this.props.recipe._id, { userId: this.props.value.user.id })
     };
 
-
+    chefAction = (actionType) => {
+        this.setState({ actionType: this.state.actionType === actionType ? '' : actionType })
+    }
 
     render() {
-        const { heart, description, liked } = this.state;
+        const { heart, description, liked, actionType } = this.state;
         const { chefId, chefName, chefImage, chefBio, dateSubmitted, chefRecipes, chefPrivate } = this.props.chef;
         const { dispatch } = this.props.value;
         const inviteFamilyLink = `${window.location.origin}/familychef/${chefId}`;
+        const likes = liked >= 1000 ? `${liked.toString().substring(0, 1) + "." + liked.toString().substring(1, 2)}k likes` : `${liked} like`;
         const pageVariant = {
             closed: {
-                // height: '100%',
-                // width: '100%',
-                // margin: 'auto',
-                // marginBottom: '40px'
                 opacity: 0
             },
             open: {
-                // height: 'auto',
-                // width: '70vw',
-                // display: 'flex',
-                // justifyContent: 'center',
-                // position: 'relative',
-                // marginBottom: '40px'
                 opacity: 1
             },
         };
         const pageTransition = {
             duration: .3
         }
-
+        const settings = {
+            className: "center",
+            centerMode: true,
+            infinite: true,
+            centerPadding: "60px",
+            slidesToShow: 1,
+            speed: 500
+        };
         return <motion.div
             className="card card-mini-chef"
             variants={pageVariant}
@@ -87,17 +97,16 @@ class ChefCardMini extends Component {
                     <label className="card-title card-mini-chef-title w-100">{chefName}</label>
                     <span className="card-title card-mini-chef-date">Submitted {new Date(dateSubmitted).toDateString()}</span>
                 </div>
-                {/* <Options options={{ value: this.props.value, chef: this.props.chef }} /> */}
+
             </div>
-            <Link className="nav-link p-0 text-white" onClick={this.setIsOpen.bind(this)} to={`/familychefs/selected/${chefId}`} >
-                <img
-                    className="card-mini-chef-img"
-                    src={chefImage}
-                    alt="chef"
-                />
-            </Link>
+            <img
+                className="card-mini-chef-img"
+                src={chefImage}
+                alt="chef"
+            />
+            {/* </Link> */}
             <div className="card-mini-chef-actions">
-                <div className='row p-2 w-100 m-0'>
+                <div className='row p-2 w-100 m-0 card-mini-chef-like-and-share'>
                     <div className="card-mini-chef-heart-container">
                         {heart ?
                             <svg className="bi bi-heart-fill mini-heart" onClick={this.toggleHeart} width="1em" height="1em" viewBox="0 0 20 20" fill="#f7c9b6" xmlns="http://www.w3.org/2000/svg">
@@ -107,7 +116,7 @@ class ChefCardMini extends Component {
                                 <path fillRule="evenodd" d="M10 4.748l-.717-.737C7.6 2.281 4.514 2.878 3.4 5.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.837-3.362.314-4.385-1.114-2.175-4.2-2.773-5.883-1.043L10 4.748zM10 17C-5.333 6.868 5.279-1.04 9.824 3.143c.06.055.119.112.176.171a3.12 3.12 0 01.176-.17C14.72-1.042 25.333 6.867 10 17z" clipRule="evenodd" />
                             </svg>}
                         {liked > 0 ?
-                            <span className='liked-number'>{liked >= 1000 ? `${liked.toString().substring(0, 1) + "." + liked.toString().substring(1, 2)}k` : liked} {liked > 1 ? "likes" : "like"}</span>
+                            <span className='liked-number'>{likes}</span>
                             : null}
                     </div>
                     <div className='card-mini-chef-share'>
@@ -122,15 +131,56 @@ class ChefCardMini extends Component {
                         </WhatsappShareButton>
                     </div>
                 </div>
-                <div className={`card-mini-chef-open`}>
-                    <NavigateButton customClassName='card-mini-chef-open-button' pathTo={`/recipe/selectedrecipe/${chefId}`} value={this.props.value} selected={null}>
-                        Open
-                        <svg className="bi bi-arrow-right card-mini-chef-open-button-arrow" width="1em" height="1em" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                            <path fillRule="evenodd" d="M12.146 6.646a.5.5 0 01.708 0l3 3a.5.5 0 010 .708l-3 3a.5.5 0 01-.708-.708L14.793 10l-2.647-2.646a.5.5 0 010-.708z" clipRule="evenodd" />
-                            <path fillRule="evenodd" d="M4 10a.5.5 0 01.5-.5H15a.5.5 0 010 1H4.5A.5.5 0 014 10z" clipRule="evenodd" />
-                        </svg>
-                    </NavigateButton>
-                </div>
+                <motion.div
+                    animate={actionType !== '' ? { height: '300px', backgroundColor: '#fcf8f3', borderRadius: '13px' } : { height: 'auto', backgroundColor: '#698474', borderRadius: '20px' }}
+                    className='card-selected-actions row'>
+                    <div className='col-12'>
+                        <motion.div className='row' animate={actionType !== '' ? { borderBottom: '1px solid rgba(0,0,0,0.4)' } : { borderBottom: '1px solid rgba(0,0,0,0.0)' }}>
+                            <motion.div className='col action-button' animate={actionType !== '' ? { border: '2px solid #fcf8f3' } : { border: '2px solid #ffd3b6' }} onClick={this.chefAction.bind(this, 'family')}>
+                                <motion.div
+                                    animate={ChefAction(actionType, 'family')}
+                                    className='icon-background'>
+                                    <Family action={actionType} />
+                                </motion.div>
+                            </motion.div>
+                            <motion.div className='col action-button' animate={actionType !== '' ? { border: '2px solid #fcf8f3' } : { border: '2px solid #ffd3b6' }} onClick={this.chefAction.bind(this, 'recipe')}>
+                                <motion.div
+                                    animate={ChefAction(actionType, 'recipe')}
+                                    className='icon-background'>
+                                    <Recipe action={actionType} />
+                                </motion.div>
+                            </motion.div>
+
+                            <motion.div className='col action-button' animate={actionType !== '' ? { border: '2px solid #fcf8f3' } : { border: '2px solid #ffd3b6' }} onClick={this.chefAction.bind(this, 'share')}>
+                                <motion.div
+                                    animate={ChefAction(actionType, 'share')}
+                                    className='icon-background'>
+                                    <Share action={actionType} />
+                                </motion.div>
+                            </motion.div>
+
+                        </motion.div>
+                        <motion.div className='row' animate={actionType !== '' ? { opacity: 1, transition: { delay: .3 } } : { opacity: 0 }} style={actionType !== '' ? { display: 'block' } : { display: 'none' }}>
+                            {actionType === 'recipe' ? <React.Fragment>
+                                <button className='btn signin-button w-75 mt-3 text-center m-auto'>Add new recipe</button>
+                                <Slider {...settings}>
+                                    {chefRecipes.map(recipe => {
+                                        return <ItemCardMini key={recipe._id} _id={recipe._id} name={recipe.recipeName} image={recipe.recipeImage} likes={likes} redirectUrl={`/recipe/selectedrecipe/${recipe._id}`} />
+                                    })}
+                                </Slider>
+                            </React.Fragment> : actionType === 'family' ? <React.Fragment>
+                                <button className='btn signin-button w-75 mt-3 text-center m-auto'>Create new family</button>
+                                {this.props.families.length > 0 ?
+                                    <Slider {...settings}>
+                                        {this.props.families.map(family => {
+                                            const { familyId, familyBio, familyOwnerName, familyName, familyMembers, familyImage } = family;
+                                            return <ItemCardMini key={familyId} _id={familyId} name={familyName} image={familyImage} likes={null} members={familyMembers} redirectUrl={`/recipe/selectedrecipe/${familyId}`} />
+                                        })}
+                                    </Slider> : 'No Families'}
+                            </React.Fragment> : null}
+                        </motion.div>
+                    </div>
+                </motion.div>
             </div>
         </motion.div >
     }

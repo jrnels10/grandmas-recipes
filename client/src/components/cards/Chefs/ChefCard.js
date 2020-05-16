@@ -6,7 +6,7 @@ import { BackButton } from '../../tools/Buttons';
 import Family from '../../../Images/FamilyIcon';
 import Recipe from '../../../Images/RecipeIcon';
 import Share from '../../../Images/ShareIcon';
-import MiniRecipeCard from './../CardMini/MiniRecipeCard';
+// import MiniRecipeCard from './../CardMini/MiniRecipeCard';
 import {
     EmailShareButton,
     FacebookShareButton,
@@ -53,14 +53,16 @@ class ChefCard extends Component {
                     const inviteFamilyLink = `${window.location.origin}/familychef/${chefId}`;
                     const pageVariant = {
                         closed: {
-                            opacity: 1
+                            scale: 1
+                            //opacity: 1
                             // height: '100%',
                             // width: '100%',
                             // margin: 'auto',
                             // borderRadius: '0px'
                         },
                         open: {
-                            opacity: 0
+                            scale: 1
+                            //: 0
                             // height: '70vh',
                             // width: '70vw',
                             // display: 'flex',
@@ -149,37 +151,38 @@ class ChefCard extends Component {
                                 </div>
                             </div>
                             <motion.div
-                                animate={actionType !== '' ? { height: '540px', backgroundColor: '#fcf8f3' } : { height: 'auto', backgroundColor: '#698474' }}
+                                animate={actionType !== '' ? { height: '540px', backgroundColor: '#fcf8f3', borderRadius: '20px 20px 0px 0px' } : { height: 'auto', backgroundColor: '#698474', borderRadius: '0px' }}
                                 className='card-selected-actions row'>
                                 <div className='col-12'>
                                     <motion.div className='row' animate={actionType !== '' ? { borderBottom: '1px solid rgba(0,0,0,0.4)' } : { borderBottom: '1px solid rgba(0,0,0,0.0)' }}>
-                                        <div className='col action-button' animate={actionType !== '' ? { opacity: 0 } : { opacity: 1 }} onClick={this.chefAction.bind(this, 'family')}>
+                                        <motion.div className='col action-button' animate={actionType !== '' ? { border: '2px solid #fcf8f3' } : { border: '2px solid #ffd3b6' }} onClick={this.chefAction.bind(this, 'family')}>
                                             <motion.div
                                                 animate={ChefAction(actionType, 'family')}
                                                 className='icon-background'>
                                                 <Family action={actionType} />
                                             </motion.div>
-                                        </div>
-                                        {/* <div className='col action-button' onClick={this.chefAction.bind(this, 'recipe')}>
+                                        </motion.div>
+                                        <motion.div className='col action-button' animate={actionType !== '' ? { border: '2px solid #fcf8f3' } : { border: '2px solid #ffd3b6' }} onClick={this.chefAction.bind(this, 'recipe')}>
                                             <motion.div
                                                 animate={ChefAction(actionType, 'recipe')}
                                                 className='icon-background'>
                                                 <Recipe action={actionType} />
                                             </motion.div>
-                                        </div> */}
-                                        <div className='col action-button' onClick={this.chefAction.bind(this, 'share')}>
+                                        </motion.div>
+
+                                        <motion.div className='col action-button' animate={actionType !== '' ? { border: '2px solid #fcf8f3' } : { border: '2px solid #ffd3b6' }} onClick={this.chefAction.bind(this, 'share')}>
                                             <motion.div
                                                 animate={ChefAction(actionType, 'share')}
                                                 className='icon-background'>
                                                 <Share action={actionType} />
                                             </motion.div>
-                                        </div>
+                                        </motion.div>
+
                                     </motion.div>
                                     <motion.div className='row' animate={actionType !== '' ? { opacity: 1, transition: { delay: .3 } } : { opacity: 0 }} style={actionType !== '' ? { display: 'block' } : { display: 'none' }}>
-                                        {chefRecipes.map(recipe => {
-                                            return <div className='card w-25' key={recipe.id}>hello</div>
-                                        })}
-
+                                        {actionType === 'recipe' ? chefRecipes.map(recipe => {
+                                            return <div className='card w-25' key={recipe._id}>hello</div>
+                                        }) : null}
                                     </motion.div>
                                 </div>
                             </motion.div>

@@ -3,7 +3,7 @@ import { Consumer } from '../../Context';
 import { withRouter, Link } from 'react-router-dom';
 import GeneralLargeCard from './GeneralLargeCard';
 import { findMyChef } from './../../API/ChefAPI';
-import MiniRecipeCard from './CardMini/MiniRecipeCard';
+// import MiniRecipeCard from './CardMini/MiniRecipeCard';
 
 
 class SingleChefCard extends Component {
@@ -46,7 +46,7 @@ class SingleChefCard extends Component {
                                     : <label onClick={this.saveChef.bind(this)}>Save Recipe</label>}
                             </div>
                         </div>
-                        <div className="row w-100 m-0 mb-3 mini-card-container p-0">
+                        {/* <div className="row w-100 m-0 mb-3 mini-card-container p-0">
                             {numberOfRecipes > 0 ?
                                 <div className='w-100'>
                                     {chefRecipes.map((recipe, idx) => {
@@ -54,7 +54,7 @@ class SingleChefCard extends Component {
                                     })}
                                 </div>
                                 : <span>No recipes.</span>}
-                        </div>
+                        </div> */}
                     </div>
                 </GeneralLargeCard>
             }}</Consumer> : null

@@ -4,20 +4,20 @@ $whiteColor: #fcf8f3;
 $greenishColor: #698474;
 
 .card-chef {
-  height: 100vh;
-  position: absolute;
-  top: 0;
-  background-color: $whiteColor;
-  .card-selected-chef-header {
-    background-color: $greenishColor;
-    border-radius: 15px 15px 0px 0px;
-  }
-  .card-selected-chef-img {
-    width: 100%;
-    height: 450px;
-    object-fit: cover;
-    object-position: center;
-  }
+  // height: 90vh;
+  // position: absolute;
+  // top: 0;
+  // background-color: $whiteColor;
+  // .card-selected-chef-header {
+  //   background-color: $greenishColor;
+  //   border-radius: 15px 15px 0px 0px;
+  // }
+  // .card-selected-chef-img {
+  //   width: 100%;
+  //   height: 450px;
+  //   object-fit: cover;
+  //   object-position: center;
+  // }
   .card-selected-chef-actions {
     height: 100%;
     background-color: $greenishColor;

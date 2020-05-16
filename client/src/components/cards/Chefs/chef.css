@@ -1,24 +1,3 @@
-.card-chef {
-  height: 100vh;
-  position: absolute;
-  top: 0;
-  background-color: #fcf8f3;
-}
-
-.card-chef .card-selected-chef-header {
-  background-color: #698474;
-  border-radius: 15px 15px 0px 0px;
-}
-
-.card-chef .card-selected-chef-img {
-  width: 100%;
-  height: 450px;
-  -o-object-fit: cover;
-     object-fit: cover;
-  -o-object-position: center;
-     object-position: center;
-}
-
 .card-chef .card-selected-chef-actions {
   height: 100%;
   background-color: #698474;

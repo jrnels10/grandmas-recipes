@@ -1,0 +1,222 @@
+$pinkishColor: #ffaaa5;
+$tanishColor: #ffd3b6;
+$whiteColor: #fcf8f3;
+$greenishColor: #698474;
+.card-recipe {
+  width: 90vw;
+  margin: auto;
+  border-radius: 15px;
+  box-shadow: 10px 10px 15px 0px rgba(0, 0, 0, 0.15);
+  margin-bottom: 40px;
+  background-color: $greenishColor !important;
+  color: $whiteColor;
+  .card-recipe-header {
+    background-color: $greenishColor;
+    border-radius: 15px 15px 0px 0px;
+
+    .card-recipe-title-container {
+      width: 70%;
+      float: left;
+
+      .card-recipe-title {
+        font-size: 1.3rem;
+        color: $whiteColor;
+        padding-top: 0px;
+        padding-left: 15px;
+        margin-bottom: 0px;
+      }
+
+      .card-recipe-date {
+        font-size: 12px;
+        color: $tanishColor;
+        padding-left: 15px;
+      }
+    }
+    .card-recipe-title-edit {
+      width: 30%;
+      float: right;
+      text-align: right;
+      font-size: 25px;
+      padding-right: 10px;
+    }
+    .card-recipe-title-edit-input {
+      margin: 5px 5px 2px 8px;
+      border-radius: 5px;
+      text-indent: 5px;
+      width: 100%;
+    }
+    .card-recipe-selected-options {
+      width: 100%;
+      position: absolute;
+      text-align: right;
+      font-size: 35px;
+    }
+    svg {
+      padding-top: 10px;
+      vertical-align: top;
+    }
+    .options-display {
+      padding: 10px;
+    }
+    .option-true {
+      background-color: $whiteColor;
+    }
+
+    .recipe-option-button {
+      box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.35) !important;
+      width: 100%;
+    }
+  }
+
+  .card-graphics-container {
+    width: 100%;
+    margin: 0;
+    position: relative;
+    .card-recipe-image-edit-container {
+      height: 100%;
+      position: absolute;
+      background: rgba(255, 255, 255, 0.5);
+      width: 100%;
+      input {
+        width: 90%;
+        height: 45px;
+        border-radius: 10px;
+        background-color: white;
+        box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.35) !important;
+        color: $greenishColor;
+        vertical-align: middle;
+        margin: 0;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+      }
+      input::before {
+        line-height: 33px;
+        font-size: 1rem;
+        border-radius: 10px;
+      }
+
+      .card-recipe-image-edit-save {
+        position: absolute;
+        vertical-align: middle;
+        margin: 0;
+        position: absolute;
+        top: 80%;
+        left: 50%;
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+      }
+    }
+    .card-recipe-image-edit {
+      position: absolute;
+      bottom: 10px;
+      right: 13px;
+      font-size: 20px;
+    }
+  }
+
+  .card-recipe-body {
+    background-color: $greenishColor;
+    border-radius: 0px 0px 15px 15px;
+    .card-recipe-body-edit {
+      float: right;
+      text-align: right;
+      font-size: 15px;
+
+      .card-recipe-body-edit-ingredient {
+        width: 90vw;
+        margin: auto;
+        border-radius: 15px;
+        box-shadow: 10px 10px 15px 0px rgba(0, 0, 0, 0.15);
+        margin-bottom: 40px;
+        background-color: $greenishColor !important;
+        color: $whiteColor;
+      }
+
+      .modal {
+        border-radius: 10px;
+      }
+    }
+    .ingredients-check-container {
+      width: 100%;
+      border-bottom: 1px solid #c59894;
+      padding-left: 30px;
+      padding-right: 10px;
+      position: relative;
+      margin-bottom: 10px;
+
+      .custom-checkbox-container {
+        background-color: transparent;
+        border-radius: 5px;
+        width: 25px;
+        height: 25px;
+        position: absolute;
+        left: 5px;
+        top: 3.5px;
+        border: 2px solid $whiteColor;
+      }
+      .check-mark {
+        position: absolute;
+        position: absolute;
+        left: 2px;
+        top: 2.5px;
+        fill: $pinkishColor;
+      }
+      .custom-checkbox-label {
+        margin-left: 10px;
+        margin-bottom: 10px;
+        font-size: 1em;
+        font-weight: 500;
+        color: $whiteColor;
+      }
+    }
+
+    .card-recipe-directions-edit {
+    }
+    .card-author {
+      text-align: right;
+      padding-right: 10px;
+    }
+  }
+}
+
+.card-recipe-edit {
+  background-color: #dadcde;
+  padding: 10px;
+  width: 90vw;
+  margin: auto;
+  border-radius: 15px;
+  box-shadow: 10px 10px 15px 0px rgba(0, 0, 0, 0.15);
+  margin-bottom: 40px;
+  color: $greenishColor;
+
+  .card-recipe-label {
+  }
+  .card-recipe-underline {
+    border-color: $tanishColor;
+  }
+}
+
+.save-button {
+  width: 50px;
+  font-size: 0.8rem;
+  background-color: $greenishColor;
+  border-radius: 5px;
+  border: 1px solid $whiteColor;
+  color: $whiteColor;
+}
+
+.save-discard {
+  width: 100%;
+  div {
+    width: 40%;
+    float: left;
+  }
+  .card-recipe-title-discard {
+    padding-top: 3px;
+    margin-left: 2px;
+    font-size: 32px;
+  }
+}

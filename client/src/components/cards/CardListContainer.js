@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import { Consumer } from '../../Context';
-import Slider from "react-slick";
 import ChefCardMini from './CardMini/ChefCardMini';
 
 import { NavigateButton } from '../tools/Buttons';
@@ -15,27 +13,17 @@ class CardListContainer extends Component {
 
 
     render() {
-        const settings = {
-            dots: true,
-            infinite: false,
-            speed: 500,
-            slidesToShow: 2,
-            slidesToScroll: 1,
-            vertical: true
-        };
-        const { children, dataType, value } = this.props;
+        const { children, value } = this.props;
         return children ?
-            // <Slider {...settings}>
             <React.Fragment>
 
                 {children.map((chef, idx) => {
-                    // const chefFamilies = children.user.families.filter(family => {
-                    //     return family.chefId === chef.chefId;
-                    // });
-                    return <ChefCardMini key={idx} chef={chef} value={value} />
+                    const families = value.user.families.filter(family => {
+                        return chef.chefId === family.chefId
+                    });
+                    return <ChefCardMini key={idx} chef={chef} value={value} families={families} />
                 })}
             </React.Fragment>
-            // </Slider>
             : <NavigateButton pathTo={'/addnewchef'}>Add new Chef</NavigateButton>
     }
 }

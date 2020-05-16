@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Navbar from './components/Navbar/Navbar';
 import PageWrapper from './components/tools/PageWrapper';
-import { withRouter, Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { BackButton } from './components/tools/Buttons';
 
 import './app.css';
