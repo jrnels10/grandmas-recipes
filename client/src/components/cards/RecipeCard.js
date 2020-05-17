@@ -97,12 +97,13 @@ class RecipeCard extends Component {
 
     componentDidUpdate() {
         const { cookingInstructions, recipeName, edit, reference } = this.state;
-        if (reference !== '') {
+        if (reference !== '' && reference.current !== null) {
             if (reference === this.titleRef) {
                 reference.current.focus();
                 reference.current.value = this.state.recipeName ? this.state.recipeName : recipeName;
             } else if (reference === this.ingredientsRef) {
                 reference.current.focus();
+
             }
             else if (reference === this.directionsRef) {
                 reference.current.focus();
@@ -114,7 +115,8 @@ class RecipeCard extends Component {
     addIngredient = (e) => {
         this.setState({
             ingredients: [...this.state.ingredients, { ingredient: this.state.ingredient }],
-            ingredientButton: 'Save'
+            ingredientButton: 'Save',
+            ingredient: ''
         });
     }
 
