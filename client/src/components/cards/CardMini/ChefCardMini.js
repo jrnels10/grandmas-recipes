@@ -162,7 +162,13 @@ class ChefCardMini extends Component {
                         </motion.div>
                         <motion.div className='row' animate={actionType !== '' ? { opacity: 1, transition: { delay: .3 } } : { opacity: 0 }} style={actionType !== '' ? { display: 'block' } : { display: 'none' }}>
                             {actionType === 'recipe' ? <React.Fragment>
-                                <button className='btn signin-button w-75 mt-3 text-center m-auto'>Add new recipe</button>
+                                {/* <Link
+                                    className="nav-link p-0 text-white"
+                                    to={`${this.props.pathTo}`}
+                                    onClick={this.selected.bind(this, this.props.selected, this.props.type)}>
+                                    <button type="submit" className={`btn signin-button-v2 ${customClass}`}>{this.props.children}</button>
+                                </Link> */}
+                                <NavigateButton customClassName='dashboard-button w-100' pathTo={`/addrecipe/${chefId}`}>Add new recipe</NavigateButton>
                                 <Slider {...settings}>
                                     {chefRecipes.map(recipe => {
                                         return <ItemCardMini key={recipe._id} _id={recipe._id} name={recipe.recipeName} image={recipe.recipeImage} likes={likes} redirectUrl={`/recipe/selectedrecipe/${recipe._id}`} />

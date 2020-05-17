@@ -66,7 +66,7 @@ module.exports = {
             chefBio: joi.string()
         }),
         recipeSchema: joi.object().keys({
-            recipeName: joi.string().required(),
+            recipeName: joi.string(),
             chefId: joi.string().required(),
             submittedBy: joi.string().required(),
             dateSubmitted: joi.date().required(),
@@ -75,7 +75,7 @@ module.exports = {
             cookingInstructions: joi.string(),
             recipeDescription: joi.string(),
             groups: joi.array(),
-            ingredients: joi.array().required()
+            ingredients: joi.array()
         }),
     }
 }

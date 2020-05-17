@@ -1,0 +1,24 @@
+$pinkishColor: #ffaaa5;
+$tanishColor: #ffd3b6;
+$whiteColor: #fcf8f3;
+$greenishColor: #698474;
+
+.new-recipe {
+  width: 90vw;
+  margin: auto;
+  border-radius: 15px;
+  box-shadow: 10px 10px 15px 0px rgba(0, 0, 0, 0.15);
+  margin-bottom: 40px;
+  background-color: $whiteColor;
+  color: $greenishColor;
+  padding: 10px;
+
+  .new-recipe-label {
+    font-weight: bold;
+  }
+  .new-recipe-input {
+    // background: none;
+    // border: none;
+    // border: 1 solid $greenishColor;
+  }
+}

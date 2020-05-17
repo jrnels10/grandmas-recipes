@@ -5,7 +5,7 @@ import { withRouter } from 'react-router-dom';
 import IngredientCards from './IngredientCards';
 import { motion } from 'framer-motion';
 
-import './addrecipe.css';
+import './newRecipe.css';
 
 async function recipeNewBody(state, props) {
     const recipeObject = {
@@ -40,6 +40,7 @@ async function updateRecipeBody(state, props) {
 }
 
 class AddRecipe extends Component {
+    ingredientsRef = React.createRef();
     constructor(props) {
         super(props);
         this.state = {
@@ -53,6 +54,7 @@ class AddRecipe extends Component {
             groups: [],
             cookingInstructions: ''
         }
+
     }
 
     componentDidMount() {
@@ -138,8 +140,8 @@ class AddRecipe extends Component {
             ingredients: [...this.state.ingredients, { ingredient: this.state.ingredient }],
             ingredientButton: 'Save'
         });
-        this.refs.ingredientDiv.value = '';
-        this.refs.ingredientDiv.focus();
+        this.ingredientsRef.current.value = '';
+        this.ingredientsRef.current.focus();
     }
 
     editIngredient = (ingre) => {
@@ -148,8 +150,8 @@ class AddRecipe extends Component {
                 return item.ingredient !== ingre
             })]
         });
-        this.refs.ingredientDiv.value = ingre;
-        this.refs.ingredientDiv.focus();
+        this.ingredientsRef.current.value = ingre;
+        this.ingredientsRef.current.focus();
 
     }
 
@@ -201,46 +203,31 @@ class AddRecipe extends Component {
     render() {
         let families = [];
         return <motion.div
-            className="card card-recipe-edit">
+            className="card new-recipe">
             <div className="input-group input-group-sm mb-3">
-                <label className="card-recipe-label" >Recipe Name</label>
-                <input type="text" className="sign-input w-100" placeholder="My secret recipe" aria-label="Sizing example input" ref="theDiv" tabIndex={0} name='recipeName' aria-describedby="inputGroup-sizing-sm" onChange={this.onSelectedText.bind(this)} />
-                <hr className='card-recipe-underline' />
+                <label className="new-recipe-label" >Recipe Name</label>
+                <input type="text" className="new-recipe-input w-100" placeholder="My family recipe" aria-label="Sizing example input" ref="theDiv" tabIndex={0} name='recipeName' aria-describedby="inputGroup-sizing-sm" onChange={this.onSelectedText.bind(this)} />
+                <hr className='new-recipe-underline' />
                 {this.state.errorKey === 'recipeName' ? <p className="text-danger">required</p> : null}
             </div>
             <div className="input-group input-group-sm mb-3">
-                <label className="sign-input-label" htmlFor="exampleInputEmail1">Description</label>
-                <textarea rows="4" cols="50" type="text" className="sign-input" id="addrecipe-instructions" placeholder="A description about the recipe" aria-label="Sizing example input" ref="theRecipeDescriptionDiv" tabIndex={0} name='recipeDescription' aria-describedby="inputGroup-sizing-sm" onChange={this.onSelectedText.bind(this)} />
+                <label className="new-recipe-label">Description</label>
+                <textarea rows="4" cols="50" type="text" className="new-recipe-input" id="addrecipe-instructions" placeholder="A description about the recipe" aria-label="Sizing example input" ref="theRecipeDescriptionDiv" tabIndex={0} name='recipeDescription' aria-describedby="inputGroup-sizing-sm" onChange={this.onSelectedText.bind(this)} />
             </div>
-            {/* <div className="input-group input-group-sm mb-3">
-                <label className="sign-input-label" htmlFor="exampleInputEmail1">Familes</label>
-                {families.length > 0 ?
-                    <select className="col-4 custom-select custom-select-sm"
-                        name="groups"
-                        value={this.state.selectSectionValue}
-                        onChange={this.onSelectedText.bind(this)}>
-                        {families.map((item) => {
-                            return <option key={item}>{item}</option>
-                        })}
-                    </select> : null}
-                <input type="text" className="sign-input" placeholder="Family Name" aria-label="Sizing example input" ref="theGroupDiv" tabIndex={0} name='groups' aria-describedby="inputGroup-sizing-sm" onChange={this.onSelectedText.bind(this)} />
-                <hr className='sign-underline' />
-            </div> */}
             <div className='row w-100 m-0 mb-3'>
-                <span className="sign-input-label ingredients-text-list">{this.state.ingredients.map(item => { return item.ingredient }).join(', ')}</span>
+                <span className="new-recipe-label ingredients-text-list">{this.state.ingredients.map(item => { return item.ingredient }).join(', ')}</span>
                 <div className='col-10 w-100 pl-0'>
                     <button className="btn w-100 signin-button" id="addrecipe-add-ingredients" onClick={this.toggleIngredientModal}>Add{this.state.ingredients.length > 0 ? '/Edit' : ''} ingredients</button>
                 </div>
                 <ModalRecipes display={this.state.ingredientModal} name={this.state.recipeName} closeAction={this.toggleIngredientModal} closeActionName={"Close"}>
                     <div className='col-9 w-100 pl-0'>
                         <div className="input-group input-group-sm mb-3">
-                            <label className="sign-input-label" htmlFor="exampleInputEmail1">Ingredient</label>
-                            <input type="text" className="ingredient-input" placeholder="Type in ingredient and amount" aria-label="Sizing example input" ref="ingredientDiv" tabIndex={0} name='ingredient' aria-describedby="inputGroup-sizing-sm" onChange={this.onSelectedText.bind(this)} />
-                            <hr className='sign-underline' />
+                            <label className="ingredients-input-label">Ingredient</label>
+                            <input type="text" className="ingredient-input" placeholder="Type in ingredient and amount" ref={this.ingredientsRef} aria-label="Sizing example input" tabIndex={0} name='ingredient' aria-describedby="inputGroup-sizing-sm" onChange={this.onSelectedText.bind(this)} />
                         </div>
                     </div>
-                    <div className='col-3 w-100 pl-0'>
-                        {this.state.ingredient.length > 0 ? <button className="btn signin-button" id="addrecipe-addingredient" onClick={this.addIngredient}>{this.state.ingredientButton}</button> : null}
+                    <div className='col-3 w-100 p-0'>
+                        {this.state.ingredient.length > 0 ? <button className="btn ingredient-button" id="addrecipe-addingredient" onClick={this.addIngredient}>Add</button> : null}
                     </div>
                     <div className='col-12 w-100 p-0 ingredients-container'>
                         <IngredientCards ingredients={this.state.ingredients} reorderList={this.reorderList} editIngredient={this.editIngredient} deleteIngredient={this.deleteIngredient} />
@@ -248,12 +235,12 @@ class AddRecipe extends Component {
                 </ModalRecipes>
             </div>
             <div className="input-group input-group-sm mb-3">
-                <label className="sign-input-label" htmlFor="exampleInputEmail1">Image</label>
+                <label className="new-recipe-label">Image</label>
                 <input className="sign-input addrecipe-custom-file-input" type="file" name='img' onChange={this.onSelected.bind(this)} />
             </div>
             <div className="input-group input-group-sm mb-3">
-                <label className="sign-input-label" htmlFor="exampleInputEmail1">Instructions</label>
-                <textarea rows="4" cols="50" type="text" className="sign-input" id="addrecipe-instructions" placeholder="Directions on how to cook recipe" aria-label="Sizing example input" ref="theInstructionsDiv" tabIndex={0} name='cookingInstructions' aria-describedby="inputGroup-sizing-sm" onChange={this.onSelectedText.bind(this)} />
+                <label className="new-recipe-label">Instructions</label>
+                <textarea rows="4" cols="50" type="text" className="new-recipe-input" id="addrecipe-instructions" placeholder="Directions on how to cook recipe" aria-label="Sizing example input" ref="theInstructionsDiv" tabIndex={0} name='cookingInstructions' aria-describedby="inputGroup-sizing-sm" onChange={this.onSelectedText.bind(this)} />
                 {/* <hr className='sign-underline' /> */}
             </div>
             <button className="btn w-100 signin-button" onClick={this.upload}>{this.state.update ? "Update" : "Save"} Recipe</button>

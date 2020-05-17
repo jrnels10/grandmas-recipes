@@ -1,0 +1,16 @@
+.new-recipe {
+  width: 90vw;
+  margin: auto;
+  border-radius: 15px;
+  -webkit-box-shadow: 10px 10px 15px 0px rgba(0, 0, 0, 0.15);
+          box-shadow: 10px 10px 15px 0px rgba(0, 0, 0, 0.15);
+  margin-bottom: 40px;
+  background-color: #fcf8f3;
+  color: #698474;
+  padding: 10px;
+}
+
+.new-recipe .new-recipe-label {
+  font-weight: bold;
+}
+/*# sourceMappingURL=newRecipe.css.map */

@@ -3,10 +3,10 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { getmyrecipe } from './../../API/RecipeAPI';
 import { Consumer } from '../../Context';
-import RecipeOptions from './CardOptions/RecipeOptions';
 import './recipe.css';
 import ModalRecipes from '../tools/Modal';
 import IngredientCards from '../addAndUpdate/IngredientCards';
+import { uploadRecipeEdit } from '../tools/Upload';
 
 
 function getHeight() {
@@ -34,8 +34,8 @@ class RecipeCard extends Component {
         const recipeUrl = this.props.location.pathname;
         const last = recipeUrl.substring(recipeUrl.lastIndexOf("/") + 1, recipeUrl.length);
         const foundRecipe = await getmyrecipe(last);
-        const { ingredients, recipeImage, cookingInstructions, chefName, recipeName, dateSubmitted, _id } = foundRecipe.data;
-        this.setState({ ingredients, recipeImage, cookingInstructions, chefName, recipeName, dateSubmitted, _id });
+        const { ingredients, recipeImage, cookingInstructions, chefName, recipeName, dateSubmitted, _id, chefId } = foundRecipe.data;
+        this.setState({ ingredients, recipeImage, cookingInstructions, chefName, recipeName, dateSubmitted, _id, chefId, originalData: foundRecipe.data });
     }
 
     findSelectedRecipe = async (dispatch) => {
@@ -66,16 +66,30 @@ class RecipeCard extends Component {
     };
 
     edit = (editItem) => {
-        const reference = editItem == 'title' ? this.titleRef :
-            editItem == 'image' ? this.imageRef :
+        const reference = editItem == 'recipeName' ? this.titleRef :
+            editItem == 'img' ? this.imageRef :
                 editItem == 'ingredients' ? this.ingredientsRef : this.directionsRef;
         this.setState({ edit: editItem === this.state.edit ? '' : editItem, reference: reference === this.state.reference ? '' : reference });
 
     };
 
-    onSelectedText = (e) => {
-        this.setState({ [e.target.name]: e.target.type === 'file' ? e.target.file : e.target.value });
+    save = async (value) => {
+        const { dispatch } = value;
+        dispatch({ type: "LOADER", payload: { display: true } });
 
+        const savedItem = await uploadRecipeEdit(value, this.state);
+        const { ingredients, recipeImage, cookingInstructions, chefName, recipeName, dateSubmitted, _id, chefId } = savedItem;
+        this.setState({ ingredients, recipeImage, cookingInstructions, chefName, recipeName, dateSubmitted, _id, chefId, originalData: savedItem });
+
+        this.edit(this.state.edit);
+        dispatch({ type: "LOADER", payload: { display: false } });
+
+    }
+
+    onSelectedText = (e) => {
+        if (e.target.value !== '') {
+            this.setState({ [e.target.name]: e.target.type === 'file' ? e.target.files[0] : e.target.value });
+        }
         if (e.charCode == 13) {
             this.addIngredient(e);
         }
@@ -181,27 +195,31 @@ class RecipeCard extends Component {
                             <div className='card-recipe-title-container'>
 
                                 <React.Fragment>
-                                    {edit !== 'title' ? <label className="card-title card-recipe-title w-100">{recipeName}</label> :
+                                    {edit !== 'recipeName' ? <label className="card-title card-recipe-title">{recipeName}</label> :
                                         <input ref={this.titleRef} type="text" name='recipeName' className="card-recipe-title-edit-input" onChange={this.onSelectedText.bind(this)} />}
-                                    <span className="card-title card-recipe-date">Submitted {new Date(dateSubmitted).toDateString()}</span>
                                 </React.Fragment>
-                            </div>
-                            <div className='card-recipe-title-edit'>
-                                {edit !== 'title' ? <EditIcon editType={'title'} that={this} /> : <SaveOrDiscard that={this} />}
+
+                                {edit !== 'recipeName' ? <div className='card-recipe-title-edit'><EditIcon editType={'recipeName'} that={this} /></div> : <div className="card-recipe-title-edit-save">
+                                    <SaveOrDiscard that={this} value={value} name='recipeName' />
+                                </div>}
+
+                                <div className='w-100'>
+                                    <span className="card-title card-recipe-date">Submitted {new Date(dateSubmitted).toDateString()}</span>
+                                </div>
                             </div>
                         </div>
                         <div className="row card-graphics-container">
-                            <EditIcon editType={'image'} that={this} />
-                            {edit === 'image' ? <div className="card-recipe-image-edit-container" id="card-recipe-image-edit">
+                            <EditIcon editType={'img'} that={this} />
+                            {edit === 'img' ? <div className="card-recipe-image-edit-container" id="card-recipe-image-edit">
                                 <input className="card-recipe-image-edit addrecipe-custom-file-input" type="file" name='img' onChange={this.onSelectedText.bind(this)} />
                                 <div className="card-recipe-image-edit-save">
-                                    <SaveIcon that={this} />
-                                    <DiscardIcon that={this} />
+                                    <SaveOrDiscard that={this} value={value} />
                                 </div>
                             </div> : null}
 
                             <Link to={`/fullscreen`}>
-                                <img id="card-recipe-image" className="card-img-top" src={recipeImage} alt="portrait of recipe" onClick={this.hide} />
+                                {recipeImage ? <img id="card-recipe-image" className="card-img-top" src={recipeImage} alt="portrait of recipe" onClick={this.hide} /> :
+                                    <img id="card-recipe-image" className="card-img-top" src="https://storage.googleapis.com/grandmas-recipes-dev/_resized_defaultRecipe.jpg" alt="default image" />}
                             </Link>
 
                         </div>
@@ -212,16 +230,15 @@ class RecipeCard extends Component {
                                     <EditIcon editType={'ingredients'} that={this} />
                                     {edit === 'ingredients' ?
                                         <div className="card-recipe-body-edit-ingredient" id='card-recipe-id-edit'>
-                                            <ModalRecipes display={true} name={this.state.recipeName} closeAction={() => this.edit('ingredients')} closeActionName={"Close"}>
+                                            <ModalRecipes display={true} name={this.state.recipeName} closeAction={() => { this.save(value); this.edit('ingredients') }} closeActionName={"Close"}>
                                                 <div className='col-9 w-100 pl-0'>
                                                     <div className="input-group input-group-sm mb-3">
-                                                        <label className="sign-input-label" htmlFor="exampleInputEmail1">Ingredient</label>
+                                                        <label className="ingredients-input-label">Ingredient</label>
                                                         <input type="text" className="ingredient-input" placeholder="Type in ingredient and amount" ref={this.ingredientsRef} aria-label="Sizing example input" tabIndex={0} name='ingredient' aria-describedby="inputGroup-sizing-sm" onChange={this.onSelectedText.bind(this)} />
-                                                        <hr className='sign-underline' />
                                                     </div>
                                                 </div>
-                                                <div className='col-3 w-100 pl-0'>
-                                                    {this.state.ingredient.length > 0 ? <button className="btn signin-button" id="addrecipe-addingredient" onClick={this.addIngredient}>Add</button> : null}
+                                                <div className='col-3 w-100 p-0'>
+                                                    {this.state.ingredient.length > 0 ? <button className="btn ingredient-button" id="addrecipe-addingredient" onClick={this.addIngredient}>Add</button> : null}
                                                 </div>
                                                 <div className='col-12 w-100 p-0 ingredients-container'>
                                                     <IngredientCards ingredients={this.state.ingredients} reorderList={this.reorderList} editIngredient={this.editIngredient} deleteIngredient={this.deleteIngredient} />
@@ -239,13 +256,20 @@ class RecipeCard extends Component {
                                         <label className='custom-checkbox-label'>{item.ingredient}</label>
 
                                     </div>
-                                }) : null}
+                                }) : <span><i>No ingredients</i></span>}
+                                <hr className='m-2' />
                                 <label>Directions</label>
                                 <div className='card-recipe-body-edit'>
-                                    <EditIcon editType={'directions'} that={this} />
+                                    <EditIcon editType={'cookingInstructions'} that={this} />
                                 </div>
-                                {edit === 'directions' ? <textarea rows="4" cols="50" type="text" className="card-recipe-directions-edit" id="addrecipe-instructions" ref={this.directionsRef} placeholder="Directions on how to cook recipe" aria-label="Sizing example input" tabIndex={0} name='cookingInstructions' aria-describedby="inputGroup-sizing-sm" onChange={this.onSelectedText.bind(this)} />
+                                {edit === 'cookingInstructions' ? <React.Fragment><textarea rows="10" cols="50" type="text" className="card-recipe-directions-edit" id="addrecipe-instructions" ref={this.directionsRef} placeholder="Directions on how to cook recipe" aria-label="Sizing example input" tabIndex={0} name='cookingInstructions' aria-describedby="inputGroup-sizing-sm" onChange={this.onSelectedText.bind(this)} />
+                                    <div className="card-recipe-title-edit-save">
+                                        <SaveOrDiscard that={this} value={value} name='cookingInstructions' />
+                                    </div>
+                                </React.Fragment>
                                     : <ul className="card-text card-recipe-text mt-3">{listItems}</ul>}
+                                <hr className='m-2' />
+
                                 <p className="card-author"> -{chefName}</p>
                             </div>
                         </div>
@@ -274,27 +298,10 @@ const EditIcon = (props) => {
 }
 
 
-const SaveOrDiscard = (that) => {
+const SaveOrDiscard = (props) => {
+    const { that, value, name } = props;
     return <div className='save-discard'>
-        <SaveIcon that={that} />
-        <DiscardIcon that={that} />
-    </div>
-
-}
-
-const SaveIcon = (props) => {
-    return <div className="card-recipe-title-save">
-        <button className='save-button'>Save</button>
-    </div>
-}
-
-
-const DiscardIcon = (props) => {
-    return <div className="card-recipe-title-discard">
-        <svg className="bi bi-x-square" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-            <path fillRule="evenodd" d="M14 1H2a1 1 0 00-1 1v12a1 1 0 001 1h12a1 1 0 001-1V2a1 1 0 00-1-1zM2 0a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2V2a2 2 0 00-2-2H2z" clipRule="evenodd" />
-            <path fillRule="evenodd" d="M11.854 4.146a.5.5 0 010 .708l-7 7a.5.5 0 01-.708-.708l7-7a.5.5 0 01.708 0z" clipRule="evenodd" />
-            <path fillRule="evenodd" d="M4.146 4.146a.5.5 0 000 .708l7 7a.5.5 0 00.708-.708l-7-7a.5.5 0 00-.708 0z" clipRule="evenodd" />
-        </svg>
+        <button className='save-button' onClick={that.save.bind(this, value)}>Save</button>
+        <button className='save-button' onClick={() => { that.edit(that.state.edit); that.setState({ [name]: that.state.originalData[name] }) }}>Close</button>
     </div>
 }
