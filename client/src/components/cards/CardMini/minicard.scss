@@ -97,18 +97,19 @@ $greenishColor: #698474;
         .icon-background {
           text-align: center;
           margin: auto;
-          width: 50px;
-          height: 50px;
+          width: 45px;
+          height: 45px;
           position: relative;
           .icon-family,
           .icon-recipe,
           .icon-share {
-            width: 35px;
-            height: 35px;
-            padding-top: 5px;
+            width: 30px;
+            height: 30px;
             position: absolute;
-            bottom: 12px;
-            right: 8px;
+            top: 50%;
+            left: 50%;
+            -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
           }
         }
       }
@@ -134,16 +135,35 @@ $greenishColor: #698474;
         background-color: $greenishColor;
         overflow: hidden;
         position: relative;
-        label {
+        .card-item-label-container {
+          position: absolute;
+          z-index: 1;
+          top: 0;
+          min-height: 20px;
+          height: 40px;
           width: 100%;
-          color: $whiteColor;
-          text-align: center;
-          line-height: 1px;
+          label {
+            width: 100%;
+            color: $whiteColor;
+            text-align: center;
+            white-space: normal;
+            position: absolute;
+            margin-bottom: 0px;
+            top: 50%;
+            left: 50%;
+            -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+          }
         }
         img {
           object-fit: contain;
           width: 100%;
           object-position: center;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          -ms-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
         }
         div {
           width: 100%;

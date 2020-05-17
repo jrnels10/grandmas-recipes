@@ -45,3 +45,24 @@ export const BackButton = ({ goBack }) => {
         <path fillRule="evenodd" d="M4.5 10a.5.5 0 01.5-.5h10.5a.5.5 0 010 1H5a.5.5 0 01-.5-.5z" clipRule="evenodd" />
     </svg>
 }
+
+export class DeleteButton extends Component {
+    state = { delete: false }
+    confirmDelete = () => {
+        this.props.approve()
+    }
+
+    render() {
+        return <React.Fragment>
+            <button className="btn card-recipe-delete" onClick={() => { this.setState({ delete: true }) }}>Delete Recipe</button>
+            {this.state.delete ? <div className='position-absolute h-100 w-100 ' style={{ borderRadius: '10px', backgroundColor: "#343a40d6" }}>
+                <div className="alert alert-danger confirm-delete" role="alert">
+                    Are you sure you want to delete?
+                <button className="btn btn-danger w-100 m-0 mb-2" onClick={this.confirmDelete.bind(this)}>Yes</button>
+                    <button className="btn btn-light btn-outline-danger w-100 m-0" onClick={() => this.setState({ delete: false })}>No</button>
+                </div >
+            </div> : null
+            }
+        </React.Fragment>
+    }
+}

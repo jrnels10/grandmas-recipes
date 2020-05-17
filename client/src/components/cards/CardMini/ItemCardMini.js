@@ -17,7 +17,9 @@ class RecipeCardMini extends Component {
                 className="nav-link p-0 text-white"
                 to={`${this.props.redirectUrl}`}>
                 <div className="card-item" id={_id}>
-                    <label>{name}</label>
+                    <div className='card-item-label-container'>
+                        <label>{name}</label>
+                    </div>
                     <img src={image} />
                     <div>
                         <span className='liked-number'>{likes}</span>

@@ -151,31 +151,25 @@ class ChefCardMini extends Component {
                                 </motion.div>
                             </motion.div>
 
-                            <motion.div className='col action-button' animate={actionType !== '' ? { border: '2px solid #fcf8f3' } : { border: '2px solid #ffd3b6' }} onClick={this.chefAction.bind(this, 'share')}>
+                            {/* <motion.div className='col action-button' animate={actionType !== '' ? { border: '2px solid #fcf8f3' } : { border: '2px solid #ffd3b6' }} onClick={this.chefAction.bind(this, 'share')}>
                                 <motion.div
                                     animate={ChefAction(actionType, 'share')}
                                     className='icon-background'>
                                     <Share action={actionType} />
                                 </motion.div>
-                            </motion.div>
+                            </motion.div> */}
 
                         </motion.div>
                         <motion.div className='row' animate={actionType !== '' ? { opacity: 1, transition: { delay: .3 } } : { opacity: 0 }} style={actionType !== '' ? { display: 'block' } : { display: 'none' }}>
                             {actionType === 'recipe' ? <React.Fragment>
-                                {/* <Link
-                                    className="nav-link p-0 text-white"
-                                    to={`${this.props.pathTo}`}
-                                    onClick={this.selected.bind(this, this.props.selected, this.props.type)}>
-                                    <button type="submit" className={`btn signin-button-v2 ${customClass}`}>{this.props.children}</button>
-                                </Link> */}
-                                <NavigateButton customClassName='dashboard-button w-100' pathTo={`/addrecipe/${chefId}`}>Add new recipe</NavigateButton>
+                                <NavigateButton customClassName='dashboard-button w-100 mt-2' pathTo={`/addrecipe/${chefId}`}>Add new recipe</NavigateButton>
                                 <Slider {...settings}>
                                     {chefRecipes.map(recipe => {
                                         return <ItemCardMini key={recipe._id} _id={recipe._id} name={recipe.recipeName} image={recipe.recipeImage} likes={likes} redirectUrl={`/recipe/selectedrecipe/${recipe._id}`} />
                                     })}
                                 </Slider>
                             </React.Fragment> : actionType === 'family' ? <React.Fragment>
-                                <button className='btn signin-button w-75 mt-3 text-center m-auto'>Create new family</button>
+                                <NavigateButton customClassName='dashboard-button w-100 mt-2' pathTo={`/addfamily/${chefId}`}>Add new family</NavigateButton>
                                 {this.props.families.length > 0 ?
                                     <Slider {...settings}>
                                         {this.props.families.map(family => {

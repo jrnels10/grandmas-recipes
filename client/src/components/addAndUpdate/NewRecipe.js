@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { addNewRecipe, updateRecipe, deleteMyRecipe } from '../../API/RecipeAPI';
+import { uploadRecipeNew } from '../tools/Upload';
+
 import ModalRecipes from '../tools/Modal';
 import { withRouter } from 'react-router-dom';
 import IngredientCards from './IngredientCards';
@@ -7,37 +9,7 @@ import { motion } from 'framer-motion';
 
 import './newRecipe.css';
 
-async function recipeNewBody(state, props) {
-    const recipeObject = {
-        dateSubmitted: new Date(),
-        recipeDescription: state.recipeDescription,
-        submittedBy: `${props.data.user.firstName} ${props.data.user.lastName}`,
-        chefId: state.grandma_Id,
-        recipeName: state.recipeName,
-        recipeOwnerId: props.data.user.id,
-        groups: state.groups,
-        ingredients: state.ingredients,
-        cookingInstructions: state.cookingInstructions
-    }
-    const json = JSON.stringify(recipeObject);
-    var bodyFormData = new FormData();
-    bodyFormData.append('picture', state.img);
-    bodyFormData.append('accountType', props.data.user.method);
-    bodyFormData.append('myRecipes', json);
-    bodyFormData.append('private', true);
-    return bodyFormData
-}
 
-async function updateRecipeBody(state, props) {
-    const { recipeId, grandma_Id, img, recipeDescription, recipeName, cookingInstructions, groups, ingredients, updatedBy, dateUpdated } = state;
-    const updatedRecipe = { recipeId, grandma_Id, recipeDescription, recipeName, cookingInstructions, groups, ingredients, updatedBy, dateUpdated };
-    const json = JSON.stringify(updatedRecipe);
-    var bodyFormData = new FormData();
-    bodyFormData.append('picture', img);
-    bodyFormData.append('accountType', props.data.user.method);
-    bodyFormData.append('myRecipes', json);
-    return bodyFormData
-}
 
 class AddRecipe extends Component {
     ingredientsRef = React.createRef();
@@ -71,7 +43,7 @@ class AddRecipe extends Component {
                 recipeName: selected.recipeName,
                 groups: [...selected.groups],
                 cookingInstructions: selected.cookingInstructions,
-                grandma_Id: selected.chefId
+                chefId: selected.chefId
             });
             this.refs.theDiv.value = selected.recipeName;
             this.refs.theRecipeDescriptionDiv.value = selected.recipeDescription;
@@ -80,8 +52,8 @@ class AddRecipe extends Component {
         }
         else {
             this.focusDiv();
-            const grandma_Id = window.location.pathname.split('/')[2];
-            this.setState({ grandma_Id });
+            const chefId = window.location.pathname.split('/')[2];
+            this.setState({ chefId });
         };
     };
 
@@ -106,20 +78,21 @@ class AddRecipe extends Component {
 
 
 
-    upload = async (e) => {
+    upload = async (value) => {
         const { dispatch } = this.props.data;
-        let res;
         dispatch({ type: "LOADER", payload: { display: true } });
+        const res = await uploadRecipeNew(value, this);
+        // let res;
 
-        const body = this.state.update ? await updateRecipeBody(this.state, this.props) : await recipeNewBody(this.state, this.props);
+        // // const body = this.state.update ? await updateRecipeBody(this.state, this.props) : await recipeNewBody(this.state, this.props);
 
 
-        // const res = await addNewRecipe(bodyFormData, this.props.data.user.id);
-        if (this.state.update) {
-            res = await updateRecipe(body, this.props.data.user.id);
-        } else {
-            res = await addNewRecipe(body, this.props.data.user.id);
-        }
+        // // const res = await addNewRecipe(bodyFormData, this.props.data.user.id);
+        // if (this.state.update) {
+        //     res = await updateRecipe(body, this.props.data.user.id);
+        // } else {
+        //     res = await addNewRecipe(body, this.props.data.user.id);
+        // }
         if (res.status === 200) {
             dispatch({ type: "LOADER", payload: { display: false } });
             dispatch({ type: 'ADDED_MY_RECIPE', payload: { myRecipes: res.data.myRecipes } })
@@ -213,6 +186,7 @@ class AddRecipe extends Component {
             <div className="input-group input-group-sm mb-3">
                 <label className="new-recipe-label">Description</label>
                 <textarea rows="4" cols="50" type="text" className="new-recipe-input" id="addrecipe-instructions" placeholder="A description about the recipe" aria-label="Sizing example input" ref="theRecipeDescriptionDiv" tabIndex={0} name='recipeDescription' aria-describedby="inputGroup-sizing-sm" onChange={this.onSelectedText.bind(this)} />
+                {this.state.errorKey === 'recipeDescription' ? <p className="text-danger">required</p> : null}
             </div>
             <div className='row w-100 m-0 mb-3'>
                 <span className="new-recipe-label ingredients-text-list">{this.state.ingredients.map(item => { return item.ingredient }).join(', ')}</span>
@@ -241,9 +215,9 @@ class AddRecipe extends Component {
             <div className="input-group input-group-sm mb-3">
                 <label className="new-recipe-label">Instructions</label>
                 <textarea rows="4" cols="50" type="text" className="new-recipe-input" id="addrecipe-instructions" placeholder="Directions on how to cook recipe" aria-label="Sizing example input" ref="theInstructionsDiv" tabIndex={0} name='cookingInstructions' aria-describedby="inputGroup-sizing-sm" onChange={this.onSelectedText.bind(this)} />
-                {/* <hr className='sign-underline' /> */}
+                {this.state.errorKey === 'cookingInstructions' ? <p className="text-danger">required</p> : null}
             </div>
-            <button className="btn w-100 signin-button" onClick={this.upload}>{this.state.update ? "Update" : "Save"} Recipe</button>
+            <button className="btn w-100 signin-button" onClick={this.upload.bind(this, this.props.data)}>{this.state.update ? "Update" : "Save"} Recipe</button>
             {this.state.update ? <button className="btn btn-danger mt-2 w-100 " onClick={this.delete}>Delete Recipe</button> : null}
         </motion.div>
     }

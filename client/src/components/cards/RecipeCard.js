@@ -1,18 +1,14 @@
 import React, { Component } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { getmyrecipe } from './../../API/RecipeAPI';
+import { getmyrecipe, deleteMyRecipe } from './../../API/RecipeAPI';
 import { Consumer } from '../../Context';
 import './recipe.css';
 import ModalRecipes from '../tools/Modal';
 import IngredientCards from '../addAndUpdate/IngredientCards';
-import { uploadRecipeEdit } from '../tools/Upload';
+import { uploadRecipeEdit, deleteRecipe } from '../tools/Upload';
+import { DeleteButton } from '../tools/Buttons';
 
-
-function getHeight() {
-    var offsetHeight = document.getElementById("card-recipe-id").offsetHeight;
-    document.getElementById("card-recipe-id-edit").style.height = offsetHeight + 'px';
-}
 
 class RecipeCard extends Component {
     titleRef = React.createRef();
@@ -34,8 +30,19 @@ class RecipeCard extends Component {
         const recipeUrl = this.props.location.pathname;
         const last = recipeUrl.substring(recipeUrl.lastIndexOf("/") + 1, recipeUrl.length);
         const foundRecipe = await getmyrecipe(last);
-        const { ingredients, recipeImage, cookingInstructions, chefName, recipeName, dateSubmitted, _id, chefId } = foundRecipe.data;
-        this.setState({ ingredients, recipeImage, cookingInstructions, chefName, recipeName, dateSubmitted, _id, chefId, originalData: foundRecipe.data });
+        const { ingredients, recipeImage, cookingInstructions, chefName, recipeName, dateSubmitted, _id, chefId, recipeOwner } = foundRecipe.data;
+        this.setState({
+            ingredients,
+            recipeImage,
+            cookingInstructions,
+            chefName,
+            recipeName,
+            dateSubmitted,
+            _id,
+            chefId,
+            originalData: foundRecipe.data,
+            recipeOwner
+        });
     }
 
     findSelectedRecipe = async (dispatch) => {
@@ -179,7 +186,8 @@ class RecipeCard extends Component {
         return <Consumer>
             {value => {
                 if (this.state.recipeName) {
-                    const { ingredients, recipeImage, cookingInstructions, chefName, recipeName, dateSubmitted, _id, edit, ingredient } = this.state;
+                    const { ingredients, recipeImage, cookingInstructions, chefName, recipeName, dateSubmitted, _id, edit, ingredient, recipeOwner } = this.state;
+                    const owner = recipeOwner === value.user.id;
                     const textSplit = cookingInstructions.split('\n');
                     const listItems = textSplit.map((textSplit, idx) =>
                         <li key={idx}>{textSplit}</li>
@@ -201,7 +209,7 @@ class RecipeCard extends Component {
                                         <input ref={this.titleRef} type="text" name='recipeName' className="card-recipe-title-edit-input" onChange={this.onSelectedText.bind(this)} />}
                                 </React.Fragment>
 
-                                {edit !== 'recipeName' ? <div className='card-recipe-title-edit'><EditIcon editType={'recipeName'} that={this} /></div> : <div className="card-recipe-title-edit-save">
+                                {edit !== 'recipeName' ? <div className='card-recipe-title-edit'><EditIcon editType={'recipeName'} that={this} owner={owner} /></div> : <div className="card-recipe-title-edit-save">
                                     <SaveOrDiscard that={this} value={value} name='recipeName' />
                                 </div>}
 
@@ -211,7 +219,7 @@ class RecipeCard extends Component {
                             </div>
                         </div>
                         <div className="row card-graphics-container">
-                            <EditIcon editType={'img'} that={this} />
+                            <EditIcon editType={'img'} that={this} owner={owner} />
                             {edit === 'img' ? <div className="card-recipe-image-edit-container" id="card-recipe-image-edit">
                                 <input className="card-recipe-image-edit addrecipe-custom-file-input" type="file" name='img' onChange={this.onSelectedText.bind(this)} />
                                 <div className="card-recipe-image-edit-save">
@@ -229,7 +237,7 @@ class RecipeCard extends Component {
                             <div className="card-body card-recipe-body">
                                 <label>Ingredients</label>
                                 <div className='card-recipe-body-edit'>
-                                    <EditIcon editType={'ingredients'} that={this} />
+                                    <EditIcon editType={'ingredients'} that={this} owner={owner} />
                                     {edit === 'ingredients' ?
                                         <div className="card-recipe-body-edit-ingredient" id='card-recipe-id-edit'>
                                             <ModalRecipes display={true} name={this.state.recipeName} closeAction={() => { this.save(value); this.edit('ingredients') }} closeActionName={"Close"}>
@@ -262,7 +270,7 @@ class RecipeCard extends Component {
                                 <hr className='m-2' />
                                 <label>Directions</label>
                                 <div className='card-recipe-body-edit'>
-                                    <EditIcon editType={'cookingInstructions'} that={this} />
+                                    <EditIcon editType={'cookingInstructions'} that={this} owner={owner} />
                                 </div>
                                 {edit === 'cookingInstructions' ? <React.Fragment><textarea rows="10" cols="50" type="text" className="card-recipe-directions-edit" id="addrecipe-instructions" ref={this.directionsRef} placeholder="Directions on how to cook recipe" aria-label="Sizing example input" tabIndex={0} name='cookingInstructions' aria-describedby="inputGroup-sizing-sm" onChange={this.onSelectedText.bind(this)} />
                                     <div className="card-recipe-title-edit-save">
@@ -271,10 +279,10 @@ class RecipeCard extends Component {
                                 </React.Fragment>
                                     : <ul className="card-text card-recipe-text mt-3">{listItems}</ul>}
                                 <hr className='m-2' />
-
                                 <p className="card-author"> -{chefName}</p>
                             </div>
                         </div>
+                        {owner ? <DeleteButton approve={() => { deleteRecipe(_id, value.user.id, this) }} /> : null}
                     </motion.div >
                 }
             }}
@@ -285,18 +293,19 @@ class RecipeCard extends Component {
 export default RecipeCard;
 
 const EditIcon = (props) => {
-    const { editType, that } = props;
-    return <div className='card-recipe-image-edit'
+    const { editType, that, owner } = props;
+    return owner ? <div
+        className='card-recipe-image-edit'
         onClick={that.edit.bind(this, editType)}
     >
-        {editType !== 'image' ? <svg className="bi bi-pencil" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        {editType !== 'img' ? <svg className="bi bi-pencil" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
             <path fillRule="evenodd" d="M11.293 1.293a1 1 0 011.414 0l2 2a1 1 0 010 1.414l-9 9a1 1 0 01-.39.242l-3 1a1 1 0 01-1.266-1.265l1-3a1 1 0 01.242-.391l9-9zM12 2l2 2-9 9-3 1 1-3 9-9z" clipRule="evenodd" />
             <path fillRule="evenodd" d="M12.146 6.354l-2.5-2.5.708-.708 2.5 2.5-.707.708zM3 10v.5a.5.5 0 00.5.5H4v.5a.5.5 0 00.5.5H5v.5a.5.5 0 00.5.5H6v-1.5a.5.5 0 00-.5-.5H5v-.5a.5.5 0 00-.5-.5H3z" clipRule="evenodd" />
         </svg> : <svg className="bi bi-pencil-square" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path d="M15.502 1.94a.5.5 0 010 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 01.707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 00-.121.196l-.805 2.414a.25.25 0 00.316.316l2.414-.805a.5.5 0 00.196-.12l6.813-6.814z" />
                 <path fillRule="evenodd" d="M1 13.5A1.5 1.5 0 002.5 15h11a1.5 1.5 0 001.5-1.5v-6a.5.5 0 00-1 0v6a.5.5 0 01-.5.5h-11a.5.5 0 01-.5-.5v-11a.5.5 0 01.5-.5H9a.5.5 0 000-1H2.5A1.5 1.5 0 001 2.5v11z" clipRule="evenodd" />
             </svg>}
-    </div>
+    </div> : null
 }
 
 
