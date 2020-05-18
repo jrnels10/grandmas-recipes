@@ -68,7 +68,7 @@ export default class SignUp extends Component {
         const { dispatch, axiosServerUrl, redirectTo } = value;
 
         try {
-            const data = await axios.post(`${axiosServerUrl}/users/oauth/google`, { access_token: res.accessToken });
+            const data = await axios.post(`${axiosServerUrl}/users/oauth/google`, { access_token: res.tokenId });
             dispatch({
                 type: "SIGN_UP",
                 payload: {
@@ -121,9 +121,10 @@ export default class SignUp extends Component {
         return (
             <Consumer>
                 {value => {
+                    // debugger
                     // const { dispatch } = value;
                     const open = !this.state.open ? "close" : "open";
-                    return <div className={` signin-menu signup-${open} `}>
+                    return <div className={` signin-menu  `}>
                         <div className={`w-100 signup-container`}>
                             <span className="m-2" onClick={this.close}><i className="fas fa-arrow-circle-right fa-lg"></i></span>
                             <form className={`mt-2`} onSubmit={this.onSubmit.bind(this, value)}>
@@ -176,8 +177,13 @@ export default class SignUp extends Component {
                                 </div>
 
                                 <div className='row w-100 m-0 pl-2 p-0 mt-3'>
-                                    <div className="w-50 text-center float-left">
+                                    {/* <div className="w-50 text-center float-left">
                                         <button type="submit" className="btn signin-button">Sign Up</button>
+                                    </div> */}
+                                    <div className='w-100 text-center'>
+
+                                        <button type="submit" className="btn signin-button-v2">Sign Up</button>
+
                                     </div>
                                 </div>
                             </form>
@@ -204,8 +210,9 @@ export default class SignUp extends Component {
                                         clientId={`267196671122-298u06lbfo5ho1ollta67bm337ovluj9.apps.googleusercontent.com`}
                                         buttonText="Google"
                                         onSuccess={this.responseGoogle.bind(this, value)}
-                                        onFailure={this.responseGoogle}
-                                        className='btn google-login'
+                                        onFailure={this.responseGoogle.bind(this, value)}
+                                        className='btn google-login '
+                                        cookiePolicy={'single_host_origin'}
                                     />
                                 </div>
                             </div>
