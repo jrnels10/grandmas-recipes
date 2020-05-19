@@ -43,7 +43,7 @@ ReactDOM.render(
                             <Route exact path="/addfamily/:id" component={authGuard(CreateFamily)} />
                             {/* <Route path="/updaterecipe" component={authGuard(UpdateRecipe)} /> */}
                             <Route exact path="/familychef/:id" component={ChefCard} />
-                            <Route exact path={`/recipe/selectedrecipe/:recipeId`} component={RecipeCard} />
+                            <Route exact path={`/recipe/selectedrecipe/:recipeId`} component={authGuard(RecipeCard)} />
                             <Route exact path="/signin" component={SignIn} />
                             <Route exact path="/fullscreen" component={FullScreen} />
                             <Route exact path="/admin" component={Analytics} />

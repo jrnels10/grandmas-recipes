@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { addNewRecipe, updateRecipe, deleteMyRecipe } from '../../API/RecipeAPI';
 import { uploadRecipeNew } from '../tools/Upload';
+import { ModalRecipes } from '../tools/Modal';
 
-import ModalRecipes from '../tools/Modal';
 import { withRouter } from 'react-router-dom';
 import IngredientCards from './IngredientCards';
 import { motion } from 'framer-motion';

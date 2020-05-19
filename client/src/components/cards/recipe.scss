@@ -54,6 +54,19 @@ $redishColor: #dc3545;
           margin-right: 10px;
         }
       }
+
+      .card-mini-chef-heart-container {
+        position: absolute;
+        top: 0;
+        right: 12px;
+        text-align: right;
+        width: 150px;
+        float: right;
+        .mini-heart {
+          font-size: 25px;
+          margin-right: 5px;
+        }
+      }
     }
     .card-recipe-selected-options {
       width: 100%;
@@ -61,7 +74,7 @@ $redishColor: #dc3545;
       text-align: right;
       font-size: 35px;
     }
-    svg {
+    .bi-pencil {
       padding-top: 10px;
       vertical-align: top;
     }
@@ -153,6 +166,7 @@ $redishColor: #dc3545;
     label {
       width: 90%;
     }
+
     .card-recipe-body-edit {
       float: right;
       text-align: right;

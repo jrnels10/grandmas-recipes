@@ -49,11 +49,7 @@ class ChefCardMini extends Component {
         this.setState({ [title]: !this.state[title] })
     };
 
-    toggleHeart = async (e) => {
-        const initialHeart = this.state.heart;
-        this.setState({ liked: initialHeart ? --this.state.liked : ++this.state.liked, heart: !initialHeart });
-        // await likemyrecipe(this.props.recipe._id, { userId: this.props.value.user.id })
-    };
+
 
     chefAction = (actionType) => {
         this.setState({ actionType: this.state.actionType === actionType ? '' : actionType })
@@ -107,18 +103,7 @@ class ChefCardMini extends Component {
             {/* </Link> */}
             <div className="card-mini-chef-actions">
                 <div className='row p-2 w-100 m-0 card-mini-chef-like-and-share'>
-                    <div className="card-mini-chef-heart-container">
-                        {heart ?
-                            <svg className="bi bi-heart-fill mini-heart" onClick={this.toggleHeart} width="1em" height="1em" viewBox="0 0 20 20" fill="#f7c9b6" xmlns="http://www.w3.org/2000/svg">
-                                <path fillRule="evenodd" d="M10 3.314C14.438-1.248 25.534 6.735 10 17-5.534 6.736 5.562-1.248 10 3.314z" clipRule="evenodd" />
-                            </svg> :
-                            <svg className="bi bi-heart-fill mini-heart" onClick={this.toggleHeart} width="1em" height="1em" viewBox="0 0 20 20" fill="#f7c9b6" xmlns="http://www.w3.org/2000/svg">
-                                <path fillRule="evenodd" d="M10 4.748l-.717-.737C7.6 2.281 4.514 2.878 3.4 5.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.837-3.362.314-4.385-1.114-2.175-4.2-2.773-5.883-1.043L10 4.748zM10 17C-5.333 6.868 5.279-1.04 9.824 3.143c.06.055.119.112.176.171a3.12 3.12 0 01.176-.17C14.72-1.042 25.333 6.867 10 17z" clipRule="evenodd" />
-                            </svg>}
-                        {liked > 0 ?
-                            <span className='liked-number'>{likes}</span>
-                            : null}
-                    </div>
+
                     <div className='card-mini-chef-share'>
                         <FacebookShareButton url={inviteFamilyLink}  >
                             <FacebookIcon size={30} round={true} />

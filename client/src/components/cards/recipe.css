@@ -58,6 +58,20 @@
   margin-right: 10px;
 }
 
+.card-recipe .card-recipe-header .card-recipe-title-container .card-mini-chef-heart-container {
+  position: absolute;
+  top: 0;
+  right: 12px;
+  text-align: right;
+  width: 150px;
+  float: right;
+}
+
+.card-recipe .card-recipe-header .card-recipe-title-container .card-mini-chef-heart-container .mini-heart {
+  font-size: 25px;
+  margin-right: 5px;
+}
+
 .card-recipe .card-recipe-header .card-recipe-selected-options {
   width: 100%;
   position: absolute;
@@ -65,7 +79,7 @@
   font-size: 35px;
 }
 
-.card-recipe .card-recipe-header svg {
+.card-recipe .card-recipe-header .bi-pencil {
   padding-top: 10px;
   vertical-align: top;
 }
