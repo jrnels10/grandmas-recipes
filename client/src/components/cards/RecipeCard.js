@@ -28,7 +28,7 @@ class RecipeCard extends Component {
         }
     }
     async componentDidMount() {
-        const recipeUrl = this.props.data.redirectTo;
+        const recipeUrl = window.location.pathname;
         const last = recipeUrl.substring(recipeUrl.lastIndexOf("/") + 1, recipeUrl.length);
         const foundRecipe = await getmyrecipe(last);
         const { ingredients, recipeImage, cookingInstructions, chefName, recipeName, dateSubmitted, _id, chefId, recipeOwner, liked } = foundRecipe.data;
