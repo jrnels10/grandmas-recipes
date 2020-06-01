@@ -63,6 +63,7 @@ module.exports = {
     readImageWithGoogleCloud: async (req, res, next) => {
         //https://morioh.com/p/0tNONZvfChiS
         const client = new vision.ImageAnnotatorClient();
+        console.log(req.file.path)
         const fileName = 'C:/Users/jrnel/Documents/visual_studio/projects/GrandmasRecipes/server/uploads/esme.jpg';
 
         // Performs text detection on the local file

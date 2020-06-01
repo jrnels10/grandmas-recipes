@@ -4,7 +4,7 @@ const Chef = require('./../models/chef');
 const Recipe = require('./../models/recipe');
 const { uploadImages, returnUserWithChefsAndRecipes } = require('./generalFunctions');
 
-const { deleteImageFromGoogleCloud } = require('./../cloud/googleCloud');
+const { deleteImageFromGoogleCloud, readImageWithGoogleCloud } = require('./../cloud/googleCloud');
 
 
 module.exports = {
@@ -39,6 +39,12 @@ module.exports = {
             return error
         });
         res.send(savedRecipe);
+    },
+    readRecipeFromImage: async (req, res, next) => {
+        console.log('====================recipe adding from image initiated ====================');
+        readImageWithGoogleCloud().then(results => {
+            res.send(results)
+        })
     },
     updateMyRecipe: async (req, res, next) => {
         // https://stackoverflow.com/questions/15691224/mongoose-update-values-in-array-of-objects
