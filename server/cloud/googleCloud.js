@@ -12,6 +12,7 @@ const path = require('path');
 // https://googleapis.dev/nodejs/storage/latest/File.html#createWriteStream
 // https://cloud.google.com/storage/docs/reference/libraries#client-libraries-install-nodejs
 // api requests (GET,POST,DELETE,PUT) =>   https://cloud.google.com/storage/docs/json_api/v1/?apix=true
+//https://cloud.google.com/vision/docs/libraries
 async function getAllBuckets(gcsname) {
     const storage = new Storage({ projectId, keyFilename });
     const bucket = await storage.bucket(bucketName)
@@ -63,14 +64,9 @@ module.exports = {
     readImageWithGoogleCloud: async (req, res, next) => {
         //https://morioh.com/p/0tNONZvfChiS
         const client = new vision.ImageAnnotatorClient();
-        console.log(req.file.path)
-        const fileName = 'C:/Users/jrnel/Documents/visual_studio/projects/GrandmasRecipes/server/uploads/esme.jpg';
-
         // Performs text detection on the local file
-        const [result] = await client.textDetection(fileName);
+        const [result] = await client.textDetection(req.path);
         const detections = result.textAnnotations;
-        console.log('Text:');
-        detections.forEach(text => console.log(text));
         return detections
     }
 };

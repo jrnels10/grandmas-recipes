@@ -302,3 +302,22 @@ $redishColor: #dc3545;
   border: 1px solid $whiteColor;
   color: $whiteColor;
 }
+
+@media screen and (min-width: 601px) {
+  .card-recipe {
+    width: 500px;
+    // float: left;
+    margin: auto;
+    border-radius: 15px;
+    box-shadow: 10px 10px 15px 0px rgba(0, 0, 0, 0.15);
+    margin: 40px;
+    background-color: $whiteColor;
+    vertical-align: middle;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+  }
+}

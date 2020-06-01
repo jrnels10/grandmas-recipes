@@ -2,53 +2,120 @@ $pinkiishColor: #ffaaa5;
 $tanishColor: #ffd3b6;
 $whiteColor: #fcf8f3;
 $greenishColor: #698474;
+@media screen and (max-width: 600px) {
+  .recipe-logo-container {
+    margin-top: 40%;
+    text-align: center;
+    width: 100vw;
+  }
 
-.recipe-logo-container {
-  margin-top: 40%;
-  text-align: center;
-  width: 100vw;
+  .navbar-brand-home {
+    font-size: 3.3rem;
+    font-family: "Dancing Script", cursive;
+    color: #f7c9b6;
+    text-shadow: 0px 5px 15px black;
+  }
+
+  .login-container {
+    width: 100vw;
+    text-align: center;
+  }
+
+  .signin-button-v2 {
+    background-color: $greenishColor;
+    border-color: $greenishColor;
+    position: relative;
+    width: 65vw;
+    box-shadow: 0px 10px 15px 0px rgba(0, 0, 0, 0.35);
+    color: $whiteColor;
+  }
+  .sign-in-v2 {
+    color: $whiteColor;
+    font-weight: 600;
+  }
+  .sign-in-arrow {
+    position: absolute;
+    top: 0;
+    right: 29px;
+    font-size: 35px;
+    font-weight: bold;
+  }
+  .sign-up-link-span {
+    font-size: 13px;
+    color: rgb(37, 37, 37);
+
+    margin-left: 35px;
+    font-weight: 500;
+  }
+  .sign-up-link {
+    color: $tanishColor;
+    font-weight: 600;
+    font-size: 15px;
+  }
 }
 
-.navbar-brand-home {
-  font-size: 3.3rem;
-  font-family: "Dancing Script", cursive;
-  color: #f7c9b6;
-  text-shadow: 0px 5px 15px black;
-}
+@media screen and (min-width: 601px) {
+  .recipe-logo-container {
+    margin: 0;
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: 100vw;
+    label {
+      font-size: 75px;
+    }
+  }
 
-.login-container {
-  width: 100vw;
-  text-align: center;
-}
+  .navbar-brand-home {
+    font-size: 3.3rem;
+    font-family: "Dancing Script", cursive;
+    color: #f7c9b6;
+    text-shadow: 0px 5px 15px black;
+  }
 
-.signin-button-v2 {
-  background-color: $greenishColor;
-  border-color: $greenishColor;
-  position: relative;
-  width: 65vw;
-  box-shadow: 0px 10px 15px 0px rgba(0, 0, 0, 0.35);
-  color: $whiteColor;
-}
-.sign-in-v2 {
-  color: $whiteColor;
-  font-weight: 600;
-}
-.sign-in-arrow {
-  position: absolute;
-  top: 0;
-  right: 29px;
-  font-size: 35px;
-  font-weight: bold;
-}
-.sign-up-link-span {
-  font-size: 13px;
-  color: rgb(37, 37, 37);
+  .login-container {
+    width: 100vw;
+    text-align: center;
+    margin: 0;
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+  }
 
-  margin-left: 35px;
-  font-weight: 500;
-}
-.sign-up-link {
-  color: $tanishColor;
-  font-weight: 600;
-  font-size: 15px;
+  .signin-button-v2 {
+    background-color: $greenishColor;
+    border-color: $greenishColor;
+    position: relative;
+    width: 300px;
+    box-shadow: 0px 10px 15px 0px rgba(0, 0, 0, 0.35);
+    color: $whiteColor;
+  }
+  .sign-in-v2 {
+    color: $whiteColor;
+    font-weight: 600;
+  }
+  .sign-in-arrow {
+    position: absolute;
+    top: 0;
+    right: 29px;
+    font-size: 35px;
+    font-weight: bold;
+  }
+  .sign-up-link-span {
+    font-size: 13px;
+    color: rgb(37, 37, 37);
+
+    margin-left: 35px;
+    font-weight: 500;
+  }
+  .sign-up-link {
+    color: $tanishColor;
+    font-weight: 600;
+    font-size: 15px;
+  }
 }

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './pagewrapper.css';
 import { withRouter } from 'react-router-dom';
-import bckgrndImage from './../../Images/photoshop_knife.png'
 class PageWrapper extends Component {
     constructor(props) {
         super(props);

@@ -1,32 +1,10 @@
-.signin-menu {
-  position: absolute;
-  object-fit: cover;
-  width: 100%;
-  overflow: hidden;
-  height: 100vh;
-}
-
 .fa-arrow-circle-right {
   color: #877785;
 }
-
 .sign-container {
   bottom: 0px;
   height: calc(100% - 50px);
   padding: 15px 50px 0px 50px;
-}
-
-.welcome-sign {
-  color: #f7c9b6;
-  margin-bottom: 75px;
-}
-
-.signup-container {
-  position: absolute;
-  bottom: 0px;
-  height: 95vh;
-  width: 100%;
-  padding: 30px 50px 0px 50px;
 }
 
 .sign-input {
@@ -35,6 +13,7 @@
   color: #c59894;
   width: 100%;
 }
+
 /* Change the white to any color ;) */
 @-webkit-keyframes autofill {
   to {
@@ -121,4 +100,24 @@
   font-size: 40px;
   font-weight: bold;
   fill: #f0d1bf;
+}
+@media screen and (max-width: 600px) {
+  .signin-menu {
+    position: absolute;
+    object-fit: cover;
+    width: 100%;
+    overflow: hidden;
+    height: 100vh;
+  }
+}
+
+@media screen and (min-width: 601px) {
+  .signin-menu {
+    /* position: absolute; */
+    object-fit: cover;
+    width: 40%;
+    overflow: hidden;
+    height: 100vh;
+    margin: auto;
+  }
 }

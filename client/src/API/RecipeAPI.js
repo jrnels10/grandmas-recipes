@@ -20,6 +20,18 @@ export async function addNewRecipe(bodyFormData, id) {
     }
 };
 
+export async function readRecipeImage(bodyFormData, id) {
+    try {
+        return axios.post(`${baseUrl}/recipes/readrecipeimage/${id}`,
+            bodyFormData,
+            { headers: { 'Content-Type': 'multipart/form-data' } }).catch(function (error) {
+                return error.response.data
+            })
+    } catch (error) {
+        return console.log(error)
+    }
+};
+
 export async function updateRecipe(bodyFormData, id) {
     try {
         return axios.put(`${baseUrl}/recipes/updatemyrecipe/${id}`,

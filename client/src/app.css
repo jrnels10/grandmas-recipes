@@ -1,42 +1,73 @@
-#root {
-  height: 100%;
-}
+@media screen and (max-width: 600px) {
+  #root {
+    height: 100%;
+  }
 
-html {
-  overflow: hidden;
-}
+  html {
+    overflow: hidden;
+  }
 
-body {
-  background-color: #fcf8f3;
-  height: auto;
-}
+  body {
+    background-color: #fcf8f3;
+    height: auto;
+  }
 
-/* #877785
+  /* #877785
 #F7C9B6
 #F0D1BF
 #C59894
 #E85A4F */
-.grandparents {
-  height: 200px;
-}
-#app-div {
-  position: static;
-  width: 100vw;
-  overflow: hidden;
-}
-
-.scrollable-div {
-  overflow: auto;
-  height: calc(100vh - 46px);
-  width: 100vw;
-}
-
-@media screen and (min-width: 600px) {
+  .grandparents {
+    height: 200px;
+  }
   #app-div {
-    /* background: url(./Images/Betty-White.jpg); */
+    position: static;
+    width: 100vw;
+    overflow: hidden;
+  }
+
+  .scrollable-div {
+    overflow: auto;
+    height: calc(100vh - 46px);
+    width: 100vw;
+  }
+
+  #app-div {
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
-    /* padding-top: 56px !important; */
+  }
+}
+
+@media screen and (min-width: 601px) {
+  #root {
+    height: 100vh;
+  }
+
+  html {
+    overflow-x: hidden;
+  }
+
+  body {
+    background-color: #fcf8f3;
+    height: auto;
+  }
+
+  /* #877785
+#F7C9B6
+#F0D1BF
+#C59894
+#E85A4F */
+
+  #app-div {
+    position: static;
+    width: 100vw;
+    overflow-x: hidden;
+  }
+
+  .scrollable-div {
+    overflow-x: hidden;
+    height: calc(100vh - 46px);
+    width: 100vw;
   }
 }

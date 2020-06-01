@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { addNewRecipe, updateRecipe, deleteMyRecipe } from '../../API/RecipeAPI';
+import { addNewRecipe, updateRecipe, deleteMyRecipe, readRecipeImage } from '../../API/RecipeAPI';
 import { uploadRecipeNew } from '../tools/Upload';
 import { ModalRecipes } from '../tools/Modal';
 
@@ -104,6 +104,14 @@ class AddRecipe extends Component {
         };
     }
 
+    readRecipeImage = async (value, e) => {
+        var bodyFormData = new FormData();
+        bodyFormData.append('picture', e.target.files[0]);
+
+        const res = await readRecipeImage(bodyFormData, value.user.id)
+        console.log(res)
+    }
+
     toggleIngredientModal = () => {
         this.setState({ ingredientModal: !this.state.ingredientModal })
     }
@@ -205,6 +213,10 @@ class AddRecipe extends Component {
                 <label className="new-recipe-label">Image</label>
                 <input className="sign-input addrecipe-custom-file-input" type="file" name='img' onChange={this.onSelected.bind(this)} />
             </div>
+            {/* <div className="input-group input-group-sm mb-3">
+                <label className="new-recipe-label">Add From Image</label>
+                <input className="sign-input addrecipe-custom-file-input" type="file" name='img' onChange={this.readRecipeImage.bind(this, this.props.data)} />
+            </div> */}
             <div className="input-group input-group-sm mb-3">
                 <label className="new-recipe-label">Instructions</label>
                 <textarea rows="4" cols="50" type="text" className="new-recipe-input" id="addrecipe-instructions" placeholder="Directions on how to cook recipe" aria-label="Sizing example input" ref="theInstructionsDiv" tabIndex={0} name='cookingInstructions' aria-describedby="inputGroup-sizing-sm" onChange={this.onSelectedText.bind(this)} />

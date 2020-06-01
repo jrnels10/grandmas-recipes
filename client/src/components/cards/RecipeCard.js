@@ -70,8 +70,9 @@ class RecipeCard extends Component {
         this.setState({ info: !this.state.info })
     };
 
-    hide = () => {
-        this.setState({ viewImage: !this.state.viewImage })
+    viewFullImage = (value) => {
+        const { dispatch } = value;
+        dispatch({ type: "FULLSCREEN_IMAGE", payload: { fullScreenImage: this.state.recipeImage } });
     };
 
     edit = (editItem) => {
@@ -203,7 +204,7 @@ class RecipeCard extends Component {
                             </div> : null}
 
                             <Link to={`/fullscreen`}>
-                                {recipeImage ? <img id="card-recipe-image" className="card-img-top" src={recipeImage} alt="portrait of recipe" onClick={this.hide} /> :
+                                {recipeImage ? <img id="card-recipe-image" className="card-img-top" src={recipeImage} alt="portrait of recipe" onClick={this.viewFullImage.bind(this, value)} /> :
                                     <img id="card-recipe-image" className="card-img-top" src="https://storage.googleapis.com/grandmas-recipes-dev/_resized_defaultRecipe.jpg" alt="default image" />}
                             </Link>
 

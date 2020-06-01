@@ -42,7 +42,7 @@ module.exports = {
     },
     readRecipeFromImage: async (req, res, next) => {
         console.log('====================recipe adding from image initiated ====================');
-        readImageWithGoogleCloud().then(results => {
+        readImageWithGoogleCloud(req.file).then(results => {
             res.send(results)
         })
     },

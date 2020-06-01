@@ -60,7 +60,6 @@ class ChefCardMini extends Component {
         const { chefId, chefName, chefImage, chefBio, dateSubmitted, chefRecipes, chefPrivate } = this.props.chef;
         const { dispatch } = this.props.value;
         const inviteFamilyLink = `${window.location.origin}/familychef/${chefId}`;
-        const likes = liked >= 1000 ? `${liked.toString().substring(0, 1) + "." + liked.toString().substring(1, 2)}k likes` : `${liked} like`;
         const pageVariant = {
             closed: {
                 opacity: 0
@@ -150,6 +149,8 @@ class ChefCardMini extends Component {
                                 <NavigateButton customClassName='dashboard-button w-100 mt-2' pathTo={`/addrecipe/${chefId}`}>Add new recipe</NavigateButton>
                                 <Slider {...settings}>
                                     {chefRecipes.map(recipe => {
+                                        const likes = recipe.liked >= 1000 ? `${liked.toString().substring(0, 1) + "." + recipe.liked.toString().substring(1, 2)}k likes` : recipe.liked > 1 || recipe.liked === 0 ? `${recipe.liked} likes` : `${recipe.liked} like`;
+
                                         return <ItemCardMini key={recipe._id} _id={recipe._id} name={recipe.recipeName} image={recipe.recipeImage} likes={likes} redirectUrl={`/recipe/selectedrecipe/${recipe._id}`} />
                                     })}
                                 </Slider>

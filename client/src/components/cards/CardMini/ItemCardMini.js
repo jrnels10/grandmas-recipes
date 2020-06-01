@@ -7,25 +7,23 @@ class RecipeCardMini extends Component {
         this.state = {}
     }
 
-    openSelectedPage = (id, e) => {
-        const redirectUrl = this.props.redirectUrl
-    }
     render() {
         const { _id, name, image, likes } = this.props;
         return (
-            <Link
-                className="nav-link p-0 text-white"
-                to={`${this.props.redirectUrl}`}>
+
+            <div className="nav-link p-0 text-white">
+
                 <div className="card-item" id={_id}>
-                    <div className='card-item-label-container'>
+                    <Link className='card-item-label-container' to={`${this.props.redirectUrl}`}>
                         <label>{name}</label>
-                    </div>
+                    </Link>
                     <img src={image} />
                     <div>
                         <span className='liked-number'>{likes}</span>
                     </div>
                 </div>
-            </Link>
+            </div >
+
         )
     }
 }

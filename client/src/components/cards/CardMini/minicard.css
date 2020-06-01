@@ -197,4 +197,17 @@
   text-align: center;
   background-color: #698474;
 }
+
+@media screen and (min-width: 601px) {
+  .card-mini-chef {
+    width: 300px;
+    float: left;
+    margin: auto;
+    border-radius: 15px;
+    -webkit-box-shadow: 10px 10px 15px 0px rgba(0, 0, 0, 0.15);
+            box-shadow: 10px 10px 15px 0px rgba(0, 0, 0, 0.15);
+    margin: 40px;
+    background-color: #fcf8f3;
+  }
+}
 /*# sourceMappingURL=minicard.css.map */

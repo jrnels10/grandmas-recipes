@@ -12,6 +12,9 @@ const RecipeController = require('../controllers/recipes');
 router.route('/addmyrecipe/:id')
     .post(upload.single('picture'), validateMyRecipe(schema.recipeSchema), RecipeController.addMyRecipe);
 
+router.route('/readrecipeimage/:id')
+    .post(upload.single('picture'), RecipeController.readRecipeFromImage);
+
 router.route('/deletemyrecipe/:id')
     .delete(RecipeController.deleteMyRecipe);
 

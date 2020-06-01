@@ -28,7 +28,6 @@ class SingleChefCard extends Component {
         return this.state.chef ? <Consumer>
             {value => {
                 const { chefImage, chefName, chefBio, submittedBy, chefRecipes } = this.state.chef;
-                const numberOfRecipes = chefRecipes.length;
                 return <GeneralLargeCard>
                     <h5 className="card-title grandma-card-title">{chefName}</h5>
                     <div className="row card-graphics-container">
@@ -46,15 +45,6 @@ class SingleChefCard extends Component {
                                     : <label onClick={this.saveChef.bind(this)}>Save Recipe</label>}
                             </div>
                         </div>
-                        {/* <div className="row w-100 m-0 mb-3 mini-card-container p-0">
-                            {numberOfRecipes > 0 ?
-                                <div className='w-100'>
-                                    {chefRecipes.map((recipe, idx) => {
-                                        return <MiniRecipeCard key={idx} recipe={recipe} value={value} />
-                                    })}
-                                </div>
-                                : <span>No recipes.</span>}
-                        </div> */}
                     </div>
                 </GeneralLargeCard>
             }}</Consumer> : null
