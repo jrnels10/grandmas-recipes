@@ -113,6 +113,7 @@ module.exports = {
                     clientData.families.push(newFamily);
                 })
             );
+            clientData.chefs.sort().reverse();
             return clientData
         } else {
             return clientData

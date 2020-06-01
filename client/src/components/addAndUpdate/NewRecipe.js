@@ -115,6 +115,7 @@ class AddRecipe extends Component {
         });
         this.ingredientsRef.current.value = '';
         this.ingredientsRef.current.focus();
+
     }
 
     editIngredient = (ingre) => {
@@ -169,12 +170,17 @@ class AddRecipe extends Component {
         });
     }
 
+    save = (ingredients) => {
+        this.setState({ ingredients: ingredients, addIngredients: false })
+    }
+
     reorderList = (list) => {
         this.setState({ ingredients: list })
     }
 
     render() {
-        let families = [];
+        const { ingredients, addIngredients, recipeName } = this.state;
+
         return <motion.div
             className="card new-recipe">
             <div className="input-group input-group-sm mb-3">
@@ -189,24 +195,11 @@ class AddRecipe extends Component {
                 {this.state.errorKey === 'recipeDescription' ? <p className="text-danger">required</p> : null}
             </div>
             <div className='row w-100 m-0 mb-3'>
-                <span className="new-recipe-label ingredients-text-list">{this.state.ingredients.map(item => { return item.ingredient }).join(', ')}</span>
+                <span className="new-recipe-label ingredients-text-list">{ingredients.map(item => { return item.ingredient }).join(', ')}</span>
                 <div className='col-10 w-100 pl-0'>
-                    <button className="btn w-100 signin-button" id="addrecipe-add-ingredients" onClick={this.toggleIngredientModal}>Add{this.state.ingredients.length > 0 ? '/Edit' : ''} ingredients</button>
+                    <button className="btn w-100 signin-button" id="addrecipe-add-ingredients" onClick={() => this.setState({ addIngredients: true })}>Add{ingredients.length > 0 ? '/Edit' : ''} ingredients</button>
                 </div>
-                <ModalRecipes display={this.state.ingredientModal} name={this.state.recipeName} closeAction={this.toggleIngredientModal} closeActionName={"Close"}>
-                    <div className='col-9 w-100 pl-0'>
-                        <div className="input-group input-group-sm mb-3">
-                            <label className="ingredients-input-label">Ingredient</label>
-                            <input type="text" className="ingredient-input" placeholder="Type in ingredient and amount" ref={this.ingredientsRef} aria-label="Sizing example input" tabIndex={0} name='ingredient' aria-describedby="inputGroup-sizing-sm" onChange={this.onSelectedText.bind(this)} />
-                        </div>
-                    </div>
-                    <div className='col-3 w-100 p-0'>
-                        {this.state.ingredient.length > 0 ? <button className="btn ingredient-button" id="addrecipe-addingredient" onClick={this.addIngredient}>Add</button> : null}
-                    </div>
-                    <div className='col-12 w-100 p-0 ingredients-container'>
-                        <IngredientCards ingredients={this.state.ingredients} reorderList={this.reorderList} editIngredient={this.editIngredient} deleteIngredient={this.deleteIngredient} />
-                    </div>
-                </ModalRecipes>
+                <ModalRecipes display={addIngredients} name={recipeName} ingredients={ingredients} closeAction={this.save.bind(this)} closeActionName={"Close"} />
             </div>
             <div className="input-group input-group-sm mb-3">
                 <label className="new-recipe-label">Image</label>

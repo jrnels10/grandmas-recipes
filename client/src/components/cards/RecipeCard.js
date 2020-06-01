@@ -5,7 +5,6 @@ import { getmyrecipe, deleteMyRecipe, likemyrecipe } from './../../API/RecipeAPI
 import { Consumer } from '../../Context';
 import './recipe.css';
 import { ModalRecipes } from '../tools/Modal';
-import IngredientCards from '../addAndUpdate/IngredientCards';
 import { uploadRecipeEdit, deleteRecipe } from '../tools/Upload';
 import { DeleteButton } from '../tools/Buttons';
 
@@ -84,7 +83,6 @@ class RecipeCard extends Component {
     };
 
     save = async (value) => {
-        debugger
         const { dispatch } = value;
         dispatch({ type: "LOADER", payload: { display: true } });
 

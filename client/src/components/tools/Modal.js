@@ -76,12 +76,10 @@ export class ModalRecipes extends Component {
     };
 
     onClose = () => {
-        debugger
         this.props.closeAction(this.state.ingredients)
     }
 
     render() {
-
         return <div className={`modal ingredient-modal-${this.props.display}`} id="exampleModalCenter" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div className="modal-dialog modal-dialog-centered" role="document">
                 <div className="modal-content">
